@@ -30,3 +30,4 @@ jobs:
         asset_path: ./kiosk-mode.js
         asset_name: kiosk-mode.js
         asset_content_type: text/javascript
+
