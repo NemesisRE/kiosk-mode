@@ -15,4 +15,4 @@ jobs:
       - name: HACS Action
         uses: "hacs/action@main"
         with:
-          category: "Lovelace"
+          category: "plugin"
