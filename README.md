@@ -3,7 +3,7 @@
 
 Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assistant.io/)
 
-![image](example1.png)
+![image](example.png)
 
 # Installation
 

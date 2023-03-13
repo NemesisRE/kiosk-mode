@@ -13,14 +13,16 @@ jobs:
       run: |
         sed -i 's|*DEV|${{ github.ref }}|g' kiosk-mode.js
         sed -i 's|refs/tags/||' kiosk-mode.js
+    - name: Set-up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: 'yarn'
+        registry-url: 'https://registry.npmjs.org'
     - name: Install deps
-      run: npm install uglify-js browserify @babel/core @babel/cli @babel/preset-env @babel/plugin-transform-runtime
-    - name: Run Babel
-      run: npx babel kiosk-mode.js --out-file kiosk-mode.js --presets @babel/preset-env --plugins @babel/plugin-transform-runtime
-    - name: Run Browserify
-      run: npx browserify kiosk-mode.js -o kiosk-mode.js
-    - name: Run Uglify
-      run: npx uglify-js kiosk-mode.js -b beautify=false,max_line_len=150 --compress --mangle toplevel --output kiosk-mode.js
+      run: yarn install --frozen-lockfile 
+    - name: Build
+      run: yarn build
     - name: Upload release asset
       uses: actions/upload-release-asset@v1
       env:

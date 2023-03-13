@@ -1,0 +1,23 @@
+{
+  "name": "kiosk-mode",
+  "version": "1.7.6",
+  "description": "Hides the Home Assistant header and/or sidebar",
+  "main": "kiosk-mode.js",
+  "repository": "git@github.com:NemesisRE/kiosk-mode.git",
+  "author": "Steven \"NemesisRE\" Koeberich <nemesissre@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "babel": "babel kiosk-mode.js --out-file kiosk-mode.js",
+    "browserify": "browserify kiosk-mode.js -o kiosk-mode.js",
+    "uglify": "uglifyjs kiosk-mode.js -b beautify=false,max_line_len=150 --compress --mangle toplevel --output kiosk-mode.js",
+    "build": "yarn babel && yarn browserify && yarn uglify"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/plugin-transform-runtime": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "browserify": "^17.0.0",
+    "uglify-js": "^3.17.4"
+  }
+}
