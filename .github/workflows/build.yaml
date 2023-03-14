@@ -8,26 +8,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set version number
       run: |
         sed -i 's|*DEV|${{ github.ref }}|g' kiosk-mode.js
         sed -i 's|refs/tags/||' kiosk-mode.js
-    - name: Install deps
-      run: npm install uglify-js browserify @babel/core @babel/cli @babel/preset-env @babel/plugin-transform-runtime
-    - name: Run Babel
-      run: npx babel kiosk-mode.js --out-file kiosk-mode.js --presets @babel/preset-env --plugins @babel/plugin-transform-runtime
-    - name: Run Browserify
-      run: npx browserify kiosk-mode.js -o kiosk-mode.js
-    - name: Run Uglify
-      run: npx uglify-js kiosk-mode.js -b beautify=false,max_line_len=150 --compress --mangle toplevel --output kiosk-mode.js
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Set-up Node
+      uses: actions/setup-node@v3
       with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./kiosk-mode.js
+        node-version: '16'
+        cache: 'yarn'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install deps
+      run: yarn install --frozen-lockfile 
+    - name: Build
+      run: yarn build
+    - name: Upload release asset
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./kiosk-mode.js
         asset_name: kiosk-mode.js
-        asset_content_type: text/javascript
-
+        tag: ${{ github.ref }}
+        overwrite: true
