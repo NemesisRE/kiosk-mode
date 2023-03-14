@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set version number
       run: |
         sed -i 's|*DEV|${{ github.ref }}|g' kiosk-mode.js
@@ -24,12 +24,10 @@ jobs:
     - name: Build
       run: yarn build
     - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: svenstaro/upload-release-action@v2
       with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./kiosk-mode.js
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./kiosk-mode.js
         asset_name: kiosk-mode.js
-        asset_content_type: text/javascript
-
+        tag: ${{ github.ref }}
+        overwrite: true
