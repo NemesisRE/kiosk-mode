@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set version number
-      run: |
-        sed -i 's|*DEV|${{ github.ref }}|g' kiosk-mode.js
-        sed -i 's|refs/tags/||' kiosk-mode.js
     - name: Set-up Node
       uses: actions/setup-node@v3
       with:
@@ -23,6 +19,10 @@ jobs:
       run: yarn install --frozen-lockfile 
     - name: Build
       run: yarn build
+    - name: Set version number
+      run: |
+        sed -i 's|*DEV|${{ github.ref }}|g' kiosk-mode.js
+        sed -i 's|refs/tags/||' kiosk-mode.js
     - name: Upload release asset
       uses: svenstaro/upload-release-action@v2
       with:
