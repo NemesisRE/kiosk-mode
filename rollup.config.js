@@ -16,7 +16,7 @@ export default {
     input: 'src/kiosk-mode.ts',
     output: [
         {
-            file: 'kiosk-mode.js',
+            file: 'dist/kiosk-mode.js',
             format: 'iife'
         }
     ]

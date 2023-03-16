@@ -21,13 +21,13 @@ jobs:
       run: yarn build
     - name: Set version number
       run: |
-        sed -i 's|*DEV|${{ github.ref }}|g' kiosk-mode.js
-        sed -i 's|refs/tags/||' kiosk-mode.js
+        sed -i 's|*DEV|${{ github.ref }}|g' dist/kiosk-mode.js
+        sed -i 's|refs/tags/||' dist/kiosk-mode.js
     - name: Upload release asset
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ./kiosk-mode.js
+        file: ./dist/kiosk-mode.js
         asset_name: kiosk-mode.js
         tag: ${{ github.ref }}
         overwrite: true

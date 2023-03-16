@@ -1,6 +1,5 @@
 class KioskMode {
   constructor() {
-    console.log('TEST TEST');
     window.kioskModeEntities = {};
     if (this.queryString("clear_km_cache")) this.setCache(["kmHeader", "kmSidebar", "kmOverflow", "kmMenuButton", "kmAccount", "kmSearch"], "false");
     this.ha = document.querySelector("home-assistant");
