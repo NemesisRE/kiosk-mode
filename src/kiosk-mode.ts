@@ -254,12 +254,13 @@ class KioskMode {
   }
 
   addStyle(css, elem) {
-    if (!this.styleExists(elem)) {
-      const style = document.createElement("style");
+    let style = this.styleExists(elem);
+    if (!style) {
+      style = document.createElement("style");
       style.setAttribute("id", `kiosk_mode_${elem.localName}`);
-      style.innerHTML = css;
       elem.appendChild(style);
     }
+    style.innerHTML = css;
   }
 
   removeStyle(elements) {
