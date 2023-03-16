@@ -1,7 +1,7 @@
 class KioskMode {
   constructor() {
     window.kioskModeEntities = {};
-    if (this.queryString("clear_km_cache")) this.setCache(["kmHeader", "kmSidebar", "kmOverflow", "kmMenuButton", "kmAccount", "kmSearch"], "false");
+    if (this.queryString("clear_km_cache")) this.setCache(["kmHeader", "kmSidebar", "kmOverflow", "kmMenuButton", "kmAccount", "kmSearch", "kmAssistant"], "false");
     this.ha = document.querySelector("home-assistant");
     this.main = this.ha.shadowRoot.querySelector("home-assistant-main").shadowRoot;
     this.user = this.ha.hass.user;
@@ -107,7 +107,7 @@ class KioskMode {
           if ("hide_overflow" in conf) this.hideOverflow = conf.hide_overflow;
           if ("hide_account" in conf) this.hideAccount = conf.hide_account;
           if ("hide_search" in conf) this.hideSearch = conf.hide_search;
-          if ("hide_assistant" in conf) this.hideAssistant = config.hide_assistant;
+          if ("hide_assistant" in conf) this.hideAssistant = conf.hide_assistant;
           if ("hide_menubutton" in conf) this.hideMenuButton = conf.hide_menubutton;
           if ("kiosk" in conf) this.hideHeader = this.hideSidebar = conf.kiosk;
         }
