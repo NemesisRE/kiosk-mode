@@ -1,4 +1,5 @@
 {
   "name": "Kiosk Mode",
+  "filename": "kiosk-mode.js",
   "render_readme": true
 }
