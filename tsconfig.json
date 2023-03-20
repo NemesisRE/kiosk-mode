@@ -9,7 +9,10 @@
       "declaration": false,
       "noImplicitAny": true,
       "removeComments": true,
-      "baseUrl": "./src"
+      "baseUrl": "./src",
+      "paths": {
+        "@constants": ["constants"]
+      }
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]

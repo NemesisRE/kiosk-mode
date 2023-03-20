@@ -1,7 +1,19 @@
+import { STYLES_PREFIX, CACHE, OPTION } from '@constants';
+
 class KioskMode {
   constructor() {
     window.kioskModeEntities = {};
-    if (this.queryString("clear_km_cache")) this.setCache(["kmHeader", "kmSidebar", "kmOverflow", "kmMenuButton", "kmAccount", "kmSearch", "kmAssistant"], "false");
+    if (this.queryString(OPTION.CLEAR_CACHE)) {
+      this.setCache([
+        CACHE.HEADER,
+        CACHE.SIDEBAR,
+        CACHE.OVERFLOW,
+        CACHE.MENU_BUTTON,
+        CACHE.ACCOUNT,
+        CACHE.SEARCH,
+        CACHE.ASSISTANT
+      ], "false");
+    }
     this.ha = document.querySelector("home-assistant");
     this.main = this.ha.shadowRoot.querySelector("home-assistant-main").shadowRoot;
     this.user = this.ha.hass.user;
@@ -14,7 +26,7 @@ class KioskMode {
   }
 
   run(lovelace = this.main.querySelector("ha-panel-lovelace")) {
-    if (this.queryString("disable_km") || !lovelace) return;
+    if (this.queryString(OPTION.DISABLE_KIOSK_MODE) || !lovelace) return;
     this.getConfig(lovelace);
   }
 
@@ -43,33 +55,33 @@ class KioskMode {
     // Retrieve localStorage values & query string options.
     const queryStringsSet = (
       this.cached([
-          "kmHeader",
-          "kmSidebar",
-          "kmOverflow",
-          "kmMenuButton",
-          "kmAccount",
-          "kmSearch",
-          "kmAssistant"
+        CACHE.HEADER,
+        CACHE.SIDEBAR,
+        CACHE.OVERFLOW,
+        CACHE.MENU_BUTTON,
+        CACHE.ACCOUNT,
+        CACHE.SEARCH,
+        CACHE.ASSISTANT
       ]) ||
       this.queryString([
-          "kiosk",
-          "hide_sidebar",
-          "hide_header",
-          "hide_overflow",
-          "hide_menubutton",
-          "hide_account",
-          "hide_search",
-          "hide_assistant"
+        OPTION.KIOSK,
+        OPTION.HIDE_HEADER,
+        OPTION.HIDE_SIDEBAR,
+        OPTION.HIDE_OVERFLOW,
+        OPTION.HIDE_MENU_BUTTON,
+        OPTION.HIDE_ACCOUNT,
+        OPTION.HIDE_SEARCH,
+        OPTION.HIDE_ASSISTANT
       ])
     );
     if (queryStringsSet) {
-      this.hideHeader = this.cached("kmHeader") || this.queryString(["kiosk", "hide_header"]);
-      this.hideSidebar = this.cached("kmSidebar") || this.queryString(["kiosk", "hide_sidebar"]);
-      this.hideOverflow = this.cached("kmOverflow") || this.queryString(["kiosk", "hide_overflow"]);
-      this.hideMenuButton = this.cached("kmMenuButton") || this.queryString(["kiosk", "hide_menubutton"]);
-      this.hideAccount = this.cached("kmAccount") || this.queryString(["kiosk", "hide_account"]);
-      this.hideSearch = this.cached("kmSearch") || this.queryString(["kiosk", "hide_search"]);
-      this.hideAssistant = this.cached("kmAssistant") || this.queryString(["kiosk", "hide_assistant"]);
+      this.hideHeader     = this.cached(CACHE.HEADER)      || this.queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
+      this.hideSidebar    = this.cached(CACHE.SIDEBAR)     || this.queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
+      this.hideOverflow   = this.cached(CACHE.OVERFLOW)    || this.queryString([OPTION.KIOSK, OPTION.HIDE_OVERFLOW]);
+      this.hideMenuButton = this.cached(CACHE.MENU_BUTTON) || this.queryString([OPTION.KIOSK, OPTION.HIDE_MENU_BUTTON]);
+      this.hideAccount    = this.cached(CACHE.ACCOUNT)     || this.queryString([OPTION.KIOSK, OPTION.HIDE_ACCOUNT]);
+      this.hideSearch     = this.cached(CACHE.SEARCH)      || this.queryString([OPTION.KIOSK, OPTION.HIDE_SEARCH]);
+      this.hideAssistant  = this.cached(CACHE.ASSISTANT)   || this.queryString([OPTION.KIOSK, OPTION.HIDE_ASSISTANT]);
     }
 
     // Use config values only if config strings and cache aren't used.
@@ -102,14 +114,14 @@ class KioskMode {
         const entity = Object.keys(conf.entity)[0];
         if (!window.kioskModeEntities[dash].includes(entity)) window.kioskModeEntities[dash].push(entity);
         if (this.ha.hass.states[entity].state == conf.entity[entity]) {
-          if ("hide_header" in conf) this.hideHeader = conf.hide_header;
-          if ("hide_sidebar" in conf) this.hideSidebar = conf.hide_sidebar;
-          if ("hide_overflow" in conf) this.hideOverflow = conf.hide_overflow;
-          if ("hide_account" in conf) this.hideAccount = conf.hide_account;
-          if ("hide_search" in conf) this.hideSearch = conf.hide_search;
-          if ("hide_assistant" in conf) this.hideAssistant = conf.hide_assistant;
-          if ("hide_menubutton" in conf) this.hideMenuButton = conf.hide_menubutton;
-          if ("kiosk" in conf) this.hideHeader = this.hideSidebar = conf.kiosk;
+          if (OPTION.HIDE_HEADER in conf)      this.hideHeader     = conf.hide_header;
+          if (OPTION.HIDE_SIDEBAR in conf)     this.hideSidebar    = conf.hide_sidebar;
+          if (OPTION.HIDE_OVERFLOW in conf)    this.hideOverflow   = conf.hide_overflow;
+          if (OPTION.HIDE_MENU_BUTTON in conf) this.hideMenuButton = conf.hide_menubutton;
+          if (OPTION.HIDE_ACCOUNT in conf)     this.hideAccount    = conf.hide_account;
+          if (OPTION.HIDE_SEARCH in conf)      this.hideSearch     = conf.hide_search;
+          if (OPTION.HIDE_ASSISTANT in conf)   this.hideAssistant  = conf.hide_assistant;
+          if (OPTION.KIOSK in conf)            this.hideHeader     = this.hideSidebar      = conf.kiosk;
         }
       }
     }
@@ -134,9 +146,9 @@ class KioskMode {
           this.hideOverflow ? overflowStyle : ""
       ];
       this.addStyle(styles.join(""), huiRoot);
-      if (this.queryString("cache")) {
-        if (this.hideHeader) this.setCache("kmHeader", "true");
-        if (this.hideOverflow) this.setCache("kmOverflow", "true");
+      if (this.queryString(OPTION.CACHE)) {
+        if (this.hideHeader) this.setCache(CACHE.HEADER, "true");
+        if (this.hideOverflow) this.setCache(CACHE.OVERFLOW, "true");
       }
     } else {
       this.removeStyle(huiRoot);
@@ -144,7 +156,7 @@ class KioskMode {
 
     if (this.hideSidebar) {
       this.addStyle(":host{--app-drawer-width:0 !important;}#drawer{display:none;}", drawerLayout);
-      if (this.queryString("cache")) this.setCache("kmSidebar", "true");
+      if (this.queryString(OPTION.CACHE)) this.setCache(CACHE.SIDEBAR, "true");
     } else {
       this.removeStyle(drawerLayout);
     }
@@ -158,7 +170,7 @@ class KioskMode {
           this.hideMenuButton ? ".menu ha-icon-button{display:none !important;}" : ""
       ];
       this.addStyle(styles.join(""), sideBarRoot);
-      if (this.hideAccount && this.queryString("cache")) this.setCache("kmAccount", "true");
+      if (this.hideAccount && this.queryString(OPTION.CACHE)) this.setCache(CACHE.ACCOUNT, "true");
     } else {
       this.removeStyle(sideBarRoot);
     }
@@ -175,10 +187,10 @@ class KioskMode {
           this.hideMenuButton ||  this.hideSidebar ? menuButtonStyle : ""
       ];
       this.addStyle(styles.join(""), appToolbar);
-      if (this.queryString("cache")) {
-          if (this.hideSearch) this.setCache("kmSearch", "true");
-          if (this.hideAssistant) this.setCache("kmAssistant", "true");
-          if (this.hideMenuButton) this.setCache("kmMenuButton", "true");
+      if (this.queryString(OPTION.CACHE)) {
+          if (this.hideSearch) this.setCache(CACHE.SEARCH, "true");
+          if (this.hideAssistant) this.setCache(CACHE.ASSISTANT, "true");
+          if (this.hideMenuButton) this.setCache(CACHE.MENU_BUTTON, "true");
       }
     } else {
       this.removeStyle(appToolbar);
@@ -250,14 +262,14 @@ class KioskMode {
   }
 
   styleExists(elem) {
-    return elem.querySelector(`#kiosk_mode_${elem.localName}`);
+    return elem.querySelector(`#${STYLES_PREFIX}_${elem.localName}`);
   }
 
   addStyle(css, elem) {
     let style = this.styleExists(elem);
     if (!style) {
       style = document.createElement("style");
-      style.setAttribute("id", `kiosk_mode_${elem.localName}`);
+      style.setAttribute("id", `${STYLES_PREFIX}_${elem.localName}`);
       elem.appendChild(style);
     }
     style.innerHTML = css;
@@ -265,7 +277,7 @@ class KioskMode {
 
   removeStyle(elements) {
     this.array(elements).forEach((elem) => {
-      if (this.styleExists(elem)) elem.querySelector(`#kiosk_mode_${elem.localName}`).remove();
+      if (this.styleExists(elem)) elem.querySelector(`#${STYLES_PREFIX}_${elem.localName}`).remove();
     });
   }
 }
