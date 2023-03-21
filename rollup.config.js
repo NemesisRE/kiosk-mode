@@ -4,7 +4,6 @@ import { terser } from 'rollup-plugin-terser';
 export default {
     plugins: [
         ts({
-            transpileOnly: true,
             browserslist: ["last 2 versions", "not dead", "> 0.2%"]
         }),
         terser({

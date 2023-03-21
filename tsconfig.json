@@ -11,7 +11,8 @@
       "removeComments": true,
       "baseUrl": "./src",
       "paths": {
-        "@constants": ["constants"]
+        "@types": ["types"],
+        "@constants": ["constants"]        
       }
     },
     "include": ["src/**/*.ts"],
