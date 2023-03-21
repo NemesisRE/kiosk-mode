@@ -1,3 +1,7 @@
+export interface KioskModeRunner {
+    run: (lovelace: HTMLElement) => void;
+}
+
 export interface User {
     name: string;
     is_admin: boolean;
@@ -89,3 +93,11 @@ export type ConInfo = {
 };
 
 export type StyleElement = HTMLElement | ShadowRoot | HTMLElement[] | ShadowRoot[];
+
+declare global {
+    interface Window {
+        kioskModeEntities: Record<string, string[]>;
+        KioskMode: KioskModeRunner;
+        hassConnection: Promise<HassConnection>;
+    }
+  }

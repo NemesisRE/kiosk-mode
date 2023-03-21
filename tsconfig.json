@@ -12,7 +12,8 @@
       "baseUrl": "./src",
       "paths": {
         "@types": ["types"],
-        "@constants": ["constants"]        
+        "@constants": ["constants"],
+        "@utilities": ["utilities"]      
       }
     },
     "include": ["src/**/*.ts"],

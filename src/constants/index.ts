@@ -36,3 +36,9 @@ export enum ELEMENT {
     APP_DRAWER = 'app-drawer',
     HA_SIDEBAR = 'ha-sidebar'
 }
+
+export const TRUE = 'true';
+export const FALSE = 'false';
+export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;
+export const SUSCRIBE_EVENTS_TYPE = 'subscribe_events';
+export const STATE_CHANGED_EVENT = 'state_changed';
