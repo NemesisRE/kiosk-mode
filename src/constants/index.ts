@@ -23,3 +23,22 @@ export enum OPTION {
     HIDE_SEARCH = 'hide_search',
     HIDE_ASSISTANT = 'hide_assistant'
 }
+
+export enum ELEMENT {
+    HOME_ASSISTANT = 'home-assistant',
+    HOME_ASSISTANT_MAIN = 'home-assistant-main',
+    HA_PANEL_LOVELACE = 'ha-panel-lovelace',
+    PARTIAL_PANEL_RESOLVER = 'partial-panel-resolver',
+    HUI_ROOT = 'hui-root',
+    HUI_VIEW = 'hui-view',
+    APP_DRAWER_LAYOUT = 'app-drawer-layout',
+    APP_TOOLBAR = 'app-toolbar',
+    APP_DRAWER = 'app-drawer',
+    HA_SIDEBAR = 'ha-sidebar'
+}
+
+export const TRUE = 'true';
+export const FALSE = 'false';
+export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;
+export const SUSCRIBE_EVENTS_TYPE = 'subscribe_events';
+export const STATE_CHANGED_EVENT = 'state_changed';
