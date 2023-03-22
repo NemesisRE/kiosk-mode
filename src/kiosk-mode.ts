@@ -5,8 +5,7 @@ import {
   Lovelace,
   KioskConfig,
   ConditionalKioskConfig,
-  SuscriberEvent,
-  ConInfo
+  SuscriberEvent
 } from '@types';
 import {
   CACHE,
@@ -24,9 +23,10 @@ import {
   setCache,
   cached,
   addStyle,
-  removeStyle,
-  getCSSString
+  removeStyle
 } from '@utilities';
+
+import { ConInfo } from './conf-info';
 
 class KioskMode implements KioskModeRunner {
   constructor() {
@@ -96,8 +96,18 @@ class KioskMode implements KioskModeRunner {
 
   protected processConfig(lovelace: Lovelace, config: KioskConfig) {
     const dash = this.ha.hass.panelUrl;
-    if (!window.kioskModeEntities[dash]) window.kioskModeEntities[dash] = [];
-    this.hideHeader = this.hideSidebar = this.hideOverflow = this.hideMenuButton = this.hideAccount = this.hideSearch = this.hideAssistant = this.ignoreEntity = this.ignoreMobile = false;
+    if (!window.kioskModeEntities[dash]) {
+      window.kioskModeEntities[dash] = [];
+    }
+    this.hideHeader     = false;
+    this.hideSidebar    = false;
+    this.hideOverflow   = false;
+    this.hideMenuButton = false;
+    this.hideAccount    = false;
+    this.hideSearch     = false;
+    this.hideAssistant  = false;
+    this.ignoreEntity   = false;
+    this.ignoreMobile   = false;
 
     // Retrieve localStorage values & query string options.
     const queryStringsSet = (
@@ -154,23 +164,29 @@ class KioskMode implements KioskModeRunner {
       ? this.hideAssistant
       : config.kiosk || config.hide_assistant;
 
+    // Admin non-admin config
     const adminConfig = this.user.is_admin
       ? config.admin_settings
       : config.non_admin_settings;
 
-    if (adminConfig) this.setOptions(adminConfig);
+    if (adminConfig) {
+      this.setOptions(adminConfig);
+    }
 
+    // User settings config
     if (config.user_settings) {
-      for (let conf of toArray(config.user_settings)) {
+      toArray(config.user_settings).forEach((conf) => {
         if (toArray(conf.users).some((x) => x.toLowerCase() === this.user.name.toLowerCase())) {
           this.setOptions(conf);
         }
-      }
+      });
     }
 
+    // Mobile config
     const mobileConfig = this.ignoreMobile
       ? null
       : config.mobile_settings;
+
     if (mobileConfig) {
       const mobileWidth = mobileConfig.custom_width
         ? mobileConfig.custom_width
@@ -180,7 +196,11 @@ class KioskMode implements KioskModeRunner {
       }
     }
 
-    const entityConfig = this.ignoreEntity ? null : config.entity_settings;
+    // Entity config
+    const entityConfig = this.ignoreEntity
+      ? null
+      : config.entity_settings;
+
     if (entityConfig) {
       for (let conf of entityConfig) {
         const entity = Object.keys(conf.entity)[0];
@@ -320,33 +340,9 @@ class KioskMode implements KioskModeRunner {
 
 }
 
-// Overly complicated console tag.
-const conInfo: ConInfo = { header: '%c≡ kiosk-mode'.padEnd(27), ver: '%cversion *DEV ' };
-const br = '%c\n';
-const maxLen = Math.max(...Object.values(conInfo).map((el) => el.length));
-for (const entry of Object.entries(conInfo)) {
-  const key = entry[0] as keyof ConInfo;
-  if (conInfo[key].length <= maxLen) conInfo[key] = conInfo[key].padEnd(maxLen);
-  if (key === 'header') conInfo[key] = `${conInfo[key].slice(0, -1)}⋮ `;
-}
-const header = getCSSString({
-  'display'     : 'inline-block',
-  'border-width': '1px 1px 0 1px',
-  'border-style': 'solid',
-  'border-color': '#424242',
-  'color'       : 'white',
-  'background'  : '#03a9f4',
-  'font-size'   : '12px',
-  'padding'     : '4px 4.5px 5px 6px'
-});
-const info = getCSSString({
-  'border-width': '0px 1px 1px 1px',
-  'padding'     : '7px',
-  'background'  : 'white',
-  'color'       : '#424242',
-  'line-height' : '0.7'
-});
-console.info(conInfo.header + br + conInfo.ver, header, '', `${header} ${info}`);
+// Console tag
+const info = new ConInfo();
+info.log();
 
 // Initial Run
 Promise.resolve(customElements.whenDefined(ELEMENT.HUI_VIEW))
