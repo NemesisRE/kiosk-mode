@@ -7,7 +7,8 @@ export enum CACHE {
     MENU_BUTTON = 'kmMenuButton',
     ACCOUNT = 'kmAccount',
     SEARCH = 'kmSearch',
-    ASSISTANT = 'kmAssistant'
+    ASSISTANT = 'kmAssistant',
+    MOUSE = 'kmMouse'
 }
 
 export enum OPTION {
@@ -21,7 +22,8 @@ export enum OPTION {
     HIDE_MENU_BUTTON = 'hide_menubutton',
     HIDE_ACCOUNT = 'hide_account',
     HIDE_SEARCH = 'hide_search',
-    HIDE_ASSISTANT = 'hide_assistant'
+    HIDE_ASSISTANT = 'hide_assistant',
+    BLOCK_MOUSE = 'block_mouse'
 }
 
 export enum ELEMENT {

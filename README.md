@@ -58,18 +58,19 @@ resources:
 
 ## Config Options
 
-| Config Option | Type | Default | Description |
-|:---------------|:---------------|:---------------|:----------|
-|`kiosk:`| Boolean | false | Hides both the header and sidebar.
-|`hide_header:` | Boolean | false | Hides only the header.
-|`hide_sidebar:` | Boolean | false | Hides only the sidebar. Disables swipe to open.
-|`hide_menubutton:` | Boolean | false | Hides only the sidebar menu icon. Does not disable swipe to open.
-|`hide_overflow:` | Boolean | false | Hides the top right menu.
-|`hide_account:` | Boolean | false | Hides the account icon.
-|`hide_search:` | Boolean | false | Hides the search icon.
-|`hide_assistant:` | Boolean | false | Hides the assistant icon.
-|`ignore_entity_settings:` | Boolean | false | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored.
-|`ignore_mobile_settings:` | Boolean | false | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored.
+| Config Option            | Type    | Default | Description |
+|:-------------------------|:--------|:--------|:------------|
+|`kiosk:`                  | Boolean | false   | Hides both the header and sidebar. |
+|`hide_header:`            | Boolean | false   | Hides only the header. |
+|`hide_sidebar:`           | Boolean | false   | Hides only the sidebar. Disables swipe to open. |
+|`hide_menubutton:`        | Boolean | false   | Hides only the sidebar menu icon. Does not disable swipe to open. |
+|`hide_overflow:`          | Boolean | false   | Hides the top right menu. |
+|`hide_account:`           | Boolean | false   | Hides the account icon. |
+|`hide_search:`            | Boolean | false   | Hides the search icon. |
+|`hide_assistant:`         | Boolean | false   | Hides the assistant icon. |
+|`block_mouse:`            | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.** |
+|`ignore_entity_settings:` | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
+|`ignore_mobile_settings:` | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
 
 ## Simple config example
 
@@ -187,6 +188,8 @@ The query string options are:
 * `?hide_menubutton` to hide sidebar menu button
 * `?hide_account` to hide the account icon
 * `?hide_search` to hide the search icon
+* `?hide_assistant` to hide the assistant icon
+* `?block_mouse` to block completely the mouse
 
 ## Query String Caching
 
