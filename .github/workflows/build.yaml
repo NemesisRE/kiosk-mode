@@ -15,14 +15,13 @@ jobs:
         node-version: '16'
         cache: 'yarn'
         registry-url: 'https://registry.npmjs.org'
+    - name: Set version number
+      run: |
+        sed -i 's/"version":\s"[^"]*"/"version": "${{ github.ref }}"/' package.json
     - name: Install deps
       run: yarn install --frozen-lockfile 
     - name: Build
       run: yarn build
-    - name: Set version number
-      run: |
-        sed -i 's|*DEV|${{ github.ref }}|g' dist/kiosk-mode.js
-        sed -i 's|refs/tags/||' dist/kiosk-mode.js
     - name: Upload release asset
       uses: svenstaro/upload-release-action@v2
       with:

@@ -16,6 +16,6 @@
         "@utilities": ["utilities"]      
       }
     },
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*.ts", "package.json"],
     "exclude": ["node_modules"]
   }

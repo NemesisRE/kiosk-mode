@@ -87,11 +87,6 @@ export interface HassConnection {
     }
 }
 
-export type ConInfo = {
-    header: string;
-    ver: string;
-};
-
 export type StyleElement = HTMLElement | ShadowRoot | HTMLElement[] | ShadowRoot[];
 
 declare global {
