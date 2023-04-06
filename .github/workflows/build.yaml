@@ -17,7 +17,8 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
     - name: Set version number
       run: |
-        sed -i 's/"version":\s"[^"]*"/"version": "${{ github.ref }}"/' package.json
+        sed -i 's|"version": "[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+"|"version": "${{ github.ref }}"|' package.json
+        sed -i 's|refs/tags/||' package.json
     - name: Install deps
       run: yarn install --frozen-lockfile 
     - name: Build
