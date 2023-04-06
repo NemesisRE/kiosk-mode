@@ -39,7 +39,8 @@ class KioskMode implements KioskModeRunner {
         CACHE.MENU_BUTTON,
         CACHE.ACCOUNT,
         CACHE.SEARCH,
-        CACHE.ASSISTANT
+        CACHE.ASSISTANT,
+        CACHE.MOUSE
       ], FALSE);
     }
     this.ha = document.querySelector<HomeAssistant>(ELEMENT.HOME_ASSISTANT);
@@ -67,6 +68,7 @@ class KioskMode implements KioskModeRunner {
   private hideAccount: boolean;
   private hideSearch: boolean;
   private hideAssistant: boolean;
+  private blockMouse: boolean;
   private ignoreEntity: boolean;
   private ignoreMobile: boolean;
 
@@ -106,6 +108,7 @@ class KioskMode implements KioskModeRunner {
     this.hideAccount    = false;
     this.hideSearch     = false;
     this.hideAssistant  = false;
+    this.blockMouse     = false;
     this.ignoreEntity   = false;
     this.ignoreMobile   = false;
 
@@ -118,7 +121,8 @@ class KioskMode implements KioskModeRunner {
         CACHE.MENU_BUTTON,
         CACHE.ACCOUNT,
         CACHE.SEARCH,
-        CACHE.ASSISTANT
+        CACHE.ASSISTANT,
+        CACHE.MOUSE
       ]) ||
       queryString([
         OPTION.KIOSK,
@@ -128,7 +132,8 @@ class KioskMode implements KioskModeRunner {
         OPTION.HIDE_MENU_BUTTON,
         OPTION.HIDE_ACCOUNT,
         OPTION.HIDE_SEARCH,
-        OPTION.HIDE_ASSISTANT
+        OPTION.HIDE_ASSISTANT,
+        OPTION.BLOCK_MOUSE
       ])
     );
     if (queryStringsSet) {
@@ -139,6 +144,7 @@ class KioskMode implements KioskModeRunner {
       this.hideAccount    = cached(CACHE.ACCOUNT)     || queryString([OPTION.KIOSK, OPTION.HIDE_ACCOUNT]);
       this.hideSearch     = cached(CACHE.SEARCH)      || queryString([OPTION.KIOSK, OPTION.HIDE_SEARCH]);
       this.hideAssistant  = cached(CACHE.ASSISTANT)   || queryString([OPTION.KIOSK, OPTION.HIDE_ASSISTANT]);
+      this.blockMouse     = cached(CACHE.MOUSE)       || queryString([OPTION.BLOCK_MOUSE]);
     }
 
     // Use config values only if config strings and cache aren't used.
@@ -163,6 +169,9 @@ class KioskMode implements KioskModeRunner {
     this.hideAssistant = queryStringsSet
       ? this.hideAssistant
       : config.kiosk || config.hide_assistant;
+    this.blockMouse = queryStringsSet
+      ? this.blockMouse
+      : config.block_mouse;
 
     // Admin non-admin config
     const adminConfig = this.user.is_admin
@@ -213,7 +222,8 @@ class KioskMode implements KioskModeRunner {
           if (OPTION.HIDE_ACCOUNT in conf)     this.hideAccount    = conf.hide_account;
           if (OPTION.HIDE_SEARCH in conf)      this.hideSearch     = conf.hide_search;
           if (OPTION.HIDE_ASSISTANT in conf)   this.hideAssistant  = conf.hide_assistant;
-          if (OPTION.KIOSK in conf)            this.hideHeader     = this.hideSidebar      = conf.kiosk;
+          if (OPTION.BLOCK_MOUSE in conf)      this.blockMouse     = conf.block_mouse;
+          if (OPTION.KIOSK in conf)            this.hideHeader     = this.hideSidebar = conf.kiosk;
         }
       }
     }
@@ -227,6 +237,7 @@ class KioskMode implements KioskModeRunner {
     const appToolbar = huiRoot.querySelector<HTMLElement>(ELEMENT.APP_TOOLBAR);
     const sideBarRoot = drawerLayout.querySelector(ELEMENT.APP_DRAWER).querySelector(ELEMENT.HA_SIDEBAR).shadowRoot;
 
+    const mouseStyle = 'body::after{content:"";display:block;position:fixed;top:0;right:0;bottom:0;left:0;cursor:none;z-index:999999}';
     const overflowStyle = 'app-toolbar > ha-button-menu{display:none !important;}';
     const menuButtonStyle = 'ha-menu-button{display:none !important;}';
     const searchStyle = 'app-toolbar > ha-icon-button:first-of-type{display:none !important;}';
@@ -289,6 +300,13 @@ class KioskMode implements KioskModeRunner {
       removeStyle(appToolbar);
     }
 
+    if (this.blockMouse) {
+      addStyle(mouseStyle, document.body);
+      if (queryString(OPTION.CACHE)) setCache(CACHE.MOUSE, TRUE);
+    } else {
+      removeStyle(document.body);
+    }
+
     // Resize window to 'refresh' view.
     window.dispatchEvent(new Event('resize'));
 
@@ -334,6 +352,7 @@ class KioskMode implements KioskModeRunner {
     this.hideAccount    = config.kiosk || config.hide_account;
     this.hideSearch     = config.kiosk || config.hide_search;
     this.hideAssistant  = config.kiosk || config.hide_assistant;
+    this.blockMouse     = config.block_mouse;
     this.ignoreEntity   = config.ignore_entity_settings;
     this.ignoreMobile   = config.ignore_mobile_settings;
   }

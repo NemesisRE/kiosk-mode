@@ -31,6 +31,7 @@ export interface KioskConfig {
     hide_account?: boolean;
     hide_search?: boolean;
     hide_assistant?: boolean;
+    block_mouse?: boolean;
     admin_settings?: ConditionalKioskConfig;
     non_admin_settings?: ConditionalKioskConfig;
     user_settings?: UserSetting[];
