@@ -68,6 +68,10 @@ resources:
 |`hide_account:`           | Boolean | false   | Hides the account icon. |
 |`hide_search:`            | Boolean | false   | Hides the search icon. |
 |`hide_assistant:`         | Boolean | false   | Hides the assistant icon. |
+|`hide_edit_dashboard`     | Boolean | false   | Hides the "Edit dashboard" button inside the top right menu |
+|`hide_refresh`            | Boolean | false   | Hides the "Refresh" button inside the top right menu in lovelace yaml mode |
+|`hide_unused_entities`    | Boolean | false   | Hides the "Unused entities" button inside the top right menu in lovelace yaml mode |
+|`hide_reload_resources`   | Boolean | false   | Hides the "Reload resources" button inside the top right menu in lovelace yaml mode |
 |`block_mouse:`            | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.** |
 |`ignore_entity_settings:` | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
 |`ignore_mobile_settings:` | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
@@ -189,6 +193,10 @@ The query string options are:
 * `?hide_account` to hide the account icon
 * `?hide_search` to hide the search icon
 * `?hide_assistant` to hide the assistant icon
+* `?hide_edit_dashboard` to hide the "Edit dashboard" button inside the top right menu
+* `?hide_refresh` to hide the "Refresh" button inside the top right menu in lovelace yaml mode
+* `?hide_unused_entities` to hide the "Unused entities" button inside the top right menu in lovelace yaml mode
+* `?hide_reload_resources` to the "Reload resources" button inside the top right menu in lovelace yaml mode
 * `?block_mouse` to block completely the mouse
 
 ## Query String Caching
