@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_header: true
+title: Kiosk-mode hide header
+views:
+  - theme: Backend-selected
+    title: Hide Header
+    path: kiosk-mode-hide-header
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_header` on `true`.

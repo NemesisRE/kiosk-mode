@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_account: true
+title: Kiosk-mode hide account
+views:
+  - theme: Backend-selected
+    title: Hide Account
+    path: kiosk-mode-hide-account
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_account` on `true`. The account avatar is located in the bottom of the sidebar.

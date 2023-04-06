@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_sidebar: true
+title: Kiosk-mode hide sidebar
+views:
+  - theme: Backend-selected
+    title: Hide Sidebar
+    path: kiosk-mode-hide-sidebar
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_sidebar` on `true`. To be able to select another dashboard from the sidebar you would need to add `?disable_km` at the end of the URL.

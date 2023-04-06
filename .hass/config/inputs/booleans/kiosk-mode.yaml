@@ -1,0 +1,26 @@
+kiosk:
+  name: Kiosk mode
+kiosk_hide_header:
+  name: Kiosk hide header
+kiosk_hide_sidebar:
+  name: Kiosk hide sidebar
+kiosk_hide_menubutton:
+  name: Kiosk hide menu button
+kiosk_hide_overflow:
+  name: Kiosk hide overflow
+kiosk_hide_account:
+  name: Kiosk hide account
+kiosk_hide_search:
+  name: Kiosk hide search
+kiosk_hide_assistant:
+  name: Kiosk hide assistant
+kiosk_hide_refresh:
+  name: Kiosk hide refresh
+kiosk_hide_unused_entities:
+  name: Kiosk hide unused entities
+kiosk_hide_reload_resources:
+  name: Kiosk hide reload resources
+kiosk_hide_edit_dashboard:
+  name: Kiosk hide edit dashboard
+kiosk_block_mouse:
+  name: Kiosk block mouse

@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_reload_resources: true
+title: Kiosk-mode hide reload resources
+views:
+  - theme: Backend-selected
+    title: Hide Reload Resources
+    path: kiosk-mode-hide-reload-resources
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_reload_resources` on `true`. The reload resources button is located inside the overflow menu (top-right corner) in [yaml mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-default-dashboard).

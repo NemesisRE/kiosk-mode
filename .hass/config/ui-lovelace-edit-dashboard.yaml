@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_edit_dashboard: true
+title: Kiosk-mode hide edit dashboard
+views:
+  - theme: Backend-selected
+    title: Hide Edit Dashboard
+    path: kiosk-mode-hide-edit-dashboard
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_edit_dashboard` on `true`. The edit dashboard button is located inside the overflow menu (top-right corner) in [yaml mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-default-dashboard).

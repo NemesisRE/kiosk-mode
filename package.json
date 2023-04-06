@@ -7,10 +7,16 @@
   "author": "Steven \"NemesisRE\" Koeberich <nemesissre@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "copy-kiosk-mode": "copyfiles -f dist/kiosk-mode.js .hass/config/www",
+    "start:ha": "docker run --rm -p8123:8123 -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.4",
+    "start:ha:win": "docker run --rm -p8123:8123 -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.4",
+    "demo": "yarn build && yarn copy-kiosk-mode && yarn start:ha",
+    "demo:win": "yarn build && yarn copy-kiosk-mode && yarn start:ha:win",
     "build": "rollup --config rollup.config.js --bundleConfigAsCjs"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^6.0.0",
+    "copyfiles": "^2.4.1",
     "rollup": "^3.19.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^3.2.0",

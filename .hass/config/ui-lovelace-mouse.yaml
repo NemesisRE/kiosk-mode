@@ -1,0 +1,11 @@
+kiosk_mode:
+  block_mouse: true
+title: Kiosk-mode block mouse
+views:
+  - theme: Backend-selected
+    title: Block Mouse
+    path: kiosk-mode-block-mouse
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `block_mouse` on `true`. You cannot interact without any element inside home assistant and your mouse will not be visible. The only way of get rid of this behaviour is to place `?disable_km` at the end of the URL.
