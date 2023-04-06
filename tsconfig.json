@@ -13,7 +13,8 @@
       "paths": {
         "@types": ["types"],
         "@constants": ["constants"],
-        "@utilities": ["utilities"]      
+        "@utilities": ["utilities"],
+        "@styles": ["styles"]   
       }
     },
     "include": ["src/**/*.ts", "package.json"],

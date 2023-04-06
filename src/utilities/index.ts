@@ -1,5 +1,5 @@
 import { StyleElement } from '@types';
-import { STYLES_PREFIX, TRUE } from '@constants';
+import { STYLES_PREFIX, TRUE, MENU_REFERENCES } from '@constants';
 
 // Convert to array
 export const toArray = <T>(x: T | T[]): T[] => {
@@ -61,4 +61,28 @@ export const getCSSString = (cssInJs: Record<string, string>): string => {
             return `${decl}:${value}`;
         })
         .join(';') + ';';
+};
+
+// Convert a CSS rules object to string
+export const getCSSRulesString = (cssRulesInJs: Record<string, Record<string, string>>): string => {
+    return Object.entries(cssRulesInJs)
+        .map((entry: [string, Record<string, string>]): string => {
+            const [rule, cssInJs] = entry;
+            return `${rule}{${getCSSString(cssInJs)}}`;
+        }).join('');
+};
+
+export const getDisplayNoneRulesString = (...rules: string[]): string => {
+    return rules.map((rule: string): string => {
+        return `${rule}{display: none !important;}`;
+    }).join('');
+};
+
+export const getMenuTranslations = (resources: Record<string, string>): Record<string, string> => {
+    const entries = Object.entries(MENU_REFERENCES);
+    const menuTranslationsEntries = entries.map((entry: [string, string]) => {
+        const [reference, prop] = entry;
+        return [resources[prop], reference];
+    });
+    return Object.fromEntries(menuTranslationsEntries);
 };

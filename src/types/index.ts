@@ -31,6 +31,10 @@ export interface KioskConfig {
     hide_account?: boolean;
     hide_search?: boolean;
     hide_assistant?: boolean;
+    hide_refresh?: boolean;
+    hide_unused_entities?: boolean;
+    hide_reload_resources?: boolean;
+    hide_edit_dashboard?: boolean;
     block_mouse?: boolean;
     admin_settings?: ConditionalKioskConfig;
     non_admin_settings?: ConditionalKioskConfig;
@@ -51,6 +55,8 @@ export interface EntityState {
 export class HomeAssistant extends HTMLElement {
     hass: {
         user: User;
+        language: string;
+        resources: Record<string, Record<string, string>>;
         panelUrl: string;
         states: Record<string, EntityState>;
     }
@@ -61,6 +67,7 @@ export class Lovelace extends HTMLElement {
         config: {
             kiosk_mode: KioskConfig;
         };
+        mode: string;
     }
 }
 

@@ -15,7 +15,9 @@ import {
   FALSE,
   CUSTOM_MOBILE_WIDTH_DEFAULT,
   SUSCRIBE_EVENTS_TYPE,
-  STATE_CHANGED_EVENT
+  STATE_CHANGED_EVENT,
+  LOVELACE_MODE,
+  WINDOW_RESIZE_DELAY
 } from '@constants';
 import {
   toArray,
@@ -23,8 +25,10 @@ import {
   setCache,
   cached,
   addStyle,
-  removeStyle
+  removeStyle,
+  getMenuTranslations
 } from '@utilities';
+import { STYLES } from '@styles';
 
 import { ConInfo } from './conf-info';
 
@@ -40,15 +44,23 @@ class KioskMode implements KioskModeRunner {
         CACHE.ACCOUNT,
         CACHE.SEARCH,
         CACHE.ASSISTANT,
+        CACHE.REFRESH,
+        CACHE.UNUSED_ENTITIES,
+        CACHE.RELOAD_RESOURCES,
+        CACHE.EDIT_DASHBOARD,
         CACHE.MOUSE
       ], FALSE);
     }
     this.ha = document.querySelector<HomeAssistant>(ELEMENT.HOME_ASSISTANT);
+    this.language = this.ha.hass.language;
+    this.menuTranslations = getMenuTranslations(this.ha.hass.resources[this.language]);
     this.main = this.ha.shadowRoot.querySelector(ELEMENT.HOME_ASSISTANT_MAIN).shadowRoot;
     this.user = this.ha.hass.user;
     this.llAttempts = 0;
+    this.resizeWindowBinded = this.resizeWindow.bind(this);
     this.run();
     this.entityWatch();
+    
     new MutationObserver(this.watchDashboards).observe(this.main.querySelector(ELEMENT.PARTIAL_PANEL_RESOLVER), {
       childList: true,
     });
@@ -58,7 +70,18 @@ class KioskMode implements KioskModeRunner {
   private ha: HomeAssistant;
   private main: ShadowRoot;
   private user: User;
+  private huiRoot: ShadowRoot;
+  private lovelace: Lovelace;
+  private drawerLayout: HTMLElement;
+  private appToolbar: HTMLElement;
+  private sideBarRoot: ShadowRoot;
+  private overlayMenu: HTMLElement;
+  private mode: string;
+  private language: string;
+  private menuTranslations: Record<string, string>;
   private llAttempts: number;
+  private resizeDelay: number;
+  private resizeWindowBinded: () => void;
 
   // Kiosk Mode options
   private hideHeader: boolean;
@@ -68,6 +91,10 @@ class KioskMode implements KioskModeRunner {
   private hideAccount: boolean;
   private hideSearch: boolean;
   private hideAssistant: boolean;
+  private hideRefresh: boolean;
+  private hideUnusedEntities: boolean;
+  private hideReloadResources: boolean;
+  private hideEditDashboard: boolean;
   private blockMouse: boolean;
   private ignoreEntity: boolean;
   private ignoreMobile: boolean;
@@ -76,41 +103,53 @@ class KioskMode implements KioskModeRunner {
     if (queryString(OPTION.DISABLE_KIOSK_MODE) || !lovelace) {
       return;
     }
-    this.getConfig(lovelace);
+    this.lovelace = lovelace;
+    this.getConfig();
   }
 
-  protected getConfig(lovelace: Lovelace) {
+  protected getConfig() {
     this.llAttempts++;
     try {
-      const llConfig = lovelace.lovelace.config;
+      const llConfig = this.lovelace.lovelace.config;
       const config = llConfig.kiosk_mode || {};
-      this.processConfig(lovelace, config);
+      this.processConfig(config);
     } catch (e) {
       if (this.llAttempts < 200) {
-        setTimeout(() => this.getConfig(lovelace), 50);
+        setTimeout(() => this.getConfig(), 50);
       } else {
         console.log('Lovelace config not found, continuing with default configuration.');
         console.log(e);
-        this.processConfig(lovelace, {});
+        this.processConfig({});
       }
     }
   }
 
-  protected processConfig(lovelace: Lovelace, config: KioskConfig) {
+  protected processConfig(config: KioskConfig) {
     const dash = this.ha.hass.panelUrl;
     if (!window.kioskModeEntities[dash]) {
       window.kioskModeEntities[dash] = [];
     }
-    this.hideHeader     = false;
-    this.hideSidebar    = false;
-    this.hideOverflow   = false;
-    this.hideMenuButton = false;
-    this.hideAccount    = false;
-    this.hideSearch     = false;
-    this.hideAssistant  = false;
-    this.blockMouse     = false;
-    this.ignoreEntity   = false;
-    this.ignoreMobile   = false;
+    this.hideHeader          = false;
+    this.hideSidebar         = false;
+    this.hideOverflow        = false;
+    this.hideMenuButton      = false;
+    this.hideAccount         = false;
+    this.hideSearch          = false;
+    this.hideAssistant       = false;
+    this.hideRefresh         = false;
+    this.hideUnusedEntities  = false;
+    this.hideReloadResources = false;
+    this.hideEditDashboard   = false;
+    this.blockMouse          = false;
+    this.ignoreEntity        = false;
+    this.ignoreMobile        = false;
+
+    this.mode = this.lovelace.lovelace.mode;
+    this.huiRoot = this.lovelace.shadowRoot.querySelector(ELEMENT.HUI_ROOT).shadowRoot;
+    this.drawerLayout = this.main.querySelector<HTMLElement>(ELEMENT.APP_DRAWER_LAYOUT);
+    this.appToolbar = this.huiRoot.querySelector<HTMLElement>(ELEMENT.APP_TOOLBAR);
+    this.sideBarRoot = this.drawerLayout.querySelector(ELEMENT.APP_DRAWER).querySelector(ELEMENT.HA_SIDEBAR).shadowRoot;
+    this.overlayMenu = this.appToolbar.querySelector<HTMLElement>(`:scope > ${ELEMENT.OVERLAY_MENU}`);
 
     // Retrieve localStorage values & query string options.
     const queryStringsSet = (
@@ -122,6 +161,10 @@ class KioskMode implements KioskModeRunner {
         CACHE.ACCOUNT,
         CACHE.SEARCH,
         CACHE.ASSISTANT,
+        CACHE.REFRESH,
+        CACHE.UNUSED_ENTITIES,
+        CACHE.RELOAD_RESOURCES,
+        CACHE.EDIT_DASHBOARD,
         CACHE.MOUSE
       ]) ||
       queryString([
@@ -133,18 +176,26 @@ class KioskMode implements KioskModeRunner {
         OPTION.HIDE_ACCOUNT,
         OPTION.HIDE_SEARCH,
         OPTION.HIDE_ASSISTANT,
+        OPTION.HIDE_REFRESH,
+        OPTION.HIDE_RELOAD_RESOURCES,
+        OPTION.HIDE_UNUSED_ENTITIES,
+        OPTION.HIDE_EDIT_DASHBOARD,
         OPTION.BLOCK_MOUSE
       ])
     );
     if (queryStringsSet) {
-      this.hideHeader     = cached(CACHE.HEADER)      || queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
-      this.hideSidebar    = cached(CACHE.SIDEBAR)     || queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
-      this.hideOverflow   = cached(CACHE.OVERFLOW)    || queryString([OPTION.KIOSK, OPTION.HIDE_OVERFLOW]);
-      this.hideMenuButton = cached(CACHE.MENU_BUTTON) || queryString([OPTION.KIOSK, OPTION.HIDE_MENU_BUTTON]);
-      this.hideAccount    = cached(CACHE.ACCOUNT)     || queryString([OPTION.KIOSK, OPTION.HIDE_ACCOUNT]);
-      this.hideSearch     = cached(CACHE.SEARCH)      || queryString([OPTION.KIOSK, OPTION.HIDE_SEARCH]);
-      this.hideAssistant  = cached(CACHE.ASSISTANT)   || queryString([OPTION.KIOSK, OPTION.HIDE_ASSISTANT]);
-      this.blockMouse     = cached(CACHE.MOUSE)       || queryString([OPTION.BLOCK_MOUSE]);
+      this.hideHeader          = cached(CACHE.HEADER)           || queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
+      this.hideSidebar         = cached(CACHE.SIDEBAR)          || queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
+      this.hideOverflow        = cached(CACHE.OVERFLOW)         || queryString([OPTION.KIOSK, OPTION.HIDE_OVERFLOW]);
+      this.hideMenuButton      = cached(CACHE.MENU_BUTTON)      || queryString([OPTION.KIOSK, OPTION.HIDE_MENU_BUTTON]);
+      this.hideAccount         = cached(CACHE.ACCOUNT)          || queryString([OPTION.KIOSK, OPTION.HIDE_ACCOUNT]);
+      this.hideSearch          = cached(CACHE.SEARCH)           || queryString([OPTION.KIOSK, OPTION.HIDE_SEARCH]);
+      this.hideAssistant       = cached(CACHE.ASSISTANT)        || queryString([OPTION.KIOSK, OPTION.HIDE_ASSISTANT]);
+      this.hideRefresh         = cached(CACHE.REFRESH)          || queryString([OPTION.KIOSK, OPTION.HIDE_REFRESH]);
+      this.hideUnusedEntities  = cached(CACHE.UNUSED_ENTITIES)  || queryString([OPTION.KIOSK, OPTION.HIDE_UNUSED_ENTITIES]);
+      this.hideReloadResources = cached(CACHE.RELOAD_RESOURCES) || queryString([OPTION.KIOSK, OPTION.HIDE_RELOAD_RESOURCES]);
+      this.hideEditDashboard   = cached(CACHE.EDIT_DASHBOARD)   || queryString([OPTION.KIOSK, OPTION.HIDE_EDIT_DASHBOARD]);
+      this.blockMouse          = cached(CACHE.MOUSE)            || queryString([OPTION.BLOCK_MOUSE]);
     }
 
     // Use config values only if config strings and cache aren't used.
@@ -169,6 +220,18 @@ class KioskMode implements KioskModeRunner {
     this.hideAssistant = queryStringsSet
       ? this.hideAssistant
       : config.kiosk || config.hide_assistant;
+    this.hideRefresh = queryStringsSet
+      ? this.hideRefresh
+      : config.kiosk || config.hide_refresh;
+    this.hideUnusedEntities = queryStringsSet
+      ? this.hideUnusedEntities
+      : config.kiosk || config.hide_unused_entities;
+    this.hideReloadResources = queryStringsSet
+      ? this.hideReloadResources
+      : config.kiosk || config.hide_reload_resources;
+    this.hideEditDashboard = queryStringsSet
+      ? this.hideEditDashboard
+      : config.kiosk || config.hide_edit_dashboard;
     this.blockMouse = queryStringsSet
       ? this.blockMouse
       : config.block_mouse;
@@ -215,54 +278,40 @@ class KioskMode implements KioskModeRunner {
         const entity = Object.keys(conf.entity)[0];
         if (!window.kioskModeEntities[dash].includes(entity)) window.kioskModeEntities[dash].push(entity);
         if (this.ha.hass.states[entity].state == conf.entity[entity]) {
-          if (OPTION.HIDE_HEADER in conf)      this.hideHeader     = conf.hide_header;
-          if (OPTION.HIDE_SIDEBAR in conf)     this.hideSidebar    = conf.hide_sidebar;
-          if (OPTION.HIDE_OVERFLOW in conf)    this.hideOverflow   = conf.hide_overflow;
-          if (OPTION.HIDE_MENU_BUTTON in conf) this.hideMenuButton = conf.hide_menubutton;
-          if (OPTION.HIDE_ACCOUNT in conf)     this.hideAccount    = conf.hide_account;
-          if (OPTION.HIDE_SEARCH in conf)      this.hideSearch     = conf.hide_search;
-          if (OPTION.HIDE_ASSISTANT in conf)   this.hideAssistant  = conf.hide_assistant;
-          if (OPTION.BLOCK_MOUSE in conf)      this.blockMouse     = conf.block_mouse;
-          if (OPTION.KIOSK in conf)            this.hideHeader     = this.hideSidebar = conf.kiosk;
+          if (OPTION.HIDE_HEADER in conf)           this.hideHeader          = conf[OPTION.HIDE_HEADER];
+          if (OPTION.HIDE_SIDEBAR in conf)          this.hideSidebar         = conf[OPTION.HIDE_SIDEBAR];
+          if (OPTION.HIDE_OVERFLOW in conf)         this.hideOverflow        = conf[OPTION.HIDE_OVERFLOW];
+          if (OPTION.HIDE_MENU_BUTTON in conf)      this.hideMenuButton      = conf[OPTION.HIDE_MENU_BUTTON];
+          if (OPTION.HIDE_ACCOUNT in conf)          this.hideAccount         = conf[OPTION.HIDE_ACCOUNT];
+          if (OPTION.HIDE_SEARCH in conf)           this.hideSearch          = conf[OPTION.HIDE_SEARCH];
+          if (OPTION.HIDE_ASSISTANT in conf)        this.hideAssistant       = conf[OPTION.HIDE_ASSISTANT];
+          if (OPTION.HIDE_REFRESH in conf)          this.hideRefresh         = conf[OPTION.HIDE_REFRESH];
+          if (OPTION.HIDE_UNUSED_ENTITIES in conf)  this.hideUnusedEntities  = conf[OPTION.HIDE_UNUSED_ENTITIES];
+          if (OPTION.HIDE_RELOAD_RESOURCES in conf) this.hideReloadResources = conf[OPTION.HIDE_RELOAD_RESOURCES];
+          if (OPTION.HIDE_EDIT_DASHBOARD in conf)   this.hideEditDashboard   = conf[OPTION.HIDE_EDIT_DASHBOARD];
+          if (OPTION.BLOCK_MOUSE in conf)           this.blockMouse          = conf[OPTION.BLOCK_MOUSE];
+          if (OPTION.KIOSK in conf)                 this.hideHeader          = this.hideSidebar = conf[OPTION.KIOSK];
         }
       }
     }
 
-    this.insertStyles(lovelace);
+    this.insertStyles();
   }
 
-  protected insertStyles(lovelace: Lovelace) {
-    const huiRoot = lovelace.shadowRoot.querySelector(ELEMENT.HUI_ROOT).shadowRoot;
-    const drawerLayout = this.main.querySelector<HTMLElement>(ELEMENT.APP_DRAWER_LAYOUT);
-    const appToolbar = huiRoot.querySelector<HTMLElement>(ELEMENT.APP_TOOLBAR);
-    const sideBarRoot = drawerLayout.querySelector(ELEMENT.APP_DRAWER).querySelector(ELEMENT.HA_SIDEBAR).shadowRoot;
-
-    const mouseStyle = 'body::after{content:"";display:block;position:fixed;top:0;right:0;bottom:0;left:0;cursor:none;z-index:999999}';
-    const overflowStyle = 'app-toolbar > ha-button-menu{display:none !important;}';
-    const menuButtonStyle = 'ha-menu-button{display:none !important;}';
-    const searchStyle = 'app-toolbar > ha-icon-button:first-of-type{display:none !important;}';
-    const assistantStyle = 'app-toolbar > ha-icon-button:nth-of-type(2){display:none !important;}';
-    const headerStyle = '#view{min-height:100vh !important;--header-height:0;}app-header{display:none;}';
+  protected insertStyles() {    
   
-    if (this.hideHeader || this.hideOverflow) {
-      const styles = [
-          this.hideHeader ? headerStyle : '',
-          this.hideOverflow ? overflowStyle : ''
-      ];
-      addStyle(styles.join(''), huiRoot);
-      if (queryString(OPTION.CACHE)) {
-        if (this.hideHeader) setCache(CACHE.HEADER, TRUE);
-        if (this.hideOverflow) setCache(CACHE.OVERFLOW, TRUE);
-      }
+    if (this.hideHeader) {
+      addStyle(STYLES.HEADER, this.huiRoot);
+      if (queryString(OPTION.CACHE)) setCache(CACHE.HEADER, TRUE);
     } else {
-      removeStyle(huiRoot);
+      removeStyle(this.huiRoot);
     }
 
     if (this.hideSidebar) {
-      addStyle(':host{--app-drawer-width:0 !important;}#drawer{display:none;}', drawerLayout);
+      addStyle(STYLES.SIDEBAR, this.drawerLayout);
       if (queryString(OPTION.CACHE)) setCache(CACHE.SIDEBAR, TRUE);
     } else {
-      removeStyle(drawerLayout);
+      removeStyle(this.drawerLayout);
     }
 
     if (
@@ -270,42 +319,74 @@ class KioskMode implements KioskModeRunner {
       this.hideMenuButton
     ) {
       const styles = [
-          this.hideAccount ? '.profile{display:none !important;}' : '',
-          this.hideMenuButton ? '.menu ha-icon-button{display:none !important;}' : ''
+          this.hideAccount ? STYLES.ACCOUNT : '',
+          this.hideMenuButton ? STYLES.MENU_BUTTON : ''
       ];
-      addStyle(styles.join(''), sideBarRoot);
+      addStyle(styles.join(''), this.sideBarRoot);
       if (this.hideAccount && queryString(OPTION.CACHE)) setCache(CACHE.ACCOUNT, TRUE);
     } else {
-      removeStyle(sideBarRoot);
+      removeStyle(this.sideBarRoot);
     }
 
     if (
       this.hideSearch ||
       this.hideAssistant ||
+      this.hideRefresh ||
+      this.hideUnusedEntities ||
+      this.hideReloadResources ||
+      this.hideEditDashboard ||
       this.hideMenuButton ||
+      this.hideOverflow ||
       this.hideSidebar
     ) {
       const styles = [
-          this.hideSearch ? searchStyle : '',
-          this.hideAssistant ? assistantStyle : '',
-          this.hideMenuButton ||  this.hideSidebar ? menuButtonStyle : ''
+          this.hideSearch ? STYLES.SEARCH : '',
+          this.hideAssistant ? STYLES.ASSISTANT : '',
+          this.hideRefresh ? STYLES.REFRESH : '',
+          this.hideUnusedEntities ? STYLES.UNUSED_ENTITIES : '',
+          this.hideReloadResources ? STYLES.RELOAD_RESOURCES : '',
+          this.hideEditDashboard ? STYLES.EDIT_DASHBOARD : '',
+          this.hideOverflow ? STYLES.OVERFLOW_MENU : '',
+          this.hideEditDashboard &&
+          (
+            this.mode === LOVELACE_MODE.STORAGE ||
+            (
+              this.mode === LOVELACE_MODE.YAML &&
+              this.hideRefresh &&
+              this.hideUnusedEntities &&
+              this.hideReloadResources
+            )
+          )
+            ? STYLES.OVERFLOW_MENU_EMPTY
+            : '',
+          this.hideMenuButton ||  this.hideSidebar ? STYLES.MENU_BUTTON_BURGER : '',
+          
       ];
-      addStyle(styles.join(''), appToolbar);
+      addStyle(styles.join(''), this.appToolbar);
       if (queryString(OPTION.CACHE)) {
           if (this.hideSearch) setCache(CACHE.SEARCH, TRUE);
           if (this.hideAssistant) setCache(CACHE.ASSISTANT, TRUE);
+          if (this.hideRefresh) setCache(CACHE.REFRESH, TRUE);
+          if (this.hideUnusedEntities) setCache(CACHE.UNUSED_ENTITIES, TRUE);
+          if (this.hideReloadResources) setCache(CACHE.RELOAD_RESOURCES, TRUE);
+          if (this.hideEditDashboard) setCache(CACHE.EDIT_DASHBOARD, TRUE);
+          if (this.hideOverflow) setCache(CACHE.OVERFLOW, TRUE);
           if (this.hideMenuButton) setCache(CACHE.MENU_BUTTON, TRUE);
       }
     } else {
-      removeStyle(appToolbar);
+      removeStyle(this.appToolbar);
     }
 
     if (this.blockMouse) {
-      addStyle(mouseStyle, document.body);
+      addStyle(STYLES.MOUSE, document.body);
       if (queryString(OPTION.CACHE)) setCache(CACHE.MOUSE, TRUE);
     } else {
       removeStyle(document.body);
     }
+
+    // Resize event
+    window.removeEventListener('resize', this.resizeWindowBinded);
+    window.addEventListener('resize', this.resizeWindowBinded);
 
     // Resize window to 'refresh' view.
     window.dispatchEvent(new Event('resize'));
@@ -313,10 +394,18 @@ class KioskMode implements KioskModeRunner {
     this.llAttempts = 0;
   }
 
-  // Run on dashboard change.
+  // Resize event
+  protected resizeWindow() {
+    window.clearTimeout(this.resizeDelay);
+    this.resizeDelay = window.setTimeout(() => {
+      this.updateMenuItemsLabels();
+    }, WINDOW_RESIZE_DELAY);
+  }
+
+  // Run on dashboard change
   protected watchDashboards(mutations: MutationRecord[]) {
-    mutations.forEach(({ addedNodes }) => {
-      addedNodes.forEach((node: Element) => {
+    mutations.forEach(({ addedNodes }): void => {
+      addedNodes.forEach((node: Element): void => {
         if (node.localName === ELEMENT.HA_PANEL_LOVELACE) {
           window.KioskMode.run(node as Lovelace);
         }
@@ -324,7 +413,34 @@ class KioskMode implements KioskModeRunner {
     });
   }
 
-  // Run on entity change.
+  // Run on button menu change
+  protected updateMenuItemsLabels() {
+    const menuItems = this.appToolbar.querySelectorAll(`:scope > ${ELEMENT.MENU_ITEM}`);
+    const overflowMenuItems = this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM);
+    
+    menuItems.forEach((menuItem: HTMLElement): void => {
+      if (!menuItem.dataset.selector) {
+        const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
+        menuItem.dataset.selector = this.menuTranslations[icon.title];
+      }
+    });
+
+    overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
+      if (!overflowMenuItem.dataset.selector) {
+        const textContent = overflowMenuItem.textContent.trim();
+        overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
+      }
+    });
+
+    this.overlayMenu.dataset.children = `${overflowMenuItems.length}`;
+
+    if (!this.overlayMenu.dataset.lovelaceMode) {
+      this.overlayMenu.dataset.lovelaceMode = this.mode;
+    }
+    
+  }
+
+  // Run on entity change
   protected async entityWatch() {
     (await window.hassConnection).conn.subscribeMessage((e) => this.entityWatchCallback(e), {
       type: SUSCRIBE_EVENTS_TYPE,
@@ -345,16 +461,20 @@ class KioskMode implements KioskModeRunner {
   }
 
   protected setOptions(config: ConditionalKioskConfig) {
-    this.hideHeader     = config.kiosk || config.hide_header;
-    this.hideSidebar    = config.kiosk || config.hide_sidebar;
-    this.hideOverflow   = config.kiosk || config.hide_overflow;
-    this.hideMenuButton = config.kiosk || config.hide_menubutton;
-    this.hideAccount    = config.kiosk || config.hide_account;
-    this.hideSearch     = config.kiosk || config.hide_search;
-    this.hideAssistant  = config.kiosk || config.hide_assistant;
-    this.blockMouse     = config.block_mouse;
-    this.ignoreEntity   = config.ignore_entity_settings;
-    this.ignoreMobile   = config.ignore_mobile_settings;
+    this.hideHeader          = config.kiosk || config.hide_header;
+    this.hideSidebar         = config.kiosk || config.hide_sidebar;
+    this.hideOverflow        = config.kiosk || config.hide_overflow;
+    this.hideMenuButton      = config.kiosk || config.hide_menubutton;
+    this.hideAccount         = config.kiosk || config.hide_account;
+    this.hideSearch          = config.kiosk || config.hide_search;
+    this.hideAssistant       = config.kiosk || config.hide_assistant;
+    this.hideRefresh         = config.kiosk || config.hide_refresh;
+    this.hideUnusedEntities  = config.kiosk || config.hide_unused_entities;
+    this.hideReloadResources = config.kiosk || config.hide_reload_resources;
+    this.hideEditDashboard   = config.kiosk || config.hide_edit_dashboard;
+    this.blockMouse          = config.block_mouse;
+    this.ignoreEntity        = config.ignore_entity_settings;
+    this.ignoreMobile        = config.ignore_mobile_settings;
   }
 
 }
