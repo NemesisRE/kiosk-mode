@@ -1,5 +1,5 @@
 import { getCSSString } from '@utilities';
-import packageJson from '../package.json';
+import { version } from '../package.json';
 
 interface Line {
     content: string;
@@ -19,7 +19,7 @@ export class ConInfo {
                 background: '#03a9f4'
             },
             {
-                content: `%cversion ${packageJson.version}`
+                content: `%cversion ${version}`
             }
         ];
     }

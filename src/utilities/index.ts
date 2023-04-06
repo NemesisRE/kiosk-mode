@@ -1,4 +1,4 @@
-import { StyleElement } from '@types';
+import { StyleElement, Version } from '@types';
 import { STYLES_PREFIX, TRUE, MENU_REFERENCES } from '@constants';
 
 // Convert to array
@@ -85,4 +85,27 @@ export const getMenuTranslations = (resources: Record<string, string>): Record<s
         return [resources[prop], reference];
     });
     return Object.fromEntries(menuTranslationsEntries);
+};
+
+export const parseVersion = (version: string | undefined): Version | null => {
+    const versionRegExp = /^(\d+)\.(\d+)\.(\w+)$/;
+    const match = version
+        ? version.match(versionRegExp)
+        : null;
+    if (match) {
+        return [
+            +match[1],
+            +match[2],
+            match[3]
+        ];
+    }
+    return null;
+};
+
+export const isLegacyVersion = (version: string | undefined): boolean => {
+    const parsedVersion = parseVersion(version);
+    if (version) {
+        return parsedVersion[0] <= 2023 && parsedVersion[1] <= 3;
+    }
+    return false;
 };

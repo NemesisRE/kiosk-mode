@@ -77,7 +77,11 @@ export enum ELEMENT {
     APP_DRAWER_LAYOUT = 'app-drawer-layout',
     APP_TOOLBAR = 'app-toolbar',
     APP_DRAWER = 'app-drawer',
-    HA_SIDEBAR = 'ha-sidebar'
+    HA_SIDEBAR = 'ha-sidebar',
+    // Home Assistant 2023.4
+    HA_DRAWER = 'ha-drawer',
+    TOOLBAR = '.toolbar',
+    ACTION_ITEMS = '.action-items'
 }
 
 export const TRUE = 'true';

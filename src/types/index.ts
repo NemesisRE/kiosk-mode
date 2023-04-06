@@ -2,6 +2,8 @@ export interface KioskModeRunner {
     run: (lovelace: HTMLElement) => void;
 }
 
+export type Version = [number, number, string];
+
 export interface User {
     name: string;
     is_admin: boolean;
@@ -55,6 +57,9 @@ export interface EntityState {
 export class HomeAssistant extends HTMLElement {
     hass: {
         user: User;
+        config: {
+            version: string;
+        };
         language: string;
         resources: Record<string, Record<string, string>>;
         panelUrl: string;
