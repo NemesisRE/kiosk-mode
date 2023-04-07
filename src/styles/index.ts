@@ -14,7 +14,7 @@ const STYLES_COMMON = {
     HEADER: getCSSRulesString({
         '#view': {
           'min-height': '100vh !important',
-          '--header-height': '0'
+          '--header-height': '0px'
         }
     }),
     ACCOUNT: getDisplayNoneRulesString('.profile'),
