@@ -55,6 +55,7 @@ jobs:
                 }
               ],
               "template": "#{{CHANGELOG}}",
+              "pr_template": "- #{{TITLE}}\n   - PR: ##{{NUMBER}} by @#{{AUTHOR}}",
               "empty_template": "#{{OWNER}}\n#{{REPO}}\n#{{FROM_TAG}}\n#{{TO_TAG}}",
               "max_pull_requests": 1000,
               "max_back_track_time_days": 1000
