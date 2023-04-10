@@ -25,7 +25,6 @@ jobs:
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v3
         with:
-          fromTag: "1.7.8"
           configurationJson: |
             {
               "categories": [
@@ -65,7 +64,6 @@ jobs:
       - name: Create a release
         uses: softprops/action-gh-release@v1
         with:
-          draft: true
           files: |
             dist/kiosk-mode.js
           body: |
