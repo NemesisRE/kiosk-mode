@@ -103,6 +103,7 @@ const STYLES = {
         }
         
     }),
+    ASIDE: getDisplayNoneRulesString('.mdc-drawer'),
     OVERFLOW_MENU: getDisplayNoneRulesString(
         `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}`
     ),
@@ -143,6 +144,7 @@ export const getStyles = (isLegacy: boolean) => {
         return {
             HEADER: `${STYLES_COMMON.HEADER}${STYLES_LEGACY.HEADER}`,
             SIDEBAR: STYLES_LEGACY.SIDEBAR,
+            ASIDE: '',
             ACCOUNT: STYLES_COMMON.ACCOUNT,
             MENU_BUTTON: STYLES_COMMON.MENU_BUTTON,
             MENU_BUTTON_BURGER: STYLES_COMMON.MENU_BUTTON_BURGER,
@@ -163,6 +165,7 @@ export const getStyles = (isLegacy: boolean) => {
     return {
         HEADER: `${STYLES_COMMON.HEADER}${STYLES.HEADER}`,
         SIDEBAR: STYLES.SIDEBAR,
+        ASIDE: STYLES.ASIDE,
         ACCOUNT: STYLES_COMMON.ACCOUNT,
         MENU_BUTTON: STYLES_COMMON.MENU_BUTTON,
         MENU_BUTTON_BURGER: STYLES_COMMON.MENU_BUTTON_BURGER,
