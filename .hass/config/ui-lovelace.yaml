@@ -1,0 +1,64 @@
+kiosk_mode:
+  entity_settings:
+    - entity:
+        input_boolean.kiosk: 'on'
+      kiosk: true
+    - entity:
+        input_boolean.kiosk_hide_account: 'on'
+      hide_account: true
+    - entity:
+        input_boolean.kiosk_hide_header: 'on'
+      hide_header: true
+    - entity:
+        input_boolean.kiosk_hide_menubutton: 'on'
+      hide_menubutton: true
+    - entity:
+        input_boolean.kiosk_hide_sidebar: 'on'
+      hide_sidebar: true
+    - entity:
+        input_boolean.kiosk_hide_search: 'on'
+      hide_search: true
+    - entity:
+        input_boolean.kiosk_hide_assistant: 'on'
+      hide_assistant: true
+    - entity:
+        input_boolean.kiosk_hide_refresh: 'on'
+      hide_refresh: true
+    - entity:
+        input_boolean.kiosk_hide_unused_entities: 'on'
+      hide_unused_entities: true
+    - entity:
+        input_boolean.kiosk_hide_reload_resources: 'on'
+      hide_reload_resources: true
+    - entity:
+        input_boolean.kiosk_hide_edit_dashboard: 'on'
+      hide_edit_dashboard: true
+    - entity:
+        input_boolean.kiosk_hide_overflow: 'on'
+      hide_overflow: true
+    - entity:
+        input_boolean.kiosk_block_mouse: 'on'
+      block_mouse: true
+title: Kiosk-mode Overview
+views:
+  - theme: Backend-selected
+    title: Kiosk-mode overview
+    path: kiosk-mode-overview
+    badges: []
+    cards:
+      - type: entities
+        title: Kiosk settings
+        entities:
+          - entity: input_boolean.kiosk
+          - entity: input_boolean.kiosk_hide_account
+          - entity: input_boolean.kiosk_hide_header
+          - entity: input_boolean.kiosk_hide_menubutton
+          - entity: input_boolean.kiosk_hide_sidebar
+          - entity: input_boolean.kiosk_hide_search
+          - entity: input_boolean.kiosk_hide_assistant
+          - entity: input_boolean.kiosk_hide_overflow
+          - entity: input_boolean.kiosk_hide_refresh
+          - entity: input_boolean.kiosk_hide_unused_entities
+          - entity: input_boolean.kiosk_hide_reload_resources
+          - entity: input_boolean.kiosk_hide_edit_dashboard
+          - entity: input_boolean.kiosk_block_mouse

@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_overflow: true
+title: Kiosk-mode hide overflow
+views:
+  - theme: Backend-selected
+    title: Hide Overflow
+    path: kiosk-mode-hide-overflow
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_overflow` on `true`. The overflow menu is located at the right of the header (three-dots button).

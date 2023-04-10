@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_menubutton: true
+title: Kiosk-mode hide menu button
+views:
+  - theme: Backend-selected
+    title: Hide Menu Button
+    path: kiosk-mode-hide-menu-button
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_menubutton` on `true`. The menu button is located on the top-left and it is used to open and close the sidebar.

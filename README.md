@@ -56,6 +56,18 @@ resources:
 * If you want the same settings on other dashboards you'll need to repeat the config on those dashboards as well.
 * Refresh page after config changes.
 
+## Simple config example
+
+YAML mode users need to add the configuration manually to the lovelace dashboard file in which they want to enable `kiosk-mode`. Non-YAML users (Storage Mode) need to add the configuration to each lovelace panel going to `Edit Dashboard` option (located in the overflow menu that appears when one clicks on the top-right three-dots button). Once in `Edit Dashboard` mode, click again on the top-right three-dots button and select `Raw configuration editor`.
+
+```
+kiosk_mode:
+  hide_header: true
+  
+views:
+```
+*Note: `views:` is added in the example above to show where `kiosk_mode:` should be placed in your Lovelace config*<br><br>
+
 ## Config Options
 
 | Config Option            | Type    | Default | Description |
@@ -75,16 +87,6 @@ resources:
 |`block_mouse:`            | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.** |
 |`ignore_entity_settings:` | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
 |`ignore_mobile_settings:` | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
-
-## Simple config example
-
-```
-kiosk_mode:
-  hide_header: true
-  
-views:
-```
-*Note: `views:` is added in the example above to show where `kiosk_mode:` should be placed in your Lovelace config*<br><br>
 
 ## Conditional Lovelace Config
 Contitional configs take priority and if a condition matches all other config options/methods are ignored.
@@ -211,6 +213,20 @@ This works for all query strings except for the utility strings listed below.
 * `?clear_km_cache` will clear all cached preferences
 * `?disable_km` will temporarily disable any modifications
 <br>
+
+## Kiosk-mode demo
+
+* Make sure you have [git](https://git-scm.com/downloads) installed
+* Make sure you have [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed
+* Make sure you have Docker installed ([Docker Desktop](https://www.docker.com/products/docker-desktop/) is a quick option)
+* Clone the repository `git clone https://github.com/NemesisRE/kiosk-mode.git` (or [download it in a zip file](https://docs.github.com/en/repositories/working-with-files/using-files/downloading-source-code-archives))
+* Run `Docker Desktop` so you get `docker daemon` running
+* Enter in the repository folder
+* Run `yarn`
+* Run `yarn demo` (`yarn demo:win` on Windows environments)
+* Open http://localhost:8123/
+* Create an account and complete the onboard
+
 
 ### Related
 

@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_search: true
+title: Kiosk-mode hide search
+views:
+  - theme: Backend-selected
+    title: Hide Search
+    path: kiosk-mode-hide-search
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_search` on `true`. The search icon is located at right of the header or inside the overflow menu (top-right corner) on small screens.

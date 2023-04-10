@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_refresh: true
+title: Kiosk-mode hide refresh
+views:
+  - theme: Backend-selected
+    title: Hide Refresh
+    path: kiosk-mode-hide-refresh
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_refresh` on `true`. The refresh button is located inside the overflow menu (top-right corner) in [yaml mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-default-dashboard).

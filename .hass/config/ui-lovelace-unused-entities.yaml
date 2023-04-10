@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_unused_entities: true
+title: Kiosk-mode hide unused entities
+views:
+  - theme: Backend-selected
+    title: Hide Refresh
+    path: kiosk-mode-hide-unused-entities
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_unused_entities` on `true`. The unused entities button is located inside the overflow menu (top-right corner) in [yaml mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-default-dashboard).
