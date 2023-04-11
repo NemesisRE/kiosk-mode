@@ -325,9 +325,15 @@ class KioskMode implements KioskModeRunner {
 
     if (this.hideSidebar) {
       addStyle(STYLES.SIDEBAR, this.drawerLayout);
+      if (!this.isLegacy) {
+        addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot);
+      }
       if (queryString(OPTION.CACHE)) setCache(CACHE.SIDEBAR, TRUE);
     } else {
       removeStyle(this.drawerLayout);
+      if (!this.isLegacy) {
+        removeStyle(this.drawerLayout.shadowRoot);
+      }
     }
 
     if (
@@ -389,7 +395,7 @@ class KioskMode implements KioskModeRunner {
           )
             ? STYLES.OVERFLOW_MENU_EMPTY_MOBILE
             : '',
-          this.hideMenuButton ||  this.hideSidebar ? STYLES.MENU_BUTTON_BURGER : '',
+          this.hideMenuButton || this.hideSidebar ? STYLES.MENU_BUTTON_BURGER : '',
           
       ];
       addStyle(styles.join(''), this.appToolbar);
