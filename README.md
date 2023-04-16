@@ -85,8 +85,17 @@ views:
 |`hide_unused_entities`    | Boolean | false   | Hides the "Unused entities" button inside the top right menu in lovelace yaml mode |
 |`hide_reload_resources`   | Boolean | false   | Hides the "Reload resources" button inside the top right menu in lovelace yaml mode |
 |`block_mouse:`            | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.** |
-|`ignore_entity_settings:` | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
-|`ignore_mobile_settings:` | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
+|`ignore_entity_settings:`\* | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
+|`ignore_mobile_settings:`\*\* | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
+|`ignore_disable_km:`\*      | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
+
+<br/>
+
+>\* These options only work if they are placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings), [user_settings](#user_settings) or [mobile_settings](#mobile_settings). They will not have any effect if they are placed inside [entity_settings](#entity_settings)
+>
+>\*\* This option only works if it is placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings) or [user_settings](#user_settings). It will not have any effect if it is placed inside [mobile_settings](#mobile_settings) or [entity_settings](#entity_settings)
+
+<br/>
 
 ## Conditional Lovelace Config
 Contitional configs take priority and if a condition matches all other config options/methods are ignored.
@@ -211,7 +220,7 @@ This works for all query strings except for the utility strings listed below.
 **Utility Query Strings**
 
 * `?clear_km_cache` will clear all cached preferences
-* `?disable_km` will temporarily disable any modifications
+* `?disable_km` will temporarily disable any modifications (unless `ignore_disable_km` has been used in one of the [conditional configs](#conditional-lovelace-config))
 <br>
 
 ## Kiosk-mode demo

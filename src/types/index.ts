@@ -48,6 +48,7 @@ export interface KioskConfig {
 export interface ConditionalKioskConfig extends KioskConfig {
     ignore_entity_settings?: boolean;
     ignore_mobile_settings?: boolean;
+    ignore_disable_km?: boolean;
 }
 
 export interface EntityState {
