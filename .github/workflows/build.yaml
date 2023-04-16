@@ -30,7 +30,7 @@ jobs:
               "categories": [
                 {
                   "title": "## 🚀 Features",
-                  "labels": ["feature", "enhancement", "request"]
+                  "labels": ["feature", "feature-request", "enhancement", "request"]
                 },
                 {
                   "title": "## 🛠 Fixes",
