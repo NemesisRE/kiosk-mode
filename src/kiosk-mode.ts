@@ -17,7 +17,10 @@ import {
   SUSCRIBE_EVENTS_TYPE,
   STATE_CHANGED_EVENT,
   LOVELACE_MODE,
-  WINDOW_RESIZE_DELAY
+  MAX_ATTEMPTS,
+  RETRY_DELAY,
+  WINDOW_RESIZE_DELAY,
+  NAMESPACE
 } from '@constants';
 import {
   isLegacyVersion,
@@ -27,7 +30,8 @@ import {
   cached,
   addStyle,
   removeStyle,
-  getMenuTranslations
+  getMenuTranslations,
+  getMenuItems
 } from '@utilities';
 import { getStyles } from '@styles';
 
@@ -117,8 +121,8 @@ class KioskMode implements KioskModeRunner {
       const config = llConfig.kiosk_mode || {};
       this.processConfig(config);
     } catch (e) {
-      if (this.llAttempts < 200) {
-        setTimeout(() => this.getConfig(), 50);
+      if (this.llAttempts < MAX_ATTEMPTS) {
+        setTimeout(() => this.getConfig(), RETRY_DELAY);
       } else {
         console.log('Lovelace config not found, continuing with default configuration.');
         console.log(e);
@@ -451,30 +455,59 @@ class KioskMode implements KioskModeRunner {
 
   // Run on button menu change
   protected updateMenuItemsLabels() {
-    const menuItems = this.isLegacy
-      ? this.appToolbar.querySelectorAll(`:scope > ${ELEMENT.MENU_ITEM}`)
-      : this.appToolbar.querySelectorAll(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`);
-    const overflowMenuItems = this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM);
+
+    const getToolbarMenuItems = (): NodeListOf<HTMLElement> => {
+      return this.isLegacy
+        ? this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.MENU_ITEM}`)
+        : this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`);
+    };
+
+    const getOverflowMenuItems = (): NodeListOf<HTMLElement> => this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM);
+
+    getMenuItems(getToolbarMenuItems)
+      .then((menuItems: NodeListOf<HTMLElement>) => {
+        menuItems.forEach((menuItem: HTMLElement): void => {
+          if (
+            menuItem &&
+            menuItem.dataset &&
+            !menuItem.dataset.selector
+          ) {
+            const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
+            menuItem.dataset.selector = this.menuTranslations[icon.title];
+          }
+        });
+      })
+      .catch(() => {
+        console.error(`${NAMESPACE} Cannot select app toolbar menu items`);
+      });
+
+    getMenuItems(getOverflowMenuItems)
+      .then((overflowMenuItems: NodeListOf<HTMLElement>) => {
+        overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
+          if (
+            overflowMenuItem &&
+            overflowMenuItem.dataset &&
+            !overflowMenuItem.dataset.selector
+          ) {
+            const textContent = overflowMenuItem.textContent.trim();
+            overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
+          }
+        });
     
-    menuItems.forEach((menuItem: HTMLElement): void => {
-      if (!menuItem.dataset.selector) {
-        const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-        menuItem.dataset.selector = this.menuTranslations[icon.title];
-      }
-    });
-
-    overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
-      if (!overflowMenuItem.dataset.selector) {
-        const textContent = overflowMenuItem.textContent.trim();
-        overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
-      }
-    });
-
-    this.overlayMenu.dataset.children = `${overflowMenuItems.length}`;
-
-    if (!this.overlayMenu.dataset.lovelaceMode) {
-      this.overlayMenu.dataset.lovelaceMode = this.mode;
-    }
+        if (
+          this.overlayMenu &&
+          this.overlayMenu.dataset
+        ) {
+          this.overlayMenu.dataset.children = `${overflowMenuItems.length}`;
+    
+          if (!this.overlayMenu.dataset.lovelaceMode) {
+            this.overlayMenu.dataset.lovelaceMode = this.mode;
+          }
+        } 
+      })
+      .catch(() => {
+        console.error(`${NAMESPACE} Cannot select overflow menu items`);
+      });
     
   }
 

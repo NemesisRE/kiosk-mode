@@ -1,5 +1,10 @@
 import { StyleElement, Version } from '@types';
-import { STYLES_PREFIX, TRUE, MENU_REFERENCES } from '@constants';
+import {
+    STYLES_PREFIX,
+    TRUE,
+    MENU_REFERENCES,
+    MAX_ATTEMPTS
+} from '@constants';
 
 // Convert to array
 export const toArray = <T>(x: T | T[]): T[] => {
@@ -108,4 +113,24 @@ export const isLegacyVersion = (version: string | undefined): boolean => {
         return parsedVersion[0] <= 2023 && parsedVersion[1] <= 3;
     }
     return false;
+};
+
+export const getMenuItems = (getElements: () => NodeListOf<HTMLElement>): Promise<NodeListOf<HTMLElement>> => {
+    return new Promise((resolve, reject) => {
+        let attempts = 0;
+        const select = () => {
+            const items = getElements();
+            if (items && items.length) {
+                resolve(items);
+            } else {
+                attempts++;
+                if (attempts < MAX_ATTEMPTS) {
+                    select();
+                } else {
+                    reject();
+                }
+            }
+        };
+        select();
+    });
 };
