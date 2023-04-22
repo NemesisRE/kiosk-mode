@@ -18,7 +18,10 @@ import {
   SUSCRIBE_EVENTS_TYPE,
   STATE_CHANGED_EVENT,
   LOVELACE_MODE,
-  WINDOW_RESIZE_DELAY
+  MAX_ATTEMPTS,
+  RETRY_DELAY,
+  WINDOW_RESIZE_DELAY,
+  NAMESPACE
 } from '@constants';
 import {
   isLegacyVersion,
@@ -28,7 +31,8 @@ import {
   cached,
   addStyle,
   removeStyle,
-  getMenuTranslations
+  getMenuTranslations,
+  getMenuItems
 } from '@utilities';
 import { getStyles } from '@styles';
 
@@ -54,8 +58,6 @@ class KioskMode implements KioskModeRunner {
       ], FALSE);
     }
     this.ha = document.querySelector<HomeAssistant>(ELEMENT.HOME_ASSISTANT);
-    this.language = this.ha.hass.language;
-    this.menuTranslations = getMenuTranslations(this.ha.hass.resources[this.language]);
     this.main = this.ha.shadowRoot.querySelector(ELEMENT.HOME_ASSISTANT_MAIN).shadowRoot;
     this.user = this.ha.hass.user;
     this.isLegacy = isLegacyVersion(this.ha.hass?.config?.version);
@@ -63,6 +65,15 @@ class KioskMode implements KioskModeRunner {
     this.resizeWindowBinded = this.resizeWindow.bind(this);
     this.run();
     this.entityWatch();
+
+    getMenuTranslations(this.ha)
+      .then((menuTranslations: Record<string, string>) => {
+        this.menuTranslations = menuTranslations;
+        this.updateMenuItemsLabels();
+      })
+      .catch(() => {
+        console.info(`${NAMESPACE} Cannot get resources translations`);
+      });
     
     new MutationObserver(this.watchDashboards).observe(this.main.querySelector(ELEMENT.PARTIAL_PANEL_RESOLVER), {
       childList: true,
@@ -81,7 +92,6 @@ class KioskMode implements KioskModeRunner {
   private sideBarRoot: ShadowRoot;
   private overlayMenu: HTMLElement;
   private mode: string;
-  private language: string;
   private menuTranslations: Record<string, string>;
   private llAttempts: number;
   private resizeDelay: number;
@@ -119,8 +129,8 @@ class KioskMode implements KioskModeRunner {
       const config = llConfig.kiosk_mode || {};
       this.processConfig(config);
     } catch (e) {
-      if (this.llAttempts < 200) {
-        setTimeout(() => this.getConfig(), 50);
+      if (this.llAttempts < MAX_ATTEMPTS) {
+        setTimeout(() => this.getConfig(), RETRY_DELAY);
       } else {
         console.log('Lovelace config not found, continuing with default configuration.');
         console.log(e);
@@ -462,29 +472,64 @@ class KioskMode implements KioskModeRunner {
 
   // Run on button menu change
   protected updateMenuItemsLabels() {
-    const menuItems = this.isLegacy
-      ? this.appToolbar.querySelectorAll(`:scope > ${ELEMENT.MENU_ITEM}`)
-      : this.appToolbar.querySelectorAll(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`);
-    const overflowMenuItems = this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM);
+
+    if (!this.menuTranslations) return;
+
+    const getToolbarMenuItems = (): NodeListOf<HTMLElement> => {
+      return this.isLegacy
+        ? this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.MENU_ITEM}`)
+        : this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`);
+    };
+
+    const getOverflowMenuItems = (): NodeListOf<HTMLElement> => this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM);
+
+    getMenuItems(getToolbarMenuItems)
+      .then((menuItems: NodeListOf<HTMLElement>) => {
+        menuItems.forEach((menuItem: HTMLElement): void => {
+          if (
+            menuItem &&
+            menuItem.dataset &&
+            !menuItem.dataset.selector
+          ) {
+            const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
+            menuItem.dataset.selector = this.menuTranslations[icon.title];
+          }
+        });
+      })
+      .catch(() => {
+        console.info(`${NAMESPACE} Cannot select app toolbar menu items`);
+      });
+
+    if (this.user.is_admin) {
+
+      getMenuItems(getOverflowMenuItems)
+      .then((overflowMenuItems: NodeListOf<HTMLElement>) => {
+        overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
+          if (
+            overflowMenuItem &&
+            overflowMenuItem.dataset &&
+            !overflowMenuItem.dataset.selector
+          ) {
+            const textContent = overflowMenuItem.textContent.trim();
+            overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
+          }
+        });
     
-    menuItems.forEach((menuItem: HTMLElement): void => {
-      if (!menuItem.dataset.selector) {
-        const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-        menuItem.dataset.selector = this.menuTranslations[icon.title];
-      }
-    });
+        if (
+          this.overlayMenu &&
+          this.overlayMenu.dataset
+        ) {
+          this.overlayMenu.dataset.children = `${overflowMenuItems.length}`;
+    
+          if (!this.overlayMenu.dataset.lovelaceMode) {
+            this.overlayMenu.dataset.lovelaceMode = this.mode;
+          }
+        } 
+      })
+      .catch(() => {
+        console.info(`${NAMESPACE} Cannot select overflow menu items`);
+      });
 
-    overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
-      if (!overflowMenuItem.dataset.selector) {
-        const textContent = overflowMenuItem.textContent.trim();
-        overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
-      }
-    });
-
-    this.overlayMenu.dataset.children = `${overflowMenuItems.length}`;
-
-    if (!this.overlayMenu.dataset.lovelaceMode) {
-      this.overlayMenu.dataset.lovelaceMode = this.mode;
     }
     
   }
