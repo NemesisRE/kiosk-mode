@@ -478,7 +478,7 @@ class KioskMode implements KioskModeRunner {
         });
       })
       .catch(() => {
-        console.error(`${NAMESPACE} Cannot select app toolbar menu items`);
+        console.info(`${NAMESPACE} Cannot select app toolbar menu items`);
       });
 
     getMenuItems(getOverflowMenuItems)
@@ -506,7 +506,7 @@ class KioskMode implements KioskModeRunner {
         } 
       })
       .catch(() => {
-        console.error(`${NAMESPACE} Cannot select overflow menu items`);
+        console.info(`${NAMESPACE} Cannot select overflow menu items`);
       });
     
   }
