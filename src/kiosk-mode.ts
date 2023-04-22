@@ -57,8 +57,6 @@ class KioskMode implements KioskModeRunner {
       ], FALSE);
     }
     this.ha = document.querySelector<HomeAssistant>(ELEMENT.HOME_ASSISTANT);
-    this.language = this.ha.hass.language;
-    this.menuTranslations = getMenuTranslations(this.ha.hass.resources[this.language]);
     this.main = this.ha.shadowRoot.querySelector(ELEMENT.HOME_ASSISTANT_MAIN).shadowRoot;
     this.user = this.ha.hass.user;
     this.isLegacy = isLegacyVersion(this.ha.hass?.config?.version);
@@ -66,6 +64,15 @@ class KioskMode implements KioskModeRunner {
     this.resizeWindowBinded = this.resizeWindow.bind(this);
     this.run();
     this.entityWatch();
+
+    getMenuTranslations(this.ha)
+      .then((menuTranslations: Record<string, string>) => {
+        this.menuTranslations = menuTranslations;
+        this.updateMenuItemsLabels();
+      })
+      .catch(() => {
+        console.info(`${NAMESPACE} Cannot get resources translations`);
+      });
     
     new MutationObserver(this.watchDashboards).observe(this.main.querySelector(ELEMENT.PARTIAL_PANEL_RESOLVER), {
       childList: true,
@@ -84,7 +91,6 @@ class KioskMode implements KioskModeRunner {
   private sideBarRoot: ShadowRoot;
   private overlayMenu: HTMLElement;
   private mode: string;
-  private language: string;
   private menuTranslations: Record<string, string>;
   private llAttempts: number;
   private resizeDelay: number;
@@ -456,6 +462,8 @@ class KioskMode implements KioskModeRunner {
   // Run on button menu change
   protected updateMenuItemsLabels() {
 
+    if (!this.menuTranslations) return;
+
     const getToolbarMenuItems = (): NodeListOf<HTMLElement> => {
       return this.isLegacy
         ? this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.MENU_ITEM}`)
@@ -481,7 +489,9 @@ class KioskMode implements KioskModeRunner {
         console.info(`${NAMESPACE} Cannot select app toolbar menu items`);
       });
 
-    getMenuItems(getOverflowMenuItems)
+    if (this.user.is_admin) {
+
+      getMenuItems(getOverflowMenuItems)
       .then((overflowMenuItems: NodeListOf<HTMLElement>) => {
         overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
           if (
@@ -508,6 +518,8 @@ class KioskMode implements KioskModeRunner {
       .catch(() => {
         console.info(`${NAMESPACE} Cannot select overflow menu items`);
       });
+
+    }
     
   }
 
