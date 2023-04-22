@@ -13,6 +13,7 @@ import {
   ELEMENT,
   TRUE,
   FALSE,
+  BOOLEAN,
   CUSTOM_MOBILE_WIDTH_DEFAULT,
   SUSCRIBE_EVENTS_TYPE,
   STATE_CHANGED_EVENT,
@@ -101,9 +102,10 @@ class KioskMode implements KioskModeRunner {
   private blockMouse: boolean;
   private ignoreEntity: boolean;
   private ignoreMobile: boolean;
+  private ignoreDisableKm: boolean;
 
   public run(lovelace = this.main.querySelector<Lovelace>(ELEMENT.HA_PANEL_LOVELACE)) {
-    if (queryString(OPTION.DISABLE_KIOSK_MODE) || !lovelace) {
+    if (!lovelace) {
       return;
     }
     this.lovelace = lovelace;
@@ -146,6 +148,7 @@ class KioskMode implements KioskModeRunner {
     this.blockMouse          = false;
     this.ignoreEntity        = false;
     this.ignoreMobile        = false;
+    this.ignoreDisableKm     = false;
 
     this.mode = this.lovelace.lovelace.mode;
     this.huiRoot = this.lovelace.shadowRoot.querySelector(ELEMENT.HUI_ROOT).shadowRoot;
@@ -307,6 +310,14 @@ class KioskMode implements KioskModeRunner {
           if (OPTION.KIOSK in conf)                 this.hideHeader          = this.hideSidebar = conf[OPTION.KIOSK];
         }
       }
+    }
+
+    // Do not run kiosk-mode if it is disabled
+    if (
+      queryString(OPTION.DISABLE_KIOSK_MODE) &&
+      !this.ignoreDisableKm
+    ) {
+      return;
     }
 
     this.insertStyles();
@@ -511,8 +522,15 @@ class KioskMode implements KioskModeRunner {
     this.hideReloadResources = config.kiosk || config.hide_reload_resources;
     this.hideEditDashboard   = config.kiosk || config.hide_edit_dashboard;
     this.blockMouse          = config.block_mouse;
-    this.ignoreEntity        = config.ignore_entity_settings;
-    this.ignoreMobile        = config.ignore_mobile_settings;
+    this.ignoreEntity        = typeof config.ignore_entity_settings === BOOLEAN
+      ? config.ignore_entity_settings
+      : this.ignoreEntity;
+    this.ignoreMobile        = typeof config.ignore_mobile_settings === BOOLEAN
+      ? config.ignore_mobile_settings
+      : this.ignoreMobile;
+    this.ignoreDisableKm     = typeof config.ignore_disable_km === BOOLEAN
+      ? config.ignore_disable_km
+      : this.ignoreDisableKm;
   }
 
 }
