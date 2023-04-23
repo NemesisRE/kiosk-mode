@@ -170,7 +170,7 @@ export const getMenuItems = (getElements: () => NodeListOf<HTMLElement>): Promis
             } else {
                 attempts++;
                 if (attempts < MAX_ATTEMPTS) {
-                    select();
+                    setTimeout(select, RETRY_DELAY);
                 } else {
                     reject();
                 }
