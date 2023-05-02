@@ -2,6 +2,3 @@
 /dist
 .DS_Store
 .hass/config/www/kiosk-mode.js
-.hass/config/.storage
-.hass/config/blueprints
-.hass/config/home-assistant*
