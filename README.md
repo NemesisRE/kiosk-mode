@@ -1,7 +1,7 @@
 # kiosk-mode
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
-Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assistant.io/)
+Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assistant.io/) lovelace dashboards
 
 ![image](example.png)
 
