@@ -91,6 +91,6 @@ export const BOOLEAN = 'boolean';
 export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;
 export const SUSCRIBE_EVENTS_TYPE = 'subscribe_events';
 export const STATE_CHANGED_EVENT = 'state_changed';
-export const MAX_ATTEMPTS = 200;
+export const MAX_ATTEMPTS = 500;
 export const RETRY_DELAY = 50;
 export const WINDOW_RESIZE_DELAY = 250;

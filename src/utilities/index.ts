@@ -1,7 +1,8 @@
 import {
     HomeAssistant,
     StyleElement,
-    Version
+    Version,
+    Lovelace
 } from '@types';
 import {
     STYLES_PREFIX,
@@ -177,5 +178,25 @@ export const getMenuItems = (getElements: () => NodeListOf<HTMLElement>): Promis
             }
         };
         select();
+    });
+};
+
+export const getLovelaceConfig = (lovelace: Lovelace): Promise<Lovelace['lovelace']['config']> => {
+    return new Promise((resolve, reject) => {
+        let attempts = 0;
+        const getConfig = () => {
+            const config = lovelace?.lovelace?.config;
+            if (config) {
+                resolve(config);
+            } else {
+                attempts++;
+                if (attempts < MAX_ATTEMPTS) {
+                    setTimeout(getConfig, RETRY_DELAY);
+                } else {
+                    reject();
+                }
+            }
+        };
+        getConfig();
     });
 };

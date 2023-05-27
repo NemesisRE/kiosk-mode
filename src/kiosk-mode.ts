@@ -19,7 +19,6 @@ import {
   STATE_CHANGED_EVENT,
   LOVELACE_MODE,
   MAX_ATTEMPTS,
-  RETRY_DELAY,
   WINDOW_RESIZE_DELAY,
   NAMESPACE
 } from '@constants';
@@ -31,6 +30,7 @@ import {
   cached,
   addStyle,
   removeStyle,
+  getLovelaceConfig,
   getMenuTranslations,
   getMenuItems
 } from '@utilities';
@@ -61,7 +61,6 @@ class KioskMode implements KioskModeRunner {
     this.main = this.ha.shadowRoot.querySelector(ELEMENT.HOME_ASSISTANT_MAIN).shadowRoot;
     this.user = this.ha.hass.user;
     this.isLegacy = isLegacyVersion(this.ha.hass?.config?.version);
-    this.llAttempts = 0;
     this.resizeWindowBinded = this.resizeWindow.bind(this);
     this.run();
     this.entityWatch();
@@ -93,7 +92,6 @@ class KioskMode implements KioskModeRunner {
   private overlayMenu: HTMLElement;
   private mode: string;
   private menuTranslations: Record<string, string>;
-  private llAttempts: number;
   private resizeDelay: number;
   private resizeWindowBinded: () => void;
 
@@ -123,20 +121,15 @@ class KioskMode implements KioskModeRunner {
   }
 
   protected getConfig() {
-    this.llAttempts++;
-    try {
-      const llConfig = this.lovelace.lovelace.config;
-      const config = llConfig.kiosk_mode || {};
-      this.processConfig(config);
-    } catch (e) {
-      if (this.llAttempts < MAX_ATTEMPTS) {
-        setTimeout(() => this.getConfig(), RETRY_DELAY);
-      } else {
-        console.log('Lovelace config not found, continuing with default configuration.');
-        console.log(e);
-        this.processConfig({});
-      }
-    }
+    getLovelaceConfig(this.lovelace)
+      .then((config) => {
+        this.processConfig(
+          config.kiosk_mode || {}
+        );
+      })
+      .catch(() => {
+        throw new Error(`Lovelace config not found. Giving up after ${ MAX_ATTEMPTS } attempts.`);
+      });
   }
 
   protected processConfig(config: KioskConfig) {
@@ -160,7 +153,7 @@ class KioskMode implements KioskModeRunner {
     this.ignoreMobile        = false;
     this.ignoreDisableKm     = false;
 
-    this.mode = this.lovelace.lovelace.mode;
+    this.mode = this.lovelace?.lovelace?.mode || LOVELACE_MODE.STORAGE;
     this.huiRoot = this.lovelace.shadowRoot.querySelector(ELEMENT.HUI_ROOT).shadowRoot;
 
     if (this.isLegacy) {
@@ -447,8 +440,6 @@ class KioskMode implements KioskModeRunner {
 
     // Resize window to 'refresh' view.
     window.dispatchEvent(new Event('resize'));
-
-    this.llAttempts = 0;
   }
 
   // Resize event
