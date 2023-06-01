@@ -31,10 +31,12 @@ export class ConInfo {
         const styles: string[] = [];
         const lastIndex = this.lines.length - 1;
         const commonStyles = {
-            'display'      : 'inline-block',
-            'font-size'    : '12px',
-            'border-style' : 'solid',
             'border-color' : '#424242',
+            'border-style' : 'solid',
+            'display'      : 'inline-block',
+            'font-family'  : 'monospace',
+            'font-size'    : '12px'
+            
         };
 
         this.lines.forEach((line: Line, index: number): void => {
@@ -66,8 +68,8 @@ export class ConInfo {
                     'background'   : line.background || 'white',
                     'color'        : line.color || '#424242',
                     'padding'      : index === 0
-                        ? '5px 0 5px 5px'
-                        : '7px 0 7px 10px',
+                        ? '1px 0px 1px 5px'
+                        : '1px 0px 1px 10px',
                     'border-width' : borderWidthStart,
                 })
             );
@@ -78,8 +80,8 @@ export class ConInfo {
                     'background'   : line.background || 'white',
                     'color'        : line.color || 'white',
                     'padding'      : index === 0
-                        ? '5px'
-                        : '7px 5px 7px 0px',
+                        ? '1px 5px'
+                        : '1px 5px 1px 0px',
                     'border-width' : borderWidthEnd,
                 })
             );
