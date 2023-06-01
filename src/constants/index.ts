@@ -13,6 +13,7 @@ export enum CACHE {
     UNUSED_ENTITIES = 'kmUnusedEntities',
     RELOAD_RESOURCES = 'kmReloadResources',
     EDIT_DASHBOARD = 'kmEditDashboard',
+    AUTO_HIDE_OVERFLOW = 'kmAutoHideOverflow',
     MOUSE = 'kmMouse'
 }
 
@@ -32,6 +33,7 @@ export enum OPTION {
     HIDE_UNUSED_ENTITIES = 'hide_unused_entities',
     HIDE_RELOAD_RESOURCES = 'hide_reload_resources',
     HIDE_EDIT_DASHBOARD = 'hide_edit_dashboard',
+    AUTO_HIDE_OVERFLOW = 'auto_hide_overflow',
     BLOCK_MOUSE = 'block_mouse'
 }
 

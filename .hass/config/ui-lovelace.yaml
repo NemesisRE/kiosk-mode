@@ -34,6 +34,9 @@ kiosk_mode:
         input_boolean.kiosk_hide_edit_dashboard: 'on'
       hide_edit_dashboard: true
     - entity:
+        input_boolean.kiosk_auto_hide_overflow: 'on'
+      auto_hide_overflow: true
+    - entity:
         input_boolean.kiosk_hide_overflow: 'on'
       hide_overflow: true
     - entity:
@@ -61,4 +64,5 @@ views:
           - entity: input_boolean.kiosk_hide_unused_entities
           - entity: input_boolean.kiosk_hide_reload_resources
           - entity: input_boolean.kiosk_hide_edit_dashboard
+          - entity: input_boolean.kiosk_auto_hide_overflow
           - entity: input_boolean.kiosk_block_mouse
