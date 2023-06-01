@@ -6,7 +6,7 @@ export default {
     plugins: [
         json(),
         ts({
-            browserslist: ["last 2 versions", "not dead", "> 0.2%"]
+            browserslist: false
         }),
         terser({
             output: {
