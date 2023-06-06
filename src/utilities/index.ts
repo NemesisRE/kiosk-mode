@@ -1,7 +1,6 @@
 import {
     HomeAssistant,
     StyleElement,
-    Version,
     Lovelace
 } from '@types';
 import {
@@ -136,29 +135,6 @@ export const getMenuTranslations = async(
         return [resourcesTranslated[prop], reference];
     });
     return Object.fromEntries(menuTranslationsEntries);
-};
-
-export const parseVersion = (version: string | undefined): Version | null => {
-    const versionRegExp = /^(\d+)\.(\d+)\.(\w+)(?:\.(\w+))?$/;
-    const match = version
-        ? version.match(versionRegExp)
-        : null;
-    if (match) {
-        return [
-            +match[1],
-            +match[2],
-            match[3]
-        ];
-    }
-    return null;
-};
-
-export const isLegacyVersion = (version: string | undefined): boolean => {
-    const parsedVersion = parseVersion(version);
-    if (parsedVersion) {
-        return parsedVersion[0] <= 2023 && parsedVersion[1] <= 3;
-    }
-    return false;
 };
 
 export const getMenuItems = (getElements: () => NodeListOf<HTMLElement>): Promise<NodeListOf<HTMLElement>> => {

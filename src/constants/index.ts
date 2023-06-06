@@ -77,11 +77,7 @@ export enum ELEMENT {
     MENU_ITEM_ICON = 'mwc-icon-button',
     OVERLAY_MENU = 'ha-button-menu',
     OVERLAY_MENU_ITEM = 'mwc-list-item',
-    APP_DRAWER_LAYOUT = 'app-drawer-layout',
-    APP_TOOLBAR = 'app-toolbar',
-    APP_DRAWER = 'app-drawer',
     HA_SIDEBAR = 'ha-sidebar',
-    // Home Assistant 2023.4
     HA_DRAWER = 'ha-drawer',
     TOOLBAR = '.toolbar',
     ACTION_ITEMS = '.action-items'
