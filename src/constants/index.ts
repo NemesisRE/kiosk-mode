@@ -5,6 +5,7 @@ export enum CACHE {
     HEADER = 'kmHeader',
     SIDEBAR = 'kmSidebar',
     OVERFLOW = 'kmOverflow',
+    OVERFLOW_LIST = 'kmOverflowList',
     MENU_BUTTON = 'kmMenuButton',
     ACCOUNT = 'kmAccount',
     SEARCH = 'kmSearch',
@@ -13,7 +14,7 @@ export enum CACHE {
     UNUSED_ENTITIES = 'kmUnusedEntities',
     RELOAD_RESOURCES = 'kmReloadResources',
     EDIT_DASHBOARD = 'kmEditDashboard',
-    AUTO_HIDE_OVERFLOW = 'kmAutoHideOverflow',
+    OVERFLOW_MOUSE = 'kmOverflowMouse',
     MOUSE = 'kmMouse'
 }
 
@@ -25,6 +26,7 @@ export enum OPTION {
     HIDE_SIDEBAR = 'hide_sidebar',
     HIDE_HEADER = 'hide_header',
     HIDE_OVERFLOW = 'hide_overflow',
+    HIDE_OVERFLOW_LIST = 'hide_overflow_list',
     HIDE_MENU_BUTTON = 'hide_menubutton',
     HIDE_ACCOUNT = 'hide_account',
     HIDE_SEARCH = 'hide_search',
@@ -33,7 +35,7 @@ export enum OPTION {
     HIDE_UNUSED_ENTITIES = 'hide_unused_entities',
     HIDE_RELOAD_RESOURCES = 'hide_reload_resources',
     HIDE_EDIT_DASHBOARD = 'hide_edit_dashboard',
-    AUTO_HIDE_OVERFLOW = 'auto_hide_overflow',
+    BLOCK_OVERFLOW = 'block_overflow',
     BLOCK_MOUSE = 'block_mouse'
 }
 

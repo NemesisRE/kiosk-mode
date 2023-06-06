@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_overflow_list: true
+title: Kiosk-mode hide overflow list
+views:
+  - theme: Backend-selected
+    title: Hide Overflow List
+    path: kiosk-mode-hide-overflow-list
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_overflow_list` on `true`. The overflow menu is located at the right of the header (three-dots button) and the overflow list is the list that opens when one clicks on the overflow menu.

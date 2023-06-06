@@ -1,4 +1,4 @@
-import { MENU, LOVELACE_MODE } from '@constants';
+import { MENU } from '@constants';
 import {
     getCSSRulesString,
     getDisplayNoneRulesString
@@ -54,14 +54,12 @@ export const STYLES = {
     OVERFLOW_MENU: getDisplayNoneRulesString(
         `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}`
     ),
-    OVERFLOW_MENU_EMPTY_DESKTOP: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}[data-lovelace-mode=${LOVELACE_MODE.STORAGE}][data-children="1"]`,
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}[data-lovelace-mode=${LOVELACE_MODE.YAML}][data-children="4"]`
-    ),
-    OVERFLOW_MENU_EMPTY_MOBILE: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}[data-lovelace-mode=${LOVELACE_MODE.STORAGE}][data-children="3"]`,
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}[data-lovelace-mode=${LOVELACE_MODE.YAML}][data-children="6"]`
-    ),
+    OVERFLOW_MENU_LIST: getDisplayNoneRulesString('mwc-menu'),
+    BLOCK_OVERFLOW: getCSSRulesString({
+        [`${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}`]: {
+            'pointer-events': 'none !important'
+        }
+    }),
     SEARCH: getDisplayNoneRulesString(
         `${TOOLBAR} > ${ACTION_ITEMS} > ha-icon-button[data-selector="${MENU.SEARCH}"]`,
         `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU} > ${OVERFLOW_BUTTON_MENU}[data-selector="${MENU.SEARCH}"]`

@@ -34,11 +34,14 @@ kiosk_mode:
         input_boolean.kiosk_hide_edit_dashboard: 'on'
       hide_edit_dashboard: true
     - entity:
-        input_boolean.kiosk_auto_hide_overflow: 'on'
-      auto_hide_overflow: true
-    - entity:
         input_boolean.kiosk_hide_overflow: 'on'
       hide_overflow: true
+    - entity:
+        input_boolean.kiosk_hide_overflow_list: 'on'
+      hide_overflow_list: true
+    - entity:
+        input_boolean.kiosk_block_overflow: 'on'
+      block_overflow: true
     - entity:
         input_boolean.kiosk_block_mouse: 'on'
       block_mouse: true
@@ -60,9 +63,10 @@ views:
           - entity: input_boolean.kiosk_hide_search
           - entity: input_boolean.kiosk_hide_assistant
           - entity: input_boolean.kiosk_hide_overflow
+          - entity: input_boolean.kiosk_hide_overflow_list
           - entity: input_boolean.kiosk_hide_refresh
           - entity: input_boolean.kiosk_hide_unused_entities
           - entity: input_boolean.kiosk_hide_reload_resources
           - entity: input_boolean.kiosk_hide_edit_dashboard
-          - entity: input_boolean.kiosk_auto_hide_overflow
+          - entity: input_boolean.kiosk_block_overflow
           - entity: input_boolean.kiosk_block_mouse

@@ -27,6 +27,7 @@ export interface KioskConfig {
     hide_header?: boolean;
     hide_sidebar?: boolean;
     hide_overflow?: boolean;
+    hide_overflow_list?: boolean;
     hide_menubutton?: boolean;
     hide_account?: boolean;
     hide_search?: boolean;
@@ -35,7 +36,7 @@ export interface KioskConfig {
     hide_unused_entities?: boolean;
     hide_reload_resources?: boolean;
     hide_edit_dashboard?: boolean;
-    auto_hide_overflow?: boolean;
+    block_overflow?: boolean;
     block_mouse?: boolean;
     admin_settings?: ConditionalKioskConfig;
     non_admin_settings?: ConditionalKioskConfig;

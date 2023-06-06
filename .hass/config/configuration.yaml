@@ -55,7 +55,15 @@ lovelace:
     lovelace-overflow:
       mode: yaml
       title: Kiosk-mode hide overflow
-      filename: ui-lovelace-overflow.yaml  
+      filename: ui-lovelace-overflow.yaml
+    lovelace-overflow-list:
+      mode: yaml
+      title: Kiosk-mode hide overflow list
+      filename: ui-lovelace-overflow-list.yaml
+    lovelace-block-overflow:
+      mode: yaml
+      title: Kiosk-mode block overflow
+      filename: ui-lovelace-overflow-mouse.yaml
     lovelace-mouse:
       mode: yaml
       title: Kiosk-mode block mouse
