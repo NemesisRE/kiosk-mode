@@ -1,0 +1,11 @@
+kiosk_mode:
+  block_overflow: true
+title: Kiosk-mode block overflow
+views:
+  - theme: Backend-selected
+    title: Block Overflow
+    path: kiosk-mode-block-overflow
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `block_overflow` on `true`. You cannot interact with the overflow menu if this option is enabled.  The overflow menu is located at the right of the header (three-dots button).

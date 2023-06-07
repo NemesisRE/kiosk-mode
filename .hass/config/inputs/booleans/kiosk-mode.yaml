@@ -22,7 +22,7 @@ kiosk_hide_reload_resources:
   name: Kiosk hide reload resources
 kiosk_hide_edit_dashboard:
   name: Kiosk hide edit dashboard
-kiosk_auto_hide_overflow:
-  name: Kiosk auto hide overflow
+kiosk_block_overflow:
+  name: Kiosk block overflow
 kiosk_block_mouse:
   name: Kiosk block mouse

@@ -17,7 +17,6 @@ import {
   CUSTOM_MOBILE_WIDTH_DEFAULT,
   SUSCRIBE_EVENTS_TYPE,
   STATE_CHANGED_EVENT,
-  LOVELACE_MODE,
   MAX_ATTEMPTS,
   WINDOW_RESIZE_DELAY,
   NAMESPACE
@@ -53,7 +52,7 @@ class KioskMode implements KioskModeRunner {
         CACHE.UNUSED_ENTITIES,
         CACHE.RELOAD_RESOURCES,
         CACHE.EDIT_DASHBOARD,
-        CACHE.AUTO_HIDE_OVERFLOW,
+        CACHE.OVERFLOW_MOUSE,
         CACHE.MOUSE
       ], FALSE);
     }
@@ -79,7 +78,7 @@ class KioskMode implements KioskModeRunner {
   private appToolbar: HTMLElement;
   private sideBarRoot: ShadowRoot;
   private overlayMenu: HTMLElement;
-  private mode: string;
+  private overlayMenuRoot: ShadowRoot;
   private menuTranslations: Record<string, string>;
   private resizeDelay: number;
   private resizeWindowBinded: () => void;
@@ -96,7 +95,7 @@ class KioskMode implements KioskModeRunner {
   private hideUnusedEntities: boolean;
   private hideReloadResources: boolean;
   private hideEditDashboard: boolean;
-  private autoHideOverflow: boolean;
+  private blockOverflow: boolean;
   private blockMouse: boolean;
   private ignoreEntity: boolean;
   private ignoreMobile: boolean;
@@ -145,13 +144,12 @@ class KioskMode implements KioskModeRunner {
     this.hideUnusedEntities  = false;
     this.hideReloadResources = false;
     this.hideEditDashboard   = false;
-    this.autoHideOverflow    = false;
+    this.blockOverflow       = false;
     this.blockMouse          = false;
     this.ignoreEntity        = false;
     this.ignoreMobile        = false;
     this.ignoreDisableKm     = false;
 
-    this.mode = this.lovelace?.lovelace?.mode || LOVELACE_MODE.STORAGE;
     this.huiRoot = this.lovelace.shadowRoot.querySelector(ELEMENT.HUI_ROOT).shadowRoot;
 
     this.drawerLayout = this.main.querySelector<HTMLElement>(ELEMENT.HA_DRAWER);
@@ -173,7 +171,7 @@ class KioskMode implements KioskModeRunner {
         CACHE.UNUSED_ENTITIES,
         CACHE.RELOAD_RESOURCES,
         CACHE.EDIT_DASHBOARD,
-        CACHE.AUTO_HIDE_OVERFLOW,
+        CACHE.OVERFLOW_MOUSE,
         CACHE.MOUSE
       ]) ||
       queryString([
@@ -189,24 +187,24 @@ class KioskMode implements KioskModeRunner {
         OPTION.HIDE_RELOAD_RESOURCES,
         OPTION.HIDE_UNUSED_ENTITIES,
         OPTION.HIDE_EDIT_DASHBOARD,
-        OPTION.AUTO_HIDE_OVERFLOW,
+        OPTION.BLOCK_OVERFLOW,
         OPTION.BLOCK_MOUSE
       ])
     );
     if (queryStringsSet) {
-      this.hideHeader          = cached(CACHE.HEADER)             || queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
-      this.hideSidebar         = cached(CACHE.SIDEBAR)            || queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
-      this.hideOverflow        = cached(CACHE.OVERFLOW)           || queryString([OPTION.KIOSK, OPTION.HIDE_OVERFLOW]);
-      this.hideMenuButton      = cached(CACHE.MENU_BUTTON)        || queryString([OPTION.KIOSK, OPTION.HIDE_MENU_BUTTON]);
-      this.hideAccount         = cached(CACHE.ACCOUNT)            || queryString([OPTION.KIOSK, OPTION.HIDE_ACCOUNT]);
-      this.hideSearch          = cached(CACHE.SEARCH)             || queryString([OPTION.KIOSK, OPTION.HIDE_SEARCH]);
-      this.hideAssistant       = cached(CACHE.ASSISTANT)          || queryString([OPTION.KIOSK, OPTION.HIDE_ASSISTANT]);
-      this.hideRefresh         = cached(CACHE.REFRESH)            || queryString([OPTION.KIOSK, OPTION.HIDE_REFRESH]);
-      this.hideUnusedEntities  = cached(CACHE.UNUSED_ENTITIES)    || queryString([OPTION.KIOSK, OPTION.HIDE_UNUSED_ENTITIES]);
-      this.hideReloadResources = cached(CACHE.RELOAD_RESOURCES)   || queryString([OPTION.KIOSK, OPTION.HIDE_RELOAD_RESOURCES]);
-      this.hideEditDashboard   = cached(CACHE.EDIT_DASHBOARD)     || queryString([OPTION.KIOSK, OPTION.HIDE_EDIT_DASHBOARD]);
-      this.autoHideOverflow    = cached(CACHE.AUTO_HIDE_OVERFLOW) || queryString([OPTION.KIOSK, OPTION.AUTO_HIDE_OVERFLOW]);
-      this.blockMouse          = cached(CACHE.MOUSE)              || queryString([OPTION.BLOCK_MOUSE]);
+      this.hideHeader          = cached(CACHE.HEADER)           || queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
+      this.hideSidebar         = cached(CACHE.SIDEBAR)          || queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
+      this.hideOverflow        = cached(CACHE.OVERFLOW)         || queryString([OPTION.KIOSK, OPTION.HIDE_OVERFLOW]);
+      this.hideMenuButton      = cached(CACHE.MENU_BUTTON)      || queryString([OPTION.KIOSK, OPTION.HIDE_MENU_BUTTON]);
+      this.hideAccount         = cached(CACHE.ACCOUNT)          || queryString([OPTION.KIOSK, OPTION.HIDE_ACCOUNT]);
+      this.hideSearch          = cached(CACHE.SEARCH)           || queryString([OPTION.KIOSK, OPTION.HIDE_SEARCH]);
+      this.hideAssistant       = cached(CACHE.ASSISTANT)        || queryString([OPTION.KIOSK, OPTION.HIDE_ASSISTANT]);
+      this.hideRefresh         = cached(CACHE.REFRESH)          || queryString([OPTION.KIOSK, OPTION.HIDE_REFRESH]);
+      this.hideUnusedEntities  = cached(CACHE.UNUSED_ENTITIES)  || queryString([OPTION.KIOSK, OPTION.HIDE_UNUSED_ENTITIES]);
+      this.hideReloadResources = cached(CACHE.RELOAD_RESOURCES) || queryString([OPTION.KIOSK, OPTION.HIDE_RELOAD_RESOURCES]);
+      this.hideEditDashboard   = cached(CACHE.EDIT_DASHBOARD)   || queryString([OPTION.KIOSK, OPTION.HIDE_EDIT_DASHBOARD]);
+      this.blockOverflow       = cached(CACHE.OVERFLOW_MOUSE)   || queryString([OPTION.BLOCK_OVERFLOW]);
+      this.blockMouse          = cached(CACHE.MOUSE)            || queryString([OPTION.BLOCK_MOUSE]);
     }
 
     // Use config values only if config strings and cache aren't used.
@@ -243,9 +241,9 @@ class KioskMode implements KioskModeRunner {
     this.hideEditDashboard = queryStringsSet
       ? this.hideEditDashboard
       : config.kiosk || config.hide_edit_dashboard;
-    this.autoHideOverflow = queryStringsSet
-      ? this.autoHideOverflow
-      : config.kiosk || config.auto_hide_overflow;
+    this.blockOverflow = queryStringsSet
+      ? this.blockOverflow
+      : config.block_overflow;
     this.blockMouse = queryStringsSet
       ? this.blockMouse
       : config.block_mouse;
@@ -303,7 +301,7 @@ class KioskMode implements KioskModeRunner {
           if (OPTION.HIDE_UNUSED_ENTITIES in conf)  this.hideUnusedEntities  = conf[OPTION.HIDE_UNUSED_ENTITIES];
           if (OPTION.HIDE_RELOAD_RESOURCES in conf) this.hideReloadResources = conf[OPTION.HIDE_RELOAD_RESOURCES];
           if (OPTION.HIDE_EDIT_DASHBOARD in conf)   this.hideEditDashboard   = conf[OPTION.HIDE_EDIT_DASHBOARD];
-          if (OPTION.AUTO_HIDE_OVERFLOW in conf)    this.autoHideOverflow    = conf[OPTION.AUTO_HIDE_OVERFLOW];
+          if (OPTION.BLOCK_OVERFLOW in conf)        this.blockOverflow       = conf[OPTION.BLOCK_OVERFLOW];
           if (OPTION.BLOCK_MOUSE in conf)           this.blockMouse          = conf[OPTION.BLOCK_MOUSE];
           if (OPTION.KIOSK in conf)                 this.hideHeader          = this.hideSidebar = conf[OPTION.KIOSK];
         }
@@ -359,10 +357,10 @@ class KioskMode implements KioskModeRunner {
       this.hideRefresh ||
       this.hideUnusedEntities ||
       this.hideReloadResources ||
-      this.autoHideOverflow ||
       this.hideEditDashboard ||
       this.hideMenuButton ||
       this.hideOverflow ||
+      this.blockOverflow ||
       this.hideSidebar
     ) {
       const styles = [
@@ -373,36 +371,8 @@ class KioskMode implements KioskModeRunner {
           this.hideReloadResources ? STYLES.RELOAD_RESOURCES : '',
           this.hideEditDashboard ? STYLES.EDIT_DASHBOARD : '',
           this.hideOverflow ? STYLES.OVERFLOW_MENU : '',
-          this.hideEditDashboard &&
-            this.autoHideOverflow &&
-            (
-              this.mode === LOVELACE_MODE.STORAGE ||
-              (
-                this.mode === LOVELACE_MODE.YAML &&
-                this.hideRefresh &&
-                this.hideUnusedEntities &&
-                this.hideReloadResources
-              )
-            )
-              ? STYLES.OVERFLOW_MENU_EMPTY_DESKTOP
-              : '',
-          this.hideSearch &&
-          this.hideAssistant &&
-          this.hideEditDashboard &&
-            this.autoHideOverflow &&
-            (
-              this.mode === LOVELACE_MODE.STORAGE ||
-              (
-                this.mode === LOVELACE_MODE.YAML &&
-                this.hideRefresh &&
-                this.hideUnusedEntities &&
-                this.hideReloadResources
-              )
-            )
-              ? STYLES.OVERFLOW_MENU_EMPTY_MOBILE
-              : '',
+          this.blockOverflow ? STYLES.BLOCK_OVERFLOW : '',
           this.hideMenuButton || this.hideSidebar ? STYLES.MENU_BUTTON_BURGER : '',
-          
       ];
       addStyle(styles.join(''), this.appToolbar);
       if (queryString(OPTION.CACHE)) {
@@ -411,9 +381,9 @@ class KioskMode implements KioskModeRunner {
           if (this.hideRefresh) setCache(CACHE.REFRESH, TRUE);
           if (this.hideUnusedEntities) setCache(CACHE.UNUSED_ENTITIES, TRUE);
           if (this.hideReloadResources) setCache(CACHE.RELOAD_RESOURCES, TRUE);
-          if (this.autoHideOverflow) setCache(CACHE.AUTO_HIDE_OVERFLOW, TRUE);
           if (this.hideEditDashboard) setCache(CACHE.EDIT_DASHBOARD, TRUE);
           if (this.hideOverflow) setCache(CACHE.OVERFLOW, TRUE);
+          if (this.blockOverflow) setCache(CACHE.OVERFLOW_MOUSE, TRUE);
           if (this.hideMenuButton) setCache(CACHE.MENU_BUTTON, TRUE);
       }
     } else {
@@ -494,17 +464,6 @@ class KioskMode implements KioskModeRunner {
             overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
           }
         });
-    
-        if (
-          this.overlayMenu &&
-          this.overlayMenu.dataset
-        ) {
-          this.overlayMenu.dataset.children = `${overflowMenuItems.length}`;
-    
-          if (!this.overlayMenu.dataset.lovelaceMode) {
-            this.overlayMenu.dataset.lovelaceMode = this.mode;
-          }
-        } 
       })
       .catch(() => { /* ignore */ });
 
@@ -544,7 +503,7 @@ class KioskMode implements KioskModeRunner {
     this.hideUnusedEntities  = config.kiosk || config.hide_unused_entities;
     this.hideReloadResources = config.kiosk || config.hide_reload_resources;
     this.hideEditDashboard   = config.kiosk || config.hide_edit_dashboard;
-    this.autoHideOverflow    = config.kiosk || config.auto_hide_overflow;
+    this.blockOverflow       = config.block_overflow;
     this.blockMouse          = config.block_mouse;
     this.ignoreEntity        = typeof config.ignore_entity_settings === BOOLEAN
       ? config.ignore_entity_settings

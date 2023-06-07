@@ -13,7 +13,7 @@ export enum CACHE {
     UNUSED_ENTITIES = 'kmUnusedEntities',
     RELOAD_RESOURCES = 'kmReloadResources',
     EDIT_DASHBOARD = 'kmEditDashboard',
-    AUTO_HIDE_OVERFLOW = 'kmAutoHideOverflow',
+    OVERFLOW_MOUSE = 'kmOverflowMouse',
     MOUSE = 'kmMouse'
 }
 
@@ -33,7 +33,7 @@ export enum OPTION {
     HIDE_UNUSED_ENTITIES = 'hide_unused_entities',
     HIDE_RELOAD_RESOURCES = 'hide_reload_resources',
     HIDE_EDIT_DASHBOARD = 'hide_edit_dashboard',
-    AUTO_HIDE_OVERFLOW = 'auto_hide_overflow',
+    BLOCK_OVERFLOW = 'block_overflow',
     BLOCK_MOUSE = 'block_mouse'
 }
 
@@ -50,11 +50,6 @@ export enum MENU {
     UNUSED_ENTITIES = 'UNUSED_ENTITIES',
     RELOAD_RESOURCES = 'RELOAD_RESOURCES',
     EDIT_DASHBOARD = 'EDIT_DASHBOARD'
-}
-
-export enum LOVELACE_MODE {
-    STORAGE = 'storage',
-    YAML = 'yaml'
 }
 
 export const MENU_REFERENCES = Object.freeze({
