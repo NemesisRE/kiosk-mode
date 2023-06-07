@@ -23,7 +23,6 @@ import {
   NAMESPACE
 } from '@constants';
 import {
-  isLegacyVersion,
   toArray,
   queryString,
   setCache,
@@ -34,7 +33,7 @@ import {
   getMenuTranslations,
   getMenuItems
 } from '@utilities';
-import { getStyles } from '@styles';
+import { STYLES } from '@styles';
 
 import { ConInfo } from './conf-info';
 
@@ -61,7 +60,6 @@ class KioskMode implements KioskModeRunner {
     this.ha = document.querySelector<HomeAssistant>(ELEMENT.HOME_ASSISTANT);
     this.main = this.ha.shadowRoot.querySelector(ELEMENT.HOME_ASSISTANT_MAIN).shadowRoot;
     this.user = this.ha.hass.user;
-    this.isLegacy = isLegacyVersion(this.ha.hass?.config?.version);
     this.resizeWindowBinded = this.resizeWindow.bind(this);
     this.run();
     this.entityWatch();
@@ -74,7 +72,6 @@ class KioskMode implements KioskModeRunner {
   // Elements
   private ha: HomeAssistant;
   private main: ShadowRoot;
-  private isLegacy: boolean;
   private user: User;
   private huiRoot: ShadowRoot;
   private lovelace: Lovelace;
@@ -157,20 +154,10 @@ class KioskMode implements KioskModeRunner {
     this.mode = this.lovelace?.lovelace?.mode || LOVELACE_MODE.STORAGE;
     this.huiRoot = this.lovelace.shadowRoot.querySelector(ELEMENT.HUI_ROOT).shadowRoot;
 
-    if (this.isLegacy) {
-      // Legacy Home Assistant
-      this.drawerLayout = this.main.querySelector<HTMLElement>(ELEMENT.APP_DRAWER_LAYOUT);
-      this.appToolbar = this.huiRoot.querySelector<HTMLElement>(ELEMENT.APP_TOOLBAR);
-      const appDrawer = this.drawerLayout.querySelector(ELEMENT.APP_DRAWER);
-      this.sideBarRoot = appDrawer.querySelector(ELEMENT.HA_SIDEBAR).shadowRoot;
-      this.overlayMenu = this.appToolbar.querySelector<HTMLElement>(`:scope > ${ELEMENT.OVERLAY_MENU}`);
-    } else {
-      // Home Assistant >= 2023.4.x
-      this.drawerLayout = this.main.querySelector<HTMLElement>(ELEMENT.HA_DRAWER);
-      this.appToolbar = this.huiRoot.querySelector<HTMLElement>(ELEMENT.TOOLBAR);
-      this.sideBarRoot = this.drawerLayout.querySelector(ELEMENT.HA_SIDEBAR).shadowRoot;
-      this.overlayMenu = this.appToolbar.querySelector<HTMLElement>(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.OVERLAY_MENU}`);
-    }
+    this.drawerLayout = this.main.querySelector<HTMLElement>(ELEMENT.HA_DRAWER);
+    this.appToolbar = this.huiRoot.querySelector<HTMLElement>(ELEMENT.TOOLBAR);
+    this.sideBarRoot = this.drawerLayout.querySelector(ELEMENT.HA_SIDEBAR).shadowRoot;
+    this.overlayMenu = this.appToolbar.querySelector<HTMLElement>(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.OVERLAY_MENU}`);
 
     // Retrieve localStorage values & query string options.
     const queryStringsSet = (
@@ -334,9 +321,7 @@ class KioskMode implements KioskModeRunner {
     this.insertStyles();
   }
 
-  protected insertStyles() {  
-    
-    const STYLES = getStyles(this.isLegacy);
+  protected insertStyles() {
   
     if (this.hideHeader) {
       addStyle(STYLES.HEADER, this.huiRoot);
@@ -347,15 +332,11 @@ class KioskMode implements KioskModeRunner {
 
     if (this.hideSidebar) {
       addStyle(STYLES.SIDEBAR, this.drawerLayout);
-      if (!this.isLegacy) {
-        addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot);
-      }
+      addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot);
       if (queryString(OPTION.CACHE)) setCache(CACHE.SIDEBAR, TRUE);
     } else {
       removeStyle(this.drawerLayout);
-      if (!this.isLegacy) {
-        removeStyle(this.drawerLayout.shadowRoot);
-      }
+      removeStyle(this.drawerLayout.shadowRoot);
     }
 
     if (
@@ -479,9 +460,7 @@ class KioskMode implements KioskModeRunner {
     if (!this.menuTranslations) return;
 
     const getToolbarMenuItems = (): NodeListOf<HTMLElement> => {
-      return this.isLegacy
-        ? this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.MENU_ITEM}`)
-        : this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`);
+      return this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`);
     };
 
     const getOverflowMenuItems = (): NodeListOf<HTMLElement> => this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM);

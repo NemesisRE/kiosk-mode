@@ -2,8 +2,6 @@ export interface KioskModeRunner {
     run: (lovelace: HTMLElement) => void;
 }
 
-export type Version = [number, number, string];
-
 export interface User {
     name: string;
     is_admin: boolean;
