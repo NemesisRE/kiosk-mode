@@ -77,8 +77,6 @@ class KioskMode implements KioskModeRunner {
   private drawerLayout: HTMLElement;
   private appToolbar: HTMLElement;
   private sideBarRoot: ShadowRoot;
-  private overlayMenu: HTMLElement;
-  private overlayMenuRoot: ShadowRoot;
   private menuTranslations: Record<string, string>;
   private resizeDelay: number;
   private resizeWindowBinded: () => void;
@@ -155,7 +153,6 @@ class KioskMode implements KioskModeRunner {
     this.drawerLayout = this.main.querySelector<HTMLElement>(ELEMENT.HA_DRAWER);
     this.appToolbar = this.huiRoot.querySelector<HTMLElement>(ELEMENT.TOOLBAR);
     this.sideBarRoot = this.drawerLayout.querySelector(ELEMENT.HA_SIDEBAR).shadowRoot;
-    this.overlayMenu = this.appToolbar.querySelector<HTMLElement>(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.OVERLAY_MENU}`);
 
     // Retrieve localStorage values & query string options.
     const queryStringsSet = (

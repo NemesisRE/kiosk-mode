@@ -70,7 +70,6 @@ export enum ELEMENT {
     HUI_VIEW = 'hui-view',
     MENU_ITEM = 'ha-icon-button',
     MENU_ITEM_ICON = 'mwc-icon-button',
-    OVERLAY_MENU = 'ha-button-menu',
     OVERLAY_MENU_ITEM = 'mwc-list-item',
     HA_SIDEBAR = 'ha-sidebar',
     HA_DRAWER = 'ha-drawer',
