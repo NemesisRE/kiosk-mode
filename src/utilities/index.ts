@@ -1,14 +1,11 @@
-import {
-    HomeAssistant,
-    StyleElement,
-    Lovelace
-} from '@types';
+import { HomeAssistant, StyleElement } from '@types';
 import {
     STYLES_PREFIX,
     TRUE,
     MENU_REFERENCES,
     MAX_ATTEMPTS,
-    RETRY_DELAY
+    RETRY_DELAY,
+    NAMESPACE
 } from '@constants';
 
 // Convert to array
@@ -137,42 +134,26 @@ export const getMenuTranslations = async(
     return Object.fromEntries(menuTranslationsEntries);
 };
 
-export const getMenuItems = (getElements: () => NodeListOf<HTMLElement>): Promise<NodeListOf<HTMLElement>> => {
-    return new Promise((resolve, reject) => {
+export const getPromisableElement = <T>(
+    getElement: () => T,
+    check: (element: T) => boolean,
+    elementName: string
+): Promise<T> => {
+    return new Promise<T>((resolve, reject) => {
         let attempts = 0;
         const select = () => {
-            const items = getElements();
-            if (items && items.length) {
-                resolve(items);
+            const element: T = getElement();
+            if (element && check(element)) {
+                resolve(element);
             } else {
                 attempts++;
                 if (attempts < MAX_ATTEMPTS) {
                     setTimeout(select, RETRY_DELAY);
                 } else {
-                    reject();
+                    reject(new Error(`${NAMESPACE}: Cannot select ${elementName} after ${MAX_ATTEMPTS} attempts. Giving up!`));
                 }
             }
         };
         select();
-    });
-};
-
-export const getLovelaceConfig = (lovelace: Lovelace): Promise<Lovelace['lovelace']['config']> => {
-    return new Promise((resolve, reject) => {
-        let attempts = 0;
-        const getConfig = () => {
-            const config = lovelace?.lovelace?.config;
-            if (config) {
-                resolve(config);
-            } else {
-                attempts++;
-                if (attempts < MAX_ATTEMPTS) {
-                    setTimeout(getConfig, RETRY_DELAY);
-                } else {
-                    reject();
-                }
-            }
-        };
-        getConfig();
     });
 };

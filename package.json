@@ -14,8 +14,8 @@
     "version": "git add .",
     "postversion": "git push && git push --tags",
     "copy-kiosk-mode": "copyfiles -f dist/kiosk-mode.js .hass/config/www",
-    "start:ha": "docker run --rm -p8123:8123 -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.4.6",
-    "start:ha:win": "docker run --rm -p8123:8123 -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.4.6",
+    "start:ha": "docker run --rm -p8123:8123 -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.6",
+    "start:ha:win": "docker run --rm -p8123:8123 -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.6",
     "demo": "yarn build && yarn copy-kiosk-mode && yarn start:ha",
     "demo:win": "yarn build && yarn copy-kiosk-mode && yarn start:ha:win"
   },

@@ -1,5 +1,7 @@
 export const NAMESPACE = 'kiosk-mode';
 export const STYLES_PREFIX = 'kiosk_mode';
+export const NON_CRITICAL_WARNING = '[ Non critial warning ]';
+export const SHADOW_ROOT_SUFFIX = ':shadowRoot';
 
 export enum CACHE {
     HEADER = 'kmHeader',
