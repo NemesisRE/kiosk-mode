@@ -17,9 +17,10 @@ import {
   CUSTOM_MOBILE_WIDTH_DEFAULT,
   SUSCRIBE_EVENTS_TYPE,
   STATE_CHANGED_EVENT,
-  MAX_ATTEMPTS,
   WINDOW_RESIZE_DELAY,
-  NAMESPACE
+  NAMESPACE,
+  NON_CRITICAL_WARNING,
+  SHADOW_ROOT_SUFFIX
 } from '@constants';
 import {
   toArray,
@@ -28,9 +29,8 @@ import {
   cached,
   addStyle,
   removeStyle,
-  getLovelaceConfig,
   getMenuTranslations,
-  getMenuItems
+  getPromisableElement
 } from '@utilities';
 import { STYLES } from '@styles';
 
@@ -56,16 +56,52 @@ class KioskMode implements KioskModeRunner {
         CACHE.MOUSE
       ], FALSE);
     }
-    this.ha = document.querySelector<HomeAssistant>(ELEMENT.HOME_ASSISTANT);
-    this.main = this.ha.shadowRoot.querySelector(ELEMENT.HOME_ASSISTANT_MAIN).shadowRoot;
-    this.user = this.ha.hass.user;
-    this.resizeWindowBinded = this.resizeWindow.bind(this);
-    this.run();
-    this.entityWatch();
+
+    const selectMainElements = async () => {
+
+      // Select ha
+      this.ha = await getPromisableElement(
+        (): HomeAssistant => document.querySelector<HomeAssistant>(ELEMENT.HOME_ASSISTANT),
+        (ha: HomeAssistant) => !!(ha && ha.shadowRoot),
+        ELEMENT.HOME_ASSISTANT
+      );
+
+      // Select home assistant main
+      this.main = await getPromisableElement(
+        (): ShadowRoot => this.ha.shadowRoot.querySelector(ELEMENT.HOME_ASSISTANT_MAIN)?.shadowRoot,
+        (main: ShadowRoot) => !!main,
+        `${ELEMENT.HOME_ASSISTANT_MAIN}${SHADOW_ROOT_SUFFIX}`
+      );
+
+      // Select user
+      this.user = await getPromisableElement(
+        (): User => this.ha?.hass?.user,
+        (user: User) => !!user,
+        `${ELEMENT.HOME_ASSISTANT} > hass > user`
+      );
+
+      // Select partial panel resolver
+      const partialPanelResolver = await getPromisableElement(
+        (): Element => this.main.querySelector(ELEMENT.PARTIAL_PANEL_RESOLVER),
+        (partialPanelResolver: Element) => !!partialPanelResolver,
+        `${ELEMENT.HOME_ASSISTANT_MAIN} > ${ELEMENT.PARTIAL_PANEL_RESOLVER}`
+      );
+
+      // Start kiosk-mode
+      this.run();
+      this.entityWatch();
+
+      // Start the mutation observer
+      new MutationObserver(this.watchDashboards).observe(partialPanelResolver, {
+        childList: true,
+      });
+
+    };
+
+    selectMainElements();
+
+    this.resizeWindowBinded = this.resizeWindow.bind(this);   
     
-    new MutationObserver(this.watchDashboards).observe(this.main.querySelector(ELEMENT.PARTIAL_PANEL_RESOLVER), {
-      childList: true,
-    });
   }
 
   // Elements
@@ -106,27 +142,19 @@ class KioskMode implements KioskModeRunner {
     this.lovelace = lovelace;
 
     // Get the configuration and process it
-    getLovelaceConfig(this.lovelace)
-      .then((config) => {
+    getPromisableElement(
+      () => lovelace?.lovelace?.config,
+      (config: Lovelace['lovelace']['config']) => !!config,
+      'Lovelace config'
+    )
+      .then((config: Lovelace['lovelace']['config']) => {
         this.processConfig(
           config.kiosk_mode || {}
         );
-        // Get menu translations
-        getMenuTranslations(this.ha)
-          .then((menuTranslations: Record<string, string>) => {
-            this.menuTranslations = menuTranslations;
-            this.updateMenuItemsLabels();
-          })
-          .catch(() => {
-            console.info(`${NAMESPACE} Cannot get resources translations`);
-          });
-      })
-      .catch(() => {
-        throw new Error(`Lovelace config not found. Giving up after ${ MAX_ATTEMPTS } attempts.`);
       });
   }
 
-  protected processConfig(config: KioskConfig) {
+  protected async processConfig(config: KioskConfig) {
     const dash = this.ha.hass.panelUrl;
     if (!window.kioskModeEntities[dash]) {
       window.kioskModeEntities[dash] = [];
@@ -148,11 +176,39 @@ class KioskMode implements KioskModeRunner {
     this.ignoreMobile        = false;
     this.ignoreDisableKm     = false;
 
-    this.huiRoot = this.lovelace.shadowRoot.querySelector(ELEMENT.HUI_ROOT).shadowRoot;
+    this.huiRoot = await getPromisableElement(
+      (): ShadowRoot => this.lovelace?.shadowRoot?.querySelector(ELEMENT.HUI_ROOT)?.shadowRoot,
+      (huiRoot: ShadowRoot) => !!huiRoot,
+      `${ELEMENT.HUI_ROOT}${SHADOW_ROOT_SUFFIX}`
+    );
+    
+    this.drawerLayout = await getPromisableElement(
+      (): HTMLElement => this.main.querySelector<HTMLElement>(ELEMENT.HA_DRAWER),
+      (drawerLayout: HTMLElement) => !!drawerLayout,
+      ELEMENT.HA_DRAWER
+    );
+    
+    this.appToolbar = await getPromisableElement(
+      (): HTMLElement => this.huiRoot.querySelector<HTMLElement>(ELEMENT.TOOLBAR),
+      (appToolbar: HTMLElement) => !!appToolbar,
+      ELEMENT.TOOLBAR
+    );
 
-    this.drawerLayout = this.main.querySelector<HTMLElement>(ELEMENT.HA_DRAWER);
-    this.appToolbar = this.huiRoot.querySelector<HTMLElement>(ELEMENT.TOOLBAR);
-    this.sideBarRoot = this.drawerLayout.querySelector(ELEMENT.HA_SIDEBAR).shadowRoot;
+    this.sideBarRoot = await getPromisableElement(
+      (): ShadowRoot => this.drawerLayout.querySelector(ELEMENT.HA_SIDEBAR)?.shadowRoot,
+      (sideBarRoot: ShadowRoot) => !!sideBarRoot,
+      `${ELEMENT.HA_SIDEBAR}${SHADOW_ROOT_SUFFIX}`
+    );
+
+    // Get menu translations
+    getMenuTranslations(this.ha)
+      .then((menuTranslations: Record<string, string>) => {
+        this.menuTranslations = menuTranslations;
+        this.updateMenuItemsLabels();
+      })
+      .catch(() => {
+        console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} Cannot get resources translations`);
+      });
 
     // Retrieve localStorage values & query string options.
     const queryStringsSet = (
@@ -424,15 +480,13 @@ class KioskMode implements KioskModeRunner {
   // Run on button menu change
   protected updateMenuItemsLabels() {
 
-    if (!this.menuTranslations) return;
+    if (!this.menuTranslations) return;    
 
-    const getToolbarMenuItems = (): NodeListOf<HTMLElement> => {
-      return this.appToolbar.querySelectorAll<HTMLElement>(`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`);
-    };
-
-    const getOverflowMenuItems = (): NodeListOf<HTMLElement> => this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM);
-
-    getMenuItems(getToolbarMenuItems)
+    getPromisableElement(
+      (): NodeListOf<HTMLElement> => this.appToolbar.querySelectorAll<HTMLElement>(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`),
+      (elements: NodeListOf<HTMLElement>): boolean => !!elements,
+      `:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`
+    )
       .then((menuItems: NodeListOf<HTMLElement>) => {
         menuItems.forEach((menuItem: HTMLElement): void => {
           if (
@@ -445,25 +499,28 @@ class KioskMode implements KioskModeRunner {
           }
         });
       })
-      .catch(() => { /* ignore */ });
+      .catch((message) => { console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} ${message}`) });
 
     if (this.user.is_admin) {
 
-      getMenuItems(getOverflowMenuItems)
-      .then((overflowMenuItems: NodeListOf<HTMLElement>) => {
-        overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
-          if (
-            overflowMenuItem &&
-            overflowMenuItem.dataset &&
-            !overflowMenuItem.dataset.selector
-          ) {
-            const textContent = overflowMenuItem.textContent.trim();
-            overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
-          }
-        });
-      })
-      .catch(() => { /* ignore */ });
-
+      getPromisableElement(
+        (): NodeListOf<HTMLElement> => this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM),
+        (elements: NodeListOf<HTMLElement>) => !!(elements && elements.length),
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.OVERLAY_MENU_ITEM}`
+      )
+        .then((overflowMenuItems: NodeListOf<HTMLElement>) => {
+          overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
+            if (
+              overflowMenuItem &&
+              overflowMenuItem.dataset &&
+              !overflowMenuItem.dataset.selector
+            ) {
+              const textContent = overflowMenuItem.textContent.trim();
+              overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
+            }
+          });
+        })
+        .catch((message) => { console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} ${message}`) });
     }
     
   }
