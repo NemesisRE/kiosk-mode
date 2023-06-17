@@ -104,7 +104,13 @@ export enum ELEMENT {
     ACTION_ITEMS = '.action-items',
     HA_MORE_INFO_DIALOG = 'ha-more-info-dialog',
     HA_DIALOG = 'ha-dialog',
-    HA_DIALOG_HEADER = 'ha-dialog-header'
+    HA_DIALOG_HEADER = 'ha-dialog-header',
+    HA_DIALOG_MORE_INFO = 'ha-more-info-info',
+    HA_DIALOG_HISTORY = 'ha-more-info-history',
+    HA_DIALOG_LOGBOOK = 'ha-more-info-logbook',
+    HA_DIALOG_CONTENT = 'more-info-content',
+    HA_DIALOG_DEFAULT = 'more-info-default',
+    HA_DIALOG_ATTRIBUTES = 'ha-attributes'
 }
 
 export const TRUE = 'true';

@@ -75,12 +75,24 @@ export const STYLES = {
         `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`
     ),
     DIALOG_HEADER_HISTORY: getDisplayNoneRulesString(
-        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM_ICON}[data-selector="${MENU.DIALOG_HISTORY}"]`
+        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_HISTORY}"]`
     ),
     DIALOG_HEADER_SETTINGS: getDisplayNoneRulesString(
-        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM_ICON}[data-selector="${MENU.DIALOG_SETTINGS}"]`
+        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_SETTINGS}"]`
     ),
     DIALOG_HEADER_OVERFLOW: getDisplayNoneRulesString(
-        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM_ICON}`
+        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.BUTTON_MENU}`
+    ),
+    DIALOG_HISTORY: getDisplayNoneRulesString(
+        ELEMENT.HA_DIALOG_HISTORY
+    ),
+    DIALOG_LOGBOOK: getDisplayNoneRulesString(
+        ELEMENT.HA_DIALOG_LOGBOOK
+    ),
+    DIALOG_ATTRIBUTES: getDisplayNoneRulesString(
+        ELEMENT.HA_DIALOG_ATTRIBUTES
+    ),
+    DIALOG_SHOW_MORE: getDisplayNoneRulesString(
+        `.header a`
     )
 };

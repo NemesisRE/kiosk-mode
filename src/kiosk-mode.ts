@@ -176,7 +176,13 @@ class KioskMode implements KioskModeRunner {
       });
   }
 
-  public async runDialogs(moreInfoDialog: Element) {
+  public async runDialogs(
+    moreInfoDialog: Element = this.ha?.shadowRoot?.querySelector(ELEMENT.HA_MORE_INFO_DIALOG)
+  ) {
+
+    if (!moreInfoDialog) {
+      return;
+    }
 
     const moreInfoDialogShadowRoot = await getPromisableElement(
       () => moreInfoDialog?.shadowRoot,
@@ -563,7 +569,7 @@ class KioskMode implements KioskModeRunner {
   }
 
   protected async insertDialogStyles(dialog: HTMLElement) {
-    
+
     getPromisableElement(
       (): NodeListOf<HTMLElement> => dialog.querySelectorAll<HTMLElement>(`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`),
       (elements: NodeListOf<HTMLElement>): boolean => !!elements,
@@ -574,7 +580,99 @@ class KioskMode implements KioskModeRunner {
       })
       .catch((message) => { console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} ${message}`) });
 
-    
+    if (
+      this.hideDialogHeaderHistory ||
+      this.hideDialogHeaderSettings ||
+      this.hideDialogHeaderOverflow
+    ) {
+      const styles = [
+          this.hideDialogHeaderHistory ? STYLES.DIALOG_HEADER_HISTORY : '',
+          this.hideDialogHeaderSettings ? STYLES.DIALOG_HEADER_SETTINGS : '',
+          this.hideDialogHeaderOverflow ? STYLES.DIALOG_HEADER_OVERFLOW : ''
+      ];
+      addStyle(styles.join(''), dialog);
+      if (queryString(OPTION.CACHE)) {
+        if (this.hideDialogHeaderHistory) setCache(CACHE.DIALOG_HEADER_HISTORY, TRUE);
+        if (this.hideDialogHeaderSettings) setCache(CACHE.DIALOG_HEADER_SETTINGS, TRUE);
+        if (this.hideDialogHeaderOverflow) setCache(CACHE.DIALOG_HEADER_OVERFLOW, TRUE);
+      }
+    } else {
+      removeStyle(dialog);
+    }
+
+    const moreInfo = await getPromisableElement(
+      (): ShadowRoot => dialog.querySelector(ELEMENT.HA_DIALOG_MORE_INFO)?.shadowRoot,
+      (moreInfo: ShadowRoot) => !!moreInfo,
+      `${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_MORE_INFO}`
+    );
+
+    if (
+      this.hideDialogHistory ||
+      this.hideDialogLogbook
+    ) {
+      const styles = [
+          this.hideDialogHistory ? STYLES.DIALOG_HISTORY : '',
+          this.hideDialogLogbook ? STYLES.DIALOG_LOGBOOK : ''
+      ];
+      addStyle(styles.join(''), moreInfo);
+      if (queryString(OPTION.CACHE)) {
+        if (this.hideDialogHistory) setCache(CACHE.DIALOG_HISTORY, TRUE);
+        if (this.hideDialogLogbook) setCache(CACHE.DIALOG_LOGBOOK, TRUE);
+      }
+    } else {
+      removeStyle(moreInfo);
+    }
+
+    getPromisableElement(
+      (): ShadowRoot => moreInfo.querySelector(ELEMENT.HA_DIALOG_HISTORY)?.shadowRoot,
+      (dialogHistory: ShadowRoot) => !!dialogHistory,
+      ''
+    )
+      .then((dialogHistory: ShadowRoot) => {
+
+        if (this.hideDialogHistoryShowMore) {
+          addStyle(STYLES.DIALOG_SHOW_MORE, dialogHistory);
+          if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_HISTORY_SHOW_MORE, TRUE);
+        } else {
+          removeStyle(dialogHistory);
+        }
+
+      })
+      .catch((e) => { /* ignore if it doesn‘t exist */ });
+
+    getPromisableElement(
+      (): ShadowRoot => moreInfo.querySelector(ELEMENT.HA_DIALOG_LOGBOOK)?.shadowRoot,
+      (dialogLogbook: ShadowRoot) => !!dialogLogbook,
+      ''
+    )
+      .then((dialogLogbook: ShadowRoot) => {
+
+        if (this.hideDialogLogbookShowMore) {
+          addStyle(STYLES.DIALOG_SHOW_MORE, dialogLogbook);
+          if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_LOGBOOK_SHOW_MORE, TRUE);
+        } else {
+          removeStyle(dialogLogbook);
+        }
+
+      })
+      .catch(() => { /* ignore if it doesn‘t exist */ });
+
+    getPromisableElement(
+      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`)?.shadowRoot,
+      (dialogDefault: ShadowRoot) => !!dialogDefault,
+      ''
+    )
+      .then((dialogDefault: ShadowRoot) => {
+
+        if (this.hideDialogAttributes) {
+          addStyle(STYLES.DIALOG_ATTRIBUTES, dialogDefault);
+          if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_ATTRIBUTES, TRUE);
+        } else {
+          removeStyle(dialogDefault);
+        }
+
+      })
+      .catch(() => { /* ignore if it doesn‘t exist */ });
 
   }
 
@@ -599,7 +697,7 @@ class KioskMode implements KioskModeRunner {
 
   // Run on more info dialogs change
   protected watchMoreInfoDialogs(mutations: MutationRecord[]) {
-    mutations.forEach(({ addedNodes, removedNodes }): void => {
+    mutations.forEach(({ addedNodes }): void => {
       addedNodes.forEach((node: Element): void => {
         if (node.localName === ELEMENT.HA_MORE_INFO_DIALOG) {
           window.KioskMode.runDialogs(node);
@@ -664,6 +762,7 @@ class KioskMode implements KioskModeRunner {
       (!event.data.old_state || event.data.new_state.state !== event.data.old_state.state)
     ) {
       this.run();
+      this.runDialogs();
     }
   }
 
