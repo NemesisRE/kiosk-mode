@@ -15,6 +15,14 @@ export enum CACHE {
     UNUSED_ENTITIES = 'kmUnusedEntities',
     RELOAD_RESOURCES = 'kmReloadResources',
     EDIT_DASHBOARD = 'kmEditDashboard',
+    DIALOG_HEADER_HISTORY = 'kmDialogHeaderHistory',
+    DIALOG_HEADER_SETTINGS = 'kmDialogHeaderSettings',
+    DIALOG_HEADER_OVERFLOW = 'kmDialogHeaderOverflow',
+    DIALOG_HISTORY = 'kmDialogHistory',
+    DIALOG_LOGBOOK = 'kmDialogLogbook',
+    DIALOG_ATTRIBUTES = 'kmDialogAttributes',
+    DIALOG_HISTORY_SHOW_MORE = 'kmDialogHistoryShowMore',
+    DIALOG_LOGBOOK_SHOW_MORE = 'kmDialogLogbookShowMore',
     OVERFLOW_MOUSE = 'kmOverflowMouse',
     MOUSE = 'kmMouse'
 }
@@ -35,6 +43,14 @@ export enum OPTION {
     HIDE_UNUSED_ENTITIES = 'hide_unused_entities',
     HIDE_RELOAD_RESOURCES = 'hide_reload_resources',
     HIDE_EDIT_DASHBOARD = 'hide_edit_dashboard',
+    HIDE_DIALOG_HEADER_HISTORY = 'hide_dialog_header_history',
+    HIDE_DIALOG_HEADER_SETTINGS = 'hide_dialog_header_settings',
+    HIDE_DIALOG_HEADER_OVERFLOW = 'hide_dialog_header_overflow',
+    HIDE_DIALOG_HISTORY = 'hide_dialog_history',
+    HIDE_DIALOG_LOGBOOK = 'hide_dialog_logbook',
+    HIDE_DIALOG_ATTRIBUTES = 'hide_dialog_attributes',
+    HIDE_DIALOG_HISTORY_SHOW_MORE = 'hide_dialog_history_show_more',
+    HIDE_DIALOG_LOGBOOK_SHOW_MORE = 'hide_dialog_logbook_show_more',
     BLOCK_OVERFLOW = 'block_overflow',
     BLOCK_MOUSE = 'block_mouse'
 }

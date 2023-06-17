@@ -52,6 +52,14 @@ class KioskMode implements KioskModeRunner {
         CACHE.UNUSED_ENTITIES,
         CACHE.RELOAD_RESOURCES,
         CACHE.EDIT_DASHBOARD,
+        CACHE.DIALOG_HEADER_HISTORY,
+        CACHE.DIALOG_HEADER_SETTINGS,
+        CACHE.DIALOG_HEADER_OVERFLOW,
+        CACHE.DIALOG_HISTORY,
+        CACHE.DIALOG_LOGBOOK,
+        CACHE.DIALOG_ATTRIBUTES,
+        CACHE.DIALOG_HISTORY_SHOW_MORE,
+        CACHE.DIALOG_LOGBOOK_SHOW_MORE,
         CACHE.OVERFLOW_MOUSE,
         CACHE.MOUSE
       ], FALSE);
@@ -134,6 +142,14 @@ class KioskMode implements KioskModeRunner {
   private hideUnusedEntities: boolean;
   private hideReloadResources: boolean;
   private hideEditDashboard: boolean;
+  private hideDialogHeaderHistory: boolean;
+  private hideDialogHeaderSettings: boolean;
+  private hideDialogHeaderOverflow: boolean;
+  private hideDialogHistory: boolean;
+  private hideDialogLogbook: boolean;
+  private hideDialogAttributes: boolean;
+  private hideDialogHistoryShowMore: boolean;
+  private hideDialogLogbookShowMore: boolean;
   private blockOverflow: boolean;
   private blockMouse: boolean;
   private ignoreEntity: boolean;
@@ -182,22 +198,30 @@ class KioskMode implements KioskModeRunner {
     if (!window.kioskModeEntities[dash]) {
       window.kioskModeEntities[dash] = [];
     }
-    this.hideHeader          = false;
-    this.hideSidebar         = false;
-    this.hideOverflow        = false;
-    this.hideMenuButton      = false;
-    this.hideAccount         = false;
-    this.hideSearch          = false;
-    this.hideAssistant       = false;
-    this.hideRefresh         = false;
-    this.hideUnusedEntities  = false;
-    this.hideReloadResources = false;
-    this.hideEditDashboard   = false;
-    this.blockOverflow       = false;
-    this.blockMouse          = false;
-    this.ignoreEntity        = false;
-    this.ignoreMobile        = false;
-    this.ignoreDisableKm     = false;
+    this.hideHeader                = false;
+    this.hideSidebar               = false;
+    this.hideOverflow              = false;
+    this.hideMenuButton            = false;
+    this.hideAccount               = false;
+    this.hideSearch                = false;
+    this.hideAssistant             = false;
+    this.hideRefresh               = false;
+    this.hideUnusedEntities        = false;
+    this.hideReloadResources       = false;
+    this.hideEditDashboard         = false;
+    this.hideDialogHeaderHistory   = false;
+    this.hideDialogHeaderSettings  = false;
+    this.hideDialogHeaderOverflow  = false;
+    this.hideDialogHistory         = false;
+    this.hideDialogLogbook         = false;
+    this.hideDialogAttributes      = false;
+    this.hideDialogHistoryShowMore = false;
+    this.hideDialogLogbookShowMore = false;
+    this.blockOverflow             = false;
+    this.blockMouse                = false;
+    this.ignoreEntity              = false;
+    this.ignoreMobile              = false;
+    this.ignoreDisableKm           = false;
 
     this.huiRoot = await getPromisableElement(
       (): ShadowRoot => this.lovelace?.shadowRoot?.querySelector(ELEMENT.HUI_ROOT)?.shadowRoot,
@@ -247,6 +271,14 @@ class KioskMode implements KioskModeRunner {
         CACHE.UNUSED_ENTITIES,
         CACHE.RELOAD_RESOURCES,
         CACHE.EDIT_DASHBOARD,
+        CACHE.DIALOG_HEADER_HISTORY,
+        CACHE.DIALOG_HEADER_SETTINGS,
+        CACHE.DIALOG_HEADER_OVERFLOW,
+        CACHE.DIALOG_HISTORY,
+        CACHE.DIALOG_LOGBOOK,
+        CACHE.DIALOG_ATTRIBUTES,
+        CACHE.DIALOG_HISTORY_SHOW_MORE,
+        CACHE.DIALOG_LOGBOOK_SHOW_MORE,
         CACHE.OVERFLOW_MOUSE,
         CACHE.MOUSE
       ]) ||
@@ -263,24 +295,40 @@ class KioskMode implements KioskModeRunner {
         OPTION.HIDE_RELOAD_RESOURCES,
         OPTION.HIDE_UNUSED_ENTITIES,
         OPTION.HIDE_EDIT_DASHBOARD,
+        OPTION.HIDE_DIALOG_HEADER_HISTORY,
+        OPTION.HIDE_DIALOG_HEADER_SETTINGS,
+        OPTION.HIDE_DIALOG_HEADER_OVERFLOW,
+        OPTION.HIDE_DIALOG_HISTORY,
+        OPTION.HIDE_DIALOG_LOGBOOK,
+        OPTION.HIDE_DIALOG_ATTRIBUTES,
+        OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE,
+        OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE,
         OPTION.BLOCK_OVERFLOW,
         OPTION.BLOCK_MOUSE
       ])
     );
     if (queryStringsSet) {
-      this.hideHeader          = cached(CACHE.HEADER)           || queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
-      this.hideSidebar         = cached(CACHE.SIDEBAR)          || queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
-      this.hideOverflow        = cached(CACHE.OVERFLOW)         || queryString([OPTION.KIOSK, OPTION.HIDE_OVERFLOW]);
-      this.hideMenuButton      = cached(CACHE.MENU_BUTTON)      || queryString([OPTION.KIOSK, OPTION.HIDE_MENU_BUTTON]);
-      this.hideAccount         = cached(CACHE.ACCOUNT)          || queryString([OPTION.KIOSK, OPTION.HIDE_ACCOUNT]);
-      this.hideSearch          = cached(CACHE.SEARCH)           || queryString([OPTION.KIOSK, OPTION.HIDE_SEARCH]);
-      this.hideAssistant       = cached(CACHE.ASSISTANT)        || queryString([OPTION.KIOSK, OPTION.HIDE_ASSISTANT]);
-      this.hideRefresh         = cached(CACHE.REFRESH)          || queryString([OPTION.KIOSK, OPTION.HIDE_REFRESH]);
-      this.hideUnusedEntities  = cached(CACHE.UNUSED_ENTITIES)  || queryString([OPTION.KIOSK, OPTION.HIDE_UNUSED_ENTITIES]);
-      this.hideReloadResources = cached(CACHE.RELOAD_RESOURCES) || queryString([OPTION.KIOSK, OPTION.HIDE_RELOAD_RESOURCES]);
-      this.hideEditDashboard   = cached(CACHE.EDIT_DASHBOARD)   || queryString([OPTION.KIOSK, OPTION.HIDE_EDIT_DASHBOARD]);
-      this.blockOverflow       = cached(CACHE.OVERFLOW_MOUSE)   || queryString([OPTION.BLOCK_OVERFLOW]);
-      this.blockMouse          = cached(CACHE.MOUSE)            || queryString([OPTION.BLOCK_MOUSE]);
+      this.hideHeader                = cached(CACHE.HEADER)                   || queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
+      this.hideSidebar               = cached(CACHE.SIDEBAR)                  || queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
+      this.hideOverflow              = cached(CACHE.OVERFLOW)                 || queryString([OPTION.HIDE_OVERFLOW]);
+      this.hideMenuButton            = cached(CACHE.MENU_BUTTON)              || queryString([OPTION.HIDE_MENU_BUTTON]);
+      this.hideAccount               = cached(CACHE.ACCOUNT)                  || queryString([OPTION.HIDE_ACCOUNT]);
+      this.hideSearch                = cached(CACHE.SEARCH)                   || queryString([OPTION.HIDE_SEARCH]);
+      this.hideAssistant             = cached(CACHE.ASSISTANT)                || queryString([OPTION.HIDE_ASSISTANT]);
+      this.hideRefresh               = cached(CACHE.REFRESH)                  || queryString([OPTION.HIDE_REFRESH]);
+      this.hideUnusedEntities        = cached(CACHE.UNUSED_ENTITIES)          || queryString([OPTION.HIDE_UNUSED_ENTITIES]);
+      this.hideReloadResources       = cached(CACHE.RELOAD_RESOURCES)         || queryString([OPTION.HIDE_RELOAD_RESOURCES]);
+      this.hideEditDashboard         = cached(CACHE.EDIT_DASHBOARD)           || queryString([OPTION.HIDE_EDIT_DASHBOARD]);
+      this.hideDialogHeaderHistory   = cached(CACHE.DIALOG_HEADER_HISTORY)    || queryString([OPTION.HIDE_DIALOG_HEADER_HISTORY]);
+      this.hideDialogHeaderSettings  = cached(CACHE.DIALOG_HEADER_SETTINGS)   || queryString([OPTION.HIDE_DIALOG_HEADER_SETTINGS]);
+      this.hideDialogHeaderOverflow  = cached(CACHE.DIALOG_HEADER_OVERFLOW)   || queryString([OPTION.HIDE_DIALOG_HEADER_OVERFLOW]);
+      this.hideDialogHistory         = cached(CACHE.DIALOG_HISTORY)           || queryString([OPTION.HIDE_DIALOG_HISTORY]);
+      this.hideDialogLogbook         = cached(CACHE.DIALOG_LOGBOOK)           || queryString([OPTION.HIDE_DIALOG_LOGBOOK]);
+      this.hideDialogAttributes      = cached(CACHE.DIALOG_ATTRIBUTES)        || queryString([OPTION.HIDE_DIALOG_ATTRIBUTES]);
+      this.hideDialogHistoryShowMore = cached(CACHE.DIALOG_HISTORY_SHOW_MORE) || queryString([OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE]);
+      this.hideDialogLogbookShowMore = cached(CACHE.DIALOG_LOGBOOK_SHOW_MORE) || queryString([OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE]);
+      this.blockOverflow             = cached(CACHE.OVERFLOW_MOUSE)           || queryString([OPTION.BLOCK_OVERFLOW]);
+      this.blockMouse                = cached(CACHE.MOUSE)                    || queryString([OPTION.BLOCK_MOUSE]);
     }
 
     // Use config values only if config strings and cache aren't used.
@@ -292,31 +340,55 @@ class KioskMode implements KioskModeRunner {
       : config.kiosk || config.hide_sidebar;
     this.hideOverflow = queryStringsSet
       ? this.hideOverflow
-      : config.kiosk || config.hide_overflow;
+      : config.hide_overflow;
     this.hideMenuButton = queryStringsSet
       ? this.hideMenuButton
-      : config.kiosk || config.hide_menubutton;
+      : config.hide_menubutton;
     this.hideAccount = queryStringsSet
       ? this.hideAccount
-      : config.kiosk || config.hide_account;
+      : config.hide_account;
     this.hideSearch = queryStringsSet
       ? this.hideSearch
-      : config.kiosk || config.hide_search;
+      : config.hide_search;
     this.hideAssistant = queryStringsSet
       ? this.hideAssistant
-      : config.kiosk || config.hide_assistant;
+      : config.hide_assistant;
     this.hideRefresh = queryStringsSet
       ? this.hideRefresh
-      : config.kiosk || config.hide_refresh;
+      : config.hide_refresh;
     this.hideUnusedEntities = queryStringsSet
       ? this.hideUnusedEntities
-      : config.kiosk || config.hide_unused_entities;
+      : config.hide_unused_entities;
     this.hideReloadResources = queryStringsSet
       ? this.hideReloadResources
-      : config.kiosk || config.hide_reload_resources;
+      : config.hide_reload_resources;
     this.hideEditDashboard = queryStringsSet
       ? this.hideEditDashboard
-      : config.kiosk || config.hide_edit_dashboard;
+      : config.hide_edit_dashboard;
+    this.hideDialogHeaderHistory = queryStringsSet
+      ? this.hideDialogHeaderHistory
+      : config.hide_dialog_header_history;
+    this.hideDialogHeaderSettings = queryStringsSet
+      ? this.hideDialogHeaderSettings
+      : config.hide_dialog_header_settings;
+    this.hideDialogHeaderOverflow = queryStringsSet
+      ? this.hideDialogHeaderOverflow
+      : config.hide_dialog_header_overflow;
+    this.hideDialogHistory = queryStringsSet
+      ? this.hideDialogHistory
+      : config.hide_dialog_history;
+    this.hideDialogLogbook = queryStringsSet
+      ? this.hideDialogLogbook
+      : config.hide_dialog_logbook;
+    this.hideDialogAttributes = queryStringsSet
+      ? this.hideDialogAttributes
+      : config.hide_dialog_attributes;
+    this.hideDialogHistoryShowMore = queryStringsSet
+      ? this.hideDialogHistoryShowMore
+      : config.hide_dialog_history_show_more;
+    this.hideDialogLogbookShowMore = queryStringsSet
+      ? this.hideDialogLogbookShowMore
+      : config.hide_dialog_logbook_show_more;
     this.blockOverflow = queryStringsSet
       ? this.blockOverflow
       : config.block_overflow;
@@ -366,20 +438,28 @@ class KioskMode implements KioskModeRunner {
         const entity = Object.keys(conf.entity)[0];
         if (!window.kioskModeEntities[dash].includes(entity)) window.kioskModeEntities[dash].push(entity);
         if (this.ha.hass.states[entity].state == conf.entity[entity]) {
-          if (OPTION.HIDE_HEADER in conf)           this.hideHeader          = conf[OPTION.HIDE_HEADER];
-          if (OPTION.HIDE_SIDEBAR in conf)          this.hideSidebar         = conf[OPTION.HIDE_SIDEBAR];
-          if (OPTION.HIDE_OVERFLOW in conf)         this.hideOverflow        = conf[OPTION.HIDE_OVERFLOW];
-          if (OPTION.HIDE_MENU_BUTTON in conf)      this.hideMenuButton      = conf[OPTION.HIDE_MENU_BUTTON];
-          if (OPTION.HIDE_ACCOUNT in conf)          this.hideAccount         = conf[OPTION.HIDE_ACCOUNT];
-          if (OPTION.HIDE_SEARCH in conf)           this.hideSearch          = conf[OPTION.HIDE_SEARCH];
-          if (OPTION.HIDE_ASSISTANT in conf)        this.hideAssistant       = conf[OPTION.HIDE_ASSISTANT];
-          if (OPTION.HIDE_REFRESH in conf)          this.hideRefresh         = conf[OPTION.HIDE_REFRESH];
-          if (OPTION.HIDE_UNUSED_ENTITIES in conf)  this.hideUnusedEntities  = conf[OPTION.HIDE_UNUSED_ENTITIES];
-          if (OPTION.HIDE_RELOAD_RESOURCES in conf) this.hideReloadResources = conf[OPTION.HIDE_RELOAD_RESOURCES];
-          if (OPTION.HIDE_EDIT_DASHBOARD in conf)   this.hideEditDashboard   = conf[OPTION.HIDE_EDIT_DASHBOARD];
-          if (OPTION.BLOCK_OVERFLOW in conf)        this.blockOverflow       = conf[OPTION.BLOCK_OVERFLOW];
-          if (OPTION.BLOCK_MOUSE in conf)           this.blockMouse          = conf[OPTION.BLOCK_MOUSE];
-          if (OPTION.KIOSK in conf)                 this.hideHeader          = this.hideSidebar = conf[OPTION.KIOSK];
+          if (OPTION.HIDE_HEADER in conf)                   this.hideHeader                = conf[OPTION.HIDE_HEADER];
+          if (OPTION.HIDE_SIDEBAR in conf)                  this.hideSidebar               = conf[OPTION.HIDE_SIDEBAR];
+          if (OPTION.HIDE_OVERFLOW in conf)                 this.hideOverflow              = conf[OPTION.HIDE_OVERFLOW];
+          if (OPTION.HIDE_MENU_BUTTON in conf)              this.hideMenuButton            = conf[OPTION.HIDE_MENU_BUTTON];
+          if (OPTION.HIDE_ACCOUNT in conf)                  this.hideAccount               = conf[OPTION.HIDE_ACCOUNT];
+          if (OPTION.HIDE_SEARCH in conf)                   this.hideSearch                = conf[OPTION.HIDE_SEARCH];
+          if (OPTION.HIDE_ASSISTANT in conf)                this.hideAssistant             = conf[OPTION.HIDE_ASSISTANT];
+          if (OPTION.HIDE_REFRESH in conf)                  this.hideRefresh               = conf[OPTION.HIDE_REFRESH];
+          if (OPTION.HIDE_UNUSED_ENTITIES in conf)          this.hideUnusedEntities        = conf[OPTION.HIDE_UNUSED_ENTITIES];
+          if (OPTION.HIDE_RELOAD_RESOURCES in conf)         this.hideReloadResources       = conf[OPTION.HIDE_RELOAD_RESOURCES];
+          if (OPTION.HIDE_EDIT_DASHBOARD in conf)           this.hideEditDashboard         = conf[OPTION.HIDE_EDIT_DASHBOARD];
+          if (OPTION.HIDE_DIALOG_HEADER_HISTORY in conf)    this.hideDialogHeaderHistory   = conf[OPTION.HIDE_DIALOG_HEADER_HISTORY];
+          if (OPTION.HIDE_DIALOG_HEADER_SETTINGS in conf)   this.hideDialogHeaderSettings  = conf[OPTION.HIDE_DIALOG_HEADER_SETTINGS];
+          if (OPTION.HIDE_DIALOG_HEADER_OVERFLOW in conf)   this.hideDialogHeaderOverflow  = conf[OPTION.HIDE_DIALOG_HEADER_OVERFLOW];
+          if (OPTION.HIDE_DIALOG_HISTORY in conf)           this.hideDialogHistory         = conf[OPTION.HIDE_DIALOG_HISTORY];
+          if (OPTION.HIDE_DIALOG_LOGBOOK in conf)           this.hideDialogLogbook         = conf[OPTION.HIDE_DIALOG_LOGBOOK];
+          if (OPTION.HIDE_DIALOG_ATTRIBUTES in conf)        this.hideDialogAttributes      = conf[OPTION.HIDE_DIALOG_ATTRIBUTES];
+          if (OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE in conf) this.hideDialogHistoryShowMore = conf[OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE];
+          if (OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE in conf) this.hideDialogLogbookShowMore = conf[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE];
+          if (OPTION.BLOCK_OVERFLOW in conf)                this.blockOverflow             = conf[OPTION.BLOCK_OVERFLOW];
+          if (OPTION.BLOCK_MOUSE in conf)                   this.blockMouse                = conf[OPTION.BLOCK_MOUSE];
+          if (OPTION.KIOSK in conf)                         this.hideHeader                = this.hideSidebar = conf[OPTION.KIOSK];
         }
       }
     }
@@ -584,26 +664,34 @@ class KioskMode implements KioskModeRunner {
   }
 
   protected setOptions(config: ConditionalKioskConfig) {
-    this.hideHeader          = config.kiosk || config.hide_header;
-    this.hideSidebar         = config.kiosk || config.hide_sidebar;
-    this.hideOverflow        = config.kiosk || config.hide_overflow;
-    this.hideMenuButton      = config.kiosk || config.hide_menubutton;
-    this.hideAccount         = config.kiosk || config.hide_account;
-    this.hideSearch          = config.kiosk || config.hide_search;
-    this.hideAssistant       = config.kiosk || config.hide_assistant;
-    this.hideRefresh         = config.kiosk || config.hide_refresh;
-    this.hideUnusedEntities  = config.kiosk || config.hide_unused_entities;
-    this.hideReloadResources = config.kiosk || config.hide_reload_resources;
-    this.hideEditDashboard   = config.kiosk || config.hide_edit_dashboard;
-    this.blockOverflow       = config.block_overflow;
-    this.blockMouse          = config.block_mouse;
-    this.ignoreEntity        = typeof config.ignore_entity_settings === BOOLEAN
+    this.hideHeader                = config.kiosk || config.hide_header;
+    this.hideSidebar               = config.kiosk || config.hide_sidebar;
+    this.hideOverflow              = config.hide_overflow;
+    this.hideMenuButton            = config.hide_menubutton;
+    this.hideAccount               = config.hide_account;
+    this.hideSearch                = config.hide_search;
+    this.hideAssistant             = config.hide_assistant;
+    this.hideRefresh               = config.hide_refresh;
+    this.hideUnusedEntities        = config.hide_unused_entities;
+    this.hideReloadResources       = config.hide_reload_resources;
+    this.hideEditDashboard         = config.hide_edit_dashboard;
+    this.hideDialogHeaderHistory   = config.hide_dialog_header_history;
+    this.hideDialogHeaderSettings  = config.hide_dialog_header_settings;
+    this.hideDialogHeaderOverflow  = config.hide_dialog_header_overflow;
+    this.hideDialogHistory         = config.hide_dialog_history;
+    this.hideDialogLogbook         = config.hide_dialog_logbook;
+    this.hideDialogAttributes      = config.hide_dialog_attributes;
+    this.hideDialogHistoryShowMore = config.hide_dialog_history_show_more;
+    this.hideDialogLogbookShowMore = config.hide_dialog_logbook_show_more;
+    this.blockOverflow             = config.block_overflow;
+    this.blockMouse                = config.block_mouse;
+    this.ignoreEntity              = typeof config.ignore_entity_settings === BOOLEAN
       ? config.ignore_entity_settings
       : this.ignoreEntity;
-    this.ignoreMobile        = typeof config.ignore_mobile_settings === BOOLEAN
+    this.ignoreMobile              = typeof config.ignore_mobile_settings === BOOLEAN
       ? config.ignore_mobile_settings
       : this.ignoreMobile;
-    this.ignoreDisableKm     = typeof config.ignore_disable_km === BOOLEAN
+    this.ignoreDisableKm           = typeof config.ignore_disable_km === BOOLEAN
       ? config.ignore_disable_km
       : this.ignoreDisableKm;
   }
