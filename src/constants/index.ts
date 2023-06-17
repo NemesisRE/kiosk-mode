@@ -60,6 +60,7 @@ const COMMON_PREFIX = `${UI_PREFIX}.common`;
 const PANEL_PREFIX = `${UI_PREFIX}.panel`;
 const LOVELACE_PREFIX = `${PANEL_PREFIX}.lovelace`;
 const MENU_PREFIX = `${LOVELACE_PREFIX}.menu`;
+const DIALOGS_PREFIX = `${UI_PREFIX}.dialogs.more_info_control`;
 
 export enum MENU {
     SEARCH = 'SEARCH',
@@ -67,7 +68,10 @@ export enum MENU {
     REFRESH = 'REFRESH',
     UNUSED_ENTITIES = 'UNUSED_ENTITIES',
     RELOAD_RESOURCES = 'RELOAD_RESOURCES',
-    EDIT_DASHBOARD = 'EDIT_DASHBOARD'
+    EDIT_DASHBOARD = 'EDIT_DASHBOARD',
+    DIALOG_DISMISS = 'DIALOG_DISMISS',
+    DIALOG_HISTORY = 'DIALOG_HISTORY',
+    DIALOG_SETTINGS = 'DIALOG_SETTINGS'
 }
 
 export const MENU_REFERENCES = Object.freeze({
@@ -76,7 +80,11 @@ export const MENU_REFERENCES = Object.freeze({
     [MENU.REFRESH]: `${COMMON_PREFIX}.refresh`,
     [MENU.UNUSED_ENTITIES]: `${LOVELACE_PREFIX}.unused_entities.title`,
     [MENU.RELOAD_RESOURCES]: `${MENU_PREFIX}.reload_resources`,
-    [MENU.EDIT_DASHBOARD]: `${MENU_PREFIX}.configure_ui`
+    [MENU.EDIT_DASHBOARD]: `${MENU_PREFIX}.configure_ui`,
+    [MENU.DIALOG_HISTORY]: `${DIALOGS_PREFIX}.history`,
+    [MENU.DIALOG_SETTINGS]: `${DIALOGS_PREFIX}.settings`,
+    [MENU.DIALOG_DISMISS]: `${DIALOGS_PREFIX}.dismiss`
+
 });
 
 export enum ELEMENT {
@@ -88,13 +96,15 @@ export enum ELEMENT {
     HUI_VIEW = 'hui-view',
     MENU_ITEM = 'ha-icon-button',
     MENU_ITEM_ICON = 'mwc-icon-button',
+    BUTTON_MENU = 'ha-button-menu',
     OVERLAY_MENU_ITEM = 'mwc-list-item',
     HA_SIDEBAR = 'ha-sidebar',
     HA_DRAWER = 'ha-drawer',
     TOOLBAR = '.toolbar',
     ACTION_ITEMS = '.action-items',
     HA_MORE_INFO_DIALOG = 'ha-more-info-dialog',
-    HA_DIALOG = 'ha-dialog'
+    HA_DIALOG = 'ha-dialog',
+    HA_DIALOG_HEADER = 'ha-dialog-header'
 }
 
 export const TRUE = 'true';

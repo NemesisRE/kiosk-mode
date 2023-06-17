@@ -1,13 +1,8 @@
-import { MENU } from '@constants';
+import { MENU, ELEMENT } from '@constants';
 import {
     getCSSRulesString,
     getDisplayNoneRulesString
 } from '@utilities';
-
-const TOOLBAR = '.toolbar';
-const ACTION_ITEMS = '.action-items';
-const BUTTON_MENU = 'ha-button-menu';
-const OVERFLOW_BUTTON_MENU = 'mwc-list-item';
 
 export const STYLES = {
     HEADER: getCSSRulesString({
@@ -52,31 +47,40 @@ export const STYLES = {
     }),
     ASIDE: getDisplayNoneRulesString('.mdc-drawer'),
     OVERFLOW_MENU: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}`
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`
     ),
     BLOCK_OVERFLOW: getCSSRulesString({
-        [`${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU}`]: {
+        [`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`]: {
             'pointer-events': 'none !important'
         }
     }),
     SEARCH: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ha-icon-button[data-selector="${MENU.SEARCH}"]`,
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU} > ${OVERFLOW_BUTTON_MENU}[data-selector="${MENU.SEARCH}"]`
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-icon-button[data-selector="${MENU.SEARCH}"]`,
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.SEARCH}"]`
     ),
     ASSISTANT: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ha-icon-button[data-selector="${MENU.ASSIST}"]`,
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU} > ${OVERFLOW_BUTTON_MENU}[data-selector="${MENU.ASSIST}"]`
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-icon-button[data-selector="${MENU.ASSIST}"]`,
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ASSIST}"]`
     ),
     REFRESH: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU} > ${OVERFLOW_BUTTON_MENU}[data-selector="${MENU.REFRESH}"]`
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.REFRESH}"]`
     ),
     UNUSED_ENTITIES: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU} > ${OVERFLOW_BUTTON_MENU}[data-selector="${MENU.UNUSED_ENTITIES}"]`,
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.UNUSED_ENTITIES}"]`,
     ),
     RELOAD_RESOURCES: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU} > ${OVERFLOW_BUTTON_MENU}[data-selector="${MENU.RELOAD_RESOURCES}"]`
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.RELOAD_RESOURCES}"]`
     ),
     EDIT_DASHBOARD: getDisplayNoneRulesString(
-        `${TOOLBAR} > ${ACTION_ITEMS} > ${BUTTON_MENU} > ${OVERFLOW_BUTTON_MENU}[data-selector="${MENU.EDIT_DASHBOARD}"]`
+        `${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`
+    ),
+    DIALOG_HEADER_HISTORY: getDisplayNoneRulesString(
+        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM_ICON}[data-selector="${MENU.DIALOG_HISTORY}"]`
+    ),
+    DIALOG_HEADER_SETTINGS: getDisplayNoneRulesString(
+        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM_ICON}[data-selector="${MENU.DIALOG_SETTINGS}"]`
+    ),
+    DIALOG_HEADER_OVERFLOW: getDisplayNoneRulesString(
+        `${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM_ICON}`
     )
 };

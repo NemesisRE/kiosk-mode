@@ -30,7 +30,8 @@ import {
   addStyle,
   removeStyle,
   getMenuTranslations,
-  getPromisableElement
+  getPromisableElement,
+  addMenuItemsDataSelectors
 } from '@utilities';
 import { STYLES } from '@styles';
 
@@ -561,8 +562,20 @@ class KioskMode implements KioskModeRunner {
     window.dispatchEvent(new Event('resize'));
   }
 
-  protected insertDialogStyles(dialog: HTMLElement) {
+  protected async insertDialogStyles(dialog: HTMLElement) {
     
+    getPromisableElement(
+      (): NodeListOf<HTMLElement> => dialog.querySelectorAll<HTMLElement>(`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`),
+      (elements: NodeListOf<HTMLElement>): boolean => !!elements,
+      `:scope > ${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`
+    )
+      .then((menuItems: NodeListOf<HTMLElement>) => {
+        addMenuItemsDataSelectors(menuItems, this.menuTranslations);
+      })
+      .catch((message) => { console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} ${message}`) });
+
+    
+
   }
 
   // Resize event
@@ -606,16 +619,7 @@ class KioskMode implements KioskModeRunner {
       `:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`
     )
       .then((menuItems: NodeListOf<HTMLElement>) => {
-        menuItems.forEach((menuItem: HTMLElement): void => {
-          if (
-            menuItem &&
-            menuItem.dataset &&
-            !menuItem.dataset.selector
-          ) {
-            const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-            menuItem.dataset.selector = this.menuTranslations[icon.title];
-          }
-        });
+        addMenuItemsDataSelectors(menuItems, this.menuTranslations);
       })
       .catch((message) => { console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} ${message}`) });
 

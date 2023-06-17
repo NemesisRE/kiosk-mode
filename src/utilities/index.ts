@@ -5,7 +5,8 @@ import {
     MENU_REFERENCES,
     MAX_ATTEMPTS,
     RETRY_DELAY,
-    NAMESPACE
+    NAMESPACE,
+    ELEMENT
 } from '@constants';
 
 // Convert to array
@@ -156,4 +157,20 @@ export const getPromisableElement = <T>(
         };
         select();
     });
+};
+
+export const addMenuItemsDataSelectors = (
+    menuItems: NodeListOf<HTMLElement>,
+    translations: Record<string, string>
+): void => {
+    menuItems.forEach((menuItem: HTMLElement): void => {
+        if (
+          menuItem &&
+          menuItem.dataset &&
+          !menuItem.dataset.selector
+        ) {
+          const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
+          menuItem.dataset.selector = translations[icon.title];
+        }
+      });
 };
