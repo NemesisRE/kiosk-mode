@@ -91,8 +91,13 @@ class KioskMode implements KioskModeRunner {
       this.run();
       this.entityWatch();
 
-      // Start the mutation observer
+      // Start the mutation observer for partial panel resolver
       new MutationObserver(this.watchDashboards).observe(partialPanelResolver, {
+        childList: true,
+      });
+
+      // Start the mutation observer for more info dialog
+      new MutationObserver(this.watchMoreInfoDialogs).observe(this.ha.shadowRoot, {
         childList: true,
       });
 
@@ -152,6 +157,24 @@ class KioskMode implements KioskModeRunner {
           config.kiosk_mode || {}
         );
       });
+  }
+
+  public async runDialogs(moreInfoDialog: Element) {
+
+    const moreInfoDialogShadowRoot = await getPromisableElement(
+      () => moreInfoDialog?.shadowRoot,
+      (shadowRoot: ShadowRoot) => !!shadowRoot,
+      `${ELEMENT.HA_MORE_INFO_DIALOG}:${SHADOW_ROOT_SUFFIX}`
+    );
+
+    const dialog = await getPromisableElement(
+      () => moreInfoDialogShadowRoot.querySelector<HTMLElement>(ELEMENT.HA_DIALOG),
+      (dialog: HTMLElement) => !!dialog,
+      `${ELEMENT.HA_MORE_INFO_DIALOG}:${SHADOW_ROOT_SUFFIX} > ${ELEMENT.HA_DIALOG}`
+    );
+
+    this.insertDialogStyles(dialog);
+
   }
 
   protected async processConfig(config: KioskConfig) {
@@ -458,6 +481,10 @@ class KioskMode implements KioskModeRunner {
     window.dispatchEvent(new Event('resize'));
   }
 
+  protected insertDialogStyles(dialog: HTMLElement) {
+    
+  }
+
   // Resize event
   protected resizeWindow() {
     window.clearTimeout(this.resizeDelay);
@@ -472,6 +499,17 @@ class KioskMode implements KioskModeRunner {
       addedNodes.forEach((node: Element): void => {
         if (node.localName === ELEMENT.HA_PANEL_LOVELACE) {
           window.KioskMode.run(node as Lovelace);
+        }
+      });
+    });
+  }
+
+  // Run on more info dialogs change
+  protected watchMoreInfoDialogs(mutations: MutationRecord[]) {
+    mutations.forEach(({ addedNodes, removedNodes }): void => {
+      addedNodes.forEach((node: Element): void => {
+        if (node.localName === ELEMENT.HA_MORE_INFO_DIALOG) {
+          window.KioskMode.runDialogs(node);
         }
       });
     });

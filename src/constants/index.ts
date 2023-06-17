@@ -76,7 +76,9 @@ export enum ELEMENT {
     HA_SIDEBAR = 'ha-sidebar',
     HA_DRAWER = 'ha-drawer',
     TOOLBAR = '.toolbar',
-    ACTION_ITEMS = '.action-items'
+    ACTION_ITEMS = '.action-items',
+    HA_MORE_INFO_DIALOG = 'ha-more-info-dialog',
+    HA_DIALOG = 'ha-dialog'
 }
 
 export const TRUE = 'true';
