@@ -21,6 +21,9 @@ export enum CACHE {
     DIALOG_HISTORY = 'kmDialogHistory',
     DIALOG_LOGBOOK = 'kmDialogLogbook',
     DIALOG_ATTRIBUTES = 'kmDialogAttributes',
+    DIALOG_MEDIA_ACTIONS = 'kmDialogMediaActions',
+    DIALOG_UPDATE_ACTIONS = 'kmDialogUpdateActions',
+    DIALOG_CLIMATE_ACTIONS = 'kmDialogClimateActions',
     DIALOG_HISTORY_SHOW_MORE = 'kmDialogHistoryShowMore',
     DIALOG_LOGBOOK_SHOW_MORE = 'kmDialogLogbookShowMore',
     OVERFLOW_MOUSE = 'kmOverflowMouse',
@@ -49,10 +52,17 @@ export enum OPTION {
     HIDE_DIALOG_HISTORY = 'hide_dialog_history',
     HIDE_DIALOG_LOGBOOK = 'hide_dialog_logbook',
     HIDE_DIALOG_ATTRIBUTES = 'hide_dialog_attributes',
+    HIDE_DIALOG_MEDIA_ACTIONS = 'hide_dialog_media_actions',
+    HIDE_DIALOG_UPDATE_ACTIONS = 'hide_dialog_update_actions',
+    HIDE_DIALOG_CLIMATE_ACTIONS = 'hide_dialog_climate_actions',
     HIDE_DIALOG_HISTORY_SHOW_MORE = 'hide_dialog_history_show_more',
     HIDE_DIALOG_LOGBOOK_SHOW_MORE = 'hide_dialog_logbook_show_more',
     BLOCK_OVERFLOW = 'block_overflow',
-    BLOCK_MOUSE = 'block_mouse'
+    BLOCK_MOUSE = 'block_mouse',
+    // Conditional configuration
+    IGNORE_ENTITY_SETTINGS = 'ignore_entity_settings',
+    IGNORE_MOBILE_SETTINGS = 'ignore_mobile_settings',
+    IGNORE_DISABLE_KM = 'ignore_disable_km'
 }
 
 const UI_PREFIX = 'ui';
@@ -110,12 +120,14 @@ export enum ELEMENT {
     HA_DIALOG_LOGBOOK = 'ha-more-info-logbook',
     HA_DIALOG_CONTENT = 'more-info-content',
     HA_DIALOG_DEFAULT = 'more-info-default',
+    HA_DIALOG_MEDIA_PLAYER = 'more-info-media_player',
+    HA_DIALOG_UPDATE = 'more-info-update',
+    HA_DIALOG_CLIMATE = 'more-info-climate',
     HA_DIALOG_ATTRIBUTES = 'ha-attributes'
 }
 
 export const TRUE = 'true';
 export const FALSE = 'false';
-export const BOOLEAN = 'boolean';
 export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;
 export const SUSCRIBE_EVENTS_TYPE = 'subscribe_events';
 export const STATE_CHANGED_EVENT = 'state_changed';

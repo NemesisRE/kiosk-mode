@@ -13,7 +13,6 @@ import {
   ELEMENT,
   TRUE,
   FALSE,
-  BOOLEAN,
   CUSTOM_MOBILE_WIDTH_DEFAULT,
   SUSCRIBE_EVENTS_TYPE,
   STATE_CHANGED_EVENT,
@@ -59,6 +58,9 @@ class KioskMode implements KioskModeRunner {
         CACHE.DIALOG_HISTORY,
         CACHE.DIALOG_LOGBOOK,
         CACHE.DIALOG_ATTRIBUTES,
+        CACHE.DIALOG_MEDIA_ACTIONS,
+        CACHE.DIALOG_UPDATE_ACTIONS,
+        CACHE.DIALOG_CLIMATE_ACTIONS,
         CACHE.DIALOG_HISTORY_SHOW_MORE,
         CACHE.DIALOG_LOGBOOK_SHOW_MORE,
         CACHE.OVERFLOW_MOUSE,
@@ -149,6 +151,9 @@ class KioskMode implements KioskModeRunner {
   private hideDialogHistory: boolean;
   private hideDialogLogbook: boolean;
   private hideDialogAttributes: boolean;
+  private hideDialogMediaActions: boolean;
+  private hideDialogUpdateActions: boolean;
+  private hideDialogClimateActions: boolean;
   private hideDialogHistoryShowMore: boolean;
   private hideDialogLogbookShowMore: boolean;
   private blockOverflow: boolean;
@@ -222,6 +227,9 @@ class KioskMode implements KioskModeRunner {
     this.hideDialogHistory         = false;
     this.hideDialogLogbook         = false;
     this.hideDialogAttributes      = false;
+    this.hideDialogMediaActions    = false;
+    this.hideDialogUpdateActions   = false;
+    this.hideDialogClimateActions  = false;
     this.hideDialogHistoryShowMore = false;
     this.hideDialogLogbookShowMore = false;
     this.blockOverflow             = false;
@@ -265,143 +273,92 @@ class KioskMode implements KioskModeRunner {
       });
 
     // Retrieve localStorage values & query string options.
-    const queryStringsSet = (
-      cached([
-        CACHE.HEADER,
-        CACHE.SIDEBAR,
-        CACHE.OVERFLOW,
-        CACHE.MENU_BUTTON,
-        CACHE.ACCOUNT,
-        CACHE.SEARCH,
-        CACHE.ASSISTANT,
-        CACHE.REFRESH,
-        CACHE.UNUSED_ENTITIES,
-        CACHE.RELOAD_RESOURCES,
-        CACHE.EDIT_DASHBOARD,
-        CACHE.DIALOG_HEADER_HISTORY,
-        CACHE.DIALOG_HEADER_SETTINGS,
-        CACHE.DIALOG_HEADER_OVERFLOW,
-        CACHE.DIALOG_HISTORY,
-        CACHE.DIALOG_LOGBOOK,
-        CACHE.DIALOG_ATTRIBUTES,
-        CACHE.DIALOG_HISTORY_SHOW_MORE,
-        CACHE.DIALOG_LOGBOOK_SHOW_MORE,
-        CACHE.OVERFLOW_MOUSE,
-        CACHE.MOUSE
-      ]) ||
-      queryString([
-        OPTION.KIOSK,
-        OPTION.HIDE_HEADER,
-        OPTION.HIDE_SIDEBAR,
-        OPTION.HIDE_OVERFLOW,
-        OPTION.HIDE_MENU_BUTTON,
-        OPTION.HIDE_ACCOUNT,
-        OPTION.HIDE_SEARCH,
-        OPTION.HIDE_ASSISTANT,
-        OPTION.HIDE_REFRESH,
-        OPTION.HIDE_RELOAD_RESOURCES,
-        OPTION.HIDE_UNUSED_ENTITIES,
-        OPTION.HIDE_EDIT_DASHBOARD,
-        OPTION.HIDE_DIALOG_HEADER_HISTORY,
-        OPTION.HIDE_DIALOG_HEADER_SETTINGS,
-        OPTION.HIDE_DIALOG_HEADER_OVERFLOW,
-        OPTION.HIDE_DIALOG_HISTORY,
-        OPTION.HIDE_DIALOG_LOGBOOK,
-        OPTION.HIDE_DIALOG_ATTRIBUTES,
-        OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE,
-        OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE,
-        OPTION.BLOCK_OVERFLOW,
-        OPTION.BLOCK_MOUSE
-      ])
-    );
-    if (queryStringsSet) {
+    const cachedOptionsSet = cached([
+      CACHE.HEADER,
+      CACHE.SIDEBAR,
+      CACHE.OVERFLOW,
+      CACHE.MENU_BUTTON,
+      CACHE.ACCOUNT,
+      CACHE.SEARCH,
+      CACHE.ASSISTANT,
+      CACHE.REFRESH,
+      CACHE.UNUSED_ENTITIES,
+      CACHE.RELOAD_RESOURCES,
+      CACHE.EDIT_DASHBOARD,
+      CACHE.DIALOG_HEADER_HISTORY,
+      CACHE.DIALOG_HEADER_SETTINGS,
+      CACHE.DIALOG_HEADER_OVERFLOW,
+      CACHE.DIALOG_HISTORY,
+      CACHE.DIALOG_LOGBOOK,
+      CACHE.DIALOG_ATTRIBUTES,
+      CACHE.DIALOG_MEDIA_ACTIONS,
+      CACHE.DIALOG_UPDATE_ACTIONS,
+      CACHE.DIALOG_CLIMATE_ACTIONS,
+      CACHE.DIALOG_HISTORY_SHOW_MORE,
+      CACHE.DIALOG_LOGBOOK_SHOW_MORE,
+      CACHE.OVERFLOW_MOUSE,
+      CACHE.MOUSE
+    ]);
+
+    const queryStringsSet = queryString([
+      OPTION.KIOSK,
+      OPTION.HIDE_HEADER,
+      OPTION.HIDE_SIDEBAR,
+      OPTION.HIDE_OVERFLOW,
+      OPTION.HIDE_MENU_BUTTON,
+      OPTION.HIDE_ACCOUNT,
+      OPTION.HIDE_SEARCH,
+      OPTION.HIDE_ASSISTANT,
+      OPTION.HIDE_REFRESH,
+      OPTION.HIDE_RELOAD_RESOURCES,
+      OPTION.HIDE_UNUSED_ENTITIES,
+      OPTION.HIDE_EDIT_DASHBOARD,
+      OPTION.HIDE_DIALOG_HEADER_HISTORY,
+      OPTION.HIDE_DIALOG_HEADER_SETTINGS,
+      OPTION.HIDE_DIALOG_HEADER_OVERFLOW,
+      OPTION.HIDE_DIALOG_HISTORY,
+      OPTION.HIDE_DIALOG_LOGBOOK,
+      OPTION.HIDE_DIALOG_ATTRIBUTES,
+      OPTION.HIDE_DIALOG_MEDIA_ACTIONS,
+      OPTION.HIDE_DIALOG_UPDATE_ACTIONS,
+      OPTION.HIDE_DIALOG_CLIMATE_ACTIONS,
+      OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE,
+      OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE,
+      OPTION.BLOCK_OVERFLOW,
+      OPTION.BLOCK_MOUSE
+    ]);
+
+    const cachedOptionsOrQueryStringsSet = cachedOptionsSet || queryStringsSet;
+
+    if (cachedOptionsOrQueryStringsSet) {
       this.hideHeader                = cached(CACHE.HEADER)                   || queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
       this.hideSidebar               = cached(CACHE.SIDEBAR)                  || queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
-      this.hideOverflow              = cached(CACHE.OVERFLOW)                 || queryString([OPTION.HIDE_OVERFLOW]);
-      this.hideMenuButton            = cached(CACHE.MENU_BUTTON)              || queryString([OPTION.HIDE_MENU_BUTTON]);
-      this.hideAccount               = cached(CACHE.ACCOUNT)                  || queryString([OPTION.HIDE_ACCOUNT]);
-      this.hideSearch                = cached(CACHE.SEARCH)                   || queryString([OPTION.HIDE_SEARCH]);
-      this.hideAssistant             = cached(CACHE.ASSISTANT)                || queryString([OPTION.HIDE_ASSISTANT]);
-      this.hideRefresh               = cached(CACHE.REFRESH)                  || queryString([OPTION.HIDE_REFRESH]);
-      this.hideUnusedEntities        = cached(CACHE.UNUSED_ENTITIES)          || queryString([OPTION.HIDE_UNUSED_ENTITIES]);
-      this.hideReloadResources       = cached(CACHE.RELOAD_RESOURCES)         || queryString([OPTION.HIDE_RELOAD_RESOURCES]);
-      this.hideEditDashboard         = cached(CACHE.EDIT_DASHBOARD)           || queryString([OPTION.HIDE_EDIT_DASHBOARD]);
-      this.hideDialogHeaderHistory   = cached(CACHE.DIALOG_HEADER_HISTORY)    || queryString([OPTION.HIDE_DIALOG_HEADER_HISTORY]);
-      this.hideDialogHeaderSettings  = cached(CACHE.DIALOG_HEADER_SETTINGS)   || queryString([OPTION.HIDE_DIALOG_HEADER_SETTINGS]);
-      this.hideDialogHeaderOverflow  = cached(CACHE.DIALOG_HEADER_OVERFLOW)   || queryString([OPTION.HIDE_DIALOG_HEADER_OVERFLOW]);
-      this.hideDialogHistory         = cached(CACHE.DIALOG_HISTORY)           || queryString([OPTION.HIDE_DIALOG_HISTORY]);
-      this.hideDialogLogbook         = cached(CACHE.DIALOG_LOGBOOK)           || queryString([OPTION.HIDE_DIALOG_LOGBOOK]);
-      this.hideDialogAttributes      = cached(CACHE.DIALOG_ATTRIBUTES)        || queryString([OPTION.HIDE_DIALOG_ATTRIBUTES]);
-      this.hideDialogHistoryShowMore = cached(CACHE.DIALOG_HISTORY_SHOW_MORE) || queryString([OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE]);
-      this.hideDialogLogbookShowMore = cached(CACHE.DIALOG_LOGBOOK_SHOW_MORE) || queryString([OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE]);
-      this.blockOverflow             = cached(CACHE.OVERFLOW_MOUSE)           || queryString([OPTION.BLOCK_OVERFLOW]);
-      this.blockMouse                = cached(CACHE.MOUSE)                    || queryString([OPTION.BLOCK_MOUSE]);
-    }
-
-    // Use config values only if config strings and cache aren't used.
-    this.hideHeader = queryStringsSet
-      ? this.hideHeader
-      : config.kiosk || config.hide_header;
-    this.hideSidebar = queryStringsSet
-      ? this.hideSidebar
-      : config.kiosk || config.hide_sidebar;
-    this.hideOverflow = queryStringsSet
-      ? this.hideOverflow
-      : config.hide_overflow;
-    this.hideMenuButton = queryStringsSet
-      ? this.hideMenuButton
-      : config.hide_menubutton;
-    this.hideAccount = queryStringsSet
-      ? this.hideAccount
-      : config.hide_account;
-    this.hideSearch = queryStringsSet
-      ? this.hideSearch
-      : config.hide_search;
-    this.hideAssistant = queryStringsSet
-      ? this.hideAssistant
-      : config.hide_assistant;
-    this.hideRefresh = queryStringsSet
-      ? this.hideRefresh
-      : config.hide_refresh;
-    this.hideUnusedEntities = queryStringsSet
-      ? this.hideUnusedEntities
-      : config.hide_unused_entities;
-    this.hideReloadResources = queryStringsSet
-      ? this.hideReloadResources
-      : config.hide_reload_resources;
-    this.hideEditDashboard = queryStringsSet
-      ? this.hideEditDashboard
-      : config.hide_edit_dashboard;
-    this.hideDialogHeaderHistory = queryStringsSet
-      ? this.hideDialogHeaderHistory
-      : config.hide_dialog_header_history;
-    this.hideDialogHeaderSettings = queryStringsSet
-      ? this.hideDialogHeaderSettings
-      : config.hide_dialog_header_settings;
-    this.hideDialogHeaderOverflow = queryStringsSet
-      ? this.hideDialogHeaderOverflow
-      : config.hide_dialog_header_overflow;
-    this.hideDialogHistory = queryStringsSet
-      ? this.hideDialogHistory
-      : config.hide_dialog_history;
-    this.hideDialogLogbook = queryStringsSet
-      ? this.hideDialogLogbook
-      : config.hide_dialog_logbook;
-    this.hideDialogAttributes = queryStringsSet
-      ? this.hideDialogAttributes
-      : config.hide_dialog_attributes;
-    this.hideDialogHistoryShowMore = queryStringsSet
-      ? this.hideDialogHistoryShowMore
-      : config.hide_dialog_history_show_more;
-    this.hideDialogLogbookShowMore = queryStringsSet
-      ? this.hideDialogLogbookShowMore
-      : config.hide_dialog_logbook_show_more;
-    this.blockOverflow = queryStringsSet
-      ? this.blockOverflow
-      : config.block_overflow;
-    this.blockMouse = queryStringsSet
-      ? this.blockMouse
-      : config.block_mouse;
+      this.hideOverflow              = cached(CACHE.OVERFLOW)                 || queryString(OPTION.HIDE_OVERFLOW);
+      this.hideMenuButton            = cached(CACHE.MENU_BUTTON)              || queryString(OPTION.HIDE_MENU_BUTTON);
+      this.hideAccount               = cached(CACHE.ACCOUNT)                  || queryString(OPTION.HIDE_ACCOUNT);
+      this.hideSearch                = cached(CACHE.SEARCH)                   || queryString(OPTION.HIDE_SEARCH);
+      this.hideAssistant             = cached(CACHE.ASSISTANT)                || queryString(OPTION.HIDE_ASSISTANT);
+      this.hideRefresh               = cached(CACHE.REFRESH)                  || queryString(OPTION.HIDE_REFRESH);
+      this.hideUnusedEntities        = cached(CACHE.UNUSED_ENTITIES)          || queryString(OPTION.HIDE_UNUSED_ENTITIES);
+      this.hideReloadResources       = cached(CACHE.RELOAD_RESOURCES)         || queryString(OPTION.HIDE_RELOAD_RESOURCES);
+      this.hideEditDashboard         = cached(CACHE.EDIT_DASHBOARD)           || queryString(OPTION.HIDE_EDIT_DASHBOARD);
+      this.hideDialogHeaderHistory   = cached(CACHE.DIALOG_HEADER_HISTORY)    || queryString(OPTION.HIDE_DIALOG_HEADER_HISTORY);
+      this.hideDialogHeaderSettings  = cached(CACHE.DIALOG_HEADER_SETTINGS)   || queryString(OPTION.HIDE_DIALOG_HEADER_SETTINGS);
+      this.hideDialogHeaderOverflow  = cached(CACHE.DIALOG_HEADER_OVERFLOW)   || queryString(OPTION.HIDE_DIALOG_HEADER_OVERFLOW);
+      this.hideDialogHistory         = cached(CACHE.DIALOG_HISTORY)           || queryString(OPTION.HIDE_DIALOG_HISTORY);
+      this.hideDialogLogbook         = cached(CACHE.DIALOG_LOGBOOK)           || queryString(OPTION.HIDE_DIALOG_LOGBOOK);
+      this.hideDialogAttributes      = cached(CACHE.DIALOG_ATTRIBUTES)        || queryString(OPTION.HIDE_DIALOG_ATTRIBUTES);
+      this.hideDialogMediaActions    = cached(CACHE.DIALOG_MEDIA_ACTIONS)     || queryString(OPTION.HIDE_DIALOG_MEDIA_ACTIONS);
+      this.hideDialogUpdateActions   = cached(CACHE.DIALOG_UPDATE_ACTIONS)    || queryString(OPTION.HIDE_DIALOG_UPDATE_ACTIONS);
+      this.hideDialogClimateActions  = cached(CACHE.DIALOG_CLIMATE_ACTIONS)   || queryString(OPTION.HIDE_DIALOG_CLIMATE_ACTIONS);
+      this.hideDialogHistoryShowMore = cached(CACHE.DIALOG_HISTORY_SHOW_MORE) || queryString(OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE);
+      this.hideDialogLogbookShowMore = cached(CACHE.DIALOG_LOGBOOK_SHOW_MORE) || queryString(OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE);
+      this.blockOverflow             = cached(CACHE.OVERFLOW_MOUSE)           || queryString(OPTION.BLOCK_OVERFLOW);
+      this.blockMouse                = cached(CACHE.MOUSE)                    || queryString(OPTION.BLOCK_MOUSE);
+    } else {
+      // Use config values only if config strings and cache aren't used.
+      this.setOptions(config, false);
+    }    
 
     // Admin non-admin config
     const adminConfig = this.user.is_admin
@@ -409,14 +366,14 @@ class KioskMode implements KioskModeRunner {
       : config.non_admin_settings;
 
     if (adminConfig) {
-      this.setOptions(adminConfig);
+      this.setOptions(adminConfig, true);
     }
 
     // User settings config
     if (config.user_settings) {
       toArray(config.user_settings).forEach((conf) => {
         if (toArray(conf.users).some((x) => x.toLowerCase() === this.user.name.toLowerCase())) {
-          this.setOptions(conf);
+          this.setOptions(conf, true);
         }
       });
     }
@@ -431,7 +388,7 @@ class KioskMode implements KioskModeRunner {
         ? mobileConfig.custom_width
         : CUSTOM_MOBILE_WIDTH_DEFAULT;
       if (window.innerWidth <= mobileWidth) {
-        this.setOptions(mobileConfig);
+        this.setOptions(mobileConfig, true);
       }
     }
 
@@ -462,6 +419,9 @@ class KioskMode implements KioskModeRunner {
           if (OPTION.HIDE_DIALOG_HISTORY in conf)           this.hideDialogHistory         = conf[OPTION.HIDE_DIALOG_HISTORY];
           if (OPTION.HIDE_DIALOG_LOGBOOK in conf)           this.hideDialogLogbook         = conf[OPTION.HIDE_DIALOG_LOGBOOK];
           if (OPTION.HIDE_DIALOG_ATTRIBUTES in conf)        this.hideDialogAttributes      = conf[OPTION.HIDE_DIALOG_ATTRIBUTES];
+          if (OPTION.HIDE_DIALOG_MEDIA_ACTIONS in conf)     this.hideDialogMediaActions    = conf[OPTION.HIDE_DIALOG_MEDIA_ACTIONS];
+          if (OPTION.HIDE_DIALOG_UPDATE_ACTIONS in conf)    this.hideDialogUpdateActions   = conf[OPTION.HIDE_DIALOG_UPDATE_ACTIONS];
+          if (OPTION.HIDE_DIALOG_CLIMATE_ACTIONS in conf)   this.hideDialogClimateActions  = conf[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS];
           if (OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE in conf) this.hideDialogHistoryShowMore = conf[OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE];
           if (OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE in conf) this.hideDialogLogbookShowMore = conf[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE];
           if (OPTION.BLOCK_OVERFLOW in conf)                this.blockOverflow             = conf[OPTION.BLOCK_OVERFLOW];
@@ -482,6 +442,7 @@ class KioskMode implements KioskModeRunner {
     this.insertStyles();
   }
 
+  // INSERT REGULAR STYLES
   protected insertStyles() {
   
     if (this.hideHeader) {
@@ -568,6 +529,7 @@ class KioskMode implements KioskModeRunner {
     window.dispatchEvent(new Event('resize'));
   }
 
+  // INSERT MORE INFO DIALOG STYLES
   protected async insertDialogStyles(dialog: HTMLElement) {
 
     getPromisableElement(
@@ -608,16 +570,19 @@ class KioskMode implements KioskModeRunner {
 
     if (
       this.hideDialogHistory ||
-      this.hideDialogLogbook
+      this.hideDialogLogbook ||
+      this.hideDialogClimateActions
     ) {
       const styles = [
           this.hideDialogHistory ? STYLES.DIALOG_HISTORY : '',
-          this.hideDialogLogbook ? STYLES.DIALOG_LOGBOOK : ''
+          this.hideDialogLogbook ? STYLES.DIALOG_LOGBOOK : '',
+          this.hideDialogClimateActions ? STYLES.DIALOG_CLIMATE_ACTIONS : ''
       ];
       addStyle(styles.join(''), moreInfo);
       if (queryString(OPTION.CACHE)) {
         if (this.hideDialogHistory) setCache(CACHE.DIALOG_HISTORY, TRUE);
         if (this.hideDialogLogbook) setCache(CACHE.DIALOG_LOGBOOK, TRUE);
+        if (this.hideDialogClimateActions) setCache(CACHE.DIALOG_CLIMATE_ACTIONS, TRUE);
       }
     } else {
       removeStyle(moreInfo);
@@ -673,6 +638,40 @@ class KioskMode implements KioskModeRunner {
 
       })
       .catch(() => { /* ignore if it doesn‘t exist */ });
+
+      getPromisableElement(
+        (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`)?.shadowRoot,
+        (dialogMediaPlayer: ShadowRoot) => !!dialogMediaPlayer,
+        ''
+      )
+        .then((dialogMediaPlayer: ShadowRoot) => {
+  
+          if (this.hideDialogMediaActions) {
+            addStyle(STYLES.DIALOG_MEDIA_ACTIONS, dialogMediaPlayer);
+            if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_MEDIA_ACTIONS, TRUE);
+          } else {
+            removeStyle(dialogMediaPlayer);
+          }
+  
+        })
+        .catch(() => { /* ignore if it doesn‘t exist */ });
+
+        getPromisableElement(
+          (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)?.shadowRoot,
+          (dialogUpdate: ShadowRoot) => !!dialogUpdate,
+          ''
+        )
+          .then((dialogUpdate: ShadowRoot) => {
+    
+            if (this.hideDialogUpdateActions) {
+              addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogUpdate);
+              if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_UPDATE_ACTIONS, TRUE);
+            } else {
+              removeStyle(dialogUpdate);
+            }
+    
+          })
+          .catch(() => { /* ignore if it doesn‘t exist */ });
 
   }
 
@@ -766,7 +765,7 @@ class KioskMode implements KioskModeRunner {
     }
   }
 
-  protected setOptions(config: ConditionalKioskConfig) {
+  protected setOptions(config: ConditionalKioskConfig, conditional: boolean) {
     this.hideHeader                = config.kiosk || config.hide_header;
     this.hideSidebar               = config.kiosk || config.hide_sidebar;
     this.hideOverflow              = config.hide_overflow;
@@ -784,19 +783,26 @@ class KioskMode implements KioskModeRunner {
     this.hideDialogHistory         = config.hide_dialog_history;
     this.hideDialogLogbook         = config.hide_dialog_logbook;
     this.hideDialogAttributes      = config.hide_dialog_attributes;
+    this.hideDialogMediaActions    = config.hide_dialog_media_actions;
+    this.hideDialogUpdateActions   = config.hide_dialog_update_actions;
+    this.hideDialogClimateActions  = config.hide_dialog_climate_actions;
     this.hideDialogHistoryShowMore = config.hide_dialog_history_show_more;
     this.hideDialogLogbookShowMore = config.hide_dialog_logbook_show_more;
     this.blockOverflow             = config.block_overflow;
     this.blockMouse                = config.block_mouse;
-    this.ignoreEntity              = typeof config.ignore_entity_settings === BOOLEAN
-      ? config.ignore_entity_settings
-      : this.ignoreEntity;
-    this.ignoreMobile              = typeof config.ignore_mobile_settings === BOOLEAN
-      ? config.ignore_mobile_settings
-      : this.ignoreMobile;
-    this.ignoreDisableKm           = typeof config.ignore_disable_km === BOOLEAN
-      ? config.ignore_disable_km
-      : this.ignoreDisableKm;
+
+    if (conditional) {
+      this.ignoreEntity = OPTION.IGNORE_ENTITY_SETTINGS in config
+        ? config.ignore_entity_settings
+        : this.ignoreEntity;        
+      this.ignoreMobile = OPTION.IGNORE_MOBILE_SETTINGS in config
+        ? config.ignore_mobile_settings
+        : this.ignoreMobile;
+      this.ignoreDisableKm = OPTION.IGNORE_DISABLE_KM in config
+        ? config.ignore_disable_km
+        : this.ignoreDisableKm;
+    }
+    
   }
 
 }

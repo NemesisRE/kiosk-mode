@@ -92,6 +92,16 @@ export const STYLES = {
     DIALOG_ATTRIBUTES: getDisplayNoneRulesString(
         ELEMENT.HA_DIALOG_ATTRIBUTES
     ),
+    DIALOG_MEDIA_ACTIONS: getDisplayNoneRulesString(
+        '.controls'
+    ),
+    DIALOG_UPDATE_ACTIONS: getDisplayNoneRulesString(
+        '.actions',
+        `hr:has(+ .actions)`
+    ),
+    DIALOG_CLIMATE_ACTIONS: getDisplayNoneRulesString(
+        ELEMENT.HA_DIALOG_CLIMATE
+    ),
     DIALOG_SHOW_MORE: getDisplayNoneRulesString(
         `.header a`
     )
