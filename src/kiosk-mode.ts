@@ -639,39 +639,39 @@ class KioskMode implements KioskModeRunner {
       })
       .catch(() => { /* ignore if it doesn‘t exist */ });
 
-      getPromisableElement(
-        (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`)?.shadowRoot,
-        (dialogMediaPlayer: ShadowRoot) => !!dialogMediaPlayer,
-        ''
-      )
-        .then((dialogMediaPlayer: ShadowRoot) => {
-  
-          if (this.hideDialogMediaActions) {
-            addStyle(STYLES.DIALOG_MEDIA_ACTIONS, dialogMediaPlayer);
-            if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_MEDIA_ACTIONS, TRUE);
-          } else {
-            removeStyle(dialogMediaPlayer);
-          }
-  
-        })
-        .catch(() => { /* ignore if it doesn‘t exist */ });
+    getPromisableElement(
+      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`)?.shadowRoot,
+      (dialogMediaPlayer: ShadowRoot) => !!dialogMediaPlayer,
+      ''
+    )
+      .then((dialogMediaPlayer: ShadowRoot) => {
 
-        getPromisableElement(
-          (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)?.shadowRoot,
-          (dialogUpdate: ShadowRoot) => !!dialogUpdate,
-          ''
-        )
-          .then((dialogUpdate: ShadowRoot) => {
-    
-            if (this.hideDialogUpdateActions) {
-              addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogUpdate);
-              if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_UPDATE_ACTIONS, TRUE);
-            } else {
-              removeStyle(dialogUpdate);
-            }
-    
-          })
-          .catch(() => { /* ignore if it doesn‘t exist */ });
+        if (this.hideDialogMediaActions) {
+          addStyle(STYLES.DIALOG_MEDIA_ACTIONS, dialogMediaPlayer);
+          if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_MEDIA_ACTIONS, TRUE);
+        } else {
+          removeStyle(dialogMediaPlayer);
+        }
+
+      })
+      .catch(() => { /* ignore if it doesn‘t exist */ });
+
+    getPromisableElement(
+      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)?.shadowRoot,
+      (dialogUpdate: ShadowRoot) => !!dialogUpdate,
+      ''
+    )
+      .then((dialogUpdate: ShadowRoot) => {
+
+        if (this.hideDialogUpdateActions) {
+          addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogUpdate);
+          if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_UPDATE_ACTIONS, TRUE);
+        } else {
+          removeStyle(dialogUpdate);
+        }
+
+      })
+      .catch(() => { /* ignore if it doesn‘t exist */ });
 
   }
 
