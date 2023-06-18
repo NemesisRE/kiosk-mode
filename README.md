@@ -301,6 +301,17 @@ The query string options are:
 * `?hide_refresh` to hide the "Refresh" button inside the top right menu in lovelace yaml mode
 * `?hide_unused_entities` to hide the "Unused entities" button inside the top right menu in lovelace yaml mode
 * `?hide_reload_resources` to hide the "Reload resources" button inside the top right menu in lovelace yaml mode
+* `?hide_dialog_header_history` to hide the "History" icon in the header of more-info dialogs
+* `?hide_dialog_header_settings` to hide the "Settings" icon in the header of more-info dialogs
+* `?hide_dialog_header_overflow` to hide the top right overflow menu in the header of more-info dialogs
+* `?hide_dialog_history` to hide the "History" section in the more-info dialogs
+* `?hide_dialog_logbook` to hide the "Logbook" section in the more-info dialogs
+* `?hide_dialog_attributes` to hide the "Attributes" section in the more-info dialogs
+* `?hide_dialog_media_actions` to hide the actions block in the more-info dialogs of media-player entities
+* `?hide_dialog_update_actions` to hide the actions block in the more-info dialogs of update entities
+* `?hide_dialog_climate_actions` to hide the actions block in the more-info dialogs of climate entities
+* `?hide_dialog_history_show_more` to hide the "Show more" link in the "History" section of more-info dialogs
+* `?hide_dialog_logbook_show_more` to hide the "Show more" link in the "Logbook" section of more-info dialogs
 * `?block_overflow` to block the top right overflow menu mouse interactions
 * `?block_mouse` to block completely the mouse
 
