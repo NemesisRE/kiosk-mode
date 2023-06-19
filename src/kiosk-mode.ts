@@ -5,7 +5,8 @@ import {
   Lovelace,
   KioskConfig,
   ConditionalKioskConfig,
-  SuscriberEvent
+  SuscriberEvent,
+  EntitySetting
 } from '@types';
 import {
   CACHE,
@@ -98,19 +99,23 @@ class KioskMode implements KioskModeRunner {
         `${ELEMENT.HOME_ASSISTANT_MAIN} > ${ELEMENT.PARTIAL_PANEL_RESOLVER}`
       );
 
-      // Start kiosk-mode
-      this.run();
-      this.entityWatch();
+      this.panelResolverObserver = new MutationObserver(this.watchDashboards);
+      this.dialogsMutationObserver = new MutationObserver(this.watchMoreInfoDialogs);
+      this.dialogContentMutationObserver = new MutationObserver(this.watchMoreInfoDialogsContent);
 
       // Start the mutation observer for partial panel resolver
-      new MutationObserver(this.watchDashboards).observe(partialPanelResolver, {
+      this.panelResolverObserver.observe(partialPanelResolver, {
         childList: true,
       });
 
       // Start the mutation observer for more info dialog
-      new MutationObserver(this.watchMoreInfoDialogs).observe(this.ha.shadowRoot, {
+      this.dialogsMutationObserver.observe(this.ha.shadowRoot, {
         childList: true,
       });
+
+      // Start kiosk-mode
+      this.run();
+      this.entityWatch();
 
     };
 
@@ -132,6 +137,9 @@ class KioskMode implements KioskModeRunner {
   private menuTranslations: Record<string, string>;
   private resizeDelay: number;
   private resizeWindowBinded: () => void;
+  private panelResolverObserver: MutationObserver;
+  private dialogsMutationObserver: MutationObserver;
+  private dialogContentMutationObserver: MutationObserver;
 
   // Kiosk Mode options
   private hideHeader: boolean;
@@ -169,13 +177,13 @@ class KioskMode implements KioskModeRunner {
     this.lovelace = lovelace;
 
     // Get the configuration and process it
-    getPromisableElement(
+    return getPromisableElement(
       () => lovelace?.lovelace?.config,
       (config: Lovelace['lovelace']['config']) => !!config,
       'Lovelace config'
     )
       .then((config: Lovelace['lovelace']['config']) => {
-        this.processConfig(
+        return this.processConfig(
           config.kiosk_mode || {}
         );
       });
@@ -201,7 +209,48 @@ class KioskMode implements KioskModeRunner {
       `${ELEMENT.HA_MORE_INFO_DIALOG}:${SHADOW_ROOT_SUFFIX} > ${ELEMENT.HA_DIALOG}`
     );
 
+    const content = await getPromisableElement(
+      (): Element => dialog.querySelector(ELEMENT.HA_DIALOG_CONTENT),
+      (content: Element) => !!content,
+      `${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_CONTENT}`
+    );
+
+    const contentChild = await getPromisableElement(
+      (): Element => content.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO}, ${ELEMENT.HA_DIALOG_MORE_INFO_HISTORY_AND_LOGBOOK}`),
+      (content: Element) => !!content,
+      `${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_CONTENT} > child`
+    );
+
+    // Start the mutation observer for more info dialog
+    this.dialogContentMutationObserver.disconnect();
+    this.dialogContentMutationObserver.observe(content, {
+      childList: true,
+    });
+
     this.insertDialogStyles(dialog);
+    this.runDialogsChildren(contentChild);
+
+  }
+
+  public async runDialogsChildren(child: Element) {
+
+    if (
+      !child ||
+      (
+        child.localName !== ELEMENT.HA_DIALOG_MORE_INFO &&
+        child.localName !== ELEMENT.HA_DIALOG_MORE_INFO_HISTORY_AND_LOGBOOK
+      )
+    ) {
+      return;
+    }
+
+    const childShadowRoot = await getPromisableElement(
+      () => child.shadowRoot,
+      (moreInfo: ShadowRoot) => !!moreInfo,
+      `${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_CONTENT} > ${child.localName}:${SHADOW_ROOT_SUFFIX}`
+    );
+
+    this.insertDialogChildStyles(childShadowRoot);
 
   }
 
@@ -329,7 +378,6 @@ class KioskMode implements KioskModeRunner {
     ]);
 
     const cachedOptionsOrQueryStringsSet = cachedOptionsSet || queryStringsSet;
-
     if (cachedOptionsOrQueryStringsSet) {
       this.hideHeader                = cached(CACHE.HEADER)                   || queryString([OPTION.KIOSK, OPTION.HIDE_HEADER]);
       this.hideSidebar               = cached(CACHE.SIDEBAR)                  || queryString([OPTION.KIOSK, OPTION.HIDE_SIDEBAR]);
@@ -358,7 +406,7 @@ class KioskMode implements KioskModeRunner {
     } else {
       // Use config values only if config strings and cache aren't used.
       this.setOptions(config, false);
-    }    
+    }
 
     // Admin non-admin config
     const adminConfig = this.user.is_admin
@@ -398,37 +446,15 @@ class KioskMode implements KioskModeRunner {
       : config.entity_settings;
 
     if (entityConfig) {
-      for (let conf of entityConfig) {
+      entityConfig.forEach((conf: EntitySetting) => {
         const entity = Object.keys(conf.entity)[0];
-        if (!window.kioskModeEntities[dash].includes(entity)) window.kioskModeEntities[dash].push(entity);
-        if (this.ha.hass.states[entity].state == conf.entity[entity]) {
-          if (OPTION.HIDE_HEADER in conf)                   this.hideHeader                = conf[OPTION.HIDE_HEADER];
-          if (OPTION.HIDE_SIDEBAR in conf)                  this.hideSidebar               = conf[OPTION.HIDE_SIDEBAR];
-          if (OPTION.HIDE_OVERFLOW in conf)                 this.hideOverflow              = conf[OPTION.HIDE_OVERFLOW];
-          if (OPTION.HIDE_MENU_BUTTON in conf)              this.hideMenuButton            = conf[OPTION.HIDE_MENU_BUTTON];
-          if (OPTION.HIDE_ACCOUNT in conf)                  this.hideAccount               = conf[OPTION.HIDE_ACCOUNT];
-          if (OPTION.HIDE_SEARCH in conf)                   this.hideSearch                = conf[OPTION.HIDE_SEARCH];
-          if (OPTION.HIDE_ASSISTANT in conf)                this.hideAssistant             = conf[OPTION.HIDE_ASSISTANT];
-          if (OPTION.HIDE_REFRESH in conf)                  this.hideRefresh               = conf[OPTION.HIDE_REFRESH];
-          if (OPTION.HIDE_UNUSED_ENTITIES in conf)          this.hideUnusedEntities        = conf[OPTION.HIDE_UNUSED_ENTITIES];
-          if (OPTION.HIDE_RELOAD_RESOURCES in conf)         this.hideReloadResources       = conf[OPTION.HIDE_RELOAD_RESOURCES];
-          if (OPTION.HIDE_EDIT_DASHBOARD in conf)           this.hideEditDashboard         = conf[OPTION.HIDE_EDIT_DASHBOARD];
-          if (OPTION.HIDE_DIALOG_HEADER_HISTORY in conf)    this.hideDialogHeaderHistory   = conf[OPTION.HIDE_DIALOG_HEADER_HISTORY];
-          if (OPTION.HIDE_DIALOG_HEADER_SETTINGS in conf)   this.hideDialogHeaderSettings  = conf[OPTION.HIDE_DIALOG_HEADER_SETTINGS];
-          if (OPTION.HIDE_DIALOG_HEADER_OVERFLOW in conf)   this.hideDialogHeaderOverflow  = conf[OPTION.HIDE_DIALOG_HEADER_OVERFLOW];
-          if (OPTION.HIDE_DIALOG_HISTORY in conf)           this.hideDialogHistory         = conf[OPTION.HIDE_DIALOG_HISTORY];
-          if (OPTION.HIDE_DIALOG_LOGBOOK in conf)           this.hideDialogLogbook         = conf[OPTION.HIDE_DIALOG_LOGBOOK];
-          if (OPTION.HIDE_DIALOG_ATTRIBUTES in conf)        this.hideDialogAttributes      = conf[OPTION.HIDE_DIALOG_ATTRIBUTES];
-          if (OPTION.HIDE_DIALOG_MEDIA_ACTIONS in conf)     this.hideDialogMediaActions    = conf[OPTION.HIDE_DIALOG_MEDIA_ACTIONS];
-          if (OPTION.HIDE_DIALOG_UPDATE_ACTIONS in conf)    this.hideDialogUpdateActions   = conf[OPTION.HIDE_DIALOG_UPDATE_ACTIONS];
-          if (OPTION.HIDE_DIALOG_CLIMATE_ACTIONS in conf)   this.hideDialogClimateActions  = conf[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS];
-          if (OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE in conf) this.hideDialogHistoryShowMore = conf[OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE];
-          if (OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE in conf) this.hideDialogLogbookShowMore = conf[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE];
-          if (OPTION.BLOCK_OVERFLOW in conf)                this.blockOverflow             = conf[OPTION.BLOCK_OVERFLOW];
-          if (OPTION.BLOCK_MOUSE in conf)                   this.blockMouse                = conf[OPTION.BLOCK_MOUSE];
-          if (OPTION.KIOSK in conf)                         this.hideHeader                = this.hideSidebar = conf[OPTION.KIOSK];
+        if (!window.kioskModeEntities[dash].includes(entity)) {
+          window.kioskModeEntities[dash].push(entity);
         }
-      }
+        if (this.ha.hass.states[entity].state == conf.entity[entity]) {
+          this.setOptions(conf, false);
+        }
+      });
     }
 
     // Do not run kiosk-mode if it is disabled
@@ -562,11 +588,10 @@ class KioskMode implements KioskModeRunner {
       removeStyle(dialog);
     }
 
-    const moreInfo = await getPromisableElement(
-      (): ShadowRoot => dialog.querySelector(ELEMENT.HA_DIALOG_MORE_INFO)?.shadowRoot,
-      (moreInfo: ShadowRoot) => !!moreInfo,
-      `${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_MORE_INFO}`
-    );
+  }
+
+  // INSERT MORE INFO DIALOG CHILDREN STYLES
+  protected async insertDialogChildStyles(moreInfo: ShadowRoot) {
 
     if (
       this.hideDialogHistory ||
@@ -594,14 +619,12 @@ class KioskMode implements KioskModeRunner {
       ''
     )
       .then((dialogHistory: ShadowRoot) => {
-
         if (this.hideDialogHistoryShowMore) {
           addStyle(STYLES.DIALOG_SHOW_MORE, dialogHistory);
           if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_HISTORY_SHOW_MORE, TRUE);
         } else {
           removeStyle(dialogHistory);
         }
-
       })
       .catch((e) => { /* ignore if it doesn‘t exist */ });
 
@@ -611,65 +634,57 @@ class KioskMode implements KioskModeRunner {
       ''
     )
       .then((dialogLogbook: ShadowRoot) => {
-
         if (this.hideDialogLogbookShowMore) {
           addStyle(STYLES.DIALOG_SHOW_MORE, dialogLogbook);
           if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_LOGBOOK_SHOW_MORE, TRUE);
         } else {
           removeStyle(dialogLogbook);
         }
-
       })
       .catch(() => { /* ignore if it doesn‘t exist */ });
 
     getPromisableElement(
-      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`)?.shadowRoot,
+      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`)?.shadowRoot,
       (dialogDefault: ShadowRoot) => !!dialogDefault,
       ''
     )
       .then((dialogDefault: ShadowRoot) => {
-
         if (this.hideDialogAttributes) {
           addStyle(STYLES.DIALOG_ATTRIBUTES, dialogDefault);
           if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_ATTRIBUTES, TRUE);
         } else {
           removeStyle(dialogDefault);
         }
-
       })
       .catch(() => { /* ignore if it doesn‘t exist */ });
 
     getPromisableElement(
-      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`)?.shadowRoot,
+      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`)?.shadowRoot,
       (dialogMediaPlayer: ShadowRoot) => !!dialogMediaPlayer,
       ''
     )
       .then((dialogMediaPlayer: ShadowRoot) => {
-
         if (this.hideDialogMediaActions) {
           addStyle(STYLES.DIALOG_MEDIA_ACTIONS, dialogMediaPlayer);
           if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_MEDIA_ACTIONS, TRUE);
         } else {
           removeStyle(dialogMediaPlayer);
         }
-
       })
       .catch(() => { /* ignore if it doesn‘t exist */ });
 
     getPromisableElement(
-      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)?.shadowRoot,
+      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)?.shadowRoot,
       (dialogUpdate: ShadowRoot) => !!dialogUpdate,
       ''
     )
       .then((dialogUpdate: ShadowRoot) => {
-
         if (this.hideDialogUpdateActions) {
           addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogUpdate);
           if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_UPDATE_ACTIONS, TRUE);
         } else {
           removeStyle(dialogUpdate);
         }
-
       })
       .catch(() => { /* ignore if it doesn‘t exist */ });
 
@@ -701,6 +716,22 @@ class KioskMode implements KioskModeRunner {
         if (node.localName === ELEMENT.HA_MORE_INFO_DIALOG) {
           window.KioskMode
             .runDialogs(node)
+            .catch((error: Error) => console.warn(`${NON_CRITICAL_WARNING} ${error?.message}`));
+        }
+      });
+    });
+  }
+
+  // Run on more info dialogs content change
+  protected watchMoreInfoDialogsContent(mutations: MutationRecord[]) {
+    mutations.forEach(({ addedNodes }): void => {
+      addedNodes.forEach((node: Element): void => {
+        if (
+          node.localName === ELEMENT.HA_DIALOG_MORE_INFO ||
+          node.localName === ELEMENT.HA_DIALOG_MORE_INFO_HISTORY_AND_LOGBOOK
+        ) {
+          window.KioskMode
+            .runDialogsChildren(node)
             .catch((error: Error) => console.warn(`${NON_CRITICAL_WARNING} ${error?.message}`));
         }
       });
@@ -754,7 +785,7 @@ class KioskMode implements KioskModeRunner {
     });
   }
 
-  protected entityWatchCallback(event: SuscriberEvent) {
+  protected async entityWatchCallback(event: SuscriberEvent) {
     const entities = window.kioskModeEntities[this.ha.hass.panelUrl] || [];
     if (
       entities.length &&
@@ -762,7 +793,7 @@ class KioskMode implements KioskModeRunner {
       entities.includes(event.data.entity_id) &&
       (!event.data.old_state || event.data.new_state.state !== event.data.old_state.state)
     ) {
-      this.run();
+      await this.run();
       this
         .runDialogs()
         .catch((error: Error) => console.warn(`${NON_CRITICAL_WARNING} ${error?.message}`));
@@ -770,41 +801,37 @@ class KioskMode implements KioskModeRunner {
   }
 
   protected setOptions(config: ConditionalKioskConfig, conditional: boolean) {
-    this.hideHeader                = config.kiosk || config.hide_header;
-    this.hideSidebar               = config.kiosk || config.hide_sidebar;
-    this.hideOverflow              = config.hide_overflow;
-    this.hideMenuButton            = config.hide_menubutton;
-    this.hideAccount               = config.hide_account;
-    this.hideSearch                = config.hide_search;
-    this.hideAssistant             = config.hide_assistant;
-    this.hideRefresh               = config.hide_refresh;
-    this.hideUnusedEntities        = config.hide_unused_entities;
-    this.hideReloadResources       = config.hide_reload_resources;
-    this.hideEditDashboard         = config.hide_edit_dashboard;
-    this.hideDialogHeaderHistory   = config.hide_dialog_header_history;
-    this.hideDialogHeaderSettings  = config.hide_dialog_header_settings;
-    this.hideDialogHeaderOverflow  = config.hide_dialog_header_overflow;
-    this.hideDialogHistory         = config.hide_dialog_history;
-    this.hideDialogLogbook         = config.hide_dialog_logbook;
-    this.hideDialogAttributes      = config.hide_dialog_attributes;
-    this.hideDialogMediaActions    = config.hide_dialog_media_actions;
-    this.hideDialogUpdateActions   = config.hide_dialog_update_actions;
-    this.hideDialogClimateActions  = config.hide_dialog_climate_actions;
-    this.hideDialogHistoryShowMore = config.hide_dialog_history_show_more;
-    this.hideDialogLogbookShowMore = config.hide_dialog_logbook_show_more;
-    this.blockOverflow             = config.block_overflow;
-    this.blockMouse                = config.block_mouse;
+
+    if (OPTION.HIDE_HEADER in config)                   this.hideHeader                = config[OPTION.HIDE_HEADER];
+    if (OPTION.HIDE_SIDEBAR in config)                  this.hideSidebar               = config[OPTION.HIDE_SIDEBAR];
+    if (OPTION.HIDE_OVERFLOW in config)                 this.hideOverflow              = config[OPTION.HIDE_OVERFLOW];
+    if (OPTION.HIDE_MENU_BUTTON in config)              this.hideMenuButton            = config[OPTION.HIDE_MENU_BUTTON];
+    if (OPTION.HIDE_ACCOUNT in config)                  this.hideAccount               = config[OPTION.HIDE_ACCOUNT];
+    if (OPTION.HIDE_SEARCH in config)                   this.hideSearch                = config[OPTION.HIDE_SEARCH];
+    if (OPTION.HIDE_ASSISTANT in config)                this.hideAssistant             = config[OPTION.HIDE_ASSISTANT];
+    if (OPTION.HIDE_REFRESH in config)                  this.hideRefresh               = config[OPTION.HIDE_REFRESH];
+    if (OPTION.HIDE_UNUSED_ENTITIES in config)          this.hideUnusedEntities        = config[OPTION.HIDE_UNUSED_ENTITIES];
+    if (OPTION.HIDE_RELOAD_RESOURCES in config)         this.hideReloadResources       = config[OPTION.HIDE_RELOAD_RESOURCES];
+    if (OPTION.HIDE_EDIT_DASHBOARD in config)           this.hideEditDashboard         = config[OPTION.HIDE_EDIT_DASHBOARD];
+    if (OPTION.HIDE_DIALOG_HEADER_HISTORY in config)    this.hideDialogHeaderHistory   = config[OPTION.HIDE_DIALOG_HEADER_HISTORY];
+    if (OPTION.HIDE_DIALOG_HEADER_SETTINGS in config)   this.hideDialogHeaderSettings  = config[OPTION.HIDE_DIALOG_HEADER_SETTINGS];
+    if (OPTION.HIDE_DIALOG_HEADER_OVERFLOW in config)   this.hideDialogHeaderOverflow  = config[OPTION.HIDE_DIALOG_HEADER_OVERFLOW];
+    if (OPTION.HIDE_DIALOG_HISTORY in config)           this.hideDialogHistory         = config[OPTION.HIDE_DIALOG_HISTORY];
+    if (OPTION.HIDE_DIALOG_LOGBOOK in config)           this.hideDialogLogbook         = config[OPTION.HIDE_DIALOG_LOGBOOK];
+    if (OPTION.HIDE_DIALOG_ATTRIBUTES in config)        this.hideDialogAttributes      = config[OPTION.HIDE_DIALOG_ATTRIBUTES];
+    if (OPTION.HIDE_DIALOG_MEDIA_ACTIONS in config)     this.hideDialogMediaActions    = config[OPTION.HIDE_DIALOG_MEDIA_ACTIONS];
+    if (OPTION.HIDE_DIALOG_UPDATE_ACTIONS in config)    this.hideDialogUpdateActions   = config[OPTION.HIDE_DIALOG_UPDATE_ACTIONS];
+    if (OPTION.HIDE_DIALOG_CLIMATE_ACTIONS in config)   this.hideDialogClimateActions  = config[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS];
+    if (OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE in config) this.hideDialogHistoryShowMore = config[OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE];
+    if (OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE in config) this.hideDialogLogbookShowMore = config[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE];
+    if (OPTION.BLOCK_OVERFLOW in config)                this.blockOverflow             = config[OPTION.BLOCK_OVERFLOW];
+    if (OPTION.BLOCK_MOUSE in config)                   this.blockMouse                = config[OPTION.BLOCK_MOUSE];
+    if (OPTION.KIOSK in config)                         this.hideHeader                = this.hideSidebar = config[OPTION.KIOSK];
 
     if (conditional) {
-      this.ignoreEntity = OPTION.IGNORE_ENTITY_SETTINGS in config
-        ? config.ignore_entity_settings
-        : this.ignoreEntity;        
-      this.ignoreMobile = OPTION.IGNORE_MOBILE_SETTINGS in config
-        ? config.ignore_mobile_settings
-        : this.ignoreMobile;
-      this.ignoreDisableKm = OPTION.IGNORE_DISABLE_KM in config
-        ? config.ignore_disable_km
-        : this.ignoreDisableKm;
+      if (OPTION.IGNORE_ENTITY_SETTINGS in config)      this.ignoreEntity              = config[OPTION.IGNORE_ENTITY_SETTINGS];
+      if (OPTION.IGNORE_MOBILE_SETTINGS in config)      this.ignoreMobile              = config[OPTION.IGNORE_MOBILE_SETTINGS];
+      if (OPTION.IGNORE_DISABLE_KM in config)           this.ignoreDisableKm           = config[OPTION.IGNORE_DISABLE_KM];
     }
     
   }

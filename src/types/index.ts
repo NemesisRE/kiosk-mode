@@ -1,6 +1,7 @@
 export interface KioskModeRunner {
-    run: (lovelace: HTMLElement) => void;
+    run: (lovelace: HTMLElement) => Promise<void>;
     runDialogs: (moreInfoDialog: Element) => Promise<void>;
+    runDialogsChildren: (child: Element) => Promise<void>
 }
 
 export interface User {
