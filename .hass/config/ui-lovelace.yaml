@@ -37,6 +37,33 @@ kiosk_mode:
         input_boolean.kiosk_hide_overflow: 'on'
       hide_overflow: true
     - entity:
+        input_boolean.kiosk_hide_dialog_header_history: 'on'
+      hide_dialog_header_history: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_header_settings: 'on'
+      hide_dialog_header_settings: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_header_overflow: 'on'
+      hide_dialog_header_overflow: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_history: 'on'
+      hide_dialog_history: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_logbook: 'on'
+      hide_dialog_logbook: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_attributes: 'on'
+      hide_dialog_attributes: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_update_actions: 'on'
+      hide_dialog_update_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_history_show_more: 'on'
+      hide_dialog_history_show_more: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_logbook_show_more: 'on'
+      hide_dialog_logbook_show_more: true
+    - entity:
         input_boolean.kiosk_block_overflow: 'on'
       block_overflow: true
     - entity:
@@ -52,6 +79,8 @@ views:
       - type: entities
         title: Kiosk settings
         entities:
+          - type: section
+            label: General options
           - entity: input_boolean.kiosk
           - entity: input_boolean.kiosk_hide_account
           - entity: input_boolean.kiosk_hide_header
@@ -66,3 +95,16 @@ views:
           - entity: input_boolean.kiosk_hide_edit_dashboard
           - entity: input_boolean.kiosk_block_overflow
           - entity: input_boolean.kiosk_block_mouse
+          - type: section
+            label: More-info dialogs options
+          - entity: sun.sun
+          - entity: zone.home
+          - entity: input_boolean.kiosk_hide_dialog_header_history
+          - entity: input_boolean.kiosk_hide_dialog_header_settings
+          - entity: input_boolean.kiosk_hide_dialog_header_overflow
+          - entity: input_boolean.kiosk_hide_dialog_history
+          - entity: input_boolean.kiosk_hide_dialog_logbook
+          - entity: input_boolean.kiosk_hide_dialog_attributes
+          - entity: input_boolean.kiosk_hide_dialog_update_actions
+          - entity: input_boolean.kiosk_hide_dialog_history_show_more
+          - entity: input_boolean.kiosk_hide_dialog_logbook_show_more
