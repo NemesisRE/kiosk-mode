@@ -86,6 +86,7 @@ views:
 |`hide_reload_resources`                   | Boolean | false   | Hides the "Reload resources" button inside the top right overflow menu in lovelace yaml mode. |
 |`hide_dialog_header_history`              | Boolean | false   | Hides the "History" icon in the header of more-info dialogs. |
 |`hide_dialog_header_history`              | Boolean | false   | Hides the "History" icon in the header of more-info dialogs. |
+|`hide_dialog_header_action_items`         | Boolean | false   | Hides all the action items from the header of more-info dialogs. |
 |`hide_dialog_header_settings`<sup>2</sup> | Boolean | false   | Hides the "Settings" icon in the header of more-info dialogs. |
 |`hide_dialog_header_overflow`<sup>2</sup> | Boolean | false   | Hides the top right overflow menu in the header of more-info dialogs. |
 |`hide_dialog_history`                     | Boolean | false   | Hides the "History" section in the more-info dialogs. |
@@ -153,12 +154,13 @@ views:
 <br>*More info dialog (media entity)*
 <br>
 
-| Options                       | Hides |
-|:------------------------------|:------|
-| `hide_dialog_header_history`  | 12    |
-| `hide_dialog_header_settings` | 13    |
-| `hide_dialog_header_overflow` | 14    |
-| `hide_dialog_media_actions`   | 15    |
+| Options                           | Hides |
+|:----------------------------------|:------|
+| `hide_dialog_header_action_items` | 12 |
+| `hide_dialog_header_history`      | 13    |
+| `hide_dialog_header_settings`     | 14    |
+| `hide_dialog_header_overflow`     | 15    |
+| `hide_dialog_media_actions`       | 16    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-climate-entity.png)
@@ -167,7 +169,7 @@ views:
 
 | Options                       | Hides |
 |:------------------------------|:------|
-| `hide_dialog_climate_actions` | 16    |
+| `hide_dialog_climate_actions` | 17    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-update-entity.png)
@@ -176,7 +178,7 @@ views:
 
 | Options                      | Hides |
 |:-----------------------------|:------|
-| `hide_dialog_update_actions` | 17    |
+| `hide_dialog_update_actions` | 18    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-history-logbook-attributes.png)
@@ -185,11 +187,11 @@ views:
 
 | Options                         | Hides |
 |:--------------------------------|:------|
-| `hide_dialog_history`           | 18    |
-| `hide_dialog_logbook`           | 19    |
-| `hide_dialog_attributes`        | 20    |
-| `hide_dialog_history_show_more` | 21    |
-| `hide_dialog_logbook_show_more` | 22    |
+| `hide_dialog_history`           | 19    |
+| `hide_dialog_logbook`           | 20    |
+| `hide_dialog_attributes`        | 21    |
+| `hide_dialog_history_show_more` | 22    |
+| `hide_dialog_logbook_show_more` | 23    |
 
 <br>
 

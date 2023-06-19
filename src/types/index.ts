@@ -37,6 +37,7 @@ export interface KioskConfig {
     hide_unused_entities?: boolean;
     hide_reload_resources?: boolean;
     hide_edit_dashboard?: boolean;
+    hide_dialog_header_action_items?: boolean;
     hide_dialog_header_history?: boolean;
     hide_dialog_header_settings?: boolean;
     hide_dialog_header_overflow?: boolean;
