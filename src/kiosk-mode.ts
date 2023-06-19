@@ -699,7 +699,9 @@ class KioskMode implements KioskModeRunner {
     mutations.forEach(({ addedNodes }): void => {
       addedNodes.forEach((node: Element): void => {
         if (node.localName === ELEMENT.HA_MORE_INFO_DIALOG) {
-          window.KioskMode.runDialogs(node);
+          window.KioskMode
+            .runDialogs(node)
+            .catch((error: Error) => console.warn(`${NON_CRITICAL_WARNING} ${error?.message}`));
         }
       });
     });
@@ -761,7 +763,9 @@ class KioskMode implements KioskModeRunner {
       (!event.data.old_state || event.data.new_state.state !== event.data.old_state.state)
     ) {
       this.run();
-      this.runDialogs();
+      this
+        .runDialogs()
+        .catch((error: Error) => console.warn(`${NON_CRITICAL_WARNING} ${error?.message}`));
     }
   }
 
