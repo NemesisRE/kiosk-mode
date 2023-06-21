@@ -217,20 +217,22 @@ class KioskMode implements KioskModeRunner {
       `${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_CONTENT}`
     );
 
-    const contentChild = await getPromisableElement(
+    getPromisableElement(
       (): Element => content.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO}, ${ELEMENT.HA_DIALOG_MORE_INFO_HISTORY_AND_LOGBOOK}`),
       (content: Element) => !!content,
       `${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_CONTENT} > child`
-    );
-
-    // Start the mutation observer for more info dialog
-    this.dialogContentMutationObserver.disconnect();
-    this.dialogContentMutationObserver.observe(content, {
-      childList: true,
-    });
+    )
+      .then((contentChild) => {
+        // Start the mutation observer for more info dialog
+        this.dialogContentMutationObserver.disconnect();
+        this.dialogContentMutationObserver.observe(content, {
+          childList: true,
+        });
+        this.runDialogsChildren(contentChild);
+      })
+      .catch(() => { /* ignore if it doesn‘t exist */ });
 
     this.insertDialogStyles(dialog);
-    this.runDialogsChildren(contentChild);
 
   }
 
@@ -804,7 +806,7 @@ class KioskMode implements KioskModeRunner {
       await this.run();
       this
         .runDialogs()
-        .catch((error: Error) => console.warn(`${NON_CRITICAL_WARNING} ${error?.message}`));
+        .catch(() => { /* ignore if it doesn‘t exist */ });
     }
   }
 
