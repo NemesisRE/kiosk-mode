@@ -72,3 +72,7 @@ input_boolean: !include_dir_merge_named inputs/booleans/
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url: /local/kiosk-mode.js
+
+timer:
+  laundry:
+    duration: "00:01:00"

@@ -63,6 +63,7 @@ class KioskMode implements KioskModeRunner {
         CACHE.DIALOG_MEDIA_ACTIONS,
         CACHE.DIALOG_UPDATE_ACTIONS,
         CACHE.DIALOG_CLIMATE_ACTIONS,
+        CACHE.DIALOG_TIMER_ACTIONS,
         CACHE.DIALOG_HISTORY_SHOW_MORE,
         CACHE.DIALOG_LOGBOOK_SHOW_MORE,
         CACHE.OVERFLOW_MOUSE,
@@ -164,6 +165,7 @@ class KioskMode implements KioskModeRunner {
   private hideDialogMediaActions: boolean;
   private hideDialogUpdateActions: boolean;
   private hideDialogClimateActions: boolean;
+  private hideDialogTimerActions: boolean;
   private hideDialogHistoryShowMore: boolean;
   private hideDialogLogbookShowMore: boolean;
   private blockOverflow: boolean;
@@ -284,6 +286,7 @@ class KioskMode implements KioskModeRunner {
     this.hideDialogMediaActions      = false;
     this.hideDialogUpdateActions     = false;
     this.hideDialogClimateActions    = false;
+    this.hideDialogTimerActions      = false;
     this.hideDialogHistoryShowMore   = false;
     this.hideDialogLogbookShowMore   = false;
     this.blockOverflow               = false;
@@ -349,6 +352,7 @@ class KioskMode implements KioskModeRunner {
       CACHE.DIALOG_MEDIA_ACTIONS,
       CACHE.DIALOG_UPDATE_ACTIONS,
       CACHE.DIALOG_CLIMATE_ACTIONS,
+      CACHE.DIALOG_TIMER_ACTIONS,
       CACHE.DIALOG_HISTORY_SHOW_MORE,
       CACHE.DIALOG_LOGBOOK_SHOW_MORE,
       CACHE.OVERFLOW_MOUSE,
@@ -378,6 +382,7 @@ class KioskMode implements KioskModeRunner {
       OPTION.HIDE_DIALOG_MEDIA_ACTIONS,
       OPTION.HIDE_DIALOG_UPDATE_ACTIONS,
       OPTION.HIDE_DIALOG_CLIMATE_ACTIONS,
+      OPTION.HIDE_DIALOG_TIMER_ACTIONS,
       OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE,
       OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE,
       OPTION.BLOCK_OVERFLOW,
@@ -407,6 +412,7 @@ class KioskMode implements KioskModeRunner {
       this.hideDialogMediaActions      = cached(CACHE.DIALOG_MEDIA_ACTIONS)       || queryString(OPTION.HIDE_DIALOG_MEDIA_ACTIONS);
       this.hideDialogUpdateActions     = cached(CACHE.DIALOG_UPDATE_ACTIONS)      || queryString(OPTION.HIDE_DIALOG_UPDATE_ACTIONS);
       this.hideDialogClimateActions    = cached(CACHE.DIALOG_CLIMATE_ACTIONS)     || queryString(OPTION.HIDE_DIALOG_CLIMATE_ACTIONS);
+      this.hideDialogTimerActions      = cached(CACHE.DIALOG_TIMER_ACTIONS)       || queryString(OPTION.HIDE_DIALOG_TIMER_ACTIONS);
       this.hideDialogHistoryShowMore   = cached(CACHE.DIALOG_HISTORY_SHOW_MORE)   || queryString(OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE);
       this.hideDialogLogbookShowMore   = cached(CACHE.DIALOG_LOGBOOK_SHOW_MORE)   || queryString(OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE);
       this.blockOverflow               = cached(CACHE.OVERFLOW_MOUSE)             || queryString(OPTION.BLOCK_OVERFLOW);
@@ -654,49 +660,54 @@ class KioskMode implements KioskModeRunner {
       .catch(() => { /* ignore if it doesn‘t exist */ });
 
     getPromisableElement(
-      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`)?.shadowRoot,
-      (dialogDefault: ShadowRoot) => !!dialogDefault,
+      (): ShadowRoot => moreInfo.querySelector(
+        [
+          `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`,
+          `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_TIMER}`,
+          `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`,
+          `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`
+        ].join(',')
+      )?.shadowRoot,
+      (dialogChild: ShadowRoot) => !!dialogChild,
       ''
     )
-      .then((dialogDefault: ShadowRoot) => {
-        if (this.hideDialogAttributes) {
-          addStyle(STYLES.DIALOG_ATTRIBUTES, dialogDefault);
-          if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_ATTRIBUTES, TRUE);
+      .then((dialogChild: ShadowRoot) => {
+        if (
+          this.hideDialogAttributes ||
+          this.hideDialogTimerActions ||
+          this.hideDialogMediaActions
+        ) {
+          const styles = [
+            this.hideDialogAttributes ? STYLES.DIALOG_ATTRIBUTES : '',
+            this.hideDialogTimerActions ? STYLES.DIALOG_TIMER_ACTIONS : '',
+            this.hideDialogMediaActions ? STYLES.DIALOG_MEDIA_ACTIONS : '',
+          ];
+          addStyle(styles.join(''), dialogChild);
+          if (queryString(OPTION.CACHE)) {
+            if (this.hideDialogAttributes) setCache(CACHE.DIALOG_ATTRIBUTES, TRUE);
+            if (this.hideDialogTimerActions) setCache(CACHE.DIALOG_TIMER_ACTIONS, TRUE);
+            if (this.hideDialogMediaActions) setCache(CACHE.DIALOG_MEDIA_ACTIONS, TRUE);
+          }
         } else {
-          removeStyle(dialogDefault);
+          removeStyle(dialogChild);
         }
       })
       .catch(() => { /* ignore if it doesn‘t exist */ });
 
-    getPromisableElement(
-      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`)?.shadowRoot,
-      (dialogMediaPlayer: ShadowRoot) => !!dialogMediaPlayer,
-      ''
-    )
-      .then((dialogMediaPlayer: ShadowRoot) => {
-        if (this.hideDialogMediaActions) {
-          addStyle(STYLES.DIALOG_MEDIA_ACTIONS, dialogMediaPlayer);
-          if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_MEDIA_ACTIONS, TRUE);
-        } else {
-          removeStyle(dialogMediaPlayer);
-        }
-      })
-      .catch(() => { /* ignore if it doesn‘t exist */ });
-
-    getPromisableElement(
-      (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)?.shadowRoot,
-      (dialogUpdate: ShadowRoot) => !!dialogUpdate,
-      ''
-    )
-      .then((dialogUpdate: ShadowRoot) => {
-        if (this.hideDialogUpdateActions) {
-          addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogUpdate);
-          if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_UPDATE_ACTIONS, TRUE);
-        } else {
-          removeStyle(dialogUpdate);
-        }
-      })
-      .catch(() => { /* ignore if it doesn‘t exist */ });
+      getPromisableElement(
+        (): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)?.shadowRoot,
+        (dialogChild: ShadowRoot) => !!dialogChild,
+        ''
+      )
+        .then((dialogChild: ShadowRoot) => {
+          if (this.hideDialogUpdateActions) {
+            addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogChild);
+            if (queryString(OPTION.CACHE)) setCache(CACHE.DIALOG_UPDATE_ACTIONS, TRUE);
+          } else {
+            removeStyle(dialogChild);
+          }
+        })
+        .catch(() => { /* ignore if it doesn‘t exist */ });
 
   }
 
@@ -833,6 +844,7 @@ class KioskMode implements KioskModeRunner {
     if (OPTION.HIDE_DIALOG_MEDIA_ACTIONS in config)       this.hideDialogMediaActions      = config[OPTION.HIDE_DIALOG_MEDIA_ACTIONS];
     if (OPTION.HIDE_DIALOG_UPDATE_ACTIONS in config)      this.hideDialogUpdateActions     = config[OPTION.HIDE_DIALOG_UPDATE_ACTIONS];
     if (OPTION.HIDE_DIALOG_CLIMATE_ACTIONS in config)     this.hideDialogClimateActions    = config[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS];
+    if (OPTION.HIDE_DIALOG_TIMER_ACTIONS in config)       this.hideDialogTimerActions      = config[OPTION.HIDE_DIALOG_TIMER_ACTIONS];
     if (OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE in config)   this.hideDialogHistoryShowMore   = config[OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE];
     if (OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE in config)   this.hideDialogLogbookShowMore   = config[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE];
     if (OPTION.BLOCK_OVERFLOW in config)                  this.blockOverflow               = config[OPTION.BLOCK_OVERFLOW];

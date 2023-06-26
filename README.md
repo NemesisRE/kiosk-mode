@@ -94,6 +94,7 @@ views:
 |`hide_dialog_attributes`                  | Boolean | false   | Hides the "Attributes" section in the more-info dialogs. |
 |`hide_dialog_media_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of media-player entities. |
 |`hide_dialog_update_actions`              | Boolean | false   | Hides the actions block in the more-info dialogs of update entities. |
+|`hide_dialog_timer_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of timer entities. |
 |`hide_dialog_climate_actions`             | Boolean | false   | Hides the actions block in the more-info dialogs of climate entities. |
 |`hide_dialog_history_show_more`           | Boolean | false   | Hides the "Show more" link in the "History" section of more-info dialogs.  |
 |`hide_dialog_logbook_show_more`           | Boolean | false   | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
@@ -173,12 +174,13 @@ views:
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-update-entity.png)
-<br>*More info dialog (update entity)*
+<br>*More info dialog (update entity / timer entity)*
 <br>
 
 | Options                      | Hides |
 |:-----------------------------|:------|
 | `hide_dialog_update_actions` | 18    |
+| `hide_dialog_timer_actions`  | 18    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-history-logbook-attributes.png)
@@ -315,6 +317,7 @@ The query string options are:
 * `?hide_dialog_attributes` to hide the "Attributes" section in the more-info dialogs
 * `?hide_dialog_media_actions` to hide the actions block in the more-info dialogs of media-player entities
 * `?hide_dialog_update_actions` to hide the actions block in the more-info dialogs of update entities
+* `?hide_dialog_timer_actions` to hide the actions block in the more-info dialogs of timer entities
 * `?hide_dialog_climate_actions` to hide the actions block in the more-info dialogs of climate entities
 * `?hide_dialog_history_show_more` to hide the "Show more" link in the "History" section of more-info dialogs
 * `?hide_dialog_logbook_show_more` to hide the "Show more" link in the "Logbook" section of more-info dialogs

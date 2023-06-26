@@ -36,6 +36,8 @@ kiosk_hide_dialog_attributes:
   name: Kiosk hide dialog attributes
 kiosk_hide_dialog_update_actions:
   name: Kiosk hide dialog update actions
+kiosk_hide_dialog_timer_actions:
+  name: Kiosk hide dialog timer actions
 kiosk_hide_dialog_history_show_more:
   name: Kiosk hide dialog history show more link
 kiosk_hide_dialog_logbook_show_more:

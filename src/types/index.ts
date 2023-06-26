@@ -47,6 +47,7 @@ export interface KioskConfig {
     hide_dialog_media_actions?: boolean;
     hide_dialog_update_actions?: boolean;
     hide_dialog_climate_actions?: boolean;
+    hide_dialog_timer_actions?: boolean;
     hide_dialog_history_show_more?: boolean;
     hide_dialog_logbook_show_more?: boolean;
     block_overflow?: boolean;

@@ -95,6 +95,9 @@ export const STYLES = {
     DIALOG_MEDIA_ACTIONS: getDisplayNoneRulesString(
         '.controls'
     ),
+    DIALOG_TIMER_ACTIONS: getDisplayNoneRulesString(
+        '.actions'
+    ),
     DIALOG_UPDATE_ACTIONS: getDisplayNoneRulesString(
         '.actions',
         `hr:has(+ .actions)`
