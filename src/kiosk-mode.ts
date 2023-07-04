@@ -663,9 +663,9 @@ class KioskMode implements KioskModeRunner {
       (): ShadowRoot => moreInfo.querySelector(
         [
           `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`,
+          `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_VACUUM}`,
           `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_TIMER}`,
-          `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`,
-          `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`
+          `${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`
         ].join(',')
       )?.shadowRoot,
       (dialogChild: ShadowRoot) => !!dialogChild,
