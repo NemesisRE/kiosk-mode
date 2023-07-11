@@ -22,6 +22,26 @@ kiosk_hide_reload_resources:
   name: Kiosk hide reload resources
 kiosk_hide_edit_dashboard:
   name: Kiosk hide edit dashboard
+kiosk_hide_dialog_header_history:
+  name: Kiosk hide dialog header history
+kiosk_hide_dialog_header_settings:
+  name: Kiosk hide dialog header settings
+kiosk_hide_dialog_header_overflow:
+  name: Kiosk hide dialog header overflow
+kiosk_hide_dialog_history:
+  name: Kiosk hide dialog history
+kiosk_hide_dialog_logbook:
+  name: Kiosk hide dialog logbook
+kiosk_hide_dialog_attributes:
+  name: Kiosk hide dialog attributes
+kiosk_hide_dialog_update_actions:
+  name: Kiosk hide dialog update actions
+kiosk_hide_dialog_timer_actions:
+  name: Kiosk hide dialog timer actions
+kiosk_hide_dialog_history_show_more:
+  name: Kiosk hide dialog history show more link
+kiosk_hide_dialog_logbook_show_more:
+  name: Kiosk hide dialog logbook show more link
 kiosk_block_overflow:
   name: Kiosk block overflow
 kiosk_block_mouse:
