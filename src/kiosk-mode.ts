@@ -47,6 +47,7 @@ class KioskMode implements KioskModeRunner {
         CACHE.OVERFLOW,
         CACHE.MENU_BUTTON,
         CACHE.ACCOUNT,
+        CACHE.NOTIFICATIONS,
         CACHE.SEARCH,
         CACHE.ASSISTANT,
         CACHE.REFRESH,
@@ -149,6 +150,7 @@ class KioskMode implements KioskModeRunner {
   private hideOverflow: boolean;
   private hideMenuButton: boolean;
   private hideAccount: boolean;
+  private hideNotifications: boolean;
   private hideSearch: boolean;
   private hideAssistant: boolean;
   private hideRefresh: boolean;
@@ -270,6 +272,7 @@ class KioskMode implements KioskModeRunner {
     this.hideOverflow                = false;
     this.hideMenuButton              = false;
     this.hideAccount                 = false;
+    this.hideNotifications           = false;
     this.hideSearch                  = false;
     this.hideAssistant               = false;
     this.hideRefresh                 = false;
@@ -336,6 +339,7 @@ class KioskMode implements KioskModeRunner {
       CACHE.OVERFLOW,
       CACHE.MENU_BUTTON,
       CACHE.ACCOUNT,
+      CACHE.NOTIFICATIONS,
       CACHE.SEARCH,
       CACHE.ASSISTANT,
       CACHE.REFRESH,
@@ -366,6 +370,7 @@ class KioskMode implements KioskModeRunner {
       OPTION.HIDE_OVERFLOW,
       OPTION.HIDE_MENU_BUTTON,
       OPTION.HIDE_ACCOUNT,
+      OPTION.HIDE_NOTIFICATIONS,
       OPTION.HIDE_SEARCH,
       OPTION.HIDE_ASSISTANT,
       OPTION.HIDE_REFRESH,
@@ -396,6 +401,7 @@ class KioskMode implements KioskModeRunner {
       this.hideOverflow                = cached(CACHE.OVERFLOW)                   || queryString(OPTION.HIDE_OVERFLOW);
       this.hideMenuButton              = cached(CACHE.MENU_BUTTON)                || queryString(OPTION.HIDE_MENU_BUTTON);
       this.hideAccount                 = cached(CACHE.ACCOUNT)                    || queryString(OPTION.HIDE_ACCOUNT);
+      this.hideNotifications           = cached(CACHE.NOTIFICATIONS)              || queryString(OPTION.HIDE_NOTIFICATIONS);
       this.hideSearch                  = cached(CACHE.SEARCH)                     || queryString(OPTION.HIDE_SEARCH);
       this.hideAssistant               = cached(CACHE.ASSISTANT)                  || queryString(OPTION.HIDE_ASSISTANT);
       this.hideRefresh                 = cached(CACHE.REFRESH)                    || queryString(OPTION.HIDE_REFRESH);
@@ -503,11 +509,19 @@ class KioskMode implements KioskModeRunner {
 
     if (
       this.hideAccount ||
+      this.hideNotifications ||
       this.hideMenuButton
     ) {
       const styles = [
           this.hideAccount ? STYLES.ACCOUNT : '',
-          this.hideMenuButton ? STYLES.MENU_BUTTON : ''
+          this.hideNotifications ? STYLES.NOTIFICATIONS : '',
+          this.hideAccount && this.hideNotifications
+            ? STYLES.DIVIDER
+            : '',
+          this.hideAccount || this.hideNotifications
+            ? STYLES.PEPER_LISTBOX(this.hideAccount, this.hideNotifications)
+            : '',
+          this.hideMenuButton ? STYLES.MENU_BUTTON : '',
       ];
       addStyle(styles.join(''), this.sideBarRoot);
       if (this.hideAccount && queryString(OPTION.CACHE)) setCache(CACHE.ACCOUNT, TRUE);
@@ -828,6 +842,7 @@ class KioskMode implements KioskModeRunner {
     if (OPTION.HIDE_OVERFLOW in config)                   this.hideOverflow                = config[OPTION.HIDE_OVERFLOW];
     if (OPTION.HIDE_MENU_BUTTON in config)                this.hideMenuButton              = config[OPTION.HIDE_MENU_BUTTON];
     if (OPTION.HIDE_ACCOUNT in config)                    this.hideAccount                 = config[OPTION.HIDE_ACCOUNT];
+    if (OPTION.HIDE_NOTIFICATIONS in config)              this.hideNotifications           = config[OPTION.HIDE_NOTIFICATIONS];
     if (OPTION.HIDE_SEARCH in config)                     this.hideSearch                  = config[OPTION.HIDE_SEARCH];
     if (OPTION.HIDE_ASSISTANT in config)                  this.hideAssistant               = config[OPTION.HIDE_ASSISTANT];
     if (OPTION.HIDE_REFRESH in config)                    this.hideRefresh                 = config[OPTION.HIDE_REFRESH];

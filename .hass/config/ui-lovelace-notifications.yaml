@@ -1,0 +1,11 @@
+kiosk_mode:
+  hide_notifications: true
+title: Kiosk-mode hide notifications
+views:
+  - theme: Backend-selected
+    title: Hide Notifications
+    path: kiosk-mode-hide-notifications
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `hide_notifications` on `true`. The notifications entry-point is located in the bottom of the sidebar, above the account avatar.

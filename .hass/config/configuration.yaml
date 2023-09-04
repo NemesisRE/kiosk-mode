@@ -20,6 +20,10 @@ lovelace:
       mode: yaml
       title: Kiosk-mode hide account
       filename: ui-lovelace-account.yaml
+    lovelace-notifications:
+      mode: yaml
+      title: Kiosk-mode hide notifications
+      filename: ui-lovelace-notifications.yaml
     lovelace-menu-button:
       mode: yaml
       title: Kiosk-mode hide menu button

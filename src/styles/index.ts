@@ -15,6 +15,23 @@ export const STYLES = {
         }
     }),
     ACCOUNT: getDisplayNoneRulesString('.profile'),
+    NOTIFICATIONS: getDisplayNoneRulesString('.notifications-container'),
+    DIVIDER: getDisplayNoneRulesString('.divider'),
+    PEPER_LISTBOX: (hideAccount: boolean, hideNotifications: boolean) => {
+        let size = 132;
+        if (hideAccount && hideNotifications) {
+            size = 0;
+        } else if (hideAccount) {
+            size -= 50;
+        } else if (hideNotifications) {
+            size -= 48;
+        }
+        return getCSSRulesString({
+            'paper-listbox': {
+                height: `calc(100% - var(--header-height) - ${size}px - env(safe-area-inset-bottom)) !important`
+            }
+        });
+    },
     MENU_BUTTON: getDisplayNoneRulesString('.menu ha-icon-button'),
     MENU_BUTTON_BURGER: getDisplayNoneRulesString('ha-menu-button'),
     MOUSE: getCSSRulesString({
