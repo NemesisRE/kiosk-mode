@@ -7,6 +7,9 @@ kiosk_mode:
         input_boolean.kiosk_hide_account: 'on'
       hide_account: true
     - entity:
+        input_boolean.kiosk_hide_notifications: 'on'
+      hide_notifications: true
+    - entity:
         input_boolean.kiosk_hide_header: 'on'
       hide_header: true
     - entity:
@@ -86,6 +89,7 @@ views:
             label: General options
           - entity: input_boolean.kiosk
           - entity: input_boolean.kiosk_hide_account
+          - entity: input_boolean.kiosk_hide_notifications
           - entity: input_boolean.kiosk_hide_header
           - entity: input_boolean.kiosk_hide_menubutton
           - entity: input_boolean.kiosk_hide_sidebar
