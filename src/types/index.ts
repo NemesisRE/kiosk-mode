@@ -31,6 +31,7 @@ export interface KioskConfig {
     hide_overflow?: boolean;
     hide_menubutton?: boolean;
     hide_account?: boolean;
+    hide_notifications?: boolean;
     hide_search?: boolean;
     hide_assistant?: boolean;
     hide_refresh?: boolean;
