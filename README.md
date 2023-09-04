@@ -77,6 +77,7 @@ views:
 |`hide_sidebar:`                           | Boolean | false   | Hides only the sidebar. |
 |`hide_menubutton:`<sup>1</sup>            | Boolean | false   | Hides only the sidebar menu icon. |
 |`hide_overflow:`                          | Boolean | false   | Hides the top right overflow menu. |
+|`hide_notifications`                      | Boolean | false   | Hide the notifications entry-point. |
 |`hide_account:`                           | Boolean | false   | Hides the account icon. |
 |`hide_search:`                            | Boolean | false   | Hides the search icon. |
 |`hide_assistant:`                         | Boolean | false   | Hides the assistant icon. |
@@ -123,18 +124,19 @@ views:
 <br>*Lovelace dashboard*
 <br>
 
-| Options           | Hides / Blocks  |
-|:------------------|:----------------|
-| `kiosk`           | 1 and 2         |
-| `hide_header`     | 1               |
-| `hide_sidebar`    | 2               |
-| `hide_menubutton` | 3               |
-| `hide_account`    | 4               |
-| `hide_search`     | 5               |
-| `hide_assistant`  | 6               |
-| `hide_overflow`   | 7               |
-| `block_overflow`  | 7               |
-| `block_mouse`     | whole interface |
+| Options              | Hides / Blocks  |
+|:---------------------|:----------------|
+| `kiosk`              | 1 and 2         |
+| `hide_header`        | 1               |
+| `hide_sidebar`       | 2               |
+| `hide_menubutton`    | 3               |
+| `hide_notifications` | 4               |
+| `hide_account`       | 5               |
+| `hide_search`        | 6               |
+| `hide_assistant`     | 7               |
+| `hide_overflow`      | 8               |
+| `block_overflow`     | 8               |
+| `block_mouse`        | whole interface |
 
 <br>
 
@@ -144,10 +146,10 @@ views:
 
 | Options                 | Hides |
 |:------------------------|:------|
-| `hide_refresh`          | 8     |
-| `hide_unused_entities`  | 9     |
-| `hide_reload_resources` | 10    |
-| `hide_edit_dashboard`   | 11    |
+| `hide_refresh`          | 9     |
+| `hide_unused_entities`  | 10    |
+| `hide_reload_resources` | 11    |
+| `hide_edit_dashboard`   | 12    |
 
 <br>
 
@@ -157,11 +159,11 @@ views:
 
 | Options                           | Hides |
 |:----------------------------------|:------|
-| `hide_dialog_header_action_items` | 12 |
-| `hide_dialog_header_history`      | 13    |
-| `hide_dialog_header_settings`     | 14    |
-| `hide_dialog_header_overflow`     | 15    |
-| `hide_dialog_media_actions`       | 16    |
+| `hide_dialog_header_action_items` | 13    |
+| `hide_dialog_header_history`      | 14    |
+| `hide_dialog_header_settings`     | 15    |
+| `hide_dialog_header_overflow`     | 16    |
+| `hide_dialog_media_actions`       | 17    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-climate-entity.png)
@@ -170,7 +172,7 @@ views:
 
 | Options                       | Hides |
 |:------------------------------|:------|
-| `hide_dialog_climate_actions` | 17    |
+| `hide_dialog_climate_actions` | 18    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-update-entity.png)
@@ -179,8 +181,8 @@ views:
 
 | Options                      | Hides |
 |:-----------------------------|:------|
-| `hide_dialog_update_actions` | 18    |
-| `hide_dialog_timer_actions`  | 18    |
+| `hide_dialog_update_actions` | 19    |
+| `hide_dialog_timer_actions`  | 19    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-history-logbook-attributes.png)
@@ -189,11 +191,11 @@ views:
 
 | Options                         | Hides |
 |:--------------------------------|:------|
-| `hide_dialog_history`           | 19    |
-| `hide_dialog_logbook`           | 20    |
-| `hide_dialog_attributes`        | 21    |
-| `hide_dialog_history_show_more` | 22    |
-| `hide_dialog_logbook_show_more` | 23    |
+| `hide_dialog_history`           | 20    |
+| `hide_dialog_logbook`           | 21    |
+| `hide_dialog_attributes`        | 22    |
+| `hide_dialog_history_show_more` | 23    |
+| `hide_dialog_logbook_show_more` | 24    |
 
 <br>
 
@@ -301,6 +303,7 @@ The query string options are:
 * `?hide_sidebar` to hide only the sidebar
 * `?hide_overflow` to hide the top right menu
 * `?hide_menubutton` to hide sidebar menu button
+* `?hide_notifications` to hide the notifications entry-point
 * `?hide_account` to hide the account icon
 * `?hide_search` to hide the search icon
 * `?hide_assistant` to hide the assistant icon
