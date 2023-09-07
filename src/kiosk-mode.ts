@@ -6,7 +6,8 @@ import {
   KioskConfig,
   ConditionalKioskConfig,
   SuscriberEvent,
-  EntitySetting
+  EntitySetting,
+  Version
 } from '@types';
 import {
   CACHE,
@@ -31,7 +32,8 @@ import {
   removeStyle,
   getMenuTranslations,
   getPromisableElement,
-  addMenuItemsDataSelectors
+  addMenuItemsDataSelectors,
+  parseVersion
 } from '@utilities';
 import { STYLES } from '@styles';
 
@@ -95,6 +97,8 @@ class KioskMode implements KioskModeRunner {
         `${ELEMENT.HOME_ASSISTANT} > hass > user`
       );
 
+      this.version = parseVersion(this.ha.hass?.config?.version);
+
       // Select partial panel resolver
       const partialPanelResolver = await getPromisableElement(
         (): Element => this.main.querySelector(ELEMENT.PARTIAL_PANEL_RESOLVER),
@@ -143,6 +147,7 @@ class KioskMode implements KioskModeRunner {
   private panelResolverObserver: MutationObserver;
   private dialogsMutationObserver: MutationObserver;
   private dialogContentMutationObserver: MutationObserver;
+  private version: Version | null;
 
   // Kiosk Mode options
   private hideHeader: boolean;
@@ -623,6 +628,17 @@ class KioskMode implements KioskModeRunner {
   // INSERT MORE INFO DIALOG CHILDREN STYLES
   protected async insertDialogChildStyles(moreInfo: ShadowRoot) {
 
+    const legacyClimateInfoDialog = Boolean(
+      this.version &&
+      (
+        this.version[0] < 2023 ||
+        (
+          this.version[0] === 2023 &&
+          this.version[1] < 9
+        )
+      )
+    );
+
     if (
       this.hideDialogHistory ||
       this.hideDialogLogbook ||
@@ -631,7 +647,9 @@ class KioskMode implements KioskModeRunner {
       const styles = [
           this.hideDialogHistory ? STYLES.DIALOG_HISTORY : '',
           this.hideDialogLogbook ? STYLES.DIALOG_LOGBOOK : '',
-          this.hideDialogClimateActions ? STYLES.DIALOG_CLIMATE_ACTIONS : ''
+          this.hideDialogClimateActions && legacyClimateInfoDialog
+            ? STYLES.DIALOG_CLIMATE_ACTIONS
+            : ''            
       ];
       addStyle(styles.join(''), moreInfo);
       if (queryString(OPTION.CACHE)) {
@@ -641,6 +659,57 @@ class KioskMode implements KioskModeRunner {
       }
     } else {
       removeStyle(moreInfo);
+    }
+
+    if (!legacyClimateInfoDialog) {
+
+      getPromisableElement(
+        (): ShadowRoot => moreInfo.querySelector(ELEMENT.HA_DIALOG_CLIMATE)?.shadowRoot,
+        (haDialogClimate: ShadowRoot) => !!haDialogClimate,
+        ''
+      )
+        .then((haDialogClimate: ShadowRoot) => {
+
+          if (this.hideDialogClimateActions) {
+            addStyle(STYLES.DIALOG_CLIMATE_CONTROL_SELECT, haDialogClimate);
+          } else {
+            removeStyle(haDialogClimate);
+          }
+
+          getPromisableElement(
+            (): ShadowRoot => haDialogClimate.querySelector(ELEMENT.HA_DIALOG_CLIMATE_TEMPERATURE)?.shadowRoot,
+            (haDialogClimateTemperature: ShadowRoot) => !!haDialogClimateTemperature,
+            ''
+          )
+            .then((haDialogClimateTemperature: ShadowRoot) => {
+
+              if (this.hideDialogClimateActions) {
+                addStyle(STYLES.DIALOG_CLIMATE_TEMPERATURE_BUTTONS, haDialogClimateTemperature);
+              } else {
+                removeStyle(haDialogClimateTemperature);
+              }
+
+              getPromisableElement(
+                (): ShadowRoot => haDialogClimateTemperature.querySelector(ELEMENT.HA_DIALOG_CLIMATE_CIRCULAR_SLIDER)?.shadowRoot,
+                (haDialogClimateCircularSlider: ShadowRoot) => !!haDialogClimateCircularSlider,
+                ''
+              )
+                .then((haDialogClimateCircularSlider: ShadowRoot) => {
+                  
+                  if (this.hideDialogClimateActions) {
+                    addStyle(STYLES.DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION, haDialogClimateCircularSlider);
+                  } else {
+                    removeStyle(haDialogClimateCircularSlider);
+                  }
+
+                })
+                .catch((e) => { /* ignore if it doesn‘t exist */ });
+
+            })
+            .catch((e) => { /* ignore if it doesn‘t exist */ });
+
+        })
+        .catch((e) => { /* ignore if it doesn‘t exist */ });
     }
 
     getPromisableElement(

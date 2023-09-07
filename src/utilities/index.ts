@@ -1,4 +1,8 @@
-import { HomeAssistant, StyleElement } from '@types';
+import {
+    HomeAssistant,
+    StyleElement,
+    Version
+} from '@types';
 import {
     STYLES_PREFIX,
     TRUE,
@@ -173,4 +177,19 @@ export const addMenuItemsDataSelectors = (
           menuItem.dataset.selector = translations[icon.title];
         }
       });
+};
+
+export const parseVersion = (version: string | undefined): Version | null => {
+    const versionRegExp = /^(\d+)\.(\d+)\.(\w+)(?:\.(\w+))?$/;
+    const match = version
+        ? version.match(versionRegExp)
+        : null;
+    if (match) {
+        return [
+            +match[1],
+            +match[2],
+            match[3]
+        ];
+    }
+    return null;
 };

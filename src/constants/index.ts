@@ -133,6 +133,14 @@ export enum ELEMENT {
     HA_DIALOG_MEDIA_PLAYER = 'more-info-media_player',
     HA_DIALOG_UPDATE = 'more-info-update',
     HA_DIALOG_CLIMATE = 'more-info-climate',
+    HA_DIALOG_CLIMATE_CONTROL_SELECT = 'ha-more-info-control-select-container',
+    HA_DIALOG_CLIMATE_TEMPERATURE = 'ha-more-info-climate-temperature',
+    HA_DIALOG_CLIMATE_TEMPERATURE_BUTTONS = '.buttons',
+    HA_DIALOG_CLIMATE_CIRCULAR_SLIDER = 'ha-control-circular-slider',
+    HA_DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION = '#interaction',
+    HA_DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION_SLIDER = 'path[role="slider"]',
+    HA_DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION_TARGET = '.target',
+    HA_DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION_TARGET_BORDER = '.target-border',
     HA_DIALOG_ATTRIBUTES = 'ha-attributes'
 }
 
