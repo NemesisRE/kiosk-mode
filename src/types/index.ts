@@ -124,4 +124,6 @@ declare global {
         KioskMode: KioskModeRunner;
         hassConnection: Promise<HassConnection>;
     }
-  }
+}
+
+export type Version = [number, number, string];
