@@ -18,6 +18,7 @@ import {
   CUSTOM_MOBILE_WIDTH_DEFAULT,
   SUSCRIBE_EVENTS_TYPE,
   STATE_CHANGED_EVENT,
+  TOGGLE_MENU_EVENT,
   WINDOW_RESIZE_DELAY,
   NAMESPACE,
   NON_CRITICAL_WARNING,
@@ -495,6 +496,13 @@ class KioskMode implements KioskModeRunner {
 
   // INSERT REGULAR STYLES
   protected insertStyles() {
+
+    // Remove toggle menu event
+    this.main?.host?.removeEventListener(TOGGLE_MENU_EVENT, this.blockToggleMenuGesture, true);
+
+    if (this.hideSidebar) {
+      this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockToggleMenuGesture, true);
+    }
   
     if (this.hideHeader) {
       addStyle(STYLES.HEADER, this.huiRoot);
@@ -902,6 +910,11 @@ class KioskMode implements KioskModeRunner {
         .runDialogs()
         .catch(() => { /* ignore if it doesn‘t exist */ });
     }
+  }
+
+  protected blockToggleMenuGesture(event: Event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
   }
 
   protected setOptions(config: ConditionalKioskConfig, conditional: boolean) {
