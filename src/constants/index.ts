@@ -131,6 +131,7 @@ export enum ELEMENT {
     HA_DIALOG_TIMER = 'more-info-timer',
     HA_DIALOG_VACUUM = 'more-info-vacuum',
     HA_DIALOG_MEDIA_PLAYER = 'more-info-media_player',
+    HA_DIALOG_LIGHT = 'more-info-light',
     HA_DIALOG_UPDATE = 'more-info-update',
     HA_DIALOG_CLIMATE = 'more-info-climate',
     HA_DIALOG_CLIMATE_CONTROL_SELECT = 'ha-more-info-control-select-container',
