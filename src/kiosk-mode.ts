@@ -772,7 +772,12 @@ class KioskMode implements KioskModeRunner {
           const styles = [
             this.hideDialogAttributes ? STYLES.DIALOG_ATTRIBUTES : '',
             this.hideDialogTimerActions ? STYLES.DIALOG_TIMER_ACTIONS : '',
-            this.hideDialogMediaActions ? STYLES.DIALOG_MEDIA_ACTIONS : '',
+            (
+              this.hideDialogMediaActions &&
+              dialogChild.host.localName === ELEMENT.HA_DIALOG_MEDIA_PLAYER
+            )
+              ? STYLES.DIALOG_MEDIA_ACTIONS
+              : '',
           ];
           addStyle(styles.join(''), dialogChild);
           if (queryString(OPTION.CACHE)) {
