@@ -96,7 +96,9 @@ views:
 |`hide_dialog_media_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of media-player entities. |
 |`hide_dialog_update_actions`              | Boolean | false   | Hides the actions block in the more-info dialogs of update entities. |
 |`hide_dialog_timer_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of timer entities. |
-|`hide_dialog_climate_actions`             | Boolean | false   | Hides the actions block in the more-info dialogs of climate entities. |
+|`hide_dialog_climate_actions`             | Boolean | false   | Hides all the actions in the more-info dialogs of climate entities. |
+|`hide_dialog_climate_temperature_actions` | Boolean | false   | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
+|`hide_dialog_climate_settings_actions`    | Boolean | false   | Hides the mode and preset actions in the more-info dialogs of climate entities. |
 |`hide_dialog_history_show_more`           | Boolean | false   | Hides the "Show more" link in the "History" section of more-info dialogs.  |
 |`hide_dialog_logbook_show_more`           | Boolean | false   | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
 |`block_overflow`                          | Boolean | false   | Blocks the top right overflow menu mouse interactions. |
@@ -170,9 +172,11 @@ views:
 <br>*More info dialog (climate entity)*
 <br>
 
-| Options                       | Hides |
-|:------------------------------|:------|
-| `hide_dialog_climate_actions` | 18    |
+| Options                                   | Hides |
+|:------------------------------------------|:------|
+| `hide_dialog_climate_actions`             | 18    |
+| `hide_dialog_climate_temperature_actions` | 19    |
+| `hide_dialog_climate_settings_actions`    | 20    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-update-entity.png)
@@ -181,8 +185,8 @@ views:
 
 | Options                      | Hides |
 |:-----------------------------|:------|
-| `hide_dialog_update_actions` | 19    |
-| `hide_dialog_timer_actions`  | 19    |
+| `hide_dialog_update_actions` | 21    |
+| `hide_dialog_timer_actions`  | 21    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-history-logbook-attributes.png)
@@ -191,11 +195,11 @@ views:
 
 | Options                         | Hides |
 |:--------------------------------|:------|
-| `hide_dialog_history`           | 20    |
-| `hide_dialog_logbook`           | 21    |
-| `hide_dialog_attributes`        | 22    |
-| `hide_dialog_history_show_more` | 23    |
-| `hide_dialog_logbook_show_more` | 24    |
+| `hide_dialog_history`           | 22    |
+| `hide_dialog_logbook`           | 23    |
+| `hide_dialog_attributes`        | 24    |
+| `hide_dialog_history_show_more` | 25    |
+| `hide_dialog_logbook_show_more` | 26    |
 
 <br>
 
@@ -321,7 +325,9 @@ The query string options are:
 * `?hide_dialog_media_actions` to hide the actions block in the more-info dialogs of media-player entities
 * `?hide_dialog_update_actions` to hide the actions block in the more-info dialogs of update entities
 * `?hide_dialog_timer_actions` to hide the actions block in the more-info dialogs of timer entities
-* `?hide_dialog_climate_actions` to hide the actions block in the more-info dialogs of climate entities
+* `?hide_dialog_climate_actions` to hide all the actions in the more-info dialogs of climate entities
+* `?hide_dialog_climate_temperature_actions` to hide the temperature cotrol actions in the more-info dialogs of climate entities
+* `?hide_dialog_climate_settings_actions` to hide the mode and preset actions in the more-info dialogs of climate entities
 * `?hide_dialog_history_show_more` to hide the "Show more" link in the "History" section of more-info dialogs
 * `?hide_dialog_logbook_show_more` to hide the "Show more" link in the "Logbook" section of more-info dialogs
 * `?block_overflow` to block the top right overflow menu mouse interactions
