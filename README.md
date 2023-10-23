@@ -68,6 +68,8 @@ views:
 ```
 *Note: `views:` is added in the example above to show where `kiosk_mode:` should be placed in your Lovelace config*<br><br>
 
+>If you want to learn how to install and set some basic configurations in `kiosk-mode` through a video, check the [next one](https://youtu.be/G3lT4zgjER8) from [@smarthomejunkie](https://github.com/smarthomejunkie).
+
 ## Config Options
 
 | Config Option                            | Type    | Default | Description |
