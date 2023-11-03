@@ -55,6 +55,7 @@ export interface KioskConfig {
     hide_dialog_logbook_show_more?: boolean;
     block_overflow?: boolean;
     block_mouse?: boolean;
+    block_context_menu?: boolean;
     admin_settings?: ConditionalKioskConfig;
     non_admin_settings?: ConditionalKioskConfig;
     user_settings?: UserSetting[];

@@ -75,6 +75,9 @@ kiosk_mode:
     - entity:
         input_boolean.kiosk_block_mouse: 'on'
       block_mouse: true
+    - entity:
+        input_boolean:kiosk_block_context_menu: 'on'
+      block_context_menu: true
 title: Kiosk-mode Overview
 views:
   - theme: Backend-selected
@@ -102,6 +105,7 @@ views:
           - entity: input_boolean.kiosk_hide_edit_dashboard
           - entity: input_boolean.kiosk_block_overflow
           - entity: input_boolean.kiosk_block_mouse
+          - entity: input_boolean.kiosk_block_context_menu
           - type: section
             label: More-info dialogs options
           - entity: sun.sun

@@ -32,7 +32,8 @@ export enum CACHE {
     DIALOG_HISTORY_SHOW_MORE = 'kmDialogHistoryShowMore',
     DIALOG_LOGBOOK_SHOW_MORE = 'kmDialogLogbookShowMore',
     OVERFLOW_MOUSE = 'kmOverflowMouse',
-    MOUSE = 'kmMouse'
+    MOUSE = 'kmMouse',
+    CONTEXT_MENU = 'kmContextMenu'
 }
 
 export enum OPTION {
@@ -69,6 +70,7 @@ export enum OPTION {
     HIDE_DIALOG_LOGBOOK_SHOW_MORE = 'hide_dialog_logbook_show_more',
     BLOCK_OVERFLOW = 'block_overflow',
     BLOCK_MOUSE = 'block_mouse',
+    BLOCK_CONTEXT_MENU = 'block_context_menu',
     // Conditional configuration
     IGNORE_ENTITY_SETTINGS = 'ignore_entity_settings',
     IGNORE_MOBILE_SETTINGS = 'ignore_mobile_settings',

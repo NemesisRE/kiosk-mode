@@ -105,6 +105,7 @@ views:
 |`hide_dialog_logbook_show_more`           | Boolean | false   | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
 |`block_overflow`                          | Boolean | false   | Blocks the top right overflow menu mouse interactions. |
 |`block_mouse:`                            | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
+|`block_context_menu:`                     | Boolean | false   | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices).
 |`ignore_entity_settings:`<sup>3</sup>     | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
 |`ignore_mobile_settings:`<sup>4</sup>     | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
 |`ignore_disable_km:`<sup>3</sup>          | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
@@ -334,6 +335,7 @@ The query string options are:
 * `?hide_dialog_logbook_show_more` to hide the "Show more" link in the "Logbook" section of more-info dialogs
 * `?block_overflow` to block the top right overflow menu mouse interactions
 * `?block_mouse` to block completely the mouse
+* `?block_context_menu` to prevent opening a right-click context menu
 
 ## Query String Caching
 
