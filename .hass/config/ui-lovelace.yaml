@@ -76,7 +76,7 @@ kiosk_mode:
         input_boolean.kiosk_block_mouse: 'on'
       block_mouse: true
     - entity:
-        input_boolean:kiosk_block_context_menu: 'on'
+        input_boolean.kiosk_block_context_menu: 'on'
       block_context_menu: true
 title: Kiosk-mode Overview
 views:

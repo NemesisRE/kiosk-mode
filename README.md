@@ -129,19 +129,20 @@ views:
 <br>*Lovelace dashboard*
 <br>
 
-| Options              | Hides / Blocks  |
-|:---------------------|:----------------|
-| `kiosk`              | 1 and 2         |
-| `hide_header`        | 1               |
-| `hide_sidebar`       | 2               |
-| `hide_menubutton`    | 3               |
-| `hide_notifications` | 4               |
-| `hide_account`       | 5               |
-| `hide_search`        | 6               |
-| `hide_assistant`     | 7               |
-| `hide_overflow`      | 8               |
-| `block_overflow`     | 8               |
-| `block_mouse`        | whole interface |
+| Options              | Hides / Blocks      |
+|:---------------------|:--------------------|
+| `kiosk`              | 1 and 2             |
+| `hide_header`        | 1                   |
+| `hide_sidebar`       | 2                   |
+| `hide_menubutton`    | 3                   |
+| `hide_notifications` | 4                   |
+| `hide_account`       | 5                   |
+| `hide_search`        | 6                   |
+| `hide_assistant`     | 7                   |
+| `hide_overflow`      | 8                   |
+| `block_overflow`     | 8                   |
+| `block_mouse`        | whole interface     |
+| `block_context_menu` | right click anywhere|
 
 <br>
 

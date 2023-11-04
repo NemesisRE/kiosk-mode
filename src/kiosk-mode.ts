@@ -514,10 +514,10 @@ class KioskMode implements KioskModeRunner {
   protected insertStyles() {
 
     // Remove toggle menu event
-    this.main?.host?.removeEventListener(TOGGLE_MENU_EVENT, this.blockToggleMenuGesture, true);
+    this.main?.host?.removeEventListener(TOGGLE_MENU_EVENT, this.blockEventHandler, true);
 
     if (this.hideSidebar) {
-      this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockToggleMenuGesture, true);
+      this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockEventHandler, true);
     }
   
     if (this.hideHeader) {
@@ -604,10 +604,10 @@ class KioskMode implements KioskModeRunner {
       removeStyle(document.body);
     }
 
-    window.removeEventListener('contextmenu', this.blockContextMenuHandler, true);
+    window.removeEventListener('contextmenu', this.blockEventHandler, true);
 
     if (this.blockContextMenu) {
-      window.addEventListener('contextmenu', this.blockContextMenuHandler, true);
+      window.addEventListener('contextmenu', this.blockEventHandler, true);
       if (queryString(OPTION.CACHE)) setCache(CACHE.CONTEXT_MENU, TRUE);
     }
 
@@ -954,12 +954,7 @@ class KioskMode implements KioskModeRunner {
     }
   }
 
-  protected blockToggleMenuGesture(event: Event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  }
-
-  protected blockContextMenuHandler(event: Event) {
+  protected blockEventHandler(event: Event) {
     event.preventDefault();
     event.stopImmediatePropagation();
   }
