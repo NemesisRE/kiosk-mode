@@ -1,13 +1,15 @@
 # kiosk-mode
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
-Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assistant.io/) lovelace dashboards
+Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assistant.io/) lovelace dashboards.
 
 ![image](example.png)
 
 # Installation
 
 **Follow only one of two installation methods below, HACS or Manually:**
+
+>If you want to learn how to install and set some basic configurations in `kiosk-mode` through a video, check the [next one](https://youtu.be/G3lT4zgjER8) from [@smarthomejunkie](https://github.com/smarthomejunkie).
 
 <details>
   <summary><b>Installation and tracking with HACS</b></summary>
@@ -67,8 +69,6 @@ kiosk_mode:
 views:
 ```
 *Note: `views:` is added in the example above to show where `kiosk_mode:` should be placed in your Lovelace config*<br><br>
-
->If you want to learn how to install and set some basic configurations in `kiosk-mode` through a video, check the [next one](https://youtu.be/G3lT4zgjER8) from [@smarthomejunkie](https://github.com/smarthomejunkie).
 
 ## Config Options
 
@@ -361,6 +361,9 @@ This works for all query strings except for the utility strings listed below.
 * Open http://localhost:8123/
 * Create an account and complete the onboard
 
+## Kiosk-mode complements
+
+Some features are outside `kiosk-mode` scope and they would be hard to maintain and escalate over time, but they could be achieved by alternative methods. Check [kiosk-mode complements](KIOSK-MODE-COMPLEMENTS.md) for this.
 
 ### Related
 
