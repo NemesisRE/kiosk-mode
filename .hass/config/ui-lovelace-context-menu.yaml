@@ -1,0 +1,11 @@
+kiosk_mode:
+  block_context_menu: true
+title: Kiosk-mode block context menu
+views:
+  - theme: Backend-selected
+    title: Block Context Menu
+    path: kiosk-mode-block-context-menu
+    badges: []
+    cards:
+      - type: markdown
+        content: This dashboard has the setting `block_context_menu` on `true`. You can not open a context-menu by right-clicking.

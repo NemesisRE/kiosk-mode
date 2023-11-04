@@ -182,6 +182,7 @@ class KioskMode implements KioskModeRunner {
   private hideDialogLogbookShowMore: boolean;
   private blockOverflow: boolean;
   private blockMouse: boolean;
+  private blockContextMenu: boolean;
   private ignoreEntity: boolean;
   private ignoreMobile: boolean;
   private ignoreDisableKm: boolean;
@@ -306,6 +307,7 @@ class KioskMode implements KioskModeRunner {
     this.hideDialogLogbookShowMore           = false;
     this.blockOverflow                       = false;
     this.blockMouse                          = false;
+    this.blockContextMenu                    = false;
     this.ignoreEntity                        = false;
     this.ignoreMobile                        = false;
     this.ignoreDisableKm                     = false;
@@ -407,7 +409,8 @@ class KioskMode implements KioskModeRunner {
       OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE,
       OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE,
       OPTION.BLOCK_OVERFLOW,
-      OPTION.BLOCK_MOUSE
+      OPTION.BLOCK_MOUSE,
+      OPTION.BLOCK_CONTEXT_MENU
     ]);
 
     const cachedOptionsOrQueryStringsSet = cachedOptionsSet || queryStringsSet;
@@ -441,6 +444,7 @@ class KioskMode implements KioskModeRunner {
       this.hideDialogLogbookShowMore           = cached(CACHE.DIALOG_LOGBOOK_SHOW_MORE)           || queryString(OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE);
       this.blockOverflow                       = cached(CACHE.OVERFLOW_MOUSE)                     || queryString(OPTION.BLOCK_OVERFLOW);
       this.blockMouse                          = cached(CACHE.MOUSE)                              || queryString(OPTION.BLOCK_MOUSE);
+      this.blockContextMenu                    = cached(CACHE.CONTEXT_MENU)                       || queryString(OPTION.BLOCK_CONTEXT_MENU);
     } else {
       // Use config values only if config strings and cache aren't used.
       this.setOptions(config, false);
@@ -510,10 +514,10 @@ class KioskMode implements KioskModeRunner {
   protected insertStyles() {
 
     // Remove toggle menu event
-    this.main?.host?.removeEventListener(TOGGLE_MENU_EVENT, this.blockToggleMenuGesture, true);
+    this.main?.host?.removeEventListener(TOGGLE_MENU_EVENT, this.blockEventHandler, true);
 
     if (this.hideSidebar) {
-      this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockToggleMenuGesture, true);
+      this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockEventHandler, true);
     }
   
     if (this.hideHeader) {
@@ -598,6 +602,13 @@ class KioskMode implements KioskModeRunner {
       if (queryString(OPTION.CACHE)) setCache(CACHE.MOUSE, TRUE);
     } else {
       removeStyle(document.body);
+    }
+
+    window.removeEventListener('contextmenu', this.blockEventHandler, true);
+
+    if (this.blockContextMenu) {
+      window.addEventListener('contextmenu', this.blockEventHandler, true);
+      if (queryString(OPTION.CACHE)) setCache(CACHE.CONTEXT_MENU, TRUE);
     }
 
     // Resize event
@@ -943,7 +954,7 @@ class KioskMode implements KioskModeRunner {
     }
   }
 
-  protected blockToggleMenuGesture(event: Event) {
+  protected blockEventHandler(event: Event) {
     event.preventDefault();
     event.stopImmediatePropagation();
   }
@@ -979,6 +990,7 @@ class KioskMode implements KioskModeRunner {
     if (OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE in config)           this.hideDialogLogbookShowMore           = config[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE];
     if (OPTION.BLOCK_OVERFLOW in config)                          this.blockOverflow                       = config[OPTION.BLOCK_OVERFLOW];
     if (OPTION.BLOCK_MOUSE in config)                             this.blockMouse                          = config[OPTION.BLOCK_MOUSE];
+    if (OPTION.BLOCK_CONTEXT_MENU in config)                      this.blockContextMenu                    = config[OPTION.BLOCK_CONTEXT_MENU];
     if (OPTION.KIOSK in config)                                   this.hideHeader                          = this.hideSidebar = config[OPTION.KIOSK];
 
     if (conditional) {

@@ -48,3 +48,5 @@ kiosk_block_overflow:
   name: Kiosk block overflow
 kiosk_block_mouse:
   name: Kiosk block mouse
+kiosk_block_context_menu:
+  name: Kiosk block context menu
