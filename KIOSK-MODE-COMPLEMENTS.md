@@ -24,6 +24,21 @@ your-custom-theme:
     }
 ```
 
+#### Align header tabs to the center
+
+This method aligns the Home Assistant header tabs to the center. You need to use the [Card Mode Themes] from [card-mod].
+
+```yaml
+your-custom-theme:
+  card-mod-theme: your-custom-theme
+  card-mod-root-yaml: |
+    ha-tabs$: |
+      #tabsContainer {
+        display: flex;
+        justify-content: center;
+      }
+```
+
 ### Cards
 
 `kiosk-mode` do not modify cards. Mainly because the layout of a lovelace dashboard could have infinite possibilities and it depends on how the user has built it, it is not a fixed layout as the UI of Home Assistant. On top of that, cards change constantly and there are tons of custom-made cards, it will be impossible to maintain and escalate a code that tries to modify whatever card users have in their dashboards. This section contains multiple modifications that you can achieve on cards.
