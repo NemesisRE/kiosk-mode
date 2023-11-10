@@ -30,11 +30,11 @@ jobs:
               "categories": [
                 {
                   "title": "## 🚀 Features",
-                  "labels": ["feature", "feature-request", "enhancement", "request"]
+                  "labels": ["🌟 feature", "✨ feature-request", "enhancement", "request"]
                 },
                 {
                   "title": "## 🛠 Fixes",
-                  "labels": ["fix", "bug"]
+                  "labels": ["fix", "🐛 bug"]
                 },
                 {
                   "title": "## 🧩 Dependencies",
@@ -46,7 +46,7 @@ jobs:
                 },
                 {
                   "title": "## 📝 Documentation",
-                  "labels": ["documentation"]
+                  "labels": ["📝 documentation"]
                 },
                 {
                   "title": "## 📦 Other",
