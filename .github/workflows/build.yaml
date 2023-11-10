@@ -9,21 +9,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: node:16
+      image: node:18
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set-up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
       - name: Install deps
         run: yarn install --frozen-lockfile
       - name: Build Changelog
         id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v3
+        uses: mikepenz/release-changelog-builder-action@v4
         with:
           configurationJson: |
             {
