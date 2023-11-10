@@ -13,15 +13,21 @@ This method moves the main Home Assistant header from the top to the bottom of t
 ```yaml
 your-custom-theme:
   card-mod-theme: your-custom-theme
-  card-mod-root: |
-    .header {
-      bottom: 0;
-      top: auto !important;
-    }
-    #view {
-      padding-bottom: calc(var(--header-height) + env(safe-area-inset-top)) !important;
-      padding-top: 0 !important;
-    }
+  card-mod-root-yaml: |
+    .: | 
+      .header {
+        bottom: 0;
+        top: auto !important;
+      }
+      #view {
+        padding-bottom: calc(var(--header-height) + env(safe-area-inset-top)) !important;
+        padding-top: 0 !important;
+      }
+    ha-tabs$: |
+      #selectionBar {
+        bottom: auto;
+        top: 0;
+      }
 ```
 
 #### Align header tabs to the center
