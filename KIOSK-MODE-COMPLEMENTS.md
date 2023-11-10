@@ -8,7 +8,7 @@ Some features are outside `kiosk-mode` scope and they would be hard to maintain 
 
 #### Move the header to the bottom
 
-This method moves the main Home Assistant header from the top to the bottom of the page. You need to use the [Card Mode Themes] from [card-mod].
+This method moves the main Home Assistant header from the top to the bottom of the page. You need to use the [Card Mod Themes] from [card-mod].
 
 ```yaml
 your-custom-theme:
@@ -43,6 +43,23 @@ your-custom-theme:
         display: flex;
         justify-content: center;
       }
+```
+
+### More-info dialogs
+
+This section contains multiple modifications that could be done in elements that are inside more-info dialogs.
+
+#### Hide the header
+
+With `kiosk-mode` it is possible to hide multiple elements from the more-info dialogs header, but the header itself, containing the title and the button to close the dialog remains there. This method hides the more-info dialogs header altogeteher. You need to use the [Card Mod Themes] from [card-mod].
+
+```yaml
+your-custom-theme:
+  card-mod-theme: your-custom-theme
+  card-mod-more-info: |
+    ha-dialog-header {
+      display: none;
+    }
 ```
 
 ### Cards
