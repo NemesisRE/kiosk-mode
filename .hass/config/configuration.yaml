@@ -1,6 +1,13 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+homeassistant:
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 0.0.0.0/0
+      allow_bypass_login: true
+
 # Text to speech
 tts:
   - platform: google_translate

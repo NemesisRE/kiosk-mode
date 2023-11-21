@@ -1,0 +1,560 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "core.restore_state",
+  "data": [
+    {
+      "state": {
+        "entity_id": "person.test",
+        "state": "unknown",
+        "attributes": {
+          "editable": true,
+          "id": "test",
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250",
+          "device_trackers": [],
+          "friendly_name": "Test"
+        },
+        "last_changed": "2023-11-21T21:44:29.063252+00:00",
+        "last_updated": "2023-11-21T21:44:30.201568+00:00",
+        "context": {
+          "id": "01HFSXF1QSE4V0TPBVTSFTD8QX",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk mode"
+        },
+        "last_changed": "2023-11-21T21:44:29.857226+00:00",
+        "last_updated": "2023-11-21T21:44:29.857226+00:00",
+        "context": {
+          "id": "01HFSXF1D1DY694JTWCMPQXM8N",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_header",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide header"
+        },
+        "last_changed": "2023-11-21T21:44:29.857274+00:00",
+        "last_updated": "2023-11-21T21:44:29.857274+00:00",
+        "context": {
+          "id": "01HFSXF1D19PTCR8TSCGBK4PP6",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_sidebar",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide sidebar"
+        },
+        "last_changed": "2023-11-21T21:44:29.857304+00:00",
+        "last_updated": "2023-11-21T21:44:29.857304+00:00",
+        "context": {
+          "id": "01HFSXF1D1FV54EX05JEE5YE79",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_menubutton",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide menu button"
+        },
+        "last_changed": "2023-11-21T21:44:29.857329+00:00",
+        "last_updated": "2023-11-21T21:44:29.857329+00:00",
+        "context": {
+          "id": "01HFSXF1D120GXGE71FM3YDD1K",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_overflow",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide overflow"
+        },
+        "last_changed": "2023-11-21T21:44:29.857450+00:00",
+        "last_updated": "2023-11-21T21:44:29.857450+00:00",
+        "context": {
+          "id": "01HFSXF1D1W3TMGG58M90B4AMC",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_account",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide account"
+        },
+        "last_changed": "2023-11-21T21:44:29.857509+00:00",
+        "last_updated": "2023-11-21T21:44:29.857509+00:00",
+        "context": {
+          "id": "01HFSXF1D1QHP8S9T9ZTCFPMP2",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_notifications",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide notifications"
+        },
+        "last_changed": "2023-11-21T21:44:29.857557+00:00",
+        "last_updated": "2023-11-21T21:44:29.857557+00:00",
+        "context": {
+          "id": "01HFSXF1D1A2ABHFC29RA9BW54",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_search",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide search"
+        },
+        "last_changed": "2023-11-21T21:44:29.857584+00:00",
+        "last_updated": "2023-11-21T21:44:29.857584+00:00",
+        "context": {
+          "id": "01HFSXF1D1ADEVRP3T42SYDV7N",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_assistant",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide assistant"
+        },
+        "last_changed": "2023-11-21T21:44:29.857609+00:00",
+        "last_updated": "2023-11-21T21:44:29.857609+00:00",
+        "context": {
+          "id": "01HFSXF1D167936W31T18Q472D",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_refresh",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide refresh"
+        },
+        "last_changed": "2023-11-21T21:44:29.857628+00:00",
+        "last_updated": "2023-11-21T21:44:29.857628+00:00",
+        "context": {
+          "id": "01HFSXF1D1Z8AKHB79K34M3MXC",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_unused_entities",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide unused entities"
+        },
+        "last_changed": "2023-11-21T21:44:29.857668+00:00",
+        "last_updated": "2023-11-21T21:44:29.857668+00:00",
+        "context": {
+          "id": "01HFSXF1D1HWKSK23Q2470F3YC",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_reload_resources",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide reload resources"
+        },
+        "last_changed": "2023-11-21T21:44:29.857686+00:00",
+        "last_updated": "2023-11-21T21:44:29.857686+00:00",
+        "context": {
+          "id": "01HFSXF1D1HRWKBASS16MZN8KS",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_edit_dashboard",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide edit dashboard"
+        },
+        "last_changed": "2023-11-21T21:44:29.857701+00:00",
+        "last_updated": "2023-11-21T21:44:29.857701+00:00",
+        "context": {
+          "id": "01HFSXF1D18GXZV83WNKMBNC3Q",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_history",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog header history"
+        },
+        "last_changed": "2023-11-21T21:44:29.857717+00:00",
+        "last_updated": "2023-11-21T21:44:29.857717+00:00",
+        "context": {
+          "id": "01HFSXF1D116YX8R5PEPWDHNZA",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_settings",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog header settings"
+        },
+        "last_changed": "2023-11-21T21:44:29.857734+00:00",
+        "last_updated": "2023-11-21T21:44:29.857734+00:00",
+        "context": {
+          "id": "01HFSXF1D1J2TDGMN7KKNWP8DV",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_overflow",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog header overflow"
+        },
+        "last_changed": "2023-11-21T21:44:29.857886+00:00",
+        "last_updated": "2023-11-21T21:44:29.857886+00:00",
+        "context": {
+          "id": "01HFSXF1D1SRTPT5K1XM0G491X",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_history",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog history"
+        },
+        "last_changed": "2023-11-21T21:44:29.858002+00:00",
+        "last_updated": "2023-11-21T21:44:29.858002+00:00",
+        "context": {
+          "id": "01HFSXF1D2S95P1MVHDGHSQEB2",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_logbook",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog logbook"
+        },
+        "last_changed": "2023-11-21T21:44:29.858046+00:00",
+        "last_updated": "2023-11-21T21:44:29.858046+00:00",
+        "context": {
+          "id": "01HFSXF1D2YQCPA3WZ69Y9JSPD",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_attributes",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog attributes"
+        },
+        "last_changed": "2023-11-21T21:44:29.858069+00:00",
+        "last_updated": "2023-11-21T21:44:29.858069+00:00",
+        "context": {
+          "id": "01HFSXF1D28MVV48CQ31JB2WKC",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_update_actions",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog update actions"
+        },
+        "last_changed": "2023-11-21T21:44:29.858098+00:00",
+        "last_updated": "2023-11-21T21:44:29.858098+00:00",
+        "context": {
+          "id": "01HFSXF1D2MMADKGWE4A5BMH51",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_timer_actions",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog timer actions"
+        },
+        "last_changed": "2023-11-21T21:44:29.858130+00:00",
+        "last_updated": "2023-11-21T21:44:29.858130+00:00",
+        "context": {
+          "id": "01HFSXF1D24KWTHR2B6V32NCXG",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_history_show_more",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog history show more link"
+        },
+        "last_changed": "2023-11-21T21:44:29.858151+00:00",
+        "last_updated": "2023-11-21T21:44:29.858151+00:00",
+        "context": {
+          "id": "01HFSXF1D27XACQ25ZHDP6F7RG",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_logbook_show_more",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide dialog logbook show more link"
+        },
+        "last_changed": "2023-11-21T21:44:29.858171+00:00",
+        "last_updated": "2023-11-21T21:44:29.858171+00:00",
+        "context": {
+          "id": "01HFSXF1D2KQY9BDABX5QBRJY4",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_block_overflow",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk block overflow"
+        },
+        "last_changed": "2023-11-21T21:44:29.858190+00:00",
+        "last_updated": "2023-11-21T21:44:29.858190+00:00",
+        "context": {
+          "id": "01HFSXF1D2HGGMYY9AKP0JMRFW",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_block_mouse",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk block mouse"
+        },
+        "last_changed": "2023-11-21T21:44:29.858206+00:00",
+        "last_updated": "2023-11-21T21:44:29.858206+00:00",
+        "context": {
+          "id": "01HFSXF1D2GC9JK41DQP1ZERZY",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_block_context_menu",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk block context menu"
+        },
+        "last_changed": "2023-11-21T21:44:29.858225+00:00",
+        "last_updated": "2023-11-21T21:44:29.858225+00:00",
+        "context": {
+          "id": "01HFSXF1D2D5F66YQ0NH3ACJ8T",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "timer.laundry",
+        "state": "idle",
+        "attributes": {
+          "duration": "0:01:00",
+          "editable": false
+        },
+        "last_changed": "2023-11-21T21:44:29.860765+00:00",
+        "last_updated": "2023-11-21T21:44:29.860765+00:00",
+        "context": {
+          "id": "01HFSXF1D411Q7CJA3GCWQYEVG",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "tts.google_en_com",
+        "state": "unknown",
+        "attributes": {
+          "friendly_name": "Google en com"
+        },
+        "last_changed": "2023-11-21T21:44:30.146201+00:00",
+        "last_updated": "2023-11-21T21:44:30.146201+00:00",
+        "context": {
+          "id": "01HFSXF1P20X2F1Q1EFCC0KVR3",
+          "parent_id": null,
+          "user_id": null
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+    }
+  ]
+}
