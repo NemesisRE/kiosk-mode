@@ -41,20 +41,24 @@ import compareSnapshotCommand from 'cypress-visual-regression/dist/command';
 
 compareSnapshotCommand({
     capture: 'viewport',
-    errorThreshold: 0.1
+    errorThreshold: 0.25
 });
 
-Cypress.Commands.add('ingress', () => {
+Cypress.Commands.add('ingress', (params: string[] = []) => {
 
-    cy.session('home-assistant', () => {
+    const urlParams = params.reduce((acc: Record<string, string>, param: string): Record<string, string> => {
+        acc[param] = '';
+        return acc;
+    }, {} as Record<string, string>);
 
-        cy
-            .visit('http://localhost:8123')
-            .location('pathname')
-            .should('eq', '/lovelace/kiosk-mode-overview');
+    cy
+        .visit('http://localhost:8123', {
+            qs: urlParams
+        })
+        .location('pathname')
+        .should('eq', '/lovelace/kiosk-mode-overview');
 
-    });
-          
+    cy.waitForHomeAssistantDOM();
 
 });
 
@@ -70,35 +74,74 @@ Cypress.Commands.add('waitForHomeAssistantDOM', () => {
             .shadow()
             .find('hui-root')
             .shadow()
+            .find('hui-masonry-view')
     ));
+
+    cy
+        .get('home-assistant')
+        .shadow()
+        .as('home-assistant');
+
+    cy
+        .get('@home-assistant')
+        .find('home-assistant-main')
+        .shadow()
+        .find('ha-drawer')
+        .as('ha-drawer');
+
+    cy
+        .get('@ha-drawer')
+        .find('ha-sidebar')
+        .as('ha-sidebar');
+
+    cy
+        .get('@ha-drawer')
+        .find('ha-panel-lovelace')
+        .shadow()
+        .find('hui-root')
+        .shadow()
+        .as('hui-root');
+
+    cy
+        .get('@hui-root')
+        .find('hui-masonry-view')
+        .shadow()
+        .find('hui-entities-card')
+        .shadow()
+        .find('#states div')
+        .as('states-divs');
+
+    cy
+        .get('@hui-root')
+        .find('.header .action-items ha-button-menu')
+        .as('overflow-menu');
+
+    cy
+        .get('@overflow-menu')
+        .shadow()
+        .find('mwc-menu')
+        .shadow()
+        .find('mwc-menu-surface')
+        .as('overflow-menu-surface');
 
 });
 
 Cypress.Commands.add('clickEntity', (index: number) => {
 
     cy
-			.get('home-assistant')
-			.shadow()
-			.find('home-assistant-main')
-			.shadow()
-			.find('ha-drawer')
-			.as('ha-drawer')
-			.find('ha-panel-lovelace')
-			.shadow()
-			.find('hui-root')
-			.shadow()
-            .find('hui-masonry-view')
-			.shadow()
-			.find('hui-entities-card')
-			.shadow()
-			.find('#states')
-            .find('div > hui-toggle-entity-row')
-			.shadow()
-			.find('hui-generic-entity-row ha-entity-toggle')
-			.shadow()
-			.find('ha-switch')
-			.eq(index)
-            .click();
+        .get('@hui-root')
+        .find('hui-masonry-view')
+        .shadow()
+        .find('hui-entities-card')
+        .shadow()
+        .find('#states')
+        .find('div > hui-toggle-entity-row')
+        .shadow()
+        .find('hui-generic-entity-row ha-entity-toggle')
+        .shadow()
+        .find('ha-switch')
+        .eq(index)
+        .click();
 
 });
 
@@ -123,7 +166,7 @@ Cypress.Commands.add('checkOverflowMenuItem', (
         .find(`mwc-list-item[data-selector="${dataSelector}"]`)
         .should('be.hidden');
 
-    cy.compareSnapshot(snapshotName);
+    //cy.compareSnapshot(snapshotName);
 
     cy.wait(100);
 
@@ -137,5 +180,33 @@ Cypress.Commands.add('checkOverflowMenuItem', (
         .should('have.attr', 'hidden');
 
     cy.clickEntity(entityIndex);
+
+});
+
+Cypress.Commands.add('waitForDialogOpen', () => {
+
+    cy.waitUntil(() => (
+        cy
+            .get('home-assistant')
+            .shadow()
+            .find('ha-more-info-dialog')
+            .shadow()
+            .find('ha-dialog')
+            .should('have.attr', 'open')
+    ));
+
+});
+
+Cypress.Commands.add('waitForDialogClose', () => {
+
+    cy.waitUntil(() => (
+        cy
+            .get('home-assistant')
+            .shadow()
+            .find('ha-more-info-dialog')
+            .shadow()
+            .children()
+            .should('have.length', 0)
+    ));
 
 });

@@ -116,8 +116,8 @@ views:
           - entity: timer.laundry
           - entity: input_boolean.kiosk_hide_dialog_header_history
           - entity: input_boolean.kiosk_hide_dialog_header_settings
-          - entity: input_boolean.kiosk_hide_dialog_header_action_items
           - entity: input_boolean.kiosk_hide_dialog_header_overflow
+          - entity: input_boolean.kiosk_hide_dialog_header_action_items
           - entity: input_boolean.kiosk_hide_dialog_history
           - entity: input_boolean.kiosk_hide_dialog_logbook
           - entity: input_boolean.kiosk_hide_dialog_attributes

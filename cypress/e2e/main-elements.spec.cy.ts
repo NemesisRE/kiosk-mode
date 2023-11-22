@@ -1,46 +1,7 @@
-describe('kiosk-mode tests', () => {
+describe('Kiosk-mode: Main Elements', () => {
 
 	beforeEach(() => {
-
 		cy.ingress();
-		cy.waitForHomeAssistantDOM();
-
-		cy
-			.get('home-assistant')
-			.shadow()
-			.find('home-assistant-main')
-			.shadow()
-			.find('ha-drawer')
-			.as('ha-drawer');
-
-		cy
-			.get('@ha-drawer')
-			.find('ha-sidebar')
-			.as('ha-sidebar');
-
-		cy
-			.get('@ha-drawer')
-			.find('ha-panel-lovelace')
-			.shadow()
-			.find('hui-root')
-			.shadow()
-			.as('hui-root');
-
-		cy
-			.get('@hui-root')
-			.find('.header .action-items ha-button-menu')
-			.as('overflow-menu');
-
-		cy
-			.get('@overflow-menu')
-			.shadow()
-			.find('mwc-menu')
-			.shadow()
-			.find('mwc-menu-surface')
-			.as('overflow-menu-surface');
-
-		cy.wait(100);
-
 	});
 
 	it('Option: kiosk', () => {

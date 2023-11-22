@@ -4,3 +4,5 @@
 .hass/config/www/kiosk-mode.js
 /.nyc_output
 /coverage
+/cypress/screenshots
+/cypress/snapshots/diff

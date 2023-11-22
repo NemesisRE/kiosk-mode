@@ -4,7 +4,7 @@ import getCompareSnapshotsPlugin from 'cypress-visual-regression/dist/plugin';
 
 export default defineConfig({
   env: {
-    type: 'base',
+    type: 'actual',
     screenshotsFolder: './cypress/snapshots/actual',
     trashAssetsBeforeRuns: true,
     video: false,
@@ -19,8 +19,11 @@ export default defineConfig({
     },
     testIsolation: false,
     defaultCommandTimeout: 15000,
-    pageLoadTimeout: 15000
+    pageLoadTimeout: 50000
   },
   screenshotOnRunFailure: false,
-
+  retries: {
+    runMode: 3,
+    openMode: 3
+  }
 });

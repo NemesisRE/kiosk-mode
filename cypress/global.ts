@@ -1,7 +1,7 @@
 declare global {
   namespace Cypress {
     interface Chainable {
-      ingress(): Chainable<void>;
+      ingress(params?: string[]): Chainable<void>;
       waitForHomeAssistantDOM(): Chainable<void>;
       clickEntity(index: number): Chainable<void>;
       checkOverflowMenuItem(
@@ -9,6 +9,8 @@ declare global {
         dataSelector: string,
         snapshotName: string
       ): Chainable<void>;
+      waitForDialogOpen(): Chainable<void>;
+      waitForDialogClose(): Chainable<void>;
     }
   }
 }
