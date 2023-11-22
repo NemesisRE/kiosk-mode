@@ -13,6 +13,7 @@
     "test:open": "cypress open",
     "test:ci": "yarn demo && yarn test:run && yarn coverage:report && yarn stop:ha",
     "test:all": "yarn test:ts && yarn test:ci",
+    "test:clean": "cypress cache clear && yarn add cypress -D",
     "coverage:report": "nyc report --reporter=lcov --reporter=text-summary",
     "prepare": "yarn build",
     "prepublishOnly": "yarn test:all",
