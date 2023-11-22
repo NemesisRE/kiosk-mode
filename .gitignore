@@ -2,5 +2,5 @@
 /dist
 .DS_Store
 .hass/config/www/kiosk-mode.js
-/coverage
 /.nyc_output
+/coverage

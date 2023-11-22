@@ -1,4 +1,5 @@
 import { defineConfig } from 'cypress';
+import codeCoverageTask from '@cypress/code-coverage/task';
 import getCompareSnapshotsPlugin from 'cypress-visual-regression/dist/plugin';
 
 export default defineConfig({
@@ -12,6 +13,7 @@ export default defineConfig({
   },
   e2e: {
     setupNodeEvents(on, config) {
+      codeCoverageTask(on, config);
       getCompareSnapshotsPlugin(on, config);
       return config;
     },
