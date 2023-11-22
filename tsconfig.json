@@ -4,6 +4,11 @@
       "module": "esnext",
       "target": "ES5",
       "moduleResolution": "node",
+      "types": [
+        "node",
+        "cypress",
+        "cypress-visual-regression"
+      ],
       "esModuleInterop": true,
       "resolveJsonModule": true,
       "declaration": false,
@@ -17,6 +22,6 @@
         "@styles": ["styles"]   
       }
     },
-    "include": ["src/**/*.ts", "package.json"],
+    "include": ["src/**/*.ts", "cypress/**/*.ts", "package.json"],
     "exclude": ["node_modules"]
   }

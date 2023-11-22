@@ -1177,6 +1177,36 @@
         "unique_id": "780cc0ac75c927dd75bd8de858b61f74",
         "previous_unique_id": null,
         "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_action_items",
+        "hidden_by": null,
+        "icon": null,
+        "id": "1d8676e25e8ba977a68376d76992264e",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide header action items",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_header_action_items",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
       }
     ],
     "deleted_entities": []

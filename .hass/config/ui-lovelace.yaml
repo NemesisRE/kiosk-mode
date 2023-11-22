@@ -4,26 +4,32 @@ kiosk_mode:
         input_boolean.kiosk: 'on'
       kiosk: true
     - entity:
-        input_boolean.kiosk_hide_account: 'on'
-      hide_account: true
-    - entity:
-        input_boolean.kiosk_hide_notifications: 'on'
-      hide_notifications: true
-    - entity:
         input_boolean.kiosk_hide_header: 'on'
       hide_header: true
+    - entity:
+        input_boolean.kiosk_hide_sidebar: 'on'
+      hide_sidebar: true
     - entity:
         input_boolean.kiosk_hide_menubutton: 'on'
       hide_menubutton: true
     - entity:
-        input_boolean.kiosk_hide_sidebar: 'on'
-      hide_sidebar: true
+        input_boolean.kiosk_hide_overflow: 'on'
+      hide_overflow: true
+    - entity:
+        input_boolean.kiosk_hide_notifications: 'on'
+      hide_notifications: true
+    - entity:
+        input_boolean.kiosk_hide_account: 'on'
+      hide_account: true
     - entity:
         input_boolean.kiosk_hide_search: 'on'
       hide_search: true
     - entity:
         input_boolean.kiosk_hide_assistant: 'on'
       hide_assistant: true
+    - entity:
+        input_boolean.kiosk_hide_edit_dashboard: 'on'
+      hide_edit_dashboard: true
     - entity:
         input_boolean.kiosk_hide_refresh: 'on'
       hide_refresh: true
@@ -34,17 +40,14 @@ kiosk_mode:
         input_boolean.kiosk_hide_reload_resources: 'on'
       hide_reload_resources: true
     - entity:
-        input_boolean.kiosk_hide_edit_dashboard: 'on'
-      hide_edit_dashboard: true
-    - entity:
-        input_boolean.kiosk_hide_overflow: 'on'
-      hide_overflow: true
-    - entity:
         input_boolean.kiosk_hide_dialog_header_history: 'on'
       hide_dialog_header_history: true
     - entity:
         input_boolean.kiosk_hide_dialog_header_settings: 'on'
       hide_dialog_header_settings: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_header_action_items: 'on'
+      hide_dialog_header_action_items: true
     - entity:
         input_boolean.kiosk_hide_dialog_header_overflow: 'on'
       hide_dialog_header_overflow: true
@@ -91,11 +94,11 @@ views:
           - type: section
             label: General options
           - entity: input_boolean.kiosk
-          - entity: input_boolean.kiosk_hide_account
-          - entity: input_boolean.kiosk_hide_notifications
           - entity: input_boolean.kiosk_hide_header
-          - entity: input_boolean.kiosk_hide_menubutton
           - entity: input_boolean.kiosk_hide_sidebar
+          - entity: input_boolean.kiosk_hide_menubutton
+          - entity: input_boolean.kiosk_hide_notifications
+          - entity: input_boolean.kiosk_hide_account
           - entity: input_boolean.kiosk_hide_search
           - entity: input_boolean.kiosk_hide_assistant
           - entity: input_boolean.kiosk_hide_overflow
@@ -113,6 +116,7 @@ views:
           - entity: timer.laundry
           - entity: input_boolean.kiosk_hide_dialog_header_history
           - entity: input_boolean.kiosk_hide_dialog_header_settings
+          - entity: input_boolean.kiosk_hide_dialog_header_action_items
           - entity: input_boolean.kiosk_hide_dialog_header_overflow
           - entity: input_boolean.kiosk_hide_dialog_history
           - entity: input_boolean.kiosk_hide_dialog_logbook
