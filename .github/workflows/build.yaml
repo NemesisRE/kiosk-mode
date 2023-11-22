@@ -7,9 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container:
-      image: node:18
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,8 +17,16 @@ jobs:
           node-version: '18'
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache
+          key: dependencies-v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install deps
         run: yarn install --frozen-lockfile
+      - name: E2E tests
+        run: yarn test:all
       - name: Build Changelog
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v4
