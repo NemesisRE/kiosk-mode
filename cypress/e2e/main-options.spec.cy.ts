@@ -1,4 +1,4 @@
-describe('Kiosk-mode: Main Elements', () => {
+describe('Kiosk-mode: Main Options', () => {
 
 	beforeEach(() => {
 		cy.ingress();
