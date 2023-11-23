@@ -14,16 +14,16 @@
           "device_trackers": [],
           "friendly_name": "Test"
         },
-        "last_changed": "2023-11-21T21:44:29.063252+00:00",
-        "last_updated": "2023-11-21T21:44:30.201568+00:00",
+        "last_changed": "2023-11-23T00:33:19.243403+00:00",
+        "last_updated": "2023-11-23T00:33:20.390414+00:00",
         "context": {
-          "id": "01HFSXF1QSE4V0TPBVTSFTD8QX",
+          "id": "01HFWSGXG6RJXEAW856ZVDEFRF",
           "parent_id": null,
           "user_id": null
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -33,16 +33,16 @@
           "editable": false,
           "friendly_name": "Kiosk mode"
         },
-        "last_changed": "2023-11-21T21:44:29.857226+00:00",
-        "last_updated": "2023-11-21T21:44:29.857226+00:00",
+        "last_changed": "2023-11-23T00:33:24.440255+00:00",
+        "last_updated": "2023-11-23T00:33:24.440255+00:00",
         "context": {
-          "id": "01HFSXF1D1DY694JTWCMPQXM8N",
+          "id": "01HFWSH1ERH6KCE5D3B0VG1M2W",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -52,16 +52,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide header"
         },
-        "last_changed": "2023-11-21T21:44:29.857274+00:00",
-        "last_updated": "2023-11-21T21:44:29.857274+00:00",
+        "last_changed": "2023-11-23T00:33:25.816159+00:00",
+        "last_updated": "2023-11-23T00:33:25.816159+00:00",
         "context": {
-          "id": "01HFSXF1D19PTCR8TSCGBK4PP6",
+          "id": "01HFWSH2SQQ5QW3PB53KVXSEK3",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -71,16 +71,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide sidebar"
         },
-        "last_changed": "2023-11-21T21:44:29.857304+00:00",
-        "last_updated": "2023-11-21T21:44:29.857304+00:00",
+        "last_changed": "2023-11-23T00:33:27.106207+00:00",
+        "last_updated": "2023-11-23T00:33:27.106207+00:00",
         "context": {
-          "id": "01HFSXF1D1FV54EX05JEE5YE79",
+          "id": "01HFWSH422XWJBZSXQWYX0TED2",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -90,16 +90,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide menu button"
         },
-        "last_changed": "2023-11-21T21:44:29.857329+00:00",
-        "last_updated": "2023-11-21T21:44:29.857329+00:00",
+        "last_changed": "2023-11-23T00:33:28.398125+00:00",
+        "last_updated": "2023-11-23T00:33:28.398125+00:00",
         "context": {
-          "id": "01HFSXF1D120GXGE71FM3YDD1K",
+          "id": "01HFWSH5AD00TVBT5K8RB4269V",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -109,16 +109,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide overflow"
         },
-        "last_changed": "2023-11-21T21:44:29.857450+00:00",
-        "last_updated": "2023-11-21T21:44:29.857450+00:00",
+        "last_changed": "2023-11-23T00:33:34.949907+00:00",
+        "last_updated": "2023-11-23T00:33:34.949907+00:00",
         "context": {
-          "id": "01HFSXF1D1W3TMGG58M90B4AMC",
+          "id": "01HFWSHBQ5TX6NY913GFHV0ED4",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -128,16 +128,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide account"
         },
-        "last_changed": "2023-11-21T21:44:29.857509+00:00",
-        "last_updated": "2023-11-21T21:44:29.857509+00:00",
+        "last_changed": "2023-11-23T00:33:30.988117+00:00",
+        "last_updated": "2023-11-23T00:33:30.988117+00:00",
         "context": {
-          "id": "01HFSXF1D1QHP8S9T9ZTCFPMP2",
+          "id": "01HFWSH7VBY1HVKT1PW9H0GCAA",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -147,16 +147,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide notifications"
         },
-        "last_changed": "2023-11-21T21:44:29.857557+00:00",
-        "last_updated": "2023-11-21T21:44:29.857557+00:00",
+        "last_changed": "2023-11-23T00:33:29.707654+00:00",
+        "last_updated": "2023-11-23T00:33:29.707654+00:00",
         "context": {
-          "id": "01HFSXF1D1A2ABHFC29RA9BW54",
+          "id": "01HFWSH6KBWNV245TYTTBQ0C6R",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -166,16 +166,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide search"
         },
-        "last_changed": "2023-11-21T21:44:29.857584+00:00",
-        "last_updated": "2023-11-21T21:44:29.857584+00:00",
+        "last_changed": "2023-11-23T00:33:32.521594+00:00",
+        "last_updated": "2023-11-23T00:33:32.521594+00:00",
         "context": {
-          "id": "01HFSXF1D1ADEVRP3T42SYDV7N",
+          "id": "01HFWSH9B9JNEQBV0F7AQJH3HE",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -185,16 +185,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide assistant"
         },
-        "last_changed": "2023-11-21T21:44:29.857609+00:00",
-        "last_updated": "2023-11-21T21:44:29.857609+00:00",
+        "last_changed": "2023-11-23T00:33:33.739137+00:00",
+        "last_updated": "2023-11-23T00:33:33.739137+00:00",
         "context": {
-          "id": "01HFSXF1D167936W31T18Q472D",
+          "id": "01HFWSHAHA6TBPVPFXTMR88HFS",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -204,16 +204,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide refresh"
         },
-        "last_changed": "2023-11-21T21:44:29.857628+00:00",
-        "last_updated": "2023-11-21T21:44:29.857628+00:00",
+        "last_changed": "2023-11-23T00:33:35.715989+00:00",
+        "last_updated": "2023-11-23T00:33:35.715989+00:00",
         "context": {
-          "id": "01HFSXF1D1Z8AKHB79K34M3MXC",
+          "id": "01HFWSHCF36HKQ6VATJ9G6JD9Y",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -223,16 +223,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide unused entities"
         },
-        "last_changed": "2023-11-21T21:44:29.857668+00:00",
-        "last_updated": "2023-11-21T21:44:29.857668+00:00",
+        "last_changed": "2023-11-23T00:33:36.498076+00:00",
+        "last_updated": "2023-11-23T00:33:36.498076+00:00",
         "context": {
-          "id": "01HFSXF1D1HWKSK23Q2470F3YC",
+          "id": "01HFWSHD7HK33YZF6VXF512F8Z",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -242,16 +242,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide reload resources"
         },
-        "last_changed": "2023-11-21T21:44:29.857686+00:00",
-        "last_updated": "2023-11-21T21:44:29.857686+00:00",
+        "last_changed": "2023-11-23T00:33:37.281083+00:00",
+        "last_updated": "2023-11-23T00:33:37.281083+00:00",
         "context": {
-          "id": "01HFSXF1D1HRWKBASS16MZN8KS",
+          "id": "01HFWSHE00ACH6Q03KPH7XDP68",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -261,16 +261,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide edit dashboard"
         },
-        "last_changed": "2023-11-21T21:44:29.857701+00:00",
-        "last_updated": "2023-11-21T21:44:29.857701+00:00",
+        "last_changed": "2023-11-23T00:33:38.062316+00:00",
+        "last_updated": "2023-11-23T00:33:38.062316+00:00",
         "context": {
-          "id": "01HFSXF1D18GXZV83WNKMBNC3Q",
+          "id": "01HFWSHERDD3CRFPCTK4Z5TCSA",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -280,16 +280,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog header history"
         },
-        "last_changed": "2023-11-21T21:44:29.857717+00:00",
-        "last_updated": "2023-11-21T21:44:29.857717+00:00",
+        "last_changed": "2023-11-23T00:33:44.524140+00:00",
+        "last_updated": "2023-11-23T00:33:44.524140+00:00",
         "context": {
-          "id": "01HFSXF1D116YX8R5PEPWDHNZA",
+          "id": "01HFWSHN2BE567CNME6C82XAKZ",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -299,16 +299,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog header settings"
         },
-        "last_changed": "2023-11-21T21:44:29.857734+00:00",
-        "last_updated": "2023-11-21T21:44:29.857734+00:00",
+        "last_changed": "2023-11-23T00:33:46.229143+00:00",
+        "last_updated": "2023-11-23T00:33:46.229143+00:00",
         "context": {
-          "id": "01HFSXF1D1J2TDGMN7KKNWP8DV",
+          "id": "01HFWSHPQM47QZHR4B9ZNC23ZX",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -318,16 +318,35 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog header overflow"
         },
-        "last_changed": "2023-11-21T21:44:29.857886+00:00",
-        "last_updated": "2023-11-21T21:44:29.857886+00:00",
+        "last_changed": "2023-11-23T00:33:47.995431+00:00",
+        "last_updated": "2023-11-23T00:33:47.995431+00:00",
         "context": {
-          "id": "01HFSXF1D1SRTPT5K1XM0G491X",
+          "id": "01HFWSHREVV0TMCB9WV066RRKZ",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
+    },
+    {
+      "state": {
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_action_items",
+        "state": "off",
+        "attributes": {
+          "editable": false,
+          "friendly_name": "Kiosk hide header action items"
+        },
+        "last_changed": "2023-11-23T00:33:49.726067+00:00",
+        "last_updated": "2023-11-23T00:33:49.726067+00:00",
+        "context": {
+          "id": "01HFWSHT4X8F5J0JC3GYJ7Y4GV",
+          "parent_id": null,
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
+        }
+      },
+      "extra_data": null,
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -337,16 +356,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog history"
         },
-        "last_changed": "2023-11-21T21:44:29.858002+00:00",
-        "last_updated": "2023-11-21T21:44:29.858002+00:00",
+        "last_changed": "2023-11-23T00:33:53.288982+00:00",
+        "last_updated": "2023-11-23T00:33:53.288982+00:00",
         "context": {
-          "id": "01HFSXF1D2S95P1MVHDGHSQEB2",
+          "id": "01HFWSHXM84C9NEVYA2EBTZS8M",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -356,16 +375,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog logbook"
         },
-        "last_changed": "2023-11-21T21:44:29.858046+00:00",
-        "last_updated": "2023-11-21T21:44:29.858046+00:00",
+        "last_changed": "2023-11-23T00:33:19.963718+00:00",
+        "last_updated": "2023-11-23T00:33:19.963718+00:00",
         "context": {
-          "id": "01HFSXF1D2YQCPA3WZ69Y9JSPD",
+          "id": "01HFWSGX2VS95P1MVHDGHSQEB2",
           "parent_id": null,
           "user_id": null
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -375,16 +394,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog attributes"
         },
-        "last_changed": "2023-11-21T21:44:29.858069+00:00",
-        "last_updated": "2023-11-21T21:44:29.858069+00:00",
+        "last_changed": "2023-11-23T00:33:53.398017+00:00",
+        "last_updated": "2023-11-23T00:33:53.398017+00:00",
         "context": {
-          "id": "01HFSXF1D28MVV48CQ31JB2WKC",
+          "id": "01HFWSHXQNQER4T7FWTF554GJP",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -394,16 +413,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog update actions"
         },
-        "last_changed": "2023-11-21T21:44:29.858098+00:00",
-        "last_updated": "2023-11-21T21:44:29.858098+00:00",
+        "last_changed": "2023-11-23T00:33:19.963755+00:00",
+        "last_updated": "2023-11-23T00:33:19.963755+00:00",
         "context": {
-          "id": "01HFSXF1D2MMADKGWE4A5BMH51",
+          "id": "01HFWSGX2V8MVV48CQ31JB2WKC",
           "parent_id": null,
           "user_id": null
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -413,16 +432,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog timer actions"
         },
-        "last_changed": "2023-11-21T21:44:29.858130+00:00",
-        "last_updated": "2023-11-21T21:44:29.858130+00:00",
+        "last_changed": "2023-11-23T00:33:19.963772+00:00",
+        "last_updated": "2023-11-23T00:33:19.963772+00:00",
         "context": {
-          "id": "01HFSXF1D24KWTHR2B6V32NCXG",
+          "id": "01HFWSGX2VMMADKGWE4A5BMH51",
           "parent_id": null,
           "user_id": null
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -432,16 +451,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog history show more link"
         },
-        "last_changed": "2023-11-21T21:44:29.858151+00:00",
-        "last_updated": "2023-11-21T21:44:29.858151+00:00",
+        "last_changed": "2023-11-23T00:33:55.126208+00:00",
+        "last_updated": "2023-11-23T00:33:55.126208+00:00",
         "context": {
-          "id": "01HFSXF1D27XACQ25ZHDP6F7RG",
+          "id": "01HFWSHZDNS9MYQ8PYP11RTHX9",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -451,16 +470,16 @@
           "editable": false,
           "friendly_name": "Kiosk hide dialog logbook show more link"
         },
-        "last_changed": "2023-11-21T21:44:29.858171+00:00",
-        "last_updated": "2023-11-21T21:44:29.858171+00:00",
+        "last_changed": "2023-11-23T00:33:19.963805+00:00",
+        "last_updated": "2023-11-23T00:33:19.963805+00:00",
         "context": {
-          "id": "01HFSXF1D2KQY9BDABX5QBRJY4",
+          "id": "01HFWSGX2V7XACQ25ZHDP6F7RG",
           "parent_id": null,
           "user_id": null
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -470,16 +489,16 @@
           "editable": false,
           "friendly_name": "Kiosk block overflow"
         },
-        "last_changed": "2023-11-21T21:44:29.858190+00:00",
-        "last_updated": "2023-11-21T21:44:29.858190+00:00",
+        "last_changed": "2023-11-23T00:33:38.540138+00:00",
+        "last_updated": "2023-11-23T00:33:38.540138+00:00",
         "context": {
-          "id": "01HFSXF1D2HGGMYY9AKP0JMRFW",
+          "id": "01HFWSHF7AA28PW4QPJZGF2M41",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -489,16 +508,16 @@
           "editable": false,
           "friendly_name": "Kiosk block mouse"
         },
-        "last_changed": "2023-11-21T21:44:29.858206+00:00",
-        "last_updated": "2023-11-21T21:44:29.858206+00:00",
+        "last_changed": "2023-11-23T00:33:19.963853+00:00",
+        "last_updated": "2023-11-23T00:33:19.963853+00:00",
         "context": {
-          "id": "01HFSXF1D2GC9JK41DQP1ZERZY",
+          "id": "01HFWSGX2VHGGMYY9AKP0JMRFW",
           "parent_id": null,
           "user_id": null
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -508,16 +527,16 @@
           "editable": false,
           "friendly_name": "Kiosk block context menu"
         },
-        "last_changed": "2023-11-21T21:44:29.858225+00:00",
-        "last_updated": "2023-11-21T21:44:29.858225+00:00",
+        "last_changed": "2023-11-23T00:33:39.287460+00:00",
+        "last_updated": "2023-11-23T00:33:39.287460+00:00",
         "context": {
-          "id": "01HFSXF1D2D5F66YQ0NH3ACJ8T",
+          "id": "01HFWSHFYQ8NRTNPQEYYHTV92B",
           "parent_id": null,
-          "user_id": null
+          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -527,16 +546,16 @@
           "duration": "0:01:00",
           "editable": false
         },
-        "last_changed": "2023-11-21T21:44:29.860765+00:00",
-        "last_updated": "2023-11-21T21:44:29.860765+00:00",
+        "last_changed": "2023-11-23T00:33:19.965577+00:00",
+        "last_updated": "2023-11-23T00:33:19.965577+00:00",
         "context": {
-          "id": "01HFSXF1D411Q7CJA3GCWQYEVG",
+          "id": "01HFWSGX2XEY56ASGXA8PCE2S1",
           "parent_id": null,
           "user_id": null
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     },
     {
       "state": {
@@ -545,16 +564,16 @@
         "attributes": {
           "friendly_name": "Google en com"
         },
-        "last_changed": "2023-11-21T21:44:30.146201+00:00",
-        "last_updated": "2023-11-21T21:44:30.146201+00:00",
+        "last_changed": "2023-11-23T00:33:20.321086+00:00",
+        "last_updated": "2023-11-23T00:33:20.321086+00:00",
         "context": {
-          "id": "01HFSXF1P20X2F1Q1EFCC0KVR3",
+          "id": "01HFWSGXE15XMF3YSR0BYSNFA0",
           "parent_id": null,
           "user_id": null
         }
       },
       "extra_data": null,
-      "last_seen": "2023-11-21T21:44:36.607834+00:00"
+      "last_seen": "2023-11-23T00:34:02.809158+00:00"
     }
   ]
 }
