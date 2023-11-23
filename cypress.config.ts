@@ -18,13 +18,13 @@ export default defineConfig({
       return config;
     },
     baseUrl: 'http://localhost:8123',
-    testIsolation: false,
+    testIsolation: true,
     defaultCommandTimeout: 15000,
     pageLoadTimeout: 15000
   },
   screenshotOnRunFailure: true,
   retries: {
-    runMode: 3,
-    openMode: 3
+    runMode: 2,
+    openMode: 2
   }
 });

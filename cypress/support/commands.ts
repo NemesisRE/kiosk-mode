@@ -60,7 +60,7 @@ Cypress.Commands.add('haRequest', function (entity: string, state: boolean) {
         }
     });
 
-    cy.wait(100);
+    cy.wait(500);
 
 });
 
@@ -175,6 +175,8 @@ Cypress.Commands.add('waitForDialogOpen', function() {
             .should('have.attr', 'open')
     });
 
+    cy.wait(500);
+
 });
 
 Cypress.Commands.add('waitForDialogClose', function() {
@@ -188,5 +190,7 @@ Cypress.Commands.add('waitForDialogClose', function() {
             .children()
             .should('have.length', 0)
     });
+
+    cy.wait(500);
 
 });

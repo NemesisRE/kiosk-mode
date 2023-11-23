@@ -192,7 +192,7 @@ describe('Kiosk-mode: URL Parameters', function () {
 
 	it('URL Parameter: ?block_context_menu', function () {
 
-		cy.ingress(['block_context_menu']);
+		cy.ingress(['dummy_param', 'block_context_menu']);
 
 		cy
 			.window()

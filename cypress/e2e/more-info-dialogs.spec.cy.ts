@@ -16,10 +16,8 @@ describe('Kiosk-mode: More-info Dialogs', function () {
             .find('ha-more-info-dialog')
             .shadow()
             .find('ha-dialog ha-dialog-header')
-            .as('dialog-header');
+            .as('dialog-header')
 
-        cy
-            .get('@dialog-header')
             .find('ha-icon-button[data-selector="DIALOG_DISMISS"]')
             .as('close-dialog');
 
@@ -232,7 +230,6 @@ describe('Kiosk-mode: More-info Dialogs', function () {
 
     it('Option: hide_dialog_attributes', function () {
 
-        cy.haRequest('kiosk_hide_dialog_history', true);
         cy.haRequest('kiosk_hide_dialog_attributes', true);
 
         cy
@@ -251,7 +248,6 @@ describe('Kiosk-mode: More-info Dialogs', function () {
 
         cy.compareSnapshot('hide_dialog_attributes');
 
-        cy.haRequest('kiosk_hide_dialog_history', false);
         cy.haRequest('kiosk_hide_dialog_attributes', false);
 
 	});
