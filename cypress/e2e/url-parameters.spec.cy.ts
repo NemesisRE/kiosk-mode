@@ -1,6 +1,6 @@
-describe('Kiosk-mode: URL Parameters', () => {
+describe('Kiosk-mode: URL Parameters', function () {
 
-	it('URL Parameter: ?kiosk', () => {
+	it('URL Parameter: ?kiosk', function () {
 
 		cy.ingress(['kiosk']);
 
@@ -15,7 +15,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_header', () => {
+	it('URL Parameter: ?hide_header', function () {
 
 		cy.ingress(['hide_header']);
 
@@ -26,7 +26,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_sidebar', () => {
+	it('URL Parameter: ?hide_sidebar', function () {
 
 		cy.ingress(['hide_sidebar']);
 
@@ -36,7 +36,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_menubutton', () => {
+	it('URL Parameter: ?hide_menubutton', function () {
 
 		cy.ingress(['hide_menubutton']);
 
@@ -48,7 +48,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_notifications', () => {
+	it('URL Parameter: ?hide_notifications', function () {
 
 		cy.ingress(['hide_notifications']);
 
@@ -60,7 +60,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_account', () => {
+	it('URL Parameter: ?hide_account', function () {
 
 		cy.ingress(['hide_account']);
 
@@ -72,7 +72,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_search', () => {
+	it('URL Parameter: ?hide_search', function () {
 
 		cy.ingress(['hide_search']);
 
@@ -83,7 +83,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_assistant', () => {
+	it('URL Parameter: ?hide_assistant', function () {
 
 		cy.ingress(['hide_assistant']);
 
@@ -94,7 +94,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_overflow', () => {
+	it('URL Parameter: ?hide_overflow', function () {
 
 		cy.ingress(['hide_overflow']);
 
@@ -104,7 +104,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_refresh', () => {
+	it('URL Parameter: ?hide_refresh', function () {
 
 		cy.ingress(['hide_refresh']);
 
@@ -123,7 +123,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_unused_entities', () => {
+	it('URL Parameter: ?hide_unused_entities', function () {
 
 		cy.ingress(['hide_unused_entities']);
 
@@ -142,7 +142,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_reload_resources', () => {
+	it('URL Parameter: ?hide_reload_resources', function () {
 
 		cy.ingress(['hide_reload_resources']);
 
@@ -161,7 +161,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?hide_edit_dashboard', () => {
+	it('URL Parameter: ?hide_edit_dashboard', function () {
 
 		cy.ingress(['hide_edit_dashboard']);
 
@@ -180,7 +180,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?block_overflow', () => {
+	it('URL Parameter: ?block_overflow', function () {
 
 		cy.ingress(['block_overflow']);
 
@@ -190,7 +190,7 @@ describe('Kiosk-mode: URL Parameters', () => {
 
 	});
 
-	it('URL Parameter: ?block_context_menu', () => {
+	it('URL Parameter: ?block_context_menu', function () {
 
 		cy.ingress(['block_context_menu']);
 

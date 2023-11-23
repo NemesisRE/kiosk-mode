@@ -3,9 +3,9 @@ declare global {
     interface Chainable {
       ingress(params?: string[]): Chainable<void>;
       waitForHomeAssistantDOM(): Chainable<void>;
-      clickEntity(index: number): Chainable<void>;
+      haRequest(entity: string, state: boolean): Chainable<void>;
       checkOverflowMenuItem(
-        entityIndex: number,
+        entity: string,
         dataSelector: string,
         snapshotName: string
       ): Chainable<void>;

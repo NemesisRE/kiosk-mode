@@ -44,7 +44,27 @@ compareSnapshotCommand({
     errorThreshold: 0.25
 });
 
-Cypress.Commands.add('ingress', (params: string[] = []) => {
+const HA_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzM2U0OGE1Nzk4NDU0YTI5YTBkZjgxMTlkZjgzMmRjMSIsImlhdCI6MTcwMDcwNzIwMiwiZXhwIjoyMDE2MDY3MjAyfQ.JTRycmen2kDa74OVUe_y1IEXE4aiKH7Hnhw6Wx5u5Bg';
+
+Cypress.Commands.add('haRequest', function (entity: string, state: boolean) {
+
+    cy.request({
+        url: `/api/services/input_boolean/turn_${state ? 'on' : 'off'}`,
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${HA_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        body: {
+            entity_id: `input_boolean.${entity}`
+        }
+    });
+
+    cy.wait(100);
+
+});
+
+Cypress.Commands.add('ingress', function (params: string[] = []) {
 
     const urlParams = params.reduce((acc: Record<string, string>, param: string): Record<string, string> => {
         acc[param] = '';
@@ -52,20 +72,18 @@ Cypress.Commands.add('ingress', (params: string[] = []) => {
     }, {} as Record<string, string>);
 
     cy
-        .visit('http://localhost:8123', {
+        .visit('/', {
             qs: urlParams
-        })
-        .location('pathname')
-        .should('eq', '/lovelace/kiosk-mode-overview');
+        });
 
     cy.waitForHomeAssistantDOM();
 
 });
 
-Cypress.Commands.add('waitForHomeAssistantDOM', () => {
+Cypress.Commands.add('waitForHomeAssistantDOM', function() {
 
-    cy.waitUntil(() => (
-        cy
+    cy.waitUntil(function() {
+        return cy
             .get('home-assistant')
             .shadow()
             .find('home-assistant-main')
@@ -75,22 +93,18 @@ Cypress.Commands.add('waitForHomeAssistantDOM', () => {
             .find('hui-root')
             .shadow()
             .find('hui-masonry-view')
-    ));
+    });
 
     cy
         .get('home-assistant')
         .shadow()
-        .as('home-assistant');
+        .as('home-assistant')
 
-    cy
-        .get('@home-assistant')
         .find('home-assistant-main')
         .shadow()
         .find('ha-drawer')
-        .as('ha-drawer');
+        .as('ha-drawer')
 
-    cy
-        .get('@ha-drawer')
         .find('ha-sidebar')
         .as('ha-sidebar');
 
@@ -100,10 +114,8 @@ Cypress.Commands.add('waitForHomeAssistantDOM', () => {
         .shadow()
         .find('hui-root')
         .shadow()
-        .as('hui-root');
+        .as('hui-root')
 
-    cy
-        .get('@hui-root')
         .find('hui-masonry-view')
         .shadow()
         .find('hui-entities-card')
@@ -114,10 +126,8 @@ Cypress.Commands.add('waitForHomeAssistantDOM', () => {
     cy
         .get('@hui-root')
         .find('.header .action-items ha-button-menu')
-        .as('overflow-menu');
+        .as('overflow-menu')
 
-    cy
-        .get('@overflow-menu')
         .shadow()
         .find('mwc-menu')
         .shadow()
@@ -126,32 +136,13 @@ Cypress.Commands.add('waitForHomeAssistantDOM', () => {
 
 });
 
-Cypress.Commands.add('clickEntity', (index: number) => {
-
-    cy
-        .get('@hui-root')
-        .find('hui-masonry-view')
-        .shadow()
-        .find('hui-entities-card')
-        .shadow()
-        .find('#states')
-        .find('div > hui-toggle-entity-row')
-        .shadow()
-        .find('hui-generic-entity-row ha-entity-toggle')
-        .shadow()
-        .find('ha-switch')
-        .eq(index)
-        .click();
-
-});
-
-Cypress.Commands.add('checkOverflowMenuItem', (
-    entityIndex: number,
+Cypress.Commands.add('checkOverflowMenuItem', function(
+    entity: string,
     dataSelector: string,
     snapshotName: string
-) => {
+) {
 
-    cy.clickEntity(entityIndex);
+    cy.haRequest(entity, true);
 
     cy
         .get('@overflow-menu')
@@ -166,47 +157,36 @@ Cypress.Commands.add('checkOverflowMenuItem', (
         .find(`mwc-list-item[data-selector="${dataSelector}"]`)
         .should('be.hidden');
 
-    //cy.compareSnapshot(snapshotName);
+    cy.compareSnapshot(snapshotName);
 
-    cy.wait(100);
-
-    cy
-        .get('@hui-root')
-        .find('.header')
-        .click();
-
-    cy
-        .get('@overflow-menu-surface')
-        .should('have.attr', 'hidden');
-
-    cy.clickEntity(entityIndex);
+    cy.haRequest(entity, false);
 
 });
 
-Cypress.Commands.add('waitForDialogOpen', () => {
+Cypress.Commands.add('waitForDialogOpen', function() {
 
-    cy.waitUntil(() => (
-        cy
+    cy.waitUntil(function() {
+        return cy
             .get('home-assistant')
             .shadow()
             .find('ha-more-info-dialog')
             .shadow()
             .find('ha-dialog')
             .should('have.attr', 'open')
-    ));
+    });
 
 });
 
-Cypress.Commands.add('waitForDialogClose', () => {
+Cypress.Commands.add('waitForDialogClose', function() {
 
-    cy.waitUntil(() => (
-        cy
+    cy.waitUntil(function() {
+        return cy
             .get('home-assistant')
             .shadow()
             .find('ha-more-info-dialog')
             .shadow()
             .children()
             .should('have.length', 0)
-    ));
+    });
 
 });

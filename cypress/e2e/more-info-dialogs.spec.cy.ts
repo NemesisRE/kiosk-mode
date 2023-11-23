@@ -1,6 +1,6 @@
-describe('Kiosk-mode: More-info Dialogs', () => {
+describe('Kiosk-mode: More-info Dialogs', function () {
 
-    beforeEach(() => {
+    beforeEach(function () {
 
         cy.ingress();
 
@@ -39,7 +39,7 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
     });
 
-    it('By default all elements should be visible', () => {
+    it('By default all elements should be visible', function () {
 
         cy
             .get('@states-divs')
@@ -103,9 +103,9 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
     });
 
-    it('Option: hide_dialog_header_history', () => {
+    it('Option: hide_dialog_header_history', function () {
 
-        cy.clickEntity(16);
+        cy.haRequest('kiosk_hide_dialog_header_history', true);
 
         cy
             .get('@states-divs')
@@ -121,20 +121,14 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
         cy.compareSnapshot('hide_dialog_header_history');
 
-        cy
-            .get('@close-dialog')
-            .click();
-
-        cy.waitForDialogClose();
-
-        cy.clickEntity(16);
+        cy.haRequest('kiosk_hide_dialog_header_history', false);
 
 	});
 
 
-    it('Option: hide_dialog_header_settings', () => {
+    it('Option: hide_dialog_header_settings', function () {
 
-        cy.clickEntity(17);
+        cy.haRequest('kiosk_hide_dialog_header_settings', true);
 
         cy
             .get('@states-divs')
@@ -150,19 +144,13 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
         cy.compareSnapshot('hide_dialog_header_settings');
 
-        cy
-            .get('@close-dialog')
-            .click();
-
-        cy.waitForDialogClose();
-
-        cy.clickEntity(17);
+        cy.haRequest('kiosk_hide_dialog_header_settings', false);
 
 	});
 
-    it('Option: hide_dialog_header_overflow', () => {
+    it('Option: hide_dialog_header_overflow', function () {
 
-        cy.clickEntity(18);
+        cy.haRequest('kiosk_hide_dialog_header_overflow', true);
 
         cy
             .get('@states-divs')
@@ -178,19 +166,13 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
         cy.compareSnapshot('hide_dialog_header_overflow');
 
-        cy
-            .get('@close-dialog')
-            .click();
-
-        cy.waitForDialogClose();
-
-        cy.clickEntity(18);
+        cy.haRequest('kiosk_hide_dialog_header_overflow', false);
 
 	});
 
-    it('Option: hide_dialog_header_action_items', () => {
+    it('Option: hide_dialog_header_action_items', function () {
 
-        cy.clickEntity(19);
+        cy.haRequest('kiosk_hide_dialog_header_action_items', true);
 
         cy
             .get('@states-divs')
@@ -216,19 +198,13 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
         cy.compareSnapshot('hide_dialog_header_action_items');
 
-        cy
-            .get('@close-dialog')
-            .click();
-
-        cy.waitForDialogClose();
-
-        cy.clickEntity(19);
+        cy.haRequest('kiosk_hide_dialog_header_action_items', false);
 
 	});
 
-    it('Option: hide_dialog_history', () => {
+    it('Option: hide_dialog_history', function () {
 
-        cy.clickEntity(20);
+        cy.haRequest('kiosk_hide_dialog_history', true);
 
         cy
             .get('@states-divs')
@@ -250,14 +226,14 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
         cy.waitForDialogClose();
 
-        cy.clickEntity(20);
+        cy.haRequest('kiosk_hide_dialog_history', false);
 
 	});
 
-    it('Option: hide_dialog_attributes', () => {
+    it('Option: hide_dialog_attributes', function () {
 
-        cy.clickEntity(20);
-        cy.clickEntity(22);
+        cy.haRequest('kiosk_hide_dialog_history', true);
+        cy.haRequest('kiosk_hide_dialog_attributes', true);
 
         cy
             .get('@states-divs')
@@ -275,20 +251,14 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
         cy.compareSnapshot('hide_dialog_attributes');
 
-        cy
-            .get('@close-dialog')
-            .click();
-
-        cy.waitForDialogClose();
-
-        cy.clickEntity(20);
-        cy.clickEntity(22);
+        cy.haRequest('kiosk_hide_dialog_history', false);
+        cy.haRequest('kiosk_hide_dialog_attributes', false);
 
 	});
 
-    it('Option: hide_dialog_history_show_more', () => {
+    it('Option: hide_dialog_history_show_more', function () {
 
-        cy.clickEntity(25);
+        cy.haRequest('kiosk_hide_dialog_history_show_more', true);
 
         cy
             .get('@states-divs')
@@ -306,13 +276,7 @@ describe('Kiosk-mode: More-info Dialogs', () => {
 
         cy.compareSnapshot('hide_dialog_history_show_more');
 
-        cy
-            .get('@close-dialog')
-            .click();
-
-        cy.waitForDialogClose();
-
-        cy.clickEntity(25);
+        cy.haRequest('kiosk_hide_dialog_history_show_more', false);
 
 	});
 

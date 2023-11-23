@@ -17,7 +17,7 @@
 import './commands';
 //import '@cypress/code-coverage/support';
 
-Cypress.on('uncaught:exception', () => {
+Cypress.on('uncaught:exception', function () {
     // returning false here prevents Cypress from failing the test
     return false;
 });

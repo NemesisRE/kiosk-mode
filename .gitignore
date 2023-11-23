@@ -5,4 +5,5 @@
 /.nyc_output
 /coverage
 /cypress/screenshots
-/cypress/snapshots/diff
+/cypress/snapshots/diff/*
+/cypress/downloads

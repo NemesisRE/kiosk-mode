@@ -17,11 +17,12 @@ export default defineConfig({
       getCompareSnapshotsPlugin(on, config);
       return config;
     },
+    baseUrl: 'http://localhost:8123',
     testIsolation: false,
     defaultCommandTimeout: 15000,
-    pageLoadTimeout: 50000
+    pageLoadTimeout: 15000
   },
-  screenshotOnRunFailure: false,
+  screenshotOnRunFailure: true,
   retries: {
     runMode: 3,
     openMode: 3

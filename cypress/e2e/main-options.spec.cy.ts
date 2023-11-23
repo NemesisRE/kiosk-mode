@@ -1,12 +1,12 @@
-describe('Kiosk-mode: Main Options', () => {
+describe('Kiosk-mode: Main Options', function () {
 
-	beforeEach(() => {
+	beforeEach(function () {
 		cy.ingress();
 	});
 
-	it('Option: kiosk', () => {
+	it('Option: kiosk', function (){
 
-		cy.clickEntity(0);
+		cy.haRequest('kiosk', true);
 
 		cy
 			.get('@ha-sidebar')
@@ -19,13 +19,13 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('kiosk');
 
-		cy.clickEntity(0);
+		cy.haRequest('kiosk', false);
 
 	});
 
-	it('Option: hide_header', () => {
+	it('Option: hide_header', function () {
 
-		cy.clickEntity(1);
+		cy.haRequest('kiosk_hide_header', true);
 
 		cy
 			.get('@hui-root')
@@ -34,13 +34,13 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('hide_header');
 
-		cy.clickEntity(1);
+		cy.haRequest('kiosk_hide_header', false);
 
 	});
 
-	it('Option: hide_sidebar', () => {
+	it('Option: hide_sidebar', function () {
 
-		cy.clickEntity(2);
+		cy.haRequest('kiosk_hide_sidebar', true);
 
 		cy
 			.get('@ha-sidebar')
@@ -48,13 +48,13 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('hide_sidebar');
 
-		cy.clickEntity(2);
+		cy.haRequest('kiosk_hide_sidebar', false);
 
 	});
 
-	it('Option: hide_menubutton', () => {
+	it('Option: hide_menubutton', function () {
 
-		cy.clickEntity(3);
+		cy.haRequest('kiosk_hide_menubutton', true);
 
 		cy
 			.get('@ha-sidebar')
@@ -64,13 +64,13 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('hide_menubutton');
 
-		cy.clickEntity(3);
+		cy.haRequest('kiosk_hide_menubutton', false);
 
 	});
 
-	it('Option: hide_notifications', () => {
+	it('Option: hide_notifications', function () {
 
-		cy.clickEntity(4);
+		cy.haRequest('kiosk_hide_notifications', true);
 
 		cy
 			.get('@ha-sidebar')
@@ -80,13 +80,13 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('hide_notifications');
 
-		cy.clickEntity(4);
+		cy.haRequest('kiosk_hide_notifications', false);
 
 	});
 
-	it('Option: hide_account', () => {
+	it('Option: hide_account', function () {
 
-		cy.clickEntity(5);
+		cy.haRequest('kiosk_hide_account', true);
 
 		cy
 			.get('@ha-sidebar')
@@ -96,13 +96,13 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('hide_account');
 
-		cy.clickEntity(5);
+		cy.haRequest('kiosk_hide_account', false);
 
 	});
 
-	it('Option: hide_search', () => {
+	it('Option: hide_search', function () {
 
-		cy.clickEntity(6);
+		cy.haRequest('kiosk_hide_search', true);
 
 		cy
 			.get('@hui-root')
@@ -111,13 +111,13 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('hide_search');
 
-		cy.clickEntity(6);
+		cy.haRequest('kiosk_hide_search', false);
 
 	});
 
-	it('Option: hide_assistant', () => {
+	it('Option: hide_assistant', function () {
 
-		cy.clickEntity(7);
+		cy.haRequest('kiosk_hide_assistant', true);
 
 		cy
 			.get('@hui-root')
@@ -126,13 +126,13 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('hide_assistant');
 
-		cy.clickEntity(7);
+		cy.haRequest('kiosk_hide_assistant', false);
 
 	});
 
-	it('Option: hide_overflow', () => {
+	it('Option: hide_overflow', function () {
 
-		cy.clickEntity(8);
+		cy.haRequest('kiosk_hide_overflow', true);
 
 		cy
 			.get('@overflow-menu')
@@ -140,67 +140,67 @@ describe('Kiosk-mode: Main Options', () => {
 
 		cy.compareSnapshot('hide_overflow');
 
-		cy.clickEntity(8);
+		cy.haRequest('kiosk_hide_overflow', false);
 
 	});
 
-	it('Option: hide_refresh', () => {
+	it('Option: hide_refresh', function () {
 
 		cy.checkOverflowMenuItem(
-			9,
+			'kiosk_hide_refresh',
 			'REFRESH',
 			'hide_refresh'
 		);
 
 	});
 
-	it('Option: hide_unused_entities', () => {
+	it('Option: hide_unused_entities', function () {
 
 		cy.checkOverflowMenuItem(
-			10,
+			'kiosk_hide_unused_entities',
 			'UNUSED_ENTITIES',
 			'hide_unused_entities'
 		);
 
 	});
 
-	it('Option: hide_reload_resources', () => {
+	it('Option: hide_reload_resources', function () {
 
 		cy.checkOverflowMenuItem(
-			11,
+			'kiosk_hide_reload_resources',
 			'RELOAD_RESOURCES',
 			'hide_reload_resources'
 		);
 
 	});
 
-	it('Option: hide_edit_dashboard', () => {
+	it('Option: hide_edit_dashboard', function () {
 
 		cy.checkOverflowMenuItem(
-			12,
+			'kiosk_hide_edit_dashboard',
 			'EDIT_DASHBOARD',
 			'hide_edit_dashboard'
 		);
 
 	});
 
-	it('Option: block_overflow', () => {
+	it('Option: block_overflow', function () {
 
-		cy.clickEntity(13);
+		cy.haRequest('kiosk_block_overflow', true);
 
 		cy
 			.get('@overflow-menu')
 			.should('have.css', 'pointer-events', 'none');
 
-		cy.clickEntity(13);
+		cy.haRequest('kiosk_block_overflow', false);
 
 	});
 
-	it('Option: block_context_menu', () => {
+	it('Option: block_context_menu', function () {
 
 		cy
 			.window()
-			.then((win) => {
+			.then(function (win) {
 
 				const listener = cy.stub().as('listener');
 				
@@ -215,7 +215,7 @@ describe('Kiosk-mode: Main Options', () => {
 					.get('@listener')
 					.should('be.calledOnce');
 
-				cy.clickEntity(15);
+				cy.haRequest('kiosk_block_context_menu', true);
 
 				cy.wait(100);
 
@@ -228,7 +228,7 @@ describe('Kiosk-mode: Main Options', () => {
 					.get('@listener')
 					.should('not.be.calledTwice');
 
-				cy.clickEntity(15);
+				cy.haRequest('kiosk_block_context_menu', false);
 
 			});
 
