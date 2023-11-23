@@ -72,9 +72,7 @@ Cypress.Commands.add('ingress', function (params: string[] = []) {
     }, {} as Record<string, string>);
 
     cy
-        .visit('/', {
-            qs: urlParams
-        });
+        .visit('/', { qs: urlParams });
 
     cy.waitForHomeAssistantDOM();
 

@@ -15,6 +15,13 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       codeCoverageTask(on, config);
       getCompareSnapshotsPlugin(on, config);
+      on('before:browser:launch', (browser, launchOptions) => {
+        launchOptions.args.push('--window-size=1280,768')
+        launchOptions.args.push('--force-device-scale-factor=2');
+        launchOptions.args.push('--disable-gpu');
+        launchOptions.args.push('--force-color-profile=srgb');
+        return launchOptions;
+      });
       return config;
     },
     baseUrl: 'http://localhost:8123',

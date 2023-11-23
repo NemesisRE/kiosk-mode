@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.js --bundleConfigAsCjs",
     "test:ts": "tsc --noEmit",
-    "test:run": "cypress run run --headed --browser chrome",
+    "test:run": "cypress run --browser chrome",
     "test:open": "cypress open",
     "test:ci": "yarn demo && yarn test:run && yarn coverage:report && yarn stop:ha",
     "test:all": "yarn test:ts && yarn test:ci",
