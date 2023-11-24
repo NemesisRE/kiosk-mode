@@ -1,3 +1,4 @@
+import { Page, TestInfo } from '@playwright/test';
 import { BASE_URL, HA_TOKEN } from '../constants';
 
 export const haRequest = (entity: string, state: boolean) => {

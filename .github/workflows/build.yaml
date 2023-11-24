@@ -31,11 +31,7 @@ jobs:
         if: always()
         with:
           name: test-report
-          path: |
-            playwright-report/
-            tests/main-options.spec.ts-snapshots/
-            tests/more-info-dialogs.spec.ts-snapshots/
-            tests/url-parameters.spec.ts-snapshots/
+          path: playwright-report/
           retention-days: 30
       - name: Build Changelog
         id: build_changelog
