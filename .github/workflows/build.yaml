@@ -26,9 +26,7 @@ jobs:
       - name: Install deps
         run: yarn install --frozen-lockfile
       - name: E2E tests
-        run: |
-          yarn playwright install --with-deps
-          yarn test:all
+        run: yarn test:all
       - uses: actions/upload-artifact@v3
         if: always()
         with:
