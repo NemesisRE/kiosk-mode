@@ -23,4 +23,12 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: E2E tests
-        run: yarn test:all
+        run: |
+          yarn playwright install --with-deps
+          yarn test:all
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-report
+          path: playwright-report/
+          retention-days: 30

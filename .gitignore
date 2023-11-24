@@ -4,6 +4,7 @@
 .hass/config/www/kiosk-mode.js
 /.nyc_output
 /coverage
-/cypress/screenshots
-/cypress/snapshots/diff/*
-/cypress/downloads
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

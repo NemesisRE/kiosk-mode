@@ -1,27 +1,23 @@
 {
-    "compilerOptions": {
-      "outDir": "./dist/",
-      "module": "esnext",
-      "target": "ES5",
-      "moduleResolution": "node",
-      "types": [
-        "node",
-        "cypress",
-        "cypress-visual-regression"
-      ],
-      "esModuleInterop": true,
-      "resolveJsonModule": true,
-      "declaration": false,
-      "noImplicitAny": true,
-      "removeComments": true,
-      "baseUrl": "./src",
-      "paths": {
-        "@types": ["types"],
-        "@constants": ["constants"],
-        "@utilities": ["utilities"],
-        "@styles": ["styles"]   
-      }
-    },
-    "include": ["src/**/*.ts", "cypress/**/*.ts", "package.json"],
-    "exclude": ["node_modules"]
-  }
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "module": "esnext",
+    "target": "ES5",
+    "moduleResolution": "node",
+    "types": ["node"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@types": ["types"],
+      "@constants": ["constants"],
+      "@utilities": ["utilities"],
+      "@styles": ["styles"]   
+    }
+  },
+  "include": ["src/**/*.ts", "package.json"],
+  "exclude": ["node_modules"]
+}
