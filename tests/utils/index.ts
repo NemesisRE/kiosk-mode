@@ -1,5 +1,4 @@
-import { Page, TestInfo } from '@playwright/test';
-import { BASE_URL, HA_TOKEN } from '../constants';
+import { BASE_URL } from '../constants';
 
 export const haRequest = (entity: string, state: boolean) => {
     return fetch(
@@ -7,7 +6,7 @@ export const haRequest = (entity: string, state: boolean) => {
         {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${HA_TOKEN}`,
+                'Authorization': `Bearer ${process.env.HA_TOKEN}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({

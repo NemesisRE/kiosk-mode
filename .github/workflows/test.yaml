@@ -23,7 +23,10 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: E2E tests
-        run: yarn test:all
+        run: |
+          touch .env
+          echo HA_TOKEN=${{ secrets.CYPRESS_HA_TOKEN }} >> .env
+          yarn test:all
       - uses: actions/upload-artifact@v3
         if: always()
         with:

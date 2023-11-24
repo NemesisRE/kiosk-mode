@@ -1,7 +1,5 @@
 export const BASE_URL = 'http://host.docker.internal:8123';
 
-export const HA_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzM2U0OGE1Nzk4NDU0YTI5YTBkZjgxMTlkZjgzMmRjMSIsImlhdCI6MTcwMDcwNzIwMiwiZXhwIjoyMDE2MDY3MjAyfQ.JTRycmen2kDa74OVUe_y1IEXE4aiKH7Hnhw6Wx5u5Bg';
-
 export const SELECTORS = {
     HUI_MASONRY_VIEW: 'hui-masonry-view',
     HA_SIDEBAR: 'ha-sidebar',
