@@ -2,3 +2,10 @@
 /dist
 .DS_Store
 .hass/config/www/kiosk-mode.js
+/.nyc_output
+/coverage
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/.env

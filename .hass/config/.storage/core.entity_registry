@@ -1,0 +1,1214 @@
+{
+  "version": 1,
+  "minor_version": 12,
+  "key": "core.entity_registry",
+  "data": {
+    "entities": [
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "timer.laundry",
+        "hidden_by": null,
+        "icon": null,
+        "id": "338c38c5d1d9929b630dc73ad383db70",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": null,
+        "platform": "timer",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "laundry",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk",
+        "hidden_by": null,
+        "icon": null,
+        "id": "8ed490118f50903547a06a4ae2440df2",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk mode",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_header",
+        "hidden_by": null,
+        "icon": null,
+        "id": "9dad8eb78b6b10457f870a6900a99362",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide header",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_header",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_sidebar",
+        "hidden_by": null,
+        "icon": null,
+        "id": "2f5b8bfa18953a1e79485ed884050f76",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide sidebar",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_sidebar",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_menubutton",
+        "hidden_by": null,
+        "icon": null,
+        "id": "3010bdd278830999b89a74747633a993",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide menu button",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_menubutton",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_overflow",
+        "hidden_by": null,
+        "icon": null,
+        "id": "da7a2dde6399da6fe1c7f279c5ed0038",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide overflow",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_overflow",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_account",
+        "hidden_by": null,
+        "icon": null,
+        "id": "48dfe7711d7103a5f5774a5759615d5e",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide account",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_account",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_notifications",
+        "hidden_by": null,
+        "icon": null,
+        "id": "2658c8607687da3f1486b3684cf350ad",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide notifications",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_notifications",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_search",
+        "hidden_by": null,
+        "icon": null,
+        "id": "db599bd18fa64bf535b957c5c7375f5e",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide search",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_search",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_assistant",
+        "hidden_by": null,
+        "icon": null,
+        "id": "f42919b339e887492d0d0bcabdfed577",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide assistant",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_assistant",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_refresh",
+        "hidden_by": null,
+        "icon": null,
+        "id": "69d7fb87f1910fe17fb5fccc42c0d919",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide refresh",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_refresh",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_unused_entities",
+        "hidden_by": null,
+        "icon": null,
+        "id": "22852d74c1b4c6d578b77f775ff98ecb",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide unused entities",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_unused_entities",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_reload_resources",
+        "hidden_by": null,
+        "icon": null,
+        "id": "8d703059da31b0947711a1c1b3658f83",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide reload resources",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_reload_resources",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_edit_dashboard",
+        "hidden_by": null,
+        "icon": null,
+        "id": "b12a31badbcc74cd55dbc2c1ae9a45c0",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide edit dashboard",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_edit_dashboard",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_history",
+        "hidden_by": null,
+        "icon": null,
+        "id": "6a2dce02bab3f42526af4a1a0b13960e",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog header history",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_header_history",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_settings",
+        "hidden_by": null,
+        "icon": null,
+        "id": "c8b89c1f7a196de95308ade031bbd650",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog header settings",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_header_settings",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_overflow",
+        "hidden_by": null,
+        "icon": null,
+        "id": "4e84dee011ead17e24eded308131b681",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog header overflow",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_header_overflow",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_history",
+        "hidden_by": null,
+        "icon": null,
+        "id": "3f8ec6c0f0272603c59b19ffa590de4e",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog history",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_history",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_logbook",
+        "hidden_by": null,
+        "icon": null,
+        "id": "b57b03cca0662a02aa7d50505e0f14cf",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog logbook",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_logbook",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_attributes",
+        "hidden_by": null,
+        "icon": null,
+        "id": "cdfb3001c12dc0ffb40dcdb0406e6a2e",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog attributes",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_attributes",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_update_actions",
+        "hidden_by": null,
+        "icon": null,
+        "id": "d0d5fd614253925da387ecc19c05b62c",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog update actions",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_update_actions",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_timer_actions",
+        "hidden_by": null,
+        "icon": null,
+        "id": "3d6e8f5c0272676ad00458edd9c7e0dc",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog timer actions",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_timer_actions",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_history_show_more",
+        "hidden_by": null,
+        "icon": null,
+        "id": "661a08295711595bc8d89f7d77e3e61b",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog history show more link",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_history_show_more",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_logbook_show_more",
+        "hidden_by": null,
+        "icon": null,
+        "id": "44df6324a32597e44098dc1f65593d25",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide dialog logbook show more link",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_logbook_show_more",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_block_overflow",
+        "hidden_by": null,
+        "icon": null,
+        "id": "63a1ac940d93e4a81cfd3f60d933e06c",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk block overflow",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_block_overflow",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_block_mouse",
+        "hidden_by": null,
+        "icon": null,
+        "id": "83591868e9c05e71f9a70833ba88cafc",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk block mouse",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_block_mouse",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_block_context_menu",
+        "hidden_by": null,
+        "icon": null,
+        "id": "555e0746f6f2a923f743a28973532d7e",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk block context menu",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_block_context_menu",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": null,
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_next_dawn",
+        "hidden_by": null,
+        "icon": null,
+        "id": "e512a032fbdf64957b1ebaaabf38c799",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": "timestamp",
+        "original_icon": "mdi:sun-clock",
+        "original_name": "Próximo amanecer",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "next_dawn",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-next_dawn",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": null,
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_next_dusk",
+        "hidden_by": null,
+        "icon": null,
+        "id": "b36f4cb802da103d85f2d7da37ffcab0",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": "timestamp",
+        "original_icon": "mdi:sun-clock",
+        "original_name": "Próximo anochecer",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "next_dusk",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-next_dusk",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": null,
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_next_midnight",
+        "hidden_by": null,
+        "icon": null,
+        "id": "9a38cbbdba6ff1e0e121c6a36c350608",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": "timestamp",
+        "original_icon": "mdi:sun-clock",
+        "original_name": "Próxima medianoche",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "next_midnight",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-next_midnight",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": null,
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_next_noon",
+        "hidden_by": null,
+        "icon": null,
+        "id": "6b2948c1bd47f04335bf6d79b59af460",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": "timestamp",
+        "original_icon": "mdi:sun-clock",
+        "original_name": "Próximo mediodía",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "next_noon",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-next_noon",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": null,
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_next_rising",
+        "hidden_by": null,
+        "icon": null,
+        "id": "29a0f780f5013656e82b8ff5c259ead5",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": "timestamp",
+        "original_icon": "mdi:sun-clock",
+        "original_name": "Próxima salida del sol",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "next_rising",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-next_rising",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": null,
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_next_setting",
+        "hidden_by": null,
+        "icon": null,
+        "id": "9a43c72c7d04c21e4714f5852028c970",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": "timestamp",
+        "original_icon": "mdi:sun-clock",
+        "original_name": "Próxima puesta de sol",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "next_setting",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-next_setting",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": {
+          "state_class": "measurement"
+        },
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": "integration",
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_solar_elevation",
+        "hidden_by": null,
+        "icon": null,
+        "id": "b446aebe3b21cf79d049773d587e381d",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": "mdi:theme-light-dark",
+        "original_name": "Elevación solar",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "solar_elevation",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-solar_elevation",
+        "previous_unique_id": null,
+        "unit_of_measurement": "°"
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": {
+          "state_class": "measurement"
+        },
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": "integration",
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_solar_azimuth",
+        "hidden_by": null,
+        "icon": null,
+        "id": "78f561bb9e245ca2bfc73f3ab572927f",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": "mdi:sun-angle",
+        "original_name": "Acimut solar",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "solar_azimuth",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-solar_azimuth",
+        "previous_unique_id": null,
+        "unit_of_measurement": "°"
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "be26a900e88a562e5489f3bd7d023692",
+        "device_class": null,
+        "device_id": "58ade3dd52e27b674a2a00d6db8a1ac8",
+        "disabled_by": "integration",
+        "entity_category": "diagnostic",
+        "entity_id": "sensor.sun_solar_rising",
+        "hidden_by": null,
+        "icon": null,
+        "id": "fef818475aa255741cde690c81d687ce",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": "mdi:sun-clock",
+        "original_name": "Salida del sol",
+        "platform": "sun",
+        "supported_features": 0,
+        "translation_key": "solar_rising",
+        "unique_id": "be26a900e88a562e5489f3bd7d023692-solar_rising",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "person.test",
+        "hidden_by": null,
+        "icon": null,
+        "id": "129942a52b081c6ad1d0f0f08aff6f5b",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Test",
+        "platform": "person",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "test",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "2b569b49288de83eef7651b79d83ed63",
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "tts.google_en_com",
+        "hidden_by": null,
+        "icon": null,
+        "id": "1849171f5c5282292f93610aef86babc",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Google en com",
+        "platform": "google_translate",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "2b569b49288de83eef7651b79d83ed63",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": "780cc0ac75c927dd75bd8de858b61f74",
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "todo.lista_de_la_compra",
+        "hidden_by": null,
+        "icon": null,
+        "id": "44ae82b3a55af97c581029aaa6959f9f",
+        "has_entity_name": true,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": "mdi:cart",
+        "original_name": "Lista de la compra",
+        "platform": "shopping_list",
+        "supported_features": 15,
+        "translation_key": "shopping_list",
+        "unique_id": "780cc0ac75c927dd75bd8de858b61f74",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      },
+      {
+        "aliases": [],
+        "area_id": null,
+        "capabilities": null,
+        "config_entry_id": null,
+        "device_class": null,
+        "device_id": null,
+        "disabled_by": null,
+        "entity_category": null,
+        "entity_id": "input_boolean.kiosk_hide_dialog_header_action_items",
+        "hidden_by": null,
+        "icon": null,
+        "id": "1d8676e25e8ba977a68376d76992264e",
+        "has_entity_name": false,
+        "name": null,
+        "options": {
+          "conversation": {
+            "should_expose": false
+          }
+        },
+        "original_device_class": null,
+        "original_icon": null,
+        "original_name": "Kiosk hide header action items",
+        "platform": "input_boolean",
+        "supported_features": 0,
+        "translation_key": null,
+        "unique_id": "kiosk_hide_dialog_header_action_items",
+        "previous_unique_id": null,
+        "unit_of_measurement": null
+      }
+    ],
+    "deleted_entities": []
+  }
+}

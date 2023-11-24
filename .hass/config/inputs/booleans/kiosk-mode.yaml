@@ -30,6 +30,8 @@ kiosk_hide_dialog_header_settings:
   name: Kiosk hide dialog header settings
 kiosk_hide_dialog_header_overflow:
   name: Kiosk hide dialog header overflow
+kiosk_hide_dialog_header_action_items:
+  name: Kiosk hide header action items
 kiosk_hide_dialog_history:
   name: Kiosk hide dialog history
 kiosk_hide_dialog_logbook:
