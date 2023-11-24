@@ -42,6 +42,8 @@ export default defineConfig({
       animations: 'disabled'
     }
   },
+  snapshotDir: 'test-snapshots',
+  snapshotPathTemplate: '{snapshotDir}/{testFilePath}/{projectName}/{arg}{ext}',
   /* Configure projects for major browsers */
   projects: [
     {
@@ -58,14 +60,14 @@ export default defineConfig({
         }
       },
     },
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
