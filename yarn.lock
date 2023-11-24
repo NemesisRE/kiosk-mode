@@ -75,14 +75,14 @@
 
 "@playwright/test@^1.40.0":
   version "1.40.0"
-  resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.40.0.tgz#d06c506977dd7863aa16e07f2136351ecc1be6ed"
+  resolved "https://registry.npmjs.org/@playwright/test/-/test-1.40.0.tgz"
   integrity sha512-PdW+kn4eV99iP5gxWNSDQCbhMaDVej+RXL5xr6t04nbKLCBwYtA046t7ofoczHOm8u6c+45hpDKQVZqtqwkeQg==
   dependencies:
     playwright "1.40.0"
 
 "@rollup/plugin-json@^6.0.1":
   version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-json/-/plugin-json-6.0.1.tgz#7e2efcf5ed549963f1444e010611d22f463931c0"
+  resolved "https://registry.npmjs.org/@rollup/plugin-json/-/plugin-json-6.0.1.tgz"
   integrity sha512-RgVfl5hWMkxN1h/uZj8FVESvPuBJ/uf6ly6GTj0GONnkfoBN5KC0MSz+PN2OLDgYXMhtG0mWpTrkiOjoxAIevw==
   dependencies:
     "@rollup/pluginutils" "^5.0.1"
@@ -108,7 +108,7 @@
 
 "@rollup/rollup-darwin-arm64@4.3.0":
   version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.3.0.tgz#80c4a4dd7b120906d4e655808fb9005784a8bf35"
+  resolved "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.3.0.tgz"
   integrity sha512-dGhVBlllt4iHwTGy21IEoMOTN5wZoid19zEIxsdY29xcEiOEHqzDa7Sqrkh5OE7LKCowL61eFJXxYe/+pYa7ZQ==
 
 "@rollup/rollup-darwin-x64@4.3.0":
@@ -173,7 +173,7 @@
 
 "@types/node@^20.9.4":
   version "20.9.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.4.tgz#cc8f970e869c26834bdb7ed480b30ede622d74c7"
+  resolved "https://registry.npmjs.org/@types/node/-/node-20.9.4.tgz"
   integrity sha512-wmyg8HUhcn6ACjsn8oKYjkN/zUzQeNtMy44weTJSM6p4MMzEOuKbA3OjJ267uPCOW7Xex9dyrNTful8XTQYoDA==
   dependencies:
     undici-types "~5.26.4"
@@ -391,12 +391,12 @@ picomatch@^2.3.1:
 
 playwright-core@1.40.0:
   version "1.40.0"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.40.0.tgz#82f61e5504cb3097803b6f8bbd98190dd34bdf14"
+  resolved "https://registry.npmjs.org/playwright-core/-/playwright-core-1.40.0.tgz"
   integrity sha512-fvKewVJpGeca8t0ipM56jkVSU6Eo0RmFvQ/MaCQNDYm+sdvKkMBBWTE1FdeMqIdumRaXXjZChWHvIzCGM/tA/Q==
 
 playwright@1.40.0:
   version "1.40.0"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.40.0.tgz#2a1824b9fe5c4fe52ed53db9ea68003543a99df0"
+  resolved "https://registry.npmjs.org/playwright/-/playwright-1.40.0.tgz"
   integrity sha512-gyHAgQjiDf1m34Xpwzaqb76KgfzYrhK7iih+2IzcOCoZWr/8ZqmdBw+t0RU85ZmfJMgtgAiNtBQ/KS2325INXw==
   dependencies:
     playwright-core "1.40.0"
@@ -422,7 +422,7 @@ rollup-plugin-terser@^7.0.2:
 
 rollup-plugin-ts@^3.4.5:
   version "3.4.5"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-ts/-/rollup-plugin-ts-3.4.5.tgz#2e04fb121c67f711ba800c3b4349782243def388"
+  resolved "https://registry.npmjs.org/rollup-plugin-ts/-/rollup-plugin-ts-3.4.5.tgz"
   integrity sha512-9iCstRJpEZXSRQuXitlSZAzcGlrqTbJg1pE4CMbEi6xYldxVncdPyzA2I+j6vnh73wBymZckerS+Q/iEE/M3Ow==
   dependencies:
     "@rollup/pluginutils" "^5.0.2"
@@ -438,7 +438,7 @@ rollup-plugin-ts@^3.4.5:
 
 rollup@^4.3.0:
   version "4.3.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-4.3.0.tgz#198e6ae4355899db630d75bc0e17b53f5d0fc20e"
+  resolved "https://registry.npmjs.org/rollup/-/rollup-4.3.0.tgz"
   integrity sha512-scIi1NrKLDIYSPK66jjECtII7vIgdAMFmFo8h6qm++I6nN9qDSV35Ku6erzGVqYjx+lj+j5wkusRMr++8SyDZg==
   optionalDependencies:
     "@rollup/rollup-android-arm-eabi" "4.3.0"
@@ -535,7 +535,7 @@ ua-parser-js@^1.0.35:
 
 undici-types@~5.26.4:
   version "5.26.5"
-  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-5.26.5.tgz#bcd539893d00b56e964fd2657a4866b221a65617"
+  resolved "https://registry.npmjs.org/undici-types/-/undici-types-5.26.5.tgz"
   integrity sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==
 
 update-browserslist-db@^1.0.11:

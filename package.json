@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.js --bundleConfigAsCjs",
     "test:ts": "tsc --noEmit",
-    "test:run": "yarn playwright test",
+    "test:run": "playwright test",
     "test:open": "playwright test --ui",
     "test:update": "playwright test --update-snapshots",
     "test:ci": "yarn demo && yarn test:run && yarn stop:ha",
