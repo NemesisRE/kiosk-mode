@@ -74,26 +74,30 @@ views:
 
 | Config Option                            | Type    | Default | Description |
 |:-----------------------------------------|:--------|:--------|:------------|
-|`kiosk:`                                  | Boolean | false   | Hides both the header and sidebar. |
-|`hide_header:`<sup>1</sup>                | Boolean | false   | Hides only the header. |
-|`hide_sidebar:`                           | Boolean | false   | Hides only the sidebar. |
-|`hide_menubutton:`<sup>1</sup>            | Boolean | false   | Hides only the sidebar menu icon. |
-|`hide_overflow:`                          | Boolean | false   | Hides the top right overflow menu. |
+|`kiosk`                                   | Boolean | false   | Hides both the header and sidebar. |
+|`hide_header`<sup>1</sup>                 | Boolean | false   | Hides only the header. |
+|`hide_sidebar`                            | Boolean | false   | Hides only the sidebar. |
+|`hide_menubutton`<sup>1</sup>             | Boolean | false   | Hides only the sidebar menu icon. |
 |`hide_notifications`                      | Boolean | false   | Hide the notifications entry-point. |
-|`hide_account:`                           | Boolean | false   | Hides the account icon. |
-|`hide_search:`                            | Boolean | false   | Hides the search icon. |
-|`hide_assistant:`                         | Boolean | false   | Hides the assistant icon. |
-|`hide_edit_dashboard`                     | Boolean | false   | Hides the "Edit dashboard" button inside the top right overflow menu. |
+|`hide_account`                            | Boolean | false   | Hides the account icon. |
+|`hide_search`                             | Boolean | false   | Hides the search icon. |
+|`hide_assistant`                          | Boolean | false   | Hides the assistant icon. |
+|`hide_overflow`                           | Boolean | false   | Hides the top right overflow menu. |
+|`block_overflow`                          | Boolean | false   | Blocks the top right overflow menu mouse interactions. |
 |`hide_refresh`                            | Boolean | false   | Hides the "Refresh" button inside the top right overflow menu in lovelace yaml mode. |
 |`hide_unused_entities`                    | Boolean | false   | Hides the "Unused entities" button inside the top right overflow menu in lovelace yaml mode. |
 |`hide_reload_resources`                   | Boolean | false   | Hides the "Reload resources" button inside the top right overflow menu in lovelace yaml mode. |
+|`hide_edit_dashboard`                     | Boolean | false   | Hides the "Edit dashboard" button inside the top right overflow menu. |
+|`block_mouse`                             | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
+|`block_context_menu`                      | Boolean | false   | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices). |
 |`hide_dialog_header_history`              | Boolean | false   | Hides the "History" icon in the header of more-info dialogs. |
-|`hide_dialog_header_history`              | Boolean | false   | Hides the "History" icon in the header of more-info dialogs. |
-|`hide_dialog_header_action_items`         | Boolean | false   | Hides all the action items from the header of more-info dialogs. |
 |`hide_dialog_header_settings`<sup>2</sup> | Boolean | false   | Hides the "Settings" icon in the header of more-info dialogs. |
 |`hide_dialog_header_overflow`<sup>2</sup> | Boolean | false   | Hides the top right overflow menu in the header of more-info dialogs. |
+|`hide_dialog_header_action_items`         | Boolean | false   | Hides all the action items from the header of more-info dialogs. |
 |`hide_dialog_history`                     | Boolean | false   | Hides the "History" section in the more-info dialogs. |
+|`hide_dialog_history_show_more`           | Boolean | false   | Hides the "Show more" link in the "History" section of more-info dialogs.  |
 |`hide_dialog_logbook`                     | Boolean | false   | Hides the "Logbook" section in the more-info dialogs. |
+|`hide_dialog_logbook_show_more`           | Boolean | false   | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
 |`hide_dialog_attributes`                  | Boolean | false   | Hides the "Attributes" section in the more-info dialogs. |
 |`hide_dialog_media_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of media-player entities. |
 |`hide_dialog_update_actions`              | Boolean | false   | Hides the actions block in the more-info dialogs of update entities. |
@@ -101,14 +105,9 @@ views:
 |`hide_dialog_climate_actions`             | Boolean | false   | Hides all the actions in the more-info dialogs of climate entities. |
 |`hide_dialog_climate_temperature_actions` | Boolean | false   | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
 |`hide_dialog_climate_settings_actions`    | Boolean | false   | Hides the mode and preset actions in the more-info dialogs of climate entities. |
-|`hide_dialog_history_show_more`           | Boolean | false   | Hides the "Show more" link in the "History" section of more-info dialogs.  |
-|`hide_dialog_logbook_show_more`           | Boolean | false   | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
-|`block_overflow`                          | Boolean | false   | Blocks the top right overflow menu mouse interactions. |
-|`block_mouse:`                            | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
-|`block_context_menu:`                     | Boolean | false   | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices).
-|`ignore_entity_settings:`<sup>3</sup>     | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
-|`ignore_mobile_settings:`<sup>4</sup>     | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
-|`ignore_disable_km:`<sup>3</sup>          | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
+|`ignore_entity_settings`<sup>3</sup>      | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
+|`ignore_mobile_settings`<sup>4</sup>      | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
+|`ignore_disable_km`<sup>3</sup>           | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
 
 <br/>
 
@@ -309,22 +308,27 @@ The query string options are:
 * `?kiosk` to hide both header and sidebar
 * `?hide_header` to hide only the header
 * `?hide_sidebar` to hide only the sidebar
-* `?hide_overflow` to hide the top right menu
 * `?hide_menubutton` to hide sidebar menu button
 * `?hide_notifications` to hide the notifications entry-point
 * `?hide_account` to hide the account icon
 * `?hide_search` to hide the search icon
 * `?hide_assistant` to hide the assistant icon
-* `?hide_edit_dashboard` to hide the "Edit dashboard" button inside the top right menu
+* `?hide_overflow` to hide the top right menu
+* `?block_overflow` to block the top right overflow menu mouse interactions
 * `?hide_refresh` to hide the "Refresh" button inside the top right menu in lovelace yaml mode
 * `?hide_unused_entities` to hide the "Unused entities" button inside the top right menu in lovelace yaml mode
 * `?hide_reload_resources` to hide the "Reload resources" button inside the top right menu in lovelace yaml mode
-* `?hide_dialog_header_action_items` to hide all the action items from the header of more-info dialogs.
+* `?hide_edit_dashboard` to hide the "Edit dashboard" button inside the top right menu
+* `?block_mouse` to block completely the mouse
+* `?block_context_menu` to prevent opening a right-click context menu
 * `?hide_dialog_header_history` to hide the "History" icon in the header of more-info dialogs
 * `?hide_dialog_header_settings` to hide the "Settings" icon in the header of more-info dialogs
 * `?hide_dialog_header_overflow` to hide the top right overflow menu in the header of more-info dialogs
+* `?hide_dialog_header_action_items` to hide all the action items from the header of more-info dialogs.
 * `?hide_dialog_history` to hide the "History" section in the more-info dialogs
+* `?hide_dialog_history_show_more` to hide the "Show more" link in the "History" section of more-info dialogs
 * `?hide_dialog_logbook` to hide the "Logbook" section in the more-info dialogs
+* `?hide_dialog_logbook_show_more` to hide the "Show more" link in the "Logbook" section of more-info dialogs
 * `?hide_dialog_attributes` to hide the "Attributes" section in the more-info dialogs
 * `?hide_dialog_media_actions` to hide the actions block in the more-info dialogs of media-player entities
 * `?hide_dialog_update_actions` to hide the actions block in the more-info dialogs of update entities
@@ -332,11 +336,8 @@ The query string options are:
 * `?hide_dialog_climate_actions` to hide all the actions in the more-info dialogs of climate entities
 * `?hide_dialog_climate_temperature_actions` to hide the temperature cotrol actions in the more-info dialogs of climate entities
 * `?hide_dialog_climate_settings_actions` to hide the mode and preset actions in the more-info dialogs of climate entities
-* `?hide_dialog_history_show_more` to hide the "Show more" link in the "History" section of more-info dialogs
-* `?hide_dialog_logbook_show_more` to hide the "Show more" link in the "Logbook" section of more-info dialogs
-* `?block_overflow` to block the top right overflow menu mouse interactions
-* `?block_mouse` to block completely the mouse
-* `?block_context_menu` to prevent opening a right-click context menu
+
+
 
 ## Query String Caching
 
