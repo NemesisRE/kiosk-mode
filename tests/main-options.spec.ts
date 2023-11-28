@@ -7,7 +7,7 @@ import {
 import { haRequest } from './utils';
 
 test('Option: kiosk', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
@@ -24,7 +24,7 @@ test('Option: kiosk', async ({ page }) => {
 });
 
 test('Option: hide_header', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
@@ -39,7 +39,7 @@ test('Option: hide_header', async ({ page }) => {
 });
 
 test('Option: hide_sidebar', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
@@ -54,7 +54,7 @@ test('Option: hide_sidebar', async ({ page }) => {
 });
 
 test('Option: hide_menubutton', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.MENU_BUTTON)).toBeVisible();
@@ -69,7 +69,7 @@ test('Option: hide_menubutton', async ({ page }) => {
 });
 
 test('Option: hide_notifications', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.NOTIFICATIONS)).toBeVisible();
@@ -84,7 +84,7 @@ test('Option: hide_notifications', async ({ page }) => {
 });
 
 test('Option: hide_account', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.ACCOUNT)).toBeVisible();
@@ -99,7 +99,7 @@ test('Option: hide_account', async ({ page }) => {
 });
 
 test('Option: hide_search', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.SEARCH_BUTTON)).toBeVisible();
@@ -114,7 +114,7 @@ test('Option: hide_search', async ({ page }) => {
 });
 
 test('Option: hide_assistant', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.ASSISTANT_BUTTON)).toBeVisible();
@@ -129,7 +129,7 @@ test('Option: hide_assistant', async ({ page }) => {
 });
 
 test('Option: hide_overflow', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toBeVisible();
@@ -144,7 +144,7 @@ test('Option: hide_overflow', async ({ page }) => {
 });
 
 test('Option: hide_refresh', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
@@ -161,7 +161,7 @@ test('Option: hide_refresh', async ({ page }) => {
 });
 
 test('Option: hide_unused_entities', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
@@ -178,7 +178,7 @@ test('Option: hide_unused_entities', async ({ page }) => {
 });
 
 test('Option: hide_reload_resources', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
@@ -195,7 +195,7 @@ test('Option: hide_reload_resources', async ({ page }) => {
 });
 
 test('Option: hide_edit_dashboard', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
@@ -212,7 +212,7 @@ test('Option: hide_edit_dashboard', async ({ page }) => {
 });
 
 test('Option: block_overflow', async ({ page }) => {
-  
+
 	await page.goto(BASE_URL);
 
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).not.toHaveCSS('pointer-events', 'none');
