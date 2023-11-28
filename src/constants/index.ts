@@ -69,15 +69,15 @@ export enum MENU {
 }
 
 export const MENU_REFERENCES = Object.freeze({
-	[MENU.SEARCH]: `${MENU_PREFIX}.search`,
-	[MENU.ASSIST]: `${MENU_PREFIX}.assist`,
-	[MENU.REFRESH]: `${COMMON_PREFIX}.refresh`,
-	[MENU.UNUSED_ENTITIES]: `${LOVELACE_PREFIX}.unused_entities.title`,
-	[MENU.RELOAD_RESOURCES]: `${MENU_PREFIX}.reload_resources`,
-	[MENU.EDIT_DASHBOARD]: `${MENU_PREFIX}.configure_ui`,
-	[MENU.DIALOG_HISTORY]: `${DIALOGS_PREFIX}.history`,
-	[MENU.DIALOG_SETTINGS]: `${DIALOGS_PREFIX}.settings`,
-	[MENU.DIALOG_DISMISS]: `${DIALOGS_PREFIX}.dismiss`
+    [MENU.SEARCH]: `${MENU_PREFIX}.search`,
+    [MENU.ASSIST]: `${MENU_PREFIX}.assist`,
+    [MENU.REFRESH]: `${COMMON_PREFIX}.refresh`,
+    [MENU.UNUSED_ENTITIES]: `${LOVELACE_PREFIX}.unused_entities.title`,
+    [MENU.RELOAD_RESOURCES]: `${MENU_PREFIX}.reload_resources`,
+    [MENU.EDIT_DASHBOARD]: `${MENU_PREFIX}.configure_ui`,
+    [MENU.DIALOG_HISTORY]: `${DIALOGS_PREFIX}.history`,
+    [MENU.DIALOG_SETTINGS]: `${DIALOGS_PREFIX}.settings`,
+    [MENU.DIALOG_DISMISS]: `${DIALOGS_PREFIX}.dismiss`
 
 });
 

@@ -55,7 +55,7 @@ export interface EntityState {
 }
 
 export class HomeAssistant extends HTMLElement {
-	hass: {
+    hass: {
         user: User;
         config: {
             version: string;
@@ -68,7 +68,7 @@ export class HomeAssistant extends HTMLElement {
 }
 
 export class Lovelace extends HTMLElement {
-	lovelace: {
+    lovelace: {
         config: {
             kiosk_mode: KioskConfig;
         };
