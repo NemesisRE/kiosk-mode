@@ -10,7 +10,8 @@ import {
 	MAX_ATTEMPTS,
 	RETRY_DELAY,
 	NAMESPACE,
-	ELEMENT
+	ELEMENT,
+	OPTION
 } from '@constants';
 
 // Convert to array
@@ -50,19 +51,46 @@ export const removeStyle = (elements: StyleElement): void => {
 	});
 };
 
+// Get cache key
+export const getCacheKey = (option: string): string => {
+	const optionCamelCase = option.replace(/(?:^|_)([a-z])/g, (__match: string, letter): string => {
+		return letter.toUpperCase();
+	});
+	return `km${optionCamelCase}`;
+};
+
 // Return true if keyword is found in query strings.
 export const queryString = (keywords: string | string[]): boolean => {
-	return toArray(keywords).some((x) => window.location.search.includes(x));
+	const params = new URLSearchParams(window.location.search);
+	return toArray(keywords).some((x) => params.has(x));
 };
 
 // Set localStorage item.
-export const setCache = (k: string | string[], v: string): void => {
-	toArray(k).forEach((x) => window.localStorage.setItem(x, v));
+export const setCache = (options: OPTION | OPTION[], value: string): void => {
+	toArray(options)
+		.forEach(
+			(option) => window.localStorage.setItem(
+				getCacheKey(option),
+				value
+			)
+		);
 };
 
 // Retrieve localStorage item as bool.
-export const cached = (key: string | string[]): boolean => {
-	return toArray(key).some((x) => window.localStorage.getItem(x) === TRUE);
+export const cached = (options: OPTION | OPTION[]): boolean => {
+	return toArray(options)
+		.some((option) => {
+			return window.localStorage.getItem(getCacheKey(option)) === TRUE;
+		});
+};
+
+// Reset all cache items to false
+export const resetCache = () => {
+	Object.values(OPTION).forEach((option: OPTION): void => {
+		window.localStorage.removeItem(
+			getCacheKey(option)
+		);
+	});
 };
 
 // Convert a CSS in JS to string

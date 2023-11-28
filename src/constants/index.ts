@@ -3,44 +3,8 @@ export const STYLES_PREFIX = 'kiosk_mode';
 export const NON_CRITICAL_WARNING = '[ Non critial warning ]';
 export const SHADOW_ROOT_SUFFIX = ':shadowRoot';
 
-export enum CACHE {
-    HEADER = 'kmHeader',
-    SIDEBAR = 'kmSidebar',
-    OVERFLOW = 'kmOverflow',
-    MENU_BUTTON = 'kmMenuButton',
-    ACCOUNT = 'kmAccount',
-    NOTIFICATIONS = 'kmNotifications',
-    SEARCH = 'kmSearch',
-    ASSISTANT = 'kmAssistant',
-    REFRESH = 'kmRefresh',
-    UNUSED_ENTITIES = 'kmUnusedEntities',
-    RELOAD_RESOURCES = 'kmReloadResources',
-    EDIT_DASHBOARD = 'kmEditDashboard',
-    DIALOG_HEADER_ACTION_ITEMS = 'kmDialogHeaderActionItems',
-    DIALOG_HEADER_HISTORY = 'kmDialogHeaderHistory',
-    DIALOG_HEADER_SETTINGS = 'kmDialogHeaderSettings',
-    DIALOG_HEADER_OVERFLOW = 'kmDialogHeaderOverflow',
-    DIALOG_HISTORY = 'kmDialogHistory',
-    DIALOG_LOGBOOK = 'kmDialogLogbook',
-    DIALOG_ATTRIBUTES = 'kmDialogAttributes',
-    DIALOG_MEDIA_ACTIONS = 'kmDialogMediaActions',
-    DIALOG_UPDATE_ACTIONS = 'kmDialogUpdateActions',
-    DIALOG_CLIMATE_ACTIONS = 'kmDialogClimateActions',
-    DIALOG_CLIMATE_TEMPERATURE_ACTIONS = 'kmDialogClimateTemperatureActions',
-    DIALOG_CLIMATE_SETTINGS_ACTIONS = 'kmDialogClimateSettingsActions',
-    DIALOG_TIMER_ACTIONS = 'kmDialogTimerActions',
-    DIALOG_HISTORY_SHOW_MORE = 'kmDialogHistoryShowMore',
-    DIALOG_LOGBOOK_SHOW_MORE = 'kmDialogLogbookShowMore',
-    OVERFLOW_MOUSE = 'kmOverflowMouse',
-    MOUSE = 'kmMouse',
-    CONTEXT_MENU = 'kmContextMenu'
-}
-
 export enum OPTION {
     KIOSK = 'kiosk',
-    CACHE = 'cache',
-    CLEAR_CACHE = 'clear_km_cache',
-    DISABLE_KIOSK_MODE = 'disable_km',
     HIDE_SIDEBAR = 'hide_sidebar',
     HIDE_HEADER = 'hide_header',
     HIDE_OVERFLOW = 'hide_overflow',
@@ -71,10 +35,18 @@ export enum OPTION {
     BLOCK_OVERFLOW = 'block_overflow',
     BLOCK_MOUSE = 'block_mouse',
     BLOCK_CONTEXT_MENU = 'block_context_menu',
-    // Conditional configuration
+}
+
+export enum CONDITIONAL_OPTION {
     IGNORE_ENTITY_SETTINGS = 'ignore_entity_settings',
     IGNORE_MOBILE_SETTINGS = 'ignore_mobile_settings',
     IGNORE_DISABLE_KM = 'ignore_disable_km'
+}
+
+export enum SPECIAL_QUERY_PARAMS {
+    CACHE = 'cache',
+    CLEAR_CACHE = 'clear_km_cache',
+    DISABLE_KIOSK_MODE = 'disable_km',
 }
 
 const UI_PREFIX = 'ui';
@@ -152,7 +124,6 @@ export enum ELEMENT {
 }
 
 export const TRUE = 'true';
-export const FALSE = 'false';
 export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;
 export const SUSCRIBE_EVENTS_TYPE = 'subscribe_events';
 export const STATE_CHANGED_EVENT = 'state_changed';
