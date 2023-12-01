@@ -1,3 +1,5 @@
+import { OPTION, CONDITIONAL_OPTION } from '@constants';
+
 export interface KioskModeRunner {
     run: (lovelace: HTMLElement) => Promise<void>;
     runDialogs: (moreInfoDialog: Element) => Promise<void>;
@@ -24,38 +26,21 @@ export interface EntitySetting extends KioskConfig {
 
 export type EntitySettings = EntitySetting[];
 
-export interface KioskConfig {
-    kiosk?: boolean;
-    hide_header?: boolean;
-    hide_sidebar?: boolean;
-    hide_overflow?: boolean;
-    hide_menubutton?: boolean;
-    hide_account?: boolean;
-    hide_notifications?: boolean;
-    hide_search?: boolean;
-    hide_assistant?: boolean;
-    hide_refresh?: boolean;
-    hide_unused_entities?: boolean;
-    hide_reload_resources?: boolean;
-    hide_edit_dashboard?: boolean;
-    hide_dialog_header_action_items?: boolean;
-    hide_dialog_header_history?: boolean;
-    hide_dialog_header_settings?: boolean;
-    hide_dialog_header_overflow?: boolean;
-    hide_dialog_history?: boolean;
-    hide_dialog_logbook?: boolean;
-    hide_dialog_attributes?: boolean;
-    hide_dialog_media_actions?: boolean;
-    hide_dialog_update_actions?: boolean;
-    hide_dialog_climate_actions?: boolean;
-    hide_dialog_climate_temperature_actions?: boolean;
-    hide_dialog_climate_settings_actions?: boolean;
-    hide_dialog_timer_actions?: boolean;
-    hide_dialog_history_show_more?: boolean;
-    hide_dialog_logbook_show_more?: boolean;
-    block_overflow?: boolean;
-    block_mouse?: boolean;
-    block_context_menu?: boolean;
+type BaseKioskConfig = Partial<
+    Record<
+        OPTION,
+        boolean
+    >
+>;
+
+type BaseConditionalKioskConfig = Partial<
+    Record<
+        CONDITIONAL_OPTION,
+        boolean
+    >
+>;
+
+export interface KioskConfig extends BaseKioskConfig {
     admin_settings?: ConditionalKioskConfig;
     non_admin_settings?: ConditionalKioskConfig;
     user_settings?: UserSetting[];
@@ -63,11 +48,7 @@ export interface KioskConfig {
     entity_settings?: EntitySettings;
 }
 
-export interface ConditionalKioskConfig extends KioskConfig {
-    ignore_entity_settings?: boolean;
-    ignore_mobile_settings?: boolean;
-    ignore_disable_km?: boolean;
-}
+export type ConditionalKioskConfig = KioskConfig & BaseConditionalKioskConfig;
 
 export interface EntityState {
     state: string;
