@@ -27,9 +27,13 @@
     "demo": "yarn build && yarn start:ha",
     "demo:win": "yarn build && yarn start:ha:win"
   },
+  "dependencies": {
+    "home-assistant-query-selector": "^2.1.1"
+  },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
     "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@types/node": "^20.9.4",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
