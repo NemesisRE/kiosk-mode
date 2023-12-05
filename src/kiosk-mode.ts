@@ -1,4 +1,11 @@
 import {
+	HAQuerySelector,
+	HAQuerySelectorEvent,
+	OnLovelacePanelLoadDetail,
+	OnLovelaceMoreInfoDialogOpenDetail,
+	OnLovelaceHistoryAndLogBookDialogOpenDetail
+} from 'home-assistant-query-selector';
+import {
 	KioskModeRunner,
 	HomeAssistant,
 	User,
@@ -21,8 +28,7 @@ import {
 	TOGGLE_MENU_EVENT,
 	WINDOW_RESIZE_DELAY,
 	NAMESPACE,
-	NON_CRITICAL_WARNING,
-	SHADOW_ROOT_SUFFIX
+	NON_CRITICAL_WARNING
 } from '@constants';
 import {
 	toArray,
@@ -43,30 +49,37 @@ import { ConInfo } from './conf-info';
 
 class KioskMode implements KioskModeRunner {
 	constructor() {
-		window.kioskModeEntities = {};
-		this.options = {};
 
 		if (queryString(SPECIAL_QUERY_PARAMS.CLEAR_CACHE)) {
 			resetCache();
 		}
 
-		const selectMainElements = async () => {
+		window.kioskModeEntities = {};
 
-			// Select ha
-			this.ha = await getPromisableElement(
-				(): HomeAssistant => document.querySelector<HomeAssistant>(ELEMENT.HOME_ASSISTANT),
-				(ha: HomeAssistant) => !!(ha && ha.shadowRoot),
-				ELEMENT.HOME_ASSISTANT
-			);
+		this.options = {};
 
-			// Select home assistant main
-			this.main = await getPromisableElement(
-				(): ShadowRoot => this.ha.shadowRoot.querySelector(ELEMENT.HOME_ASSISTANT_MAIN)?.shadowRoot,
-				(main: ShadowRoot) => !!main,
-				`${ELEMENT.HOME_ASSISTANT_MAIN}${SHADOW_ROOT_SUFFIX}`
-			);
+		const selector = new HAQuerySelector();
 
-			// Select user
+		selector.addEventListener(HAQuerySelectorEvent.ON_LOVELACE_PANEL_LOAD, async (event) => {
+
+			this.HAElements = event.detail;
+
+			const {
+				HOME_ASSISTANT,
+				HOME_ASSISTANT_MAIN,
+				HUI_ROOT,
+				HA_DRAWER,
+				HEADER,
+				HA_SIDEBAR
+			} = this.HAElements;
+
+			this.ha = await HOME_ASSISTANT.element as HomeAssistant;
+			this.main = await HOME_ASSISTANT_MAIN.selector.$.element;
+			this.huiRoot = await HUI_ROOT.selector.$.element;
+			this.drawerLayout = await HA_DRAWER.element;
+			this.appToolbar = await HEADER.selector.query(ELEMENT.TOOLBAR).element;
+			this.sideBarRoot = await HA_SIDEBAR.selector.$.element;
+
 			this.user = await getPromisableElement(
 				(): User => this.ha?.hass?.user,
 				(user: User) => !!user,
@@ -75,54 +88,40 @@ class KioskMode implements KioskModeRunner {
 
 			this.version = parseVersion(this.ha.hass?.config?.version);
 
-			// Select partial panel resolver
-			const partialPanelResolver = await getPromisableElement(
-				(): Element => this.main.querySelector(ELEMENT.PARTIAL_PANEL_RESOLVER),
-				(partialPanelResolver: Element) => !!partialPanelResolver,
-				`${ELEMENT.HOME_ASSISTANT_MAIN} > ${ELEMENT.PARTIAL_PANEL_RESOLVER}`
-			);
-
-			this.panelResolverObserver = new MutationObserver(this.watchDashboards);
-			this.dialogsMutationObserver = new MutationObserver(this.watchMoreInfoDialogs);
-			this.dialogContentMutationObserver = new MutationObserver(this.watchMoreInfoDialogsContent);
-
-			// Start the mutation observer for partial panel resolver
-			this.panelResolverObserver.observe(partialPanelResolver, {
-				childList: true,
-			});
-
-			// Start the mutation observer for more info dialog
-			this.dialogsMutationObserver.observe(this.ha.shadowRoot, {
-				childList: true,
-			});
-
 			// Start kiosk-mode
 			this.run();
-			this.entityWatch();
 
-		};
+		});
 
-		selectMainElements();
+		selector.addEventListener(HAQuerySelectorEvent.ON_LOVELACE_MORE_INFO_DIALOG_OPEN, (event) => {
+			this.HAMoreInfoDialogElements = event.detail;
+			this.insertMoreInfoDialogStyles();
+		});
 
+		selector.addEventListener(HAQuerySelectorEvent.ON_LOVELACE_HISTORY_AND_LOGBOOK_DIALOG_OPEN, (event) => {
+			this.HAMoreInfoDialogElements = event.detail;
+			this.insertMoreInfoDialogStyles();
+		});
+
+		selector.listen();
+		this.entityWatch();
 		this.resizeWindowBinded = this.resizeWindow.bind(this);
 
 	}
 
 	// Elements
+	private HAElements: OnLovelacePanelLoadDetail;
+	private HAMoreInfoDialogElements: OnLovelaceMoreInfoDialogOpenDetail | OnLovelaceHistoryAndLogBookDialogOpenDetail;
 	private ha: HomeAssistant;
 	private main: ShadowRoot;
 	private user: User;
 	private huiRoot: ShadowRoot;
-	private lovelace: Lovelace;
-	private drawerLayout: HTMLElement;
-	private appToolbar: HTMLElement;
+	private drawerLayout: Element;
+	private appToolbar: Element;
 	private sideBarRoot: ShadowRoot;
 	private menuTranslations: Record<string, string>;
 	private resizeDelay: number;
 	private resizeWindowBinded: () => void;
-	private panelResolverObserver: MutationObserver;
-	private dialogsMutationObserver: MutationObserver;
-	private dialogContentMutationObserver: MutationObserver;
 	private version: Version | null;
 
 	// Kiosk Mode options
@@ -133,11 +132,13 @@ class KioskMode implements KioskModeRunner {
 		>
 	>;
 
-	public run(lovelace = this.main.querySelector<Lovelace>(ELEMENT.HA_PANEL_LOVELACE)) {
+	public async run() {
+
+		const lovelace = this.main.querySelector<Lovelace>(ELEMENT.HA_PANEL_LOVELACE);
+
 		if (!lovelace) {
 			return;
 		}
-		this.lovelace = lovelace;
 
 		// Get the configuration and process it
 		return getPromisableElement(
@@ -152,75 +153,15 @@ class KioskMode implements KioskModeRunner {
 			});
 	}
 
-	public async runDialogs(
-		moreInfoDialog: Element = this.ha?.shadowRoot?.querySelector(ELEMENT.HA_MORE_INFO_DIALOG)
-	) {
-
-		if (!moreInfoDialog) {
-			return;
-		}
-
-		const moreInfoDialogShadowRoot = await getPromisableElement(
-			() => moreInfoDialog?.shadowRoot,
-			(shadowRoot: ShadowRoot) => !!shadowRoot,
-			`${ELEMENT.HA_MORE_INFO_DIALOG}:${SHADOW_ROOT_SUFFIX}`
-		);
-
-		const dialog = await getPromisableElement(
-			() => moreInfoDialogShadowRoot.querySelector<HTMLElement>(ELEMENT.HA_DIALOG),
-			(dialog: HTMLElement) => !!dialog,
-			`${ELEMENT.HA_MORE_INFO_DIALOG}:${SHADOW_ROOT_SUFFIX} > ${ELEMENT.HA_DIALOG}`
-		);
-
-		const content = await getPromisableElement(
-			(): Element => dialog.querySelector(ELEMENT.HA_DIALOG_CONTENT),
-			(content: Element) => !!content,
-			`${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_CONTENT}`
-		);
-
-		getPromisableElement(
-			(): Element => content.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO}, ${ELEMENT.HA_DIALOG_MORE_INFO_HISTORY_AND_LOGBOOK}`),
-			(content: Element) => !!content,
-			`${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_CONTENT} > child`
-		)
-			.then((contentChild) => {
-				// Start the mutation observer for more info dialog
-				this.dialogContentMutationObserver.disconnect();
-				this.dialogContentMutationObserver.observe(content, {
-					childList: true,
-				});
-				this.runDialogsChildren(contentChild);
-			})
-			.catch(() => { /* ignore if it doesn‘t exist */ });
-
-		this.insertDialogStyles(dialog);
-
-	}
-
-	public async runDialogsChildren(child: Element) {
-
-		if (
-			!child ||
-			(
-				child.localName !== ELEMENT.HA_DIALOG_MORE_INFO &&
-				child.localName !== ELEMENT.HA_DIALOG_MORE_INFO_HISTORY_AND_LOGBOOK
-			)
-		) {
-			return;
-		}
-
-		const childShadowRoot = await getPromisableElement(
-			() => child.shadowRoot,
-			(moreInfo: ShadowRoot) => !!moreInfo,
-			`${ELEMENT.HA_DIALOG} > ${ELEMENT.HA_DIALOG_CONTENT} > ${child.localName}:${SHADOW_ROOT_SUFFIX}`
-		);
-
-		this.insertDialogChildStyles(childShadowRoot);
-
+	public runDialogs(dialog: Element = this.ha?.shadowRoot?.querySelector(ELEMENT.HA_MORE_INFO_DIALOG)) {
+		if (!dialog) return;
+		this.insertMoreInfoDialogStyles();
 	}
 
 	protected async processConfig(config: KioskConfig) {
+
 		const dash = this.ha.hass.panelUrl;
+
 		if (!window.kioskModeEntities[dash]) {
 			window.kioskModeEntities[dash] = [];
 		}
@@ -232,30 +173,6 @@ class KioskMode implements KioskModeRunner {
 		Object.values(CONDITIONAL_OPTION).forEach((option: CONDITIONAL_OPTION) => {
 			this.options[option] = false;
 		});
-
-		this.huiRoot = await getPromisableElement(
-			(): ShadowRoot => this.lovelace?.shadowRoot?.querySelector(ELEMENT.HUI_ROOT)?.shadowRoot,
-			(huiRoot: ShadowRoot) => !!huiRoot,
-			`${ELEMENT.HUI_ROOT}${SHADOW_ROOT_SUFFIX}`
-		);
-
-		this.drawerLayout = await getPromisableElement(
-			(): HTMLElement => this.main.querySelector<HTMLElement>(ELEMENT.HA_DRAWER),
-			(drawerLayout: HTMLElement) => !!drawerLayout,
-			ELEMENT.HA_DRAWER
-		);
-
-		this.appToolbar = await getPromisableElement(
-			(): HTMLElement => this.huiRoot.querySelector<HTMLElement>(ELEMENT.TOOLBAR),
-			(appToolbar: HTMLElement) => !!appToolbar,
-			ELEMENT.TOOLBAR
-		);
-
-		this.sideBarRoot = await getPromisableElement(
-			(): ShadowRoot => this.drawerLayout.querySelector(ELEMENT.HA_SIDEBAR)?.shadowRoot,
-			(sideBarRoot: ShadowRoot) => !!sideBarRoot,
-			`${ELEMENT.HA_SIDEBAR}${SHADOW_ROOT_SUFFIX}`
-		);
 
 		// Get menu translations
 		getMenuTranslations(this.ha)
@@ -269,12 +186,8 @@ class KioskMode implements KioskModeRunner {
 
 		// Retrieve localStorage values & query string options.
 		if (
-			cached(
-				Object.values(OPTION)
-			) ||
-			queryString(
-				Object.values(OPTION)
-			)
+			cached(Object.values(OPTION)) ||
+			queryString(Object.values(OPTION))
 		) {
 			Object.values(OPTION).forEach((option: OPTION): void => {
 				this.options[option] = cached(option) || queryString(option);
@@ -475,19 +388,22 @@ class KioskMode implements KioskModeRunner {
 	}
 
 	// INSERT MORE INFO DIALOG STYLES
-	protected async insertDialogStyles(dialog: HTMLElement) {
+	protected async insertMoreInfoDialogStyles() {
 
-		getPromisableElement(
-			(): NodeListOf<HTMLElement> => dialog.querySelectorAll<HTMLElement>(`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`),
-			(elements: NodeListOf<HTMLElement>): boolean => !!elements,
-			`:scope > ${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`
-		)
+		this.HAMoreInfoDialogElements.HA_DIALOG
+			.selector.query(`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`)
+			.all
 			.then((menuItems: NodeListOf<HTMLElement>) => {
 				addMenuItemsDataSelectors(menuItems, this.menuTranslations);
-			})
-			.catch((message) => {
-				console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} ${message}`);
 			});
+
+		const dialog = await this.HAMoreInfoDialogElements.HA_DIALOG.element;
+		const moreInfoDialogContent = this.HAMoreInfoDialogElements.HA_DIALOG_CONTENT;
+		const MORE_INFO_CHILD_ROOT = moreInfoDialogContent
+			.selector
+			.query(`${ELEMENT.HA_DIALOG_MORE_INFO}, ${ELEMENT.HA_DIALOG_MORE_INFO_HISTORY_AND_LOGBOOK}`)
+			.$;
+		const moreInfo = await MORE_INFO_CHILD_ROOT.element;
 
 		if (
 			this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] ||
@@ -513,11 +429,6 @@ class KioskMode implements KioskModeRunner {
 		} else {
 			removeStyle(dialog);
 		}
-
-	}
-
-	// INSERT MORE INFO DIALOG CHILDREN STYLES
-	protected async insertDialogChildStyles(moreInfo: ShadowRoot) {
 
 		const legacyClimateInfoDialog = Boolean(
 			this.version &&
@@ -560,69 +471,55 @@ class KioskMode implements KioskModeRunner {
 
 		if (!legacyClimateInfoDialog) {
 
-			getPromisableElement(
-				(): ShadowRoot => moreInfo.querySelector(ELEMENT.HA_DIALOG_CLIMATE)?.shadowRoot,
-				(haDialogClimate: ShadowRoot) => !!haDialogClimate,
-				''
-			)
-				.then((haDialogClimate: ShadowRoot) => {
+			const haDialogClimate = MORE_INFO_CHILD_ROOT
+				.query(ELEMENT.HA_DIALOG_CLIMATE)
+				.$;
+			const haDialogClimateTemperature = haDialogClimate
+				.query(ELEMENT.HA_DIALOG_CLIMATE_TEMPERATURE)
+				.$;
+			const haDialogClimateCircularSlider = haDialogClimateTemperature
+				.query(ELEMENT.HA_DIALOG_CLIMATE_CIRCULAR_SLIDER)
+				.$;
 
-					if (
-						this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
-						this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]
-					) {
-						addStyle(STYLES.DIALOG_CLIMATE_CONTROL_SELECT, haDialogClimate);
-					} else {
-						removeStyle(haDialogClimate);
-					}
+			haDialogClimate.element.then((haDialogClimate: ShadowRoot): void => {
+				if (
+					this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]
+				) {
+					addStyle(STYLES.DIALOG_CLIMATE_CONTROL_SELECT, haDialogClimate);
+				} else {
+					removeStyle(haDialogClimate);
+				}
+			});
 
-					getPromisableElement(
-						(): ShadowRoot => haDialogClimate.querySelector(ELEMENT.HA_DIALOG_CLIMATE_TEMPERATURE)?.shadowRoot,
-						(haDialogClimateTemperature: ShadowRoot) => !!haDialogClimateTemperature,
-						''
-					)
-						.then((haDialogClimateTemperature: ShadowRoot) => {
+			haDialogClimateTemperature.element.then((haDialogClimateTemperature: ShadowRoot): void => {
+				if (
+					this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
+				) {
+					addStyle(STYLES.DIALOG_CLIMATE_TEMPERATURE_BUTTONS, haDialogClimateTemperature);
+				} else {
+					removeStyle(haDialogClimateTemperature);
+				}
+			});
 
-							if (
-								this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
-								this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
-							) {
-								addStyle(STYLES.DIALOG_CLIMATE_TEMPERATURE_BUTTONS, haDialogClimateTemperature);
-							} else {
-								removeStyle(haDialogClimateTemperature);
-							}
+			haDialogClimateCircularSlider.element.then((haDialogClimateCircularSlider: ShadowRoot) => {
+				if (
+					this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
+				) {
+					addStyle(STYLES.DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION, haDialogClimateCircularSlider);
+				} else {
+					removeStyle(haDialogClimateCircularSlider);
+				}
+			});
 
-							getPromisableElement(
-								(): ShadowRoot => haDialogClimateTemperature.querySelector(ELEMENT.HA_DIALOG_CLIMATE_CIRCULAR_SLIDER)?.shadowRoot,
-								(haDialogClimateCircularSlider: ShadowRoot) => !!haDialogClimateCircularSlider,
-								''
-							)
-								.then((haDialogClimateCircularSlider: ShadowRoot) => {
-
-									if (
-										this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
-										this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
-									) {
-										addStyle(STYLES.DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION, haDialogClimateCircularSlider);
-									} else {
-										removeStyle(haDialogClimateCircularSlider);
-									}
-
-								})
-								.catch(() => { /* ignore if it doesn‘t exist */ });
-
-						})
-						.catch(() => { /* ignore if it doesn‘t exist */ });
-
-				})
-				.catch(() => { /* ignore if it doesn‘t exist */ });
 		}
 
-		getPromisableElement(
-			(): ShadowRoot => moreInfo.querySelector(ELEMENT.HA_DIALOG_HISTORY)?.shadowRoot,
-			(dialogHistory: ShadowRoot) => !!dialogHistory,
-			''
-		)
+		MORE_INFO_CHILD_ROOT
+			.query(ELEMENT.HA_DIALOG_HISTORY)
+			.$
+			.element
 			.then((dialogHistory: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE]) {
 					addStyle(STYLES.DIALOG_SHOW_MORE, dialogHistory);
@@ -630,14 +527,12 @@ class KioskMode implements KioskModeRunner {
 				} else {
 					removeStyle(dialogHistory);
 				}
-			})
-			.catch(() => { /* ignore if it doesn‘t exist */ });
+			});
 
-		getPromisableElement(
-			(): ShadowRoot => moreInfo.querySelector(ELEMENT.HA_DIALOG_LOGBOOK)?.shadowRoot,
-			(dialogLogbook: ShadowRoot) => !!dialogLogbook,
-			''
-		)
+		MORE_INFO_CHILD_ROOT
+			.query(ELEMENT.HA_DIALOG_LOGBOOK)
+			.$
+			.element
 			.then((dialogLogbook: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE]) {
 					addStyle(STYLES.DIALOG_SHOW_MORE, dialogLogbook);
@@ -645,11 +540,10 @@ class KioskMode implements KioskModeRunner {
 				} else {
 					removeStyle(dialogLogbook);
 				}
-			})
-			.catch(() => { /* ignore if it doesn‘t exist */ });
+			});
 
-		getPromisableElement(
-			(): ShadowRoot => moreInfo.querySelector(
+		MORE_INFO_CHILD_ROOT
+			.query(
 				[
 					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`,
 					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_VACUUM}`,
@@ -657,11 +551,11 @@ class KioskMode implements KioskModeRunner {
 					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_LIGHT}`,
 					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`
 				].join(',')
-			)?.shadowRoot,
-			(dialogChild: ShadowRoot) => !!dialogChild,
-			''
-		)
+			)
+			.$
+			.element
 			.then((dialogChild: ShadowRoot) => {
+
 				if (
 					this.options[OPTION.HIDE_DIALOG_ATTRIBUTES] ||
 					this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] ||
@@ -686,14 +580,13 @@ class KioskMode implements KioskModeRunner {
 				} else {
 					removeStyle(dialogChild);
 				}
-			})
-			.catch(() => { /* ignore if it doesn‘t exist */ });
 
-		getPromisableElement(
-			(): ShadowRoot => moreInfo.querySelector(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)?.shadowRoot,
-			(dialogChild: ShadowRoot) => !!dialogChild,
-			''
-		)
+			});
+
+		MORE_INFO_CHILD_ROOT
+			.query(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)
+			.$
+			.element
 			.then((dialogChild: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS]) {
 					addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogChild);
@@ -701,8 +594,7 @@ class KioskMode implements KioskModeRunner {
 				} else {
 					removeStyle(dialogChild);
 				}
-			})
-			.catch(() => { /* ignore if it doesn‘t exist */ });
+			});
 
 	}
 
@@ -714,70 +606,18 @@ class KioskMode implements KioskModeRunner {
 		}, WINDOW_RESIZE_DELAY);
 	}
 
-	// Run on dashboard change
-	protected watchDashboards(mutations: MutationRecord[]) {
-		mutations.forEach(({ addedNodes }): void => {
-			addedNodes.forEach((node: Element): void => {
-				if (node.localName === ELEMENT.HA_PANEL_LOVELACE) {
-					window.KioskMode.run(node as Lovelace);
-				}
-			});
-		});
-	}
-
-	// Run on more info dialogs change
-	protected watchMoreInfoDialogs(mutations: MutationRecord[]) {
-		mutations.forEach(({ addedNodes }): void => {
-			addedNodes.forEach((node: Element): void => {
-				if (node.localName === ELEMENT.HA_MORE_INFO_DIALOG) {
-					window.KioskMode
-						.runDialogs(node)
-						.catch((error: Error) => console.warn(`${NON_CRITICAL_WARNING} ${error?.message}`));
-				}
-			});
-		});
-	}
-
-	// Run on more info dialogs content change
-	protected watchMoreInfoDialogsContent(mutations: MutationRecord[]) {
-		mutations.forEach(({ addedNodes }): void => {
-			addedNodes.forEach((node: Element): void => {
-				if (
-					node.localName === ELEMENT.HA_DIALOG_MORE_INFO ||
-					node.localName === ELEMENT.HA_DIALOG_MORE_INFO_HISTORY_AND_LOGBOOK
-				) {
-					window.KioskMode
-						.runDialogsChildren(node)
-						.catch((error: Error) => console.warn(`${NON_CRITICAL_WARNING} ${error?.message}`));
-				}
-			});
-		});
-	}
-
 	// Run on button menu change
 	protected updateMenuItemsLabels() {
 
 		if (!this.menuTranslations) return;
 
-		getPromisableElement(
-			(): NodeListOf<HTMLElement> => this.appToolbar.querySelectorAll<HTMLElement>(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`),
-			(elements: NodeListOf<HTMLElement>): boolean => !!elements,
-			`:scope > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`
-		)
+		this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`).all
 			.then((menuItems: NodeListOf<HTMLElement>) => {
 				addMenuItemsDataSelectors(menuItems, this.menuTranslations);
-			})
-			.catch((message) => {
-				console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} ${message}`);
 			});
 
 		if (this.user.is_admin) {
-
-			getPromisableElement(
-				(): NodeListOf<HTMLElement> => this.appToolbar.querySelectorAll(ELEMENT.OVERLAY_MENU_ITEM),
-				(elements: NodeListOf<HTMLElement>) => !!(elements && elements.length),
-				`${ELEMENT.TOOLBAR} > ${ELEMENT.OVERLAY_MENU_ITEM}`
-			)
+			this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} ${ELEMENT.OVERLAY_MENU_ITEM}`).all
 				.then((overflowMenuItems: NodeListOf<HTMLElement>) => {
 					overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
 						if (
@@ -789,9 +629,6 @@ class KioskMode implements KioskModeRunner {
 							overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
 						}
 					});
-				})
-				.catch((message) => {
-					console.warn(`${NAMESPACE}: ${NON_CRITICAL_WARNING} ${message}`);
 				});
 		}
 	}
@@ -816,9 +653,7 @@ class KioskMode implements KioskModeRunner {
 			)
 		) {
 			await this.run();
-			this
-				.runDialogs()
-				.catch(() => { /* ignore if it doesn‘t exist */ });
+			this.runDialogs();
 		}
 	}
 

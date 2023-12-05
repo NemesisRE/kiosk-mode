@@ -19,19 +19,20 @@ export const toArray = <T>(x: T | T[]): T[] => {
 	return Array.isArray(x) ? x : [x];
 };
 
-const getElementName = (elem: HTMLElement | ShadowRoot): string => {
+const getElementName = (elem: Element | ShadowRoot): string => {
 	if (elem instanceof ShadowRoot) {
 		return elem.host.localName;
 	}
 	return elem.localName;
 };
 
-export const styleExists = (elem: HTMLElement | ShadowRoot): HTMLStyleElement => {
+export const styleExists = (elem: Element | ShadowRoot): HTMLStyleElement => {
 	const name = getElementName(elem);
 	return elem.querySelector<HTMLStyleElement>(`#${STYLES_PREFIX}_${name}`);
 };
 
-export const addStyle = (css: string, elem: HTMLElement | ShadowRoot): void => {
+export const addStyle = (css: string, elem: Element | ShadowRoot | null): void => {
+	if (!elem) return;
 	const name = getElementName(elem);
 	let style = styleExists(elem);
 	if (!style) {
@@ -42,7 +43,8 @@ export const addStyle = (css: string, elem: HTMLElement | ShadowRoot): void => {
 	style.innerHTML = css;
 };
 
-export const removeStyle = (elements: StyleElement): void => {
+export const removeStyle = (elements: StyleElement | null): void => {
+	if (!elements) return;
 	toArray(elements).forEach((elem) => {
 		const name = getElementName(elem);
 		if (styleExists(elem)) {
@@ -198,8 +200,8 @@ export const addMenuItemsDataSelectors = (
 	menuItems.forEach((menuItem: HTMLElement): void => {
 		if (
 			menuItem &&
-          menuItem.dataset &&
-          !menuItem.dataset.selector
+			menuItem.dataset &&
+			!menuItem.dataset.selector
 		) {
 			const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
 			menuItem.dataset.selector = translations[icon.title];

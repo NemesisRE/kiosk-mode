@@ -2,8 +2,7 @@ import { OPTION, CONDITIONAL_OPTION } from '@constants';
 
 export interface KioskModeRunner {
     run: (lovelace: HTMLElement) => Promise<void>;
-    runDialogs: (moreInfoDialog: Element) => Promise<void>;
-    runDialogsChildren: (child: Element) => Promise<void>
+    runDialogs: (dialog: Element) => void;
 }
 
 export interface User {
@@ -100,7 +99,7 @@ export interface HassConnection {
     }
 }
 
-export type StyleElement = HTMLElement | ShadowRoot | HTMLElement[] | ShadowRoot[];
+export type StyleElement = Element | ShadowRoot | Element[] | ShadowRoot[];
 
 declare global {
     interface Window {

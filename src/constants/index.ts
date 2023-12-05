@@ -1,7 +1,6 @@
 export const NAMESPACE = 'kiosk-mode';
 export const STYLES_PREFIX = 'kiosk_mode';
 export const NON_CRITICAL_WARNING = '[ Non critial warning ]';
-export const SHADOW_ROOT_SUFFIX = ':shadowRoot';
 
 export enum OPTION {
     KIOSK = 'kiosk',
@@ -83,23 +82,17 @@ export const MENU_REFERENCES = Object.freeze({
 
 export enum ELEMENT {
     HOME_ASSISTANT = 'home-assistant',
-    HOME_ASSISTANT_MAIN = 'home-assistant-main',
     HA_PANEL_LOVELACE = 'ha-panel-lovelace',
-    PARTIAL_PANEL_RESOLVER = 'partial-panel-resolver',
-    HUI_ROOT = 'hui-root',
     HUI_VIEW = 'hui-view',
     MENU_ITEM = 'ha-icon-button',
     MENU_ITEM_ICON = 'mwc-icon-button',
     BUTTON_MENU = 'ha-button-menu',
     OVERLAY_MENU_ITEM = 'mwc-list-item',
-    HA_SIDEBAR = 'ha-sidebar',
-    HA_DRAWER = 'ha-drawer',
     TOOLBAR = '.toolbar',
     ACTION_ITEMS = '.action-items',
     HA_MORE_INFO_DIALOG = 'ha-more-info-dialog',
     HA_DIALOG = 'ha-dialog',
     HA_DIALOG_HEADER = 'ha-dialog-header',
-    HA_DIALOG_CONTENT = '.content',
     HA_DIALOG_MORE_INFO = 'ha-more-info-info',
     HA_DIALOG_HISTORY = 'ha-more-info-history',
     HA_DIALOG_LOGBOOK = 'ha-more-info-logbook',
