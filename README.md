@@ -369,7 +369,6 @@ This works for all query strings except for the utility strings listed below.
 * Run `yarn`
 * Run `yarn demo` (`yarn demo:win` on Windows environments)
 * Open http://localhost:8123/
-* Create an account and complete the onboard
 
 ## Kiosk-mode complements
 
