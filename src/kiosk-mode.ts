@@ -396,14 +396,7 @@ class KioskMode implements KioskModeRunner {
 				this.version[0] < 2023 ||
 				(
 					this.version[0] === 2023 &&
-					(
-						this.version[1] < 12 ||
-						(
-							this.version[1] === 12 &&
-							!Number.isNaN(+this.version[2]) &&
-							+this.version[2] < 1
-						)
-					)
+					this.version[1] < 12
 				)
 			)
 		);
