@@ -118,9 +118,6 @@ export const STYLES = {
 		'.actions',
 		`hr:has(+ .actions)`
 	),
-	DIALOG_CLIMATE_ACTIONS: getDisplayNoneRulesString(
-		ELEMENT.HA_DIALOG_CLIMATE
-	),
 	DIALOG_CLIMATE_CONTROL_SELECT: getDisplayNoneRulesString(
 		ELEMENT.HA_DIALOG_CLIMATE_CONTROL_SELECT
 	),
