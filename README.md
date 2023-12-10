@@ -303,6 +303,12 @@ Add a query string such as `?kiosk` to the end of your URL:
 https://hass:8123/lovelace/default_view?kiosk
 ```
 
+If you need to add multiple query parameters, you need to separate them by `&` (only the first parameter should be prepended by `?`):
+
+```
+https://hass:8123/lovelace/default_view?hide_header&hide_sidebar
+```
+
 The query string options are:
 
 * `?kiosk` to hide both header and sidebar
