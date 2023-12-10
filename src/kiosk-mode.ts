@@ -390,6 +390,24 @@ class KioskMode implements KioskModeRunner {
 	// INSERT MORE INFO DIALOG STYLES
 	protected async insertMoreInfoDialogStyles() {
 
+		const legacyMoreInfoDialog = Boolean(
+			this.version &&
+			(
+				this.version[0] < 2023 ||
+				(
+					this.version[0] === 2023 &&
+					(
+						this.version[1] < 12 ||
+						(
+							this.version[1] === 12 &&
+							!Number.isNaN(+this.version[2]) &&
+							+this.version[2] < 1
+						)
+					)
+				)
+			)
+		);
+
 		this.HAMoreInfoDialogElements.HA_DIALOG
 			.selector.query(`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`)
 			.all
@@ -449,11 +467,22 @@ class KioskMode implements KioskModeRunner {
 			removeStyle(moreInfo);
 		}
 
-		const haDialogClimate = MORE_INFO_CHILD_ROOT
-			.query(ELEMENT.HA_DIALOG_CLIMATE)
-			.$;
+		const haDialogClimate = legacyMoreInfoDialog
+			// BEFORE Home Assistant 2023.12.0
+			? MORE_INFO_CHILD_ROOT
+				.query(ELEMENT.HA_DIALOG_CLIMATE)
+				.$
+			: MORE_INFO_CHILD_ROOT
+				.query(ELEMENT.HA_DIALOG_MORE_INFO_CONTENT)
+				.$
+				.query(ELEMENT.HA_DIALOG_CLIMATE)
+				.$;
 		const haDialogClimateTemperature = haDialogClimate
-			.query(ELEMENT.HA_DIALOG_CLIMATE_TEMPERATURE)
+			.query(
+				legacyMoreInfoDialog
+					? ELEMENT.HA_DIALOG_CLIMATE_TEMPERATURE
+					: ELEMENT.HA_STATE_CONTROL_CLIMATE_TEMPERATURE
+			)
 			.$;
 		const haDialogClimateCircularSlider = haDialogClimateTemperature
 			.query(ELEMENT.HA_DIALOG_CLIMATE_CIRCULAR_SLIDER)
@@ -525,26 +554,8 @@ class KioskMode implements KioskModeRunner {
 				}
 			});
 
-		const legacyMoreInfoDialog = Boolean(
-			this.version &&
-			(
-				this.version[0] < 2023 ||
-				(
-					this.version[0] === 2023 &&
-					(
-						this.version[1] < 12 ||
-						(
-							this.version[1] === 12 &&
-							!Number.isNaN(+this.version[2]) &&
-							+this.version[2] < 1
-						)
-					)
-				)
-			)
-		);
-
 		const attributesShadowRoot = legacyMoreInfoDialog
-			// Attributes of more-info dialogs prior to HA 2023.12.1
+			// // BEFORE Home Assistant 2023.12.0
 			? MORE_INFO_CHILD_ROOT
 				.query(
 					[
