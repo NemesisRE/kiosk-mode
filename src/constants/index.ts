@@ -106,7 +106,8 @@ export enum ELEMENT {
     HA_DIALOG_UPDATE = 'more-info-update',
     HA_DIALOG_CLIMATE = 'more-info-climate',
     HA_DIALOG_CLIMATE_CONTROL_SELECT = 'ha-more-info-control-select-container',
-    HA_DIALOG_CLIMATE_TEMPERATURE = 'ha-more-info-climate-temperature',
+    HA_DIALOG_CLIMATE_TEMPERATURE = 'ha-more-info-climate-temperature', // Home Assistant < 2023.12.0
+    HA_STATE_CONTROL_CLIMATE_TEMPERATURE = 'ha-state-control-climate-temperature',
     HA_DIALOG_CLIMATE_TEMPERATURE_BUTTONS = '.buttons',
     HA_DIALOG_CLIMATE_CIRCULAR_SLIDER = 'ha-control-circular-slider',
     HA_DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION = '#interaction',

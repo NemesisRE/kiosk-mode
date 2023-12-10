@@ -390,6 +390,17 @@ class KioskMode implements KioskModeRunner {
 	// INSERT MORE INFO DIALOG STYLES
 	protected async insertMoreInfoDialogStyles() {
 
+		const legacyMoreInfoDialog = Boolean(
+			this.version &&
+			(
+				this.version[0] < 2023 ||
+				(
+					this.version[0] === 2023 &&
+					this.version[1] < 12
+				)
+			)
+		);
+
 		this.HAMoreInfoDialogElements.HA_DIALOG
 			.selector.query(`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`)
 			.all
@@ -430,91 +441,85 @@ class KioskMode implements KioskModeRunner {
 			removeStyle(dialog);
 		}
 
-		const legacyClimateInfoDialog = Boolean(
-			this.version &&
-			(
-				this.version[0] < 2023 ||
-				(
-					this.version[0] === 2023 &&
-					this.version[1] < 9
-				)
-			)
-		);
-
 		if (
 			this.options[OPTION.HIDE_DIALOG_HISTORY] ||
-			this.options[OPTION.HIDE_DIALOG_LOGBOOK] ||
-			this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
-			this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS] ||
-			this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]
+			this.options[OPTION.HIDE_DIALOG_LOGBOOK]
 		) {
 			const styles = [
 				this.options[OPTION.HIDE_DIALOG_HISTORY]
 					? STYLES.DIALOG_HISTORY : '',
 				this.options[OPTION.HIDE_DIALOG_LOGBOOK]
-					? STYLES.DIALOG_LOGBOOK : '',
-				this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] && legacyClimateInfoDialog
-					? STYLES.DIALOG_CLIMATE_ACTIONS
-					: ''
+					? STYLES.DIALOG_LOGBOOK : ''
 			];
 			addStyle(styles.join(''), moreInfo);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (this.options[OPTION.HIDE_DIALOG_HISTORY])                     setCache(OPTION.HIDE_DIALOG_HISTORY, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK])                     setCache(OPTION.HIDE_DIALOG_LOGBOOK, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS])             setCache(OPTION.HIDE_DIALOG_CLIMATE_ACTIONS, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]) setCache(OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS])    setCache(OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS, TRUE);
+				if (this.options[OPTION.HIDE_DIALOG_HISTORY]) setCache(OPTION.HIDE_DIALOG_HISTORY, TRUE);
+				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK]) setCache(OPTION.HIDE_DIALOG_LOGBOOK, TRUE);
 			}
 		} else {
 			removeStyle(moreInfo);
 		}
 
-		if (!legacyClimateInfoDialog) {
-
-			const haDialogClimate = MORE_INFO_CHILD_ROOT
+		const haDialogClimate = legacyMoreInfoDialog
+			// BEFORE Home Assistant 2023.12.0
+			? MORE_INFO_CHILD_ROOT
+				.query(ELEMENT.HA_DIALOG_CLIMATE)
+				.$
+			: MORE_INFO_CHILD_ROOT
+				.query(ELEMENT.HA_DIALOG_MORE_INFO_CONTENT)
+				.$
 				.query(ELEMENT.HA_DIALOG_CLIMATE)
 				.$;
-			const haDialogClimateTemperature = haDialogClimate
-				.query(ELEMENT.HA_DIALOG_CLIMATE_TEMPERATURE)
-				.$;
-			const haDialogClimateCircularSlider = haDialogClimateTemperature
-				.query(ELEMENT.HA_DIALOG_CLIMATE_CIRCULAR_SLIDER)
-				.$;
+		const haDialogClimateTemperature = haDialogClimate
+			.query(
+				legacyMoreInfoDialog
+					? ELEMENT.HA_DIALOG_CLIMATE_TEMPERATURE
+					: ELEMENT.HA_STATE_CONTROL_CLIMATE_TEMPERATURE
+			)
+			.$;
+		const haDialogClimateCircularSlider = haDialogClimateTemperature
+			.query(ELEMENT.HA_DIALOG_CLIMATE_CIRCULAR_SLIDER)
+			.$;
 
-			haDialogClimate.element.then((haDialogClimate: ShadowRoot): void => {
-				if (
-					this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
-					this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]
-				) {
-					addStyle(STYLES.DIALOG_CLIMATE_CONTROL_SELECT, haDialogClimate);
-				} else {
-					removeStyle(haDialogClimate);
+		haDialogClimate.element.then((haDialogClimate: ShadowRoot): void => {
+			if (
+				this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
+				this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]
+			) {
+				addStyle(STYLES.DIALOG_CLIMATE_CONTROL_SELECT, haDialogClimate);
+				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
+					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS])          setCache(OPTION.HIDE_DIALOG_CLIMATE_ACTIONS, TRUE);
+					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]) setCache(OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS, TRUE);
 				}
-			});
+			} else {
+				removeStyle(haDialogClimate);
+			}
+		});
 
-			haDialogClimateTemperature.element.then((haDialogClimateTemperature: ShadowRoot): void => {
-				if (
-					this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
-					this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
-				) {
-					addStyle(STYLES.DIALOG_CLIMATE_TEMPERATURE_BUTTONS, haDialogClimateTemperature);
-				} else {
-					removeStyle(haDialogClimateTemperature);
+		haDialogClimateTemperature.element.then((haDialogClimateTemperature: ShadowRoot): void => {
+			if (
+				this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
+				this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
+			) {
+				addStyle(STYLES.DIALOG_CLIMATE_TEMPERATURE_BUTTONS, haDialogClimateTemperature);
+				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
+					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]) setCache(OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS, TRUE);
 				}
-			});
+			} else {
+				removeStyle(haDialogClimateTemperature);
+			}
+		});
 
-			haDialogClimateCircularSlider.element.then((haDialogClimateCircularSlider: ShadowRoot) => {
-				if (
-					this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
-					this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
-				) {
-					addStyle(STYLES.DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION, haDialogClimateCircularSlider);
-				} else {
-					removeStyle(haDialogClimateCircularSlider);
-				}
-			});
-
-		}
+		haDialogClimateCircularSlider.element.then((haDialogClimateCircularSlider: ShadowRoot) => {
+			if (
+				this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
+				this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
+			) {
+				addStyle(STYLES.DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION, haDialogClimateCircularSlider);
+			} else {
+				removeStyle(haDialogClimateCircularSlider);
+			}
+		});
 
 		MORE_INFO_CHILD_ROOT
 			.query(ELEMENT.HA_DIALOG_HISTORY)
@@ -542,18 +547,36 @@ class KioskMode implements KioskModeRunner {
 				}
 			});
 
-		MORE_INFO_CHILD_ROOT
-			.query(
-				[
-					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`,
-					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_VACUUM}`,
-					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_TIMER}`,
-					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_LIGHT}`,
-					`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`
-				].join(',')
-			)
-			.$
-			.element
+		const attributesShadowRoot = legacyMoreInfoDialog
+			// BEFORE Home Assistant 2023.12.0
+			? MORE_INFO_CHILD_ROOT
+				.query(
+					[
+						`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_DEFAULT}`,
+						`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_VACUUM}`,
+						`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_TIMER}`,
+						`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_LIGHT}`,
+						`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_MEDIA_PLAYER}`
+					].join(',')
+				)
+				.$
+				.element
+			: MORE_INFO_CHILD_ROOT
+				.query(ELEMENT.HA_DIALOG_MORE_INFO_CONTENT)
+				.$
+				.query(
+					[
+						ELEMENT.HA_DIALOG_DEFAULT,
+						ELEMENT.HA_DIALOG_VACUUM,
+						ELEMENT.HA_DIALOG_TIMER,
+						ELEMENT.HA_DIALOG_LIGHT,
+						ELEMENT.HA_DIALOG_MEDIA_PLAYER
+					].join(',')
+				)
+				.$
+				.element;
+
+		attributesShadowRoot
 			.then((dialogChild: ShadowRoot) => {
 
 				if (
@@ -583,10 +606,20 @@ class KioskMode implements KioskModeRunner {
 
 			});
 
-		MORE_INFO_CHILD_ROOT
-			.query(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)
-			.$
-			.element
+		const haDialogUpdateShadowRoot = legacyMoreInfoDialog
+			// BEFORE Home Assistant 2023.12.0
+			? MORE_INFO_CHILD_ROOT
+				.query(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)
+				.$
+				.element
+			: MORE_INFO_CHILD_ROOT
+				.query(ELEMENT.HA_DIALOG_MORE_INFO_CONTENT)
+				.$
+				.query(ELEMENT.HA_DIALOG_UPDATE)
+				.$
+				.element;
+
+		haDialogUpdateShadowRoot
 			.then((dialogChild: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS]) {
 					addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogChild);
