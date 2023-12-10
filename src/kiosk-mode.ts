@@ -555,7 +555,7 @@ class KioskMode implements KioskModeRunner {
 			});
 
 		const attributesShadowRoot = legacyMoreInfoDialog
-			// // BEFORE Home Assistant 2023.12.0
+			// BEFORE Home Assistant 2023.12.0
 			? MORE_INFO_CHILD_ROOT
 				.query(
 					[
@@ -613,10 +613,20 @@ class KioskMode implements KioskModeRunner {
 
 			});
 
-		MORE_INFO_CHILD_ROOT
-			.query(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)
-			.$
-			.element
+		const haDialogUpdateShadowRoot = legacyMoreInfoDialog
+			// BEFORE Home Assistant 2023.12.0
+			? MORE_INFO_CHILD_ROOT
+				.query(`${ELEMENT.HA_DIALOG_MORE_INFO_CONTENT} > ${ELEMENT.HA_DIALOG_UPDATE}`)
+				.$
+				.element
+			: MORE_INFO_CHILD_ROOT
+				.query(ELEMENT.HA_DIALOG_MORE_INFO_CONTENT)
+				.$
+				.query(ELEMENT.HA_DIALOG_UPDATE)
+				.$
+				.element;
+
+		haDialogUpdateShadowRoot
 			.then((dialogChild: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS]) {
 					addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogChild);
