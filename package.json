@@ -28,7 +28,7 @@
     "demo:win": "yarn build && yarn start:ha:win"
   },
   "dependencies": {
-    "home-assistant-query-selector": "^2.1.1"
+    "home-assistant-query-selector": "^2.1.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
