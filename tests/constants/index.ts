@@ -1,4 +1,5 @@
 export const BASE_URL = 'http://host.docker.internal:8123';
+export const REQUEST_MAXIMUM_RETRIES = 10;
 
 export const SELECTORS = {
 	HUI_MASONRY_VIEW: 'hui-masonry-view',
