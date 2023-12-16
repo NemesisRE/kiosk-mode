@@ -908,12 +908,12 @@ helpertypes@^0.0.19:
   resolved "https://registry.npmjs.org/helpertypes/-/helpertypes-0.0.19.tgz"
   integrity sha512-J00e55zffgi3yVnUp0UdbMztNkr2PnizEkOe9URNohnrNhW5X0QpegkuLpOmFQInpi93Nb8MCjQRHAiCDF42NQ==
 
-home-assistant-query-selector@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/home-assistant-query-selector/-/home-assistant-query-selector-2.1.2.tgz#4c07cfade208400f49b0657a169c6b2b5360f7dd"
-  integrity sha512-Xyi3czMLKlbnPdpxQEtS8W8E2xq4C/W4fsS3zY/d9gx5uEI68B+3/1wZBdXO5jLEjf3LGkr+TPYugK0bdb+zJg==
+home-assistant-query-selector@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/home-assistant-query-selector/-/home-assistant-query-selector-2.1.4.tgz#7b5eb9b8f5e6158473e247a13ffe73e474510a4f"
+  integrity sha512-pAjp3NpttPyJ/HCinPdEa6vMug5OyYTnhwGkj51LNXoTGTAGKQ/DCV/EIARfFPv8iAbuDxWrElBEYa9ClxXreQ==
   dependencies:
-    shadow-dom-selector "^3.0.1"
+    shadow-dom-selector "^4.1.0"
 
 ignore@^5.2.0, ignore@^5.2.4:
   version "5.3.0"
@@ -1332,10 +1332,10 @@ serialize-javascript@^4.0.0:
   dependencies:
     randombytes "^2.1.0"
 
-shadow-dom-selector@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/shadow-dom-selector/-/shadow-dom-selector-3.0.1.tgz#26798d837d601758c07f61777bf05f6f6c7250ac"
-  integrity sha512-wyepC9q/FI7WYMejGhQJq3lqflFGFehrgKaGqJarw8DGOQBHtR9m/NZyeYEshXA85R96BDUCEnsXg6pDS+hF5Q==
+shadow-dom-selector@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/shadow-dom-selector/-/shadow-dom-selector-4.1.0.tgz#0e16fa3425a30ad844f9bc075328c624bcc334a6"
+  integrity sha512-JTidMWSit39Fv7QJE18EsQNFxq2BDOsrXDpxh+8gyJ3zxYwJ8TnpR7LQFk817acq3Y8DLNN9eaqi+UFq4eXZrQ==
 
 shebang-command@^2.0.0:
   version "2.0.0"
