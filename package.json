@@ -21,14 +21,14 @@
     "prepublishOnly": "yarn test:all",
     "version": "git add .",
     "postversion": "git push && git push --tags",
-    "start:ha": "docker run --rm -d -p8123:8123 --shm-size=512m -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.12.1",
-    "start:ha:win": "docker run --rm -d -p8123:8123 --shm-size=512m -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.12.1",
-    "stop:ha": "docker stop $(docker ps -a -q  --filter ancestor=homeassistant/home-assistant:2023.12.1) || true",
+    "start:ha": "docker run --rm -d -p8123:8123 --shm-size=512m -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.12.2",
+    "start:ha:win": "docker run --rm -d -p8123:8123 --shm-size=512m -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.12.2",
+    "stop:ha": "docker stop $(docker ps -a -q  --filter ancestor=homeassistant/home-assistant:2023.12.2) || true",
     "demo": "yarn build && yarn start:ha",
     "demo:win": "yarn build && yarn start:ha:win"
   },
   "dependencies": {
-    "home-assistant-query-selector": "^2.1.1"
+    "home-assistant-query-selector": "^2.1.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
