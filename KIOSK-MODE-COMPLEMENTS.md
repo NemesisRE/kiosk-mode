@@ -62,6 +62,10 @@ your-custom-theme:
     }
 ```
 
+#### Hide or unhide more-info dialogs attributes
+
+With `kiosk-mode` it is possible to hide the more-info dialogs attributes, but if one doesn‘t want to hide this element, but hide specific options shown in this element, then `kiosk-mode` is not the right complement for that. For that you can use [custom-attributes](https://github.com/Mariusthvdb/custom-attributes) which allows one to manage which attributes to hide or shown per entity id, domain, device class or device id globs.
+
 ### Cards
 
 `kiosk-mode` do not modify cards. Mainly because the layout of a lovelace dashboard could have infinite possibilities and it depends on how the user has built it, it is not a fixed layout as the UI of Home Assistant. On top of that, cards change constantly and there are tons of custom-made cards, it will be impossible to maintain and escalate a code that tries to modify whatever card users have in their dashboards. This section contains multiple modifications that you can achieve on cards.
