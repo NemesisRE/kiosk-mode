@@ -31,17 +31,17 @@
     "home-assistant-query-selector": "^2.1.4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
-    "@rollup/plugin-json": "^6.0.1",
+    "@playwright/test": "^1.40.1",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/node": "^20.9.4",
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
+    "@types/node": "^20.10.4",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
     "dotenv-cli": "^7.3.0",
-    "eslint": "^8.54.0",
-    "rollup": "^4.3.0",
+    "eslint": "^8.56.0",
+    "rollup": "^4.9.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^3.4.5",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   }
 }
