@@ -1,5 +1,10 @@
 # kiosk-mode
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
+[![CodeQL](https://github.com/NemesisRE/kiosk-mode/actions/workflows/github-code-scanning/codeql/badge.svg?style=flat-square)](https://github.com/NemesisRE/kiosk-mode/security/code-scanning/tools/CodeQL/status)
+[![HACS Action](https://github.com/NemesisRE/kiosk-mode/actions/workflows/hacs.yaml/badge.svg)](https://github.com/NemesisRE/kiosk-mode/actions/workflows/hacs.yaml)
+[![Test](https://github.com/NemesisRE/kiosk-mode/actions/workflows/test.yaml/badge.svg)](https://github.com/NemesisRE/kiosk-mode/actions/workflows/test.yaml)
+[![release](https://img.shields.io/github/v/release/NemesisRE/kiosk-mode.svg)](https://github.com/NemesisRE/kiosk-mode/releases)
+[![downloads](https://img.shields.io/github/downloads/NemesisRE/kiosk-mode/total)](https://github.com/NemesisRE/kiosk-mode/releases)
 
 Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assistant.io/) lovelace dashboards.
 
