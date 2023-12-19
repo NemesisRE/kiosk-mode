@@ -12,20 +12,21 @@
     "lint:fix": "yarn lint --fix",
     "test:ts": "tsc --noEmit",
     "test:run": "dotenv playwright test",
-    "start:playwright": "docker run --rm --network host --add-host host.docker.internal:host-gateway -v $(pwd):/work/ -w /work -i mcr.microsoft.com/playwright:v1.40.0-jammy sh -c \"yarn install --frozen-lockfile && yarn test:run && exit\"",
+    "start:playwright": "docker run --rm --network host --add-host host.docker.internal:host-gateway -v $(pwd):$(pwd) -w $(pwd) -i mcr.microsoft.com/playwright:v1.40.0-jammy sh -c \"yarn install --frozen-lockfile && yarn test:run && exit\"",
     "test:open": "playwright test --ui",
     "test:update": "playwright test --update-snapshots",
     "test:ci": "yarn demo && yarn start:playwright && yarn stop:ha",
     "test:all": "yarn lint && yarn test:ts && yarn test:ci",
-    "prepare": "yarn build",
-    "prepublishOnly": "yarn test:all",
-    "version": "git add .",
-    "postversion": "git push && git push --tags",
+    "coverage:report": "nyc report --reporter=lcov --reporter=text-summary",
     "start:ha": "docker run --rm -d -p8123:8123 --shm-size=512m -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.12.3",
     "start:ha:win": "docker run --rm -d -p8123:8123 --shm-size=512m -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.12.3",
     "stop:ha": "docker stop $(docker ps -a -q  --filter ancestor=homeassistant/home-assistant:2023.12.3) || true",
     "demo": "yarn build && yarn start:ha",
-    "demo:win": "yarn build && yarn start:ha:win"
+    "demo:win": "yarn build && yarn start:ha:win",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test:all",
+    "version": "git add .",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "home-assistant-query-selector": "^2.1.4"
@@ -39,7 +40,10 @@
     "@typescript-eslint/parser": "^6.14.0",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.56.0",
+    "nyc": "^15.1.0",
+    "playwright-test-coverage": "^1.2.12",
     "rollup": "^4.9.0",
+    "rollup-plugin-istanbul": "^5.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^3.4.5",
     "typescript": "^5.3.3"

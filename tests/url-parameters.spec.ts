@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from 'playwright-test-coverage';
 import { URL_PARAMS, SELECTORS } from './constants';
 import { getUrlWithParam } from './utils';
 

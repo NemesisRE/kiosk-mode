@@ -27,9 +27,13 @@ jobs:
           touch .env
           echo HA_TOKEN=${{ secrets.CYPRESS_HA_TOKEN }} >> .env
           yarn test:all
+      - name: Create coverage
+        run: yarn coverage:report
       - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: test-report
-          path: playwright-report/
+          path: |
+            playwright-report/
+            coverage/
           retention-days: 30
