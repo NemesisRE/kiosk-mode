@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    commit-message:
+      prefix: "[Dependencies]"
+    groups:
+      dependencies-prod:
+        dependency-type: "production"
+      dependencies-dev:
+        dependency-type: "development"
+    labels:
+      - dependencies
+    versioning-strategy: increase
