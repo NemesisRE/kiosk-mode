@@ -1328,12 +1328,12 @@ helpertypes@^0.0.19:
   resolved "https://registry.npmjs.org/helpertypes/-/helpertypes-0.0.19.tgz"
   integrity sha512-J00e55zffgi3yVnUp0UdbMztNkr2PnizEkOe9URNohnrNhW5X0QpegkuLpOmFQInpi93Nb8MCjQRHAiCDF42NQ==
 
-home-assistant-query-selector@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/home-assistant-query-selector/-/home-assistant-query-selector-2.1.4.tgz#7b5eb9b8f5e6158473e247a13ffe73e474510a4f"
-  integrity sha512-pAjp3NpttPyJ/HCinPdEa6vMug5OyYTnhwGkj51LNXoTGTAGKQ/DCV/EIARfFPv8iAbuDxWrElBEYa9ClxXreQ==
+home-assistant-query-selector@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/home-assistant-query-selector/-/home-assistant-query-selector-2.1.5.tgz#b7d9df3538f28d3beb1bcc5577bcf5aa1458c5fe"
+  integrity sha512-Epr2DSFOx6Z8CyFSGalqghwT0dq2JGH1np9+T1q7Nkflk40g3LgBaRDiSkjAtmiU6sY0UOkmEW0tfxLhCMR9NA==
   dependencies:
-    shadow-dom-selector "^4.1.0"
+    shadow-dom-selector "^4.1.2"
 
 html-escaper@^2.0.0:
   version "2.0.2"
@@ -2045,10 +2045,10 @@ set-blocking@^2.0.0:
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
 
-shadow-dom-selector@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/shadow-dom-selector/-/shadow-dom-selector-4.1.0.tgz#0e16fa3425a30ad844f9bc075328c624bcc334a6"
-  integrity sha512-JTidMWSit39Fv7QJE18EsQNFxq2BDOsrXDpxh+8gyJ3zxYwJ8TnpR7LQFk817acq3Y8DLNN9eaqi+UFq4eXZrQ==
+shadow-dom-selector@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/shadow-dom-selector/-/shadow-dom-selector-4.1.2.tgz#d7bb66907f1f7747b45d7dbe87546ce7f75e9ea3"
+  integrity sha512-e0c+frNE71KtDgRmtl9NxLqbnzmzLU7gYMH0bEpZaMMLg4pX7fPfgTROh4XtS51R6GdTiUM9OEp8dd//AyQd0A==
 
 shebang-command@^2.0.0:
   version "2.0.0"
