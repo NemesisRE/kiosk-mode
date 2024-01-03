@@ -1,4 +1,5 @@
 import { test, expect } from 'playwright-test-coverage';
+import path from 'path';
 import {
 	BASE_URL,
 	SELECTORS,
@@ -223,4 +224,55 @@ test('Option: block_overflow', async ({ page }) => {
 
 	await haRequest(ENTITIES.BLOCK_OVERFLOW, false);
 
+});
+
+test.describe('Option: block_context_menu', () => {
+	test.beforeEach(async ({ context }) => {
+		await context.addInitScript({
+			path: path.join(__dirname, '..', './node_modules/sinon/pkg/sinon.js'),
+		});
+		await context.addInitScript(() => {
+			window['__listener'] = window['sinon'].fake();
+			window.addEventListener('contextmenu', window['__listener']);
+		});
+	});
+	test('Test contextmenu event listener', async ({ page }) => {
+
+		await page.goto(BASE_URL);
+
+		await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
+
+		let executed = await page.evaluate(() => window['__listener'].calledOnce);
+
+		await expect(executed).toBe(false);
+
+		await page.locator(SELECTORS.HEADER).click({
+			button: 'right'
+		});
+
+		executed = await page.evaluate(() => window['__listener'].calledOnce);
+
+		await expect(executed).toBe(true);
+
+		await haRequest(ENTITIES.BLOCK_CONTEXT_MENU, true);
+
+		await page.locator(SELECTORS.HEADER).click({
+			button: 'right'
+		});
+
+		executed = await page.evaluate(() => window['__listener'].calledTwice);
+
+		await expect(executed).toBe(false);
+
+		await haRequest(ENTITIES.BLOCK_CONTEXT_MENU, false);
+
+		await page.locator(SELECTORS.HEADER).click({
+			button: 'right'
+		});
+
+		executed = await page.evaluate(() => window['__listener'].calledTwice);
+
+		await expect(executed).toBe(true);
+
+	});
 });
