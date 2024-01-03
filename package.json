@@ -18,9 +18,9 @@
     "test:ci": "yarn demo && yarn start:playwright && yarn stop:ha",
     "test:all": "yarn lint && yarn test:ts && yarn test:ci",
     "coverage:report": "nyc report --reporter=lcov --reporter=text-summary",
-    "start:ha": "docker run --rm -d -p8123:8123 --shm-size=512m -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.12.3",
-    "start:ha:win": "docker run --rm -d -p8123:8123 --shm-size=512m -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.12.3",
-    "stop:ha": "docker stop $(docker ps -a -q  --filter ancestor=homeassistant/home-assistant:2023.12.3) || true",
+    "start:ha": "docker run --rm -d -p8123:8123 --shm-size=512m -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.12.4",
+    "start:ha:win": "docker run --rm -d -p8123:8123 --shm-size=512m -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.12.4",
+    "stop:ha": "docker stop $(docker ps -a -q  --filter ancestor=homeassistant/home-assistant:2023.12.4) || true",
     "demo": "yarn build && yarn start:ha",
     "demo:win": "yarn build && yarn start:ha:win",
     "prepare": "yarn build",
@@ -29,7 +29,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "home-assistant-query-selector": "^2.1.5"
+    "home-assistant-query-selector": "^3.0.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",

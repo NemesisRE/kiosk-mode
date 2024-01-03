@@ -60,7 +60,7 @@ class KioskMode implements KioskModeRunner {
 
 		const selector = new HAQuerySelector();
 
-		selector.addEventListener(HAQuerySelectorEvent.ON_LOVELACE_PANEL_LOAD, async (event) => {
+		selector.addEventListener(HAQuerySelectorEvent.ON_PANEL_LOAD, async (event) => {
 
 			this.HAElements = event.detail;
 
@@ -93,12 +93,12 @@ class KioskMode implements KioskModeRunner {
 
 		});
 
-		selector.addEventListener(HAQuerySelectorEvent.ON_LOVELACE_MORE_INFO_DIALOG_OPEN, (event) => {
+		selector.addEventListener(HAQuerySelectorEvent.ON_MORE_INFO_DIALOG_OPEN, (event) => {
 			this.HAMoreInfoDialogElements = event.detail;
 			this.insertMoreInfoDialogStyles();
 		});
 
-		selector.addEventListener(HAQuerySelectorEvent.ON_LOVELACE_HISTORY_AND_LOGBOOK_DIALOG_OPEN, (event) => {
+		selector.addEventListener(HAQuerySelectorEvent.ON_HISTORY_AND_LOGBOOK_DIALOG_OPEN, (event) => {
 			this.HAMoreInfoDialogElements = event.detail;
 			this.insertMoreInfoDialogStyles();
 		});
