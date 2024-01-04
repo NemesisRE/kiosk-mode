@@ -45,6 +45,20 @@ your-custom-theme:
       }
 ```
 
+#### Hide back button on subviews
+
+This method hides the back button that appears before the title on lovelace subviews. You need to use the [Card Mode Themes] from [card-mod].
+
+```yaml
+your-custom-theme:
+  card-mod-theme: your-custom-theme
+  card-mod-root-yaml: |
+    .header: |
+      .toolbar ha-icon-button-arrow-prev {
+        display: none !important;
+      }
+    
+
 ### More-info dialogs
 
 This section contains multiple modifications that could be done in elements that are inside more-info dialogs.
