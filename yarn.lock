@@ -1390,10 +1390,10 @@ helpertypes@^0.0.19:
   resolved "https://registry.npmjs.org/helpertypes/-/helpertypes-0.0.19.tgz"
   integrity sha512-J00e55zffgi3yVnUp0UdbMztNkr2PnizEkOe9URNohnrNhW5X0QpegkuLpOmFQInpi93Nb8MCjQRHAiCDF42NQ==
 
-home-assistant-query-selector@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/home-assistant-query-selector/-/home-assistant-query-selector-3.0.0.tgz#60b3df3440474e78cd6fe930ce93c124f306c55b"
-  integrity sha512-ELlN9wQG0XWjwEECdMh9LgdMAeH6LMiOKwIQ19o70ddx9pGFgO4d3SBe79aKBlhp06Pbj1Kc596IpXzpg1/hkA==
+home-assistant-query-selector@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/home-assistant-query-selector/-/home-assistant-query-selector-4.0.0.tgz#2ca3979c41d842eb3d9d89f68254fa5d16bf3e44"
+  integrity sha512-uvDEXNzwg/EyS7cp7aqxhFfm2ytN9UnJcb4ceM7OuuCQREy6sLkOpT3Tjck9Vy/rjDKx/c0qHSLKmeve/3r+/Q==
   dependencies:
     shadow-dom-selector "^4.1.2"
 
