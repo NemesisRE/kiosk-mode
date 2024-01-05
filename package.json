@@ -12,15 +12,15 @@
     "lint:fix": "yarn lint --fix",
     "test:ts": "tsc --noEmit",
     "test:run": "dotenv playwright test",
-    "start:playwright": "docker run --rm --network host --add-host host.docker.internal:host-gateway -v $(pwd):$(pwd) -w $(pwd) -i mcr.microsoft.com/playwright:v1.40.0-jammy sh -c \"yarn install --frozen-lockfile && yarn test:run && exit\"",
+    "start:playwright": "docker run --rm --network host --add-host host.docker.internal:host-gateway -v $(pwd):$(pwd) -w $(pwd) -i mcr.microsoft.com/playwright:v1.40.0-jammy sh -c \"yarn test:run && exit\"",
     "test:open": "playwright test --ui",
     "test:update": "playwright test --update-snapshots",
     "test:ci": "yarn demo && yarn start:playwright && yarn stop:ha",
     "test:all": "yarn lint && yarn test:ts && yarn test:ci",
     "coverage:report": "nyc report --reporter=lcov --reporter=text-summary",
-    "start:ha": "docker run --rm -d -p8123:8123 --shm-size=512m -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2023.12.4",
-    "start:ha:win": "docker run --rm -d -p8123:8123 --shm-size=512m -v %cd%/.hass/config:/config homeassistant/home-assistant:2023.12.4",
-    "stop:ha": "docker stop $(docker ps -a -q  --filter ancestor=homeassistant/home-assistant:2023.12.4) || true",
+    "start:ha": "docker run --rm -d -p8123:8123 --shm-size=512m -v ${PWD}/.hass/config:/config homeassistant/home-assistant:2024.1.0",
+    "start:ha:win": "docker run --rm -d -p8123:8123 --shm-size=512m -v %cd%/.hass/config:/config homeassistant/home-assistant:2024.1.0",
+    "stop:ha": "docker stop $(docker ps -a -q  --filter ancestor=homeassistant/home-assistant:2024.1.0) || true",
     "demo": "yarn build && yarn start:ha",
     "demo:win": "yarn build && yarn start:ha:win",
     "prepare": "yarn build",
@@ -29,7 +29,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "home-assistant-query-selector": "^3.0.0"
+    "home-assistant-query-selector": "^4.0.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
