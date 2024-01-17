@@ -23,7 +23,7 @@ jobs:
       - name: Cache Docker images
         uses: ScribeMD/docker-cache@0.3.6
         with:
-          key: docker-v1-${{ runner.os }}-${{ hashFiles('package.json') }}
+          key: docker-v1-${{ runner.os }}-${{ hashFiles('.hass/config/.HA_VERSION', '.playwright_docker_version') }}
       - name: Install
         run: yarn install --frozen-lockfile
       - name: E2E tests
