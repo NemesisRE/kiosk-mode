@@ -29,4 +29,7 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: E2E Tests
-        run: TAG=beta yarn test:ci
+        run: |
+          touch .env
+          echo HA_TOKEN=${{ secrets.CYPRESS_HA_TOKEN }} >> .env
+          TAG=beta yarn test:ci
