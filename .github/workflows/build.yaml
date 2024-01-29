@@ -18,13 +18,13 @@ jobs:
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cache
           key: dependencies-v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Cache Docker images
-        uses: ScribeMD/docker-cache@0.3.6
+        uses: ScribeMD/docker-cache@0.3.7
         with:
           key: docker-v1-${{ runner.os }}-${{ hashFiles('.hass/config/.HA_VERSION', '.playwright_docker_version') }}
       - name: Install deps
