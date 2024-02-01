@@ -1,6 +1,10 @@
 import { test, expect } from 'playwright-test-coverage';
-import { URL_PARAMS, SELECTORS } from './constants';
-import { getUrlWithParam } from './utils';
+import {
+	URL_PARAMS,
+	SELECTORS,
+	ENTITIES
+} from './constants';
+import { getUrlWithParam, haRequest } from './utils';
 
 test('URL Parameter: ?kiosk', async ({ page }) => {
 
@@ -199,5 +203,28 @@ test('URL Parameter: ?block_overflow', async ({ page }) => {
 
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');
+
+});
+
+test('URL Parameter: ?disable_km', async ({ page }) => {
+
+	await page.goto(
+		getUrlWithParam(
+			URL_PARAMS.DISABLE_KM
+		)
+	);
+
+	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
+	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
+
+	await haRequest(ENTITIES.KIOSK, true);
+
+	await expect(page.locator(SELECTORS.HEADER)).not.toBeHidden();
+	await expect(page.locator(SELECTORS.HA_SIDEBAR)).not.toBeHidden();
+
+	await haRequest(ENTITIES.KIOSK, false);
+
+	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
+	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
 
 });
