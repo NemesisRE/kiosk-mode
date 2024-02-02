@@ -67,5 +67,6 @@ export const URL_PARAMS = {
 	HIDE_UNUSED_ENTITIES: 'hide_unused_entities',
 	HIDE_RELOAD_RESOURCES: 'hide_reload_resources',
 	HIDE_EDIT_DASHBOARD: 'hide_edit_dashboard',
-	BLOCK_OVERFLOW: 'block_overflow'
+	BLOCK_OVERFLOW: 'block_overflow',
+	DISABLE_KM: 'disable_km'
 };
