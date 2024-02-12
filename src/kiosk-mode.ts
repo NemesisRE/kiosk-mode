@@ -80,16 +80,23 @@ class KioskMode implements KioskModeRunner {
 			this.appToolbar = await HEADER.selector.query(ELEMENT.TOOLBAR).element;
 			this.sideBarRoot = await HA_SIDEBAR.selector.$.element;
 
-			this.user = await getPromisableElement(
-				(): User => this.ha?.hass?.user,
-				(user: User) => !!user,
-				`${ELEMENT.HOME_ASSISTANT} > hass > user`
-			);
+			if (this.huiRoot) {
 
-			this.version = parseVersion(this.ha.hass?.config?.version);
+				this.user = await getPromisableElement(
+					(): User => this.ha?.hass?.user,
+					(user: User) => !!user,
+					`${ELEMENT.HOME_ASSISTANT} > hass > user`
+				);
 
-			// Start kiosk-mode
-			this.run();
+				this.version = parseVersion(this.ha.hass?.config?.version);
+
+				// Start kiosk-mode
+				this.run();
+
+				// Start entity watch
+				this.entityWatch();
+
+			}
 
 		});
 
@@ -104,7 +111,6 @@ class KioskMode implements KioskModeRunner {
 		});
 
 		selector.listen();
-		this.entityWatch();
 		this.resizeWindowBinded = this.resizeWindow.bind(this);
 
 	}
@@ -679,7 +685,7 @@ class KioskMode implements KioskModeRunner {
 	}
 
 	protected async entityWatchCallback(event: SuscriberEvent) {
-		const entities = window.kioskModeEntities[this.ha.hass.panelUrl] || [];
+		const entities = window.kioskModeEntities[this.ha?.hass?.panelUrl] || [];
 		if (
 			entities.length &&
 			event.event_type === STATE_CHANGED_EVENT &&
