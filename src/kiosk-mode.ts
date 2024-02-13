@@ -679,7 +679,7 @@ class KioskMode implements KioskModeRunner {
 	}
 
 	protected async entityWatchCallback(event: SuscriberEvent) {
-		const entities = window.kioskModeEntities[this.ha.hass.panelUrl] || [];
+		const entities = window.kioskModeEntities[this.ha?.hass?.panelUrl] || [];
 		if (
 			entities.length &&
 			event.event_type === STATE_CHANGED_EVENT &&
