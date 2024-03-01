@@ -17,7 +17,7 @@ export const STYLES = {
 	ACCOUNT: getDisplayNoneRulesString('.profile'),
 	NOTIFICATIONS: getDisplayNoneRulesString('.notifications-container'),
 	DIVIDER: getDisplayNoneRulesString('.divider'),
-	PEPER_LISTBOX: (hideAccount: boolean, hideNotifications: boolean) => {
+	PAPER_LISTBOX: (hideAccount: boolean, hideNotifications: boolean) => {
 		let size = 132;
 		if (hideAccount && hideNotifications) {
 			size = 0;
@@ -88,6 +88,7 @@ export const STYLES = {
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.RELOAD_RESOURCES}"]`
 	),
 	EDIT_DASHBOARD: getDisplayNoneRulesString(
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-icon-button[data-selector="${MENU.EDIT_DASHBOARD}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`
 	),
 	DIALOG_HEADER_HISTORY: getDisplayNoneRulesString(

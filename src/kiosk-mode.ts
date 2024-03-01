@@ -300,7 +300,7 @@ class KioskMode implements KioskModeRunner {
 					? STYLES.DIVIDER
 					: '',
 				this.options[OPTION.HIDE_ACCOUNT] || this.options[OPTION.HIDE_NOTIFICATIONS]
-					? STYLES.PEPER_LISTBOX(
+					? STYLES.PAPER_LISTBOX(
 						this.options[OPTION.HIDE_ACCOUNT],
 						this.options[OPTION.HIDE_NOTIFICATIONS]
 					)
