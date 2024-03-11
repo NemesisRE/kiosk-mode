@@ -22,10 +22,6 @@ jobs:
           path: |
             ~/.cache
           key: dependencies-v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - name: Cache Docker images
-        uses: ScribeMD/docker-cache@0.3.7
-        with:
-          key: docker-ha-beta-v1-${{ runner.os }}-${{ hashFiles('.playwright_docker_version') }}
       - name: Install
         run: yarn install --frozen-lockfile
       - name: E2E Tests
