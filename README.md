@@ -17,21 +17,23 @@ Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assi
 >If you want to learn how to install and set some basic configurations in `kiosk-mode` through a video, check the [next one](https://youtu.be/G3lT4zgjER8) from [@smarthomejunkie](https://github.com/smarthomejunkie).
 
 <details>
-  <summary><b>Installation and tracking with HACS</b></summary>
+  <summary><b>Installation through HACS</b></summary>
 <br>
 
-* In the "Frontend" section of [HACS](https://github.com/hacs/integration) hit the plus icon in the bottom right
-* Search for `Kiosk Mode` and install it
-* If using YAML mode or if HACS doesn't automatically add it you'll need to add the resource below
+1. In the "Frontend" section of [HACS](https://github.com/hacs/integration) hit the plus icon in the bottom right
+2. Search for `Kiosk Mode` and install it
+3. If using YAML mode or if HACS doesn't automatically add it, you'll need to add the resource manually:
 
-YAML mode users will add it to their [configuration.yaml](https://www.home-assistant.io/lovelace/dashboards-and-views/#adding-more-dashboards-with-yaml) file.
-Non-YAML mode, or Storage Mode, users can find resources in their sidebar under `"Configuration" > "Lovelace Dashboards" > "Resources"`
+Go to your [configuration.yaml](https://www.home-assistant.io/docs/configuration/) file and add the url of the plugin as an [extra_module_url](https://www.home-assistant.io/integrations/frontend/#extra_module_url):
 
 ```yaml
-resources:
-  - url: /hacsfiles/kiosk-mode/kiosk-mode.js
-    type: module
+# You should update the version number at the end of the url
+# after every update to avoid the old version being cached by Home Assistant
+frontend:
+  extra_module_url:
+    - /hacsfiles/kiosk-mode/kiosk-mode.js?v1.0.0
 ```
+
 <br>
 </details>
 
@@ -39,18 +41,29 @@ resources:
   <summary><b>Manual installation</b></summary>
 <br>
   
-* Download [kiosk-mode.js](https://github.com/NemesisRE/kiosk-mode/releases/latest) from the latest release and place it in your `www` folder
-* Add the resource below
+1. Download [kiosk-mode.js](https://github.com/NemesisRE/kiosk-mode/releases/latest) from the latest release and place it in your `www` folder
+2. Add the resource:
 
-YAML mode users add it to their [configuration.yaml](https://www.home-assistant.io/lovelace/dashboards-and-views/#adding-more-dashboards-with-yaml) file.
-Non-YAML mode, or Storage Mode, users can find resources in their sidebar under `"Configuration" > "Lovelace Dashboards" > "Resources"`
+#### If you are in storage mode (default mode)
+
+1. Go to `Settings > Dashboards`
+2. Click on the three dots located on the top-right corner and then click on `Resources`
+3. Click on `ADD RESOURCE` on the bottom-right of the screen
+4. Add the URL to the file that you have downloaded previously (e.g `/local/kiosk-mode.js?v=1.0.0`)
+5. Make sure you add the correct version at the end of the URL (e.g. `?v=1.0.0`) because in this way you make Home Assistant to load the new version instead of a version stored in cache
+
+#### If you are in yaml mode
+
+Go to your [configuration.yaml](https://www.home-assistant.io/docs/configuration/) file and add the url of the plugin as an [extra_module_url](https://www.home-assistant.io/integrations/frontend/#extra_module_url):
 
 ```yaml
-resources:
-  # You'll need to update the version number at the end of the url after every update.
-  - url: /local/kiosk-mode.js?v=1.2.1
-    type: module
+# You should update the version number at the end of the url
+# after every update to avoid the old version being cached by Home Assistant
+frontend:
+  extra_module_url:
+    - /hacsfiles/kiosk-mode/kiosk-mode.js?v1.0.0
 ```
+
 <br>
 </details>
 
