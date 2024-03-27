@@ -405,6 +405,7 @@ class KioskMode implements KioskModeRunner {
 			.$;
 		const moreInfo = await MORE_INFO_CHILD_ROOT.element;
 
+		// General dialog elements
 		if (
 			this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] ||
 			this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY] ||
@@ -430,25 +431,7 @@ class KioskMode implements KioskModeRunner {
 			removeStyle(dialog);
 		}
 
-		if (
-			this.options[OPTION.HIDE_DIALOG_HISTORY] ||
-			this.options[OPTION.HIDE_DIALOG_LOGBOOK]
-		) {
-			const styles = [
-				this.options[OPTION.HIDE_DIALOG_HISTORY]
-					? STYLES.DIALOG_HISTORY : '',
-				this.options[OPTION.HIDE_DIALOG_LOGBOOK]
-					? STYLES.DIALOG_LOGBOOK : ''
-			];
-			addStyle(styles.join(''), moreInfo);
-			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (this.options[OPTION.HIDE_DIALOG_HISTORY]) setCache(OPTION.HIDE_DIALOG_HISTORY, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK]) setCache(OPTION.HIDE_DIALOG_LOGBOOK, TRUE);
-			}
-		} else {
-			removeStyle(moreInfo);
-		}
-
+		// Climate dialog
 		const haDialogClimate = MORE_INFO_CHILD_ROOT
 			.query(ELEMENT.HA_DIALOG_MORE_INFO_CONTENT)
 			.$
@@ -503,20 +486,83 @@ class KioskMode implements KioskModeRunner {
 			}
 		});
 
+		// Dialog children
 		MORE_INFO_CHILD_ROOT
 			.query(ELEMENT.HA_DIALOG_MORE_INFO_CONTENT)
 			.$
-			.query(ELEMENT.HA_DIALOG_UPDATE)
+			.query(
+				[
+					ELEMENT.HA_DIALOG_DEFAULT,
+					ELEMENT.HA_DIALOG_VACUUM,
+					ELEMENT.HA_DIALOG_TIMER,
+					ELEMENT.HA_DIALOG_LIGHT,
+					ELEMENT.HA_DIALOG_SIREN,
+					ELEMENT.HA_DIALOG_MEDIA_PLAYER,
+					ELEMENT.HA_DIALOG_UPDATE,
+				].join(',')
+			)
 			.$
 			.element
 			.then((dialogChild: ShadowRoot) => {
-				if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS]) {
-					addStyle(STYLES.DIALOG_UPDATE_ACTIONS, dialogChild);
-					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_DIALOG_UPDATE_ACTIONS, TRUE);
+
+				if (
+					this.options[OPTION.HIDE_DIALOG_ATTRIBUTES] ||
+					this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS]
+				) {
+					const styles = [
+						this.options[OPTION.HIDE_DIALOG_ATTRIBUTES] ? STYLES.DIALOG_ATTRIBUTES : '',
+						(
+							this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] &&
+							dialogChild.host.localName === ELEMENT.HA_DIALOG_TIMER
+						)
+							? STYLES.DIALOG_TIMER_ACTIONS
+							: '',
+						(
+							this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS] &&
+							dialogChild.host.localName === ELEMENT.HA_DIALOG_MEDIA_PLAYER
+						)
+							? STYLES.DIALOG_MEDIA_ACTIONS
+							: '',
+						(
+							this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS] &&
+							dialogChild.host.localName === ELEMENT.HA_DIALOG_UPDATE
+						)	? STYLES.DIALOG_UPDATE_ACTIONS
+							: ''
+					];
+					addStyle(styles.join(''), dialogChild);
+					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
+						if (this.options[OPTION.HIDE_DIALOG_ATTRIBUTES])     setCache(OPTION.HIDE_DIALOG_ATTRIBUTES, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS])  setCache(OPTION.HIDE_DIALOG_TIMER_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS])  setCache(OPTION.HIDE_DIALOG_MEDIA_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS]) setCache(OPTION.HIDE_DIALOG_UPDATE_ACTIONS, TRUE);
+					}
 				} else {
 					removeStyle(dialogChild);
 				}
+
 			});
+
+		// History and Logbook
+		if (
+			this.options[OPTION.HIDE_DIALOG_HISTORY] ||
+			this.options[OPTION.HIDE_DIALOG_LOGBOOK]
+		) {
+			const styles = [
+				this.options[OPTION.HIDE_DIALOG_HISTORY]
+					? STYLES.DIALOG_HISTORY : '',
+				this.options[OPTION.HIDE_DIALOG_LOGBOOK]
+					? STYLES.DIALOG_LOGBOOK : ''
+			];
+			addStyle(styles.join(''), moreInfo);
+			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
+				if (this.options[OPTION.HIDE_DIALOG_HISTORY]) setCache(OPTION.HIDE_DIALOG_HISTORY, TRUE);
+				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK]) setCache(OPTION.HIDE_DIALOG_LOGBOOK, TRUE);
+			}
+		} else {
+			removeStyle(moreInfo);
+		}
 
 		MORE_INFO_CHILD_ROOT
 			.query(ELEMENT.HA_DIALOG_HISTORY)
@@ -542,50 +588,6 @@ class KioskMode implements KioskModeRunner {
 				} else {
 					removeStyle(dialogLogbook);
 				}
-			});
-
-		MORE_INFO_CHILD_ROOT
-			.query(ELEMENT.HA_DIALOG_MORE_INFO_CONTENT)
-			.$
-			.query(
-				[
-					ELEMENT.HA_DIALOG_DEFAULT,
-					ELEMENT.HA_DIALOG_VACUUM,
-					ELEMENT.HA_DIALOG_TIMER,
-					ELEMENT.HA_DIALOG_LIGHT,
-					ELEMENT.HA_DIALOG_SIREN,
-					ELEMENT.HA_DIALOG_MEDIA_PLAYER
-				].join(',')
-			)
-			.$
-			.element
-			.then((dialogChild: ShadowRoot) => {
-
-				if (
-					this.options[OPTION.HIDE_DIALOG_ATTRIBUTES] ||
-					this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] ||
-					this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS]
-				) {
-					const styles = [
-						this.options[OPTION.HIDE_DIALOG_ATTRIBUTES] ? STYLES.DIALOG_ATTRIBUTES : '',
-						this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] ? STYLES.DIALOG_TIMER_ACTIONS : '',
-						(
-							this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS] &&
-							dialogChild.host.localName === ELEMENT.HA_DIALOG_MEDIA_PLAYER
-						)
-							? STYLES.DIALOG_MEDIA_ACTIONS
-							: '',
-					];
-					addStyle(styles.join(''), dialogChild);
-					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-						if (this.options[OPTION.HIDE_DIALOG_ATTRIBUTES])    setCache(OPTION.HIDE_DIALOG_ATTRIBUTES, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS]) setCache(OPTION.HIDE_DIALOG_TIMER_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS]) setCache(OPTION.HIDE_DIALOG_MEDIA_ACTIONS, TRUE);
-					}
-				} else {
-					removeStyle(dialogChild);
-				}
-
 			});
 
 	}
