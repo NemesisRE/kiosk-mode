@@ -509,7 +509,11 @@ class KioskMode implements KioskModeRunner {
 					this.options[OPTION.HIDE_DIALOG_ATTRIBUTES] ||
 					this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] ||
 					this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS] ||
-					this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS]
+					this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]
 				) {
 					const styles = [
 						this.options[OPTION.HIDE_DIALOG_ATTRIBUTES] ? STYLES.DIALOG_ATTRIBUTES : '',
@@ -529,14 +533,36 @@ class KioskMode implements KioskModeRunner {
 							this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS] &&
 							dialogChild.host.localName === ELEMENT.HA_DIALOG_UPDATE
 						)	? STYLES.DIALOG_UPDATE_ACTIONS
+							: '',
+						(
+							this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
+							this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS]
+						)
+							? STYLES.DIALOG_LIGHT_CONTROL_ACTIONS
+							: '',
+						(
+							this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
+							this.options[OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS]
+						)
+							? STYLES.DIALOG_LIGHT_COLOR_ACTIONS
+							: '',
+						(
+							this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
+							this.options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]
+						)
+							? STYLES.DIALOG_LIGHT_SETTINGS_ACTIONS
 							: ''
 					];
 					addStyle(styles.join(''), dialogChild);
 					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-						if (this.options[OPTION.HIDE_DIALOG_ATTRIBUTES])     setCache(OPTION.HIDE_DIALOG_ATTRIBUTES, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS])  setCache(OPTION.HIDE_DIALOG_TIMER_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS])  setCache(OPTION.HIDE_DIALOG_MEDIA_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS]) setCache(OPTION.HIDE_DIALOG_UPDATE_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_ATTRIBUTES])             setCache(OPTION.HIDE_DIALOG_ATTRIBUTES, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS])          setCache(OPTION.HIDE_DIALOG_TIMER_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS])          setCache(OPTION.HIDE_DIALOG_MEDIA_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS])         setCache(OPTION.HIDE_DIALOG_UPDATE_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS])          setCache(OPTION.HIDE_DIALOG_LIGHT_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS])  setCache(OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS])    setCache(OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]) setCache(OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS, TRUE);
 					}
 				} else {
 					removeStyle(dialogChild);

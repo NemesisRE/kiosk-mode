@@ -29,6 +29,10 @@ export enum OPTION {
     HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS = 'hide_dialog_climate_temperature_actions',
     HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS = 'hide_dialog_climate_settings_actions',
     HIDE_DIALOG_TIMER_ACTIONS = 'hide_dialog_timer_actions',
+    HIDE_DIALOG_LIGHT_ACTIONS = 'hide_dialog_light_actions',
+    HIDE_DIALOG_LIGHT_CONTROL_ACTIONS = 'hide_dialog_light_control_actions',
+    HIDE_DIALOG_LIGHT_COLOR_ACTIONS = 'hide_dialog_light_color_actions',
+    HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS = 'hide_dialog_light_settings_actions',
     HIDE_DIALOG_HISTORY_SHOW_MORE = 'hide_dialog_history_show_more',
     HIDE_DIALOG_LOGBOOK_SHOW_MORE = 'hide_dialog_logbook_show_more',
     BLOCK_OVERFLOW = 'block_overflow',
@@ -115,6 +119,10 @@ export enum ELEMENT {
     HA_DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION_SLIDER = 'path[role="slider"]',
     HA_DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION_TARGET = '.target',
     HA_DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION_TARGET_BORDER = '.target-border',
+    HA_DIALOG_LIGHT_BRIGHTNESS = 'ha-state-control-light-brightness',
+    HA_DIALOG_LIGHT_CONTROLS = 'ha-icon-button-group',
+    HA_DIALOG_LIGHT_COLORS = 'ha-more-info-light-favorite-colors',
+    HA_DIALOG_LIGHT_SETTINGS = 'ha-more-info-control-select-container',
     HA_DIALOG_ATTRIBUTES = 'ha-attributes'
 }
 

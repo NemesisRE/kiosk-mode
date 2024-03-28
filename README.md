@@ -123,6 +123,10 @@ views:
 |`hide_dialog_climate_actions`             | Boolean | false   | Hides all the actions in the more-info dialogs of climate entities. |
 |`hide_dialog_climate_temperature_actions` | Boolean | false   | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
 |`hide_dialog_climate_settings_actions`    | Boolean | false   | Hides the mode and preset actions in the more-info dialogs of climate entities. |
+|`hide_dialog_light_actions`               | Boolean | false   | Hides all the actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_control_actions`       | Boolean | false   | Hides the control actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_color_actions`         | Boolean | false   | Hides the favorite colors actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_settings_actions`      | Boolean | false   | Hides the settings actions in the more-info dialogs of light entities. |
 |`ignore_entity_settings`<sup>3</sup>      | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
 |`ignore_mobile_settings`<sup>4</sup>      | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
 |`ignore_disable_km`<sup>3</sup>           | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
@@ -200,14 +204,26 @@ views:
 | `hide_dialog_climate_settings_actions`    | 20    |
 <br>
 
+![Lovelace Dashboard](images/more-info-dialog-light-entity.png)
+<br>*More info dialog (light entity)*
+<br>
+
+| Options                                   | Hides |
+|:------------------------------------------|:------|
+| `hide_dialog_light_actions`               | 21    |
+| `hide_dialog_light_control_actions`       | 22    |
+| `hide_dialog_light_color_actions`         | 23    |
+| `hide_dialog_light_settings_actions`      | 24    |
+<br>
+
 ![Lovelace Dashboard](images/more-info-dialog-update-entity.png)
 <br>*More info dialog (update entity / timer entity)*
 <br>
 
 | Options                      | Hides |
 |:-----------------------------|:------|
-| `hide_dialog_update_actions` | 21    |
-| `hide_dialog_timer_actions`  | 21    |
+| `hide_dialog_update_actions` | 25    |
+| `hide_dialog_timer_actions`  | 25    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-history-logbook-attributes.png)
@@ -216,11 +232,11 @@ views:
 
 | Options                         | Hides |
 |:--------------------------------|:------|
-| `hide_dialog_history`           | 22    |
-| `hide_dialog_logbook`           | 23    |
-| `hide_dialog_attributes`        | 24    |
-| `hide_dialog_history_show_more` | 25    |
-| `hide_dialog_logbook_show_more` | 26    |
+| `hide_dialog_history`           | 26    |
+| `hide_dialog_logbook`           | 27    |
+| `hide_dialog_attributes`        | 28    |
+| `hide_dialog_history_show_more` | 29    |
+| `hide_dialog_logbook_show_more` | 30    |
 
 <br>
 
@@ -360,6 +376,10 @@ The query string options are:
 * `?hide_dialog_climate_actions` to hide all the actions in the more-info dialogs of climate entities
 * `?hide_dialog_climate_temperature_actions` to hide the temperature cotrol actions in the more-info dialogs of climate entities
 * `?hide_dialog_climate_settings_actions` to hide the mode and preset actions in the more-info dialogs of climate entities
+* `?hide_dialog_light_actions` to hide all the actions in the more-info dialogs of light entities
+* `?hide_dialog_light_control_actions` to hide the control actions in the more-info dialogs of light entities
+* `?hide_dialog_light_color_actions` to hide the favorite colors actions in the more-info dialogs of light entities
+* `?hide_dialog_light_settings_actions` to hide the settings actions in the more-info dialogs of light entities
 
 
 
