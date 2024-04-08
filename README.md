@@ -71,6 +71,7 @@ frontend:
 
 ## Important Info
 
+* Since Home Assistant `2023.12.0` it is possible to access the raw config of a "Default dashboard" controlled by Home Assistant. It is important to remark that any configuration that you add to these kinds of dashboards will be ignored so `kiosk-mode` will not be able to read it. You need to create a "New dashboard from scratch" controlled by you to make it work with `kiosk-mode`.
 * If you need to disable Kiosk-Mode temporarily add `?disable_km` to the end of your URL.
 * Config is placed in the root of your Lovelace config: `kiosk_mode:` should not be indented & is per dashboard.
 * If you want the same settings on other dashboards you'll need to repeat the config on those dashboards as well.
