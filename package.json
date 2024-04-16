@@ -24,7 +24,8 @@
     "reset:ha": "git add .hass/config/.HA_VERSION && git checkout .hass/config",
     "demo": "yarn build && yarn start:ha",
     "demo:win": "yarn build && yarn start:ha:win",
-    "prepare": "yarn build",
+    "husky:setup": "husky",
+    "prepare": "yarn build && yarn husky:setup",
     "prepublishOnly": "yarn test:all",
     "version": "git add .",
     "postversion": "git push && git push --tags"
