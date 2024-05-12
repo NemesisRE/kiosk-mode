@@ -24,8 +24,7 @@
     "reset:ha": "git add .hass/config/.HA_VERSION && git checkout .hass/config",
     "demo": "yarn build && yarn start:ha",
     "demo:win": "yarn build && yarn start:ha:win",
-    "husky:setup": "husky",
-    "prepare": "yarn build && yarn husky:setup",
+    "prepare": "yarn build",
     "prepublishOnly": "yarn test:all",
     "version": "git add .",
     "postversion": "git push && git push --tags"
@@ -34,21 +33,20 @@
     "home-assistant-query-selector": "^4.2.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.43.1",
+    "@playwright/test": "^1.44.0",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/node": "^20.12.8",
+    "@types/node": "^20.12.11",
     "@types/sinon": "^17.0.3",
-    "dotenv-cli": "^7.4.1",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^9.2.0",
-    "husky": "^9.0.11",
     "nyc": "^15.1.0",
     "playwright-test-coverage": "^1.2.12",
     "rollup": "^4.17.2",
     "rollup-plugin-istanbul": "^5.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^3.4.5",
-    "sinon": "^17.0.1",
+    "sinon": "^17.0.2",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.8.0"
   }
