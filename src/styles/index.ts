@@ -49,7 +49,7 @@ export const STYLES = {
 	}),
 	SIDEBAR: getCSSRulesString({
 		':host': {
-			'--mdc-drawer-width': '0 !important'
+			'--mdc-drawer-width': '0px !important'
 		},
 		'partial-panel-resolver': {
 			'--mdc-top-app-bar-width': '100% !important'
