@@ -36,18 +36,18 @@
     "@playwright/test": "^1.44.0",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/node": "^20.12.11",
+    "@types/node": "^20.12.12",
     "@types/sinon": "^17.0.3",
     "dotenv-cli": "^7.4.2",
-    "eslint": "^9.2.0",
+    "eslint": "^9.3.0",
     "nyc": "^15.1.0",
     "playwright-test-coverage": "^1.2.12",
     "rollup": "^4.17.2",
     "rollup-plugin-istanbul": "^5.0.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-ts": "^3.4.5",
-    "sinon": "^17.0.2",
+    "sinon": "^18.0.0",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.8.0"
+    "typescript-eslint": "^7.9.0"
   }
 }
