@@ -36,7 +36,7 @@
     "@playwright/test": "^1.44.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/node": "^20.13.0",
+    "@types/node": "^20.14.2",
     "@types/sinon": "^17.0.3",
     "dotenv-cli": "^7.4.2",
     "eslint": "^9.4.0",
@@ -48,6 +48,6 @@
     "rollup-plugin-ts": "^3.4.5",
     "sinon": "^18.0.0",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.11.0"
+    "typescript-eslint": "^7.12.0"
   }
 }
