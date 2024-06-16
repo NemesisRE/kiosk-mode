@@ -39,8 +39,8 @@
     "@types/node": "^20.14.2",
     "@types/sinon": "^17.0.3",
     "dotenv-cli": "^7.4.2",
-    "eslint": "^9.4.0",
-    "nyc": "^15.1.0",
+    "eslint": "^9.5.0",
+    "nyc": "^17.0.0",
     "playwright-test-coverage": "^1.2.12",
     "rollup": "^4.18.0",
     "rollup-plugin-istanbul": "^5.0.0",
@@ -48,6 +48,6 @@
     "rollup-plugin-ts": "^3.4.5",
     "sinon": "^18.0.0",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.12.0"
+    "typescript-eslint": "^7.13.0"
   }
 }
