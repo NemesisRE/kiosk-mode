@@ -109,6 +109,7 @@ export enum ELEMENT {
     HA_DIALOG_MEDIA_PLAYER = 'more-info-media_player',
     HA_DIALOG_LIGHT = 'more-info-light',
     HA_DIALOG_UPDATE = 'more-info-update',
+    HA_DIALOG_LOCK = 'more-info-lock',
     HA_DIALOG_CLIMATE = 'more-info-climate',
     HA_DIALOG_CLIMATE_CONTROL_SELECT = 'ha-more-info-control-select-container',
     HA_DIALOG_CLIMATE_TEMPERATURE = 'ha-more-info-climate-temperature', // Home Assistant < 2023.12.0
