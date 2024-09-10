@@ -4,576 +4,159 @@
   "key": "core.restore_state",
   "data": [
     {
-      "state": {
-        "entity_id": "person.test",
-        "state": "unknown",
-        "attributes": {
-          "editable": true,
-          "id": "test",
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250",
-          "device_trackers": [],
-          "friendly_name": "Test"
-        },
-        "last_changed": "2023-11-24T11:20:52.297672+00:00",
-        "last_updated": "2023-11-24T11:20:53.391690+00:00",
-        "context": {
-          "id": "01HG0GZAWF0X2F1Q1EFCC0KVR3",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"person.test","state":"unknown","attributes":{"editable":true,"id":"test","device_trackers":[],"user_id":"ec313e3c38fb4d60b44e0db03cdc1250","friendly_name":"Test"},"last_changed":"2024-09-10T18:10:27.949262+00:00","last_reported":"2024-09-10T18:10:28.720397+00:00","last_updated":"2024-09-10T18:10:28.720397+00:00","context":{"id":"01J7EJ2F7GF25ESYKV9K0EFXXG","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk mode"
-        },
-        "last_changed": "2023-11-24T11:21:06.643923+00:00",
-        "last_updated": "2023-11-24T11:21:06.643923+00:00",
-        "context": {
-          "id": "01HG0GZQTKQ5QW3PB53KVXSEK3",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"tts.google_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2024-09-10T18:10:28.434956+00:00","last_reported":"2024-09-10T18:10:28.434956+00:00","last_updated":"2024-09-10T18:10:28.434956+00:00","context":{"id":"01J7EJ2EYJSTFC3SH3TQG429FF","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_header",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide header"
-        },
-        "last_changed": "2023-11-24T11:21:07.491663+00:00",
-        "last_updated": "2023-11-24T11:21:07.491663+00:00",
-        "context": {
-          "id": "01HG0GZRN3XWJBZSXQWYX0TED2",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"timer.laundry","state":"idle","attributes":{"duration":"0:01:00","editable":false},"last_changed":"2024-09-10T18:10:28.441654+00:00","last_reported":"2024-09-10T18:10:28.441654+00:00","last_updated":"2024-09-10T18:10:28.441654+00:00","context":{"id":"01J7EJ2EYS3NV6V4BSWBJAM4AJ","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_sidebar",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide sidebar"
-        },
-        "last_changed": "2023-11-24T11:21:08.109503+00:00",
-        "last_updated": "2023-11-24T11:21:08.109503+00:00",
-        "context": {
-          "id": "01HG0GZS8D00TVBT5K8RB4269V",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk mode"},"last_changed":"2024-09-10T18:10:30.232264+00:00","last_reported":"2024-09-10T18:10:30.232264+00:00","last_updated":"2024-09-10T18:10:30.232264+00:00","context":{"id":"01J7EJ2GPRFX660MFJMD2S93WV","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_menubutton",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide menu button"
-        },
-        "last_changed": "2023-11-24T11:21:08.749027+00:00",
-        "last_updated": "2023-11-24T11:21:08.749027+00:00",
-        "context": {
-          "id": "01HG0GZSWCWNV245TYTTBQ0C6R",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_header","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide header"},"last_changed":"2024-09-10T18:10:31.250243+00:00","last_reported":"2024-09-10T18:10:31.250243+00:00","last_updated":"2024-09-10T18:10:31.250243+00:00","context":{"id":"01J7EJ2HPJYPRNM5TTA1WQ2J1M","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_overflow",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide overflow"
-        },
-        "last_changed": "2023-11-24T11:21:12.331431+00:00",
-        "last_updated": "2023-11-24T11:21:12.331431+00:00",
-        "context": {
-          "id": "01HG0GZXCB6HKQ6VATJ9G6JD9Y",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_sidebar","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide sidebar"},"last_changed":"2024-09-10T18:10:32.236106+00:00","last_reported":"2024-09-10T18:10:32.236106+00:00","last_updated":"2024-09-10T18:10:32.236106+00:00","context":{"id":"01J7EJ2JNBYJJFR3D9AJJAQXJH","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_account",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide account"
-        },
-        "last_changed": "2023-11-24T11:21:10.018789+00:00",
-        "last_updated": "2023-11-24T11:21:10.018789+00:00",
-        "context": {
-          "id": "01HG0GZV42JNEQBV0F7AQJH3HE",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_menubutton","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide menu button"},"last_changed":"2024-09-10T18:10:33.142039+00:00","last_reported":"2024-09-10T18:10:33.142039+00:00","last_updated":"2024-09-10T18:10:33.142039+00:00","context":{"id":"01J7EJ2KHNF3BDJ4C529Y50Z8K","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_notifications",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide notifications"
-        },
-        "last_changed": "2023-11-24T11:21:09.382268+00:00",
-        "last_updated": "2023-11-24T11:21:09.382268+00:00",
-        "context": {
-          "id": "01HG0GZTG6Y1HVKT1PW9H0GCAA",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_overflow","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide overflow"},"last_changed":"2024-09-10T18:10:39.808516+00:00","last_reported":"2024-09-10T18:10:39.808516+00:00","last_updated":"2024-09-10T18:10:39.808516+00:00","context":{"id":"01J7EJ2T20KJXG1JETDP9QA7P4","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_search",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide search"
-        },
-        "last_changed": "2023-11-24T11:21:10.768579+00:00",
-        "last_updated": "2023-11-24T11:21:10.768579+00:00",
-        "context": {
-          "id": "01HG0GZVVG6TBPVPFXTMR88HFS",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_account","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide account"},"last_changed":"2024-09-10T18:10:35.535531+00:00","last_reported":"2024-09-10T18:10:35.535531+00:00","last_updated":"2024-09-10T18:10:35.535531+00:00","context":{"id":"01J7EJ2NWFR25TZVWV1K2R5JYP","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_assistant",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide assistant"
-        },
-        "last_changed": "2023-11-24T11:21:11.586367+00:00",
-        "last_updated": "2023-11-24T11:21:11.586367+00:00",
-        "context": {
-          "id": "01HG0GZWN2TX6NY913GFHV0ED4",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_notifications","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide notifications"},"last_changed":"2024-09-10T18:10:34.161855+00:00","last_reported":"2024-09-10T18:10:34.161855+00:00","last_updated":"2024-09-10T18:10:34.161855+00:00","context":{"id":"01J7EJ2MHH0CZJDADQ6D6K07DB","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_refresh",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide refresh"
-        },
-        "last_changed": "2023-11-24T11:21:13.001609+00:00",
-        "last_updated": "2023-11-24T11:21:13.001609+00:00",
-        "context": {
-          "id": "01HG0GZY19K33YZF6VXF512F8Z",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_search","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide search"},"last_changed":"2024-09-10T18:10:36.990565+00:00","last_reported":"2024-09-10T18:10:36.990565+00:00","last_updated":"2024-09-10T18:10:36.990565+00:00","context":{"id":"01J7EJ2Q9Y7D14QE96K8JP81YB","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_unused_entities",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide unused entities"
-        },
-        "last_changed": "2023-11-24T11:21:13.684192+00:00",
-        "last_updated": "2023-11-24T11:21:13.684192+00:00",
-        "context": {
-          "id": "01HG0GZYPMACH6Q03KPH7XDP68",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_assistant","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide assistant"},"last_changed":"2024-09-10T18:10:38.400064+00:00","last_reported":"2024-09-10T18:10:38.400064+00:00","last_updated":"2024-09-10T18:10:38.400064+00:00","context":{"id":"01J7EJ2RNZ76D0PA0G28CXS7G5","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_reload_resources",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide reload resources"
-        },
-        "last_changed": "2023-11-24T11:21:14.350671+00:00",
-        "last_updated": "2023-11-24T11:21:14.350671+00:00",
-        "context": {
-          "id": "01HG0GZZBED3CRFPCTK4Z5TCSA",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_refresh","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide refresh"},"last_changed":"2024-09-10T18:10:40.770995+00:00","last_reported":"2024-09-10T18:10:40.770995+00:00","last_updated":"2024-09-10T18:10:40.770995+00:00","context":{"id":"01J7EJ2V02JZM5CRG3H07AVBY6","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_edit_dashboard",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide edit dashboard"
-        },
-        "last_changed": "2023-11-24T11:21:14.985232+00:00",
-        "last_updated": "2023-11-24T11:21:14.985232+00:00",
-        "context": {
-          "id": "01HG0GZZZ9A28PW4QPJZGF2M41",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_unused_entities","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide unused entities"},"last_changed":"2024-09-10T18:10:41.771101+00:00","last_reported":"2024-09-10T18:10:41.771101+00:00","last_updated":"2024-09-10T18:10:41.771101+00:00","context":{"id":"01J7EJ2VZAV2A6B8VCZ2GES24R","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_header_history",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog header history"
-        },
-        "last_changed": "2023-11-24T11:21:16.429383+00:00",
-        "last_updated": "2023-11-24T11:21:16.429383+00:00",
-        "context": {
-          "id": "01HG0H01CDE567CNME6C82XAKZ",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_reload_resources","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide reload resources"},"last_changed":"2024-09-10T18:10:42.784605+00:00","last_reported":"2024-09-10T18:10:42.784605+00:00","last_updated":"2024-09-10T18:10:42.784605+00:00","context":{"id":"01J7EJ2WZ0KNRRKT7MNP0FH2FA","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_header_settings",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog header settings"
-        },
-        "last_changed": "2023-11-24T11:21:17.142077+00:00",
-        "last_updated": "2023-11-24T11:21:17.142077+00:00",
-        "context": {
-          "id": "01HG0H022N47QZHR4B9ZNC23ZX",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_edit_dashboard","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide edit dashboard"},"last_changed":"2024-09-10T18:10:43.836046+00:00","last_reported":"2024-09-10T18:10:43.836046+00:00","last_updated":"2024-09-10T18:10:43.836046+00:00","context":{"id":"01J7EJ2XZVA8YSXVM6BK7QPFAZ","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_header_overflow",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog header overflow"
-        },
-        "last_changed": "2023-11-24T11:21:17.831721+00:00",
-        "last_updated": "2023-11-24T11:21:17.831721+00:00",
-        "context": {
-          "id": "01HG0H02R7V0TMCB9WV066RRKZ",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_header_history","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog header history"},"last_changed":"2024-09-10T18:10:48.065956+00:00","last_reported":"2024-09-10T18:10:48.065956+00:00","last_updated":"2024-09-10T18:10:48.065956+00:00","context":{"id":"01J7EJ3241QM8D07E8FB4XW83N","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_header_action_items",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide header action items"
-        },
-        "last_changed": "2023-11-24T11:21:18.514322+00:00",
-        "last_updated": "2023-11-24T11:21:18.514322+00:00",
-        "context": {
-          "id": "01HG0H03DJ8F5J0JC3GYJ7Y4GV",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_header_settings","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog header settings"},"last_changed":"2024-09-10T18:10:49.016973+00:00","last_reported":"2024-09-10T18:10:49.016973+00:00","last_updated":"2024-09-10T18:10:49.016973+00:00","context":{"id":"01J7EJ331RW7CZNKS8QM88VYZ4","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_history",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog history"
-        },
-        "last_changed": "2023-11-24T11:21:19.231041+00:00",
-        "last_updated": "2023-11-24T11:21:19.231041+00:00",
-        "context": {
-          "id": "01HG0H043YMFCV619NT5B66ZT4",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_header_overflow","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog header overflow"},"last_changed":"2024-09-10T18:10:50.086248+00:00","last_reported":"2024-09-10T18:10:50.086248+00:00","last_updated":"2024-09-10T18:10:50.086248+00:00","context":{"id":"01J7EJ3436E3BAY1TW8F81K1T1","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_logbook",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog logbook"
-        },
-        "last_changed": "2023-11-24T11:20:53.049866+00:00",
-        "last_updated": "2023-11-24T11:20:53.049866+00:00",
-        "context": {
-          "id": "01HG0GZAHSEY56ASGXA8PCE2S1",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_header_action_items","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide header action items"},"last_changed":"2024-09-10T18:10:28.442285+00:00","last_reported":"2024-09-10T18:10:28.442285+00:00","last_updated":"2024-09-10T18:10:28.442285+00:00","context":{"id":"01J7EJ2EYTY16WRZMYNFPRJCZH","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_attributes",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog attributes"
-        },
-        "last_changed": "2023-11-24T11:21:19.964416+00:00",
-        "last_updated": "2023-11-24T11:21:19.964416+00:00",
-        "context": {
-          "id": "01HG0H04TWMPFCV28ACMK0KQNF",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_history","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog history"},"last_changed":"2024-09-10T18:10:28.442311+00:00","last_reported":"2024-09-10T18:10:28.442311+00:00","last_updated":"2024-09-10T18:10:28.442311+00:00","context":{"id":"01J7EJ2EYT2DRW7ZD7R7NRJEHR","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_update_actions",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog update actions"
-        },
-        "last_changed": "2023-11-24T11:20:53.049917+00:00",
-        "last_updated": "2023-11-24T11:20:53.049917+00:00",
-        "context": {
-          "id": "01HG0GZAHSA6N20A5A3GZ0WK57",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_logbook","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog logbook"},"last_changed":"2024-09-10T18:10:28.442337+00:00","last_reported":"2024-09-10T18:10:28.442337+00:00","last_updated":"2024-09-10T18:10:28.442337+00:00","context":{"id":"01J7EJ2EYTWXNC6J04MYGK78VN","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_timer_actions",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog timer actions"
-        },
-        "last_changed": "2023-11-24T11:20:53.049936+00:00",
-        "last_updated": "2023-11-24T11:20:53.049936+00:00",
-        "context": {
-          "id": "01HG0GZAHSJAW1SESXZRHG7YH7",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_attributes","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog attributes"},"last_changed":"2024-09-10T18:10:28.442393+00:00","last_reported":"2024-09-10T18:10:28.442393+00:00","last_updated":"2024-09-10T18:10:28.442393+00:00","context":{"id":"01J7EJ2EYT65XXCE6EE0KE856R","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_history_show_more",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog history show more link"
-        },
-        "last_changed": "2023-11-24T11:21:20.762420+00:00",
-        "last_updated": "2023-11-24T11:21:20.762420+00:00",
-        "context": {
-          "id": "01HG0H05KTQER4T7FWTF554GJP",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_update_actions","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog update actions"},"last_changed":"2024-09-10T18:10:28.442460+00:00","last_reported":"2024-09-10T18:10:28.442460+00:00","last_updated":"2024-09-10T18:10:28.442460+00:00","context":{"id":"01J7EJ2EYT9P7CFTY7M9807KWZ","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_hide_dialog_logbook_show_more",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk hide dialog logbook show more link"
-        },
-        "last_changed": "2023-11-24T11:20:53.049968+00:00",
-        "last_updated": "2023-11-24T11:20:53.049968+00:00",
-        "context": {
-          "id": "01HG0GZAHS5R2W6CPTSCNXZNJX",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_timer_actions","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog timer actions"},"last_changed":"2024-09-10T18:10:28.442514+00:00","last_reported":"2024-09-10T18:10:28.442514+00:00","last_updated":"2024-09-10T18:10:28.442514+00:00","context":{"id":"01J7EJ2EYTZ8TS7MNAHAEYNHTZ","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_block_overflow",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk block overflow"
-        },
-        "last_changed": "2023-11-24T11:21:15.662790+00:00",
-        "last_updated": "2023-11-24T11:21:15.662790+00:00",
-        "context": {
-          "id": "01HG0H00ME8NRTNPQEYYHTV92B",
-          "parent_id": null,
-          "user_id": "ec313e3c38fb4d60b44e0db03cdc1250"
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_history_show_more","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog history show more link"},"last_changed":"2024-09-10T18:10:28.442550+00:00","last_reported":"2024-09-10T18:10:28.442550+00:00","last_updated":"2024-09-10T18:10:28.442550+00:00","context":{"id":"01J7EJ2EYTP1EC7GBB0EJF6S0K","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_block_mouse",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk block mouse"
-        },
-        "last_changed": "2023-11-24T11:20:53.050002+00:00",
-        "last_updated": "2023-11-24T11:20:53.050002+00:00",
-        "context": {
-          "id": "01HG0GZAHTXKQ1Z01XW493XMZY",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_hide_dialog_logbook_show_more","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk hide dialog logbook show more link"},"last_changed":"2024-09-10T18:10:28.442579+00:00","last_reported":"2024-09-10T18:10:28.442579+00:00","last_updated":"2024-09-10T18:10:28.442579+00:00","context":{"id":"01J7EJ2EYT29G1WC4XXZR41VBF","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "input_boolean.kiosk_block_context_menu",
-        "state": "off",
-        "attributes": {
-          "editable": false,
-          "friendly_name": "Kiosk block context menu"
-        },
-        "last_changed": "2023-11-24T11:20:53.050018+00:00",
-        "last_updated": "2023-11-24T11:20:53.050018+00:00",
-        "context": {
-          "id": "01HG0GZAHTQETRSJW1FN47845V",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_block_overflow","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk block overflow"},"last_changed":"2024-09-10T18:10:45.079499+00:00","last_reported":"2024-09-10T18:10:45.079499+00:00","last_updated":"2024-09-10T18:10:45.079499+00:00","context":{"id":"01J7EJ2Z6QMSZAYY67M7Q9G90P","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "timer.laundry",
-        "state": "idle",
-        "attributes": {
-          "duration": "0:01:00",
-          "editable": false
-        },
-        "last_changed": "2023-11-24T11:20:53.210152+00:00",
-        "last_updated": "2023-11-24T11:20:53.210152+00:00",
-        "context": {
-          "id": "01HG0GZAPTCH6WR38PRKMK51QP",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_block_mouse","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk block mouse"},"last_changed":"2024-09-10T18:10:28.442630+00:00","last_reported":"2024-09-10T18:10:28.442630+00:00","last_updated":"2024-09-10T18:10:28.442630+00:00","context":{"id":"01J7EJ2EYTSM3M9396ZT1N0N3N","parent_id":null,"user_id":null}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     },
     {
-      "state": {
-        "entity_id": "tts.google_en_com",
-        "state": "unknown",
-        "attributes": {
-          "friendly_name": "Google en com"
-        },
-        "last_changed": "2023-11-24T11:20:53.307091+00:00",
-        "last_updated": "2023-11-24T11:20:53.307091+00:00",
-        "context": {
-          "id": "01HG0GZASV5XMF3YSR0BYSNFA0",
-          "parent_id": null,
-          "user_id": null
-        }
-      },
+      "state": {"entity_id":"input_boolean.kiosk_block_context_menu","state":"off","attributes":{"editable":false,"friendly_name":"Kiosk block context menu"},"last_changed":"2024-09-10T18:10:46.465487+00:00","last_reported":"2024-09-10T18:10:46.465487+00:00","last_updated":"2024-09-10T18:10:46.465487+00:00","context":{"id":"01J7EJ30J1EDQA03WAFHZXNDP0","parent_id":null,"user_id":"ec313e3c38fb4d60b44e0db03cdc1250"}},
       "extra_data": null,
-      "last_seen": "2023-11-24T11:21:32.159803+00:00"
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
+    },
+    {
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2024-09-10T18:10:28.488197+00:00","last_reported":"2024-09-10T18:10:28.488197+00:00","last_updated":"2024-09-10T18:10:28.488197+00:00","context":{"id":"01J7EJ2F087XACQ25ZHDP6F7RG","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-09-10T18:10:50.521436+00:00"
     }
   ]
 }
