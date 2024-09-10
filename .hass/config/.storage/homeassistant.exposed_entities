@@ -18,6 +18,13 @@
             "should_expose": false
           }
         }
+      },
+      "conversation.home_assistant": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
       }
     }
   }
