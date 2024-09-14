@@ -1,4 +1,5 @@
 import { test, expect } from 'playwright-test-coverage';
+import path from 'path';
 import {
 	URL_PARAMS,
 	SELECTORS,
@@ -149,6 +150,32 @@ test('URL Parameter: ?block_overflow', async ({ page }) => {
 
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');
+
+});
+
+test('URL Parameter: ?block_context_menu', async ({ context, page }) => {
+
+	await context.addInitScript({
+		path: path.join(__dirname, '..', './node_modules/sinon/pkg/sinon.js'),
+	});
+
+	await context.addInitScript(() => {
+		window['__listener'] = window['sinon'].fake();
+		window.addEventListener('contextmenu', window['__listener']);
+	});
+
+	await goToPageWithParams(page, URL_PARAMS.BLOCK_CONTEXT_MENU);
+
+	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
+	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
+
+	await page.locator(SELECTORS.HEADER).click({
+		button: 'right'
+	});
+
+	const executed = await page.evaluate(() => window['__listener'].calledOnce);
+
+	await expect(executed).toBe(false);
 
 });
 
