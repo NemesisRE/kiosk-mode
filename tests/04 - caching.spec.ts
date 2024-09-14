@@ -1,4 +1,5 @@
 import { test, expect } from 'playwright-test-coverage';
+import path from 'path';
 import {
 	URL_PARAMS,
 	SELECTORS,
@@ -367,3 +368,53 @@ test('Caching URL Parameter: ?block_overflow', async ({ page }) => {
 
 });
 
+test('Caching URL Parameter: ?block_context_menu', async ({ context, page }) => {
+
+	await context.addInitScript({
+		path: path.join(__dirname, '..', './node_modules/sinon/pkg/sinon.js'),
+	});
+
+	await context.addInitScript(() => {
+		window['__listener'] = window['sinon'].fake();
+		window.addEventListener('contextmenu', window['__listener']);
+	});
+
+	await goToPageWithParams(
+		page,
+		URL_PARAMS.BLOCK_CONTEXT_MENU,
+		URL_PARAMS.CACHE
+	);
+
+	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+
+	await page.locator(SELECTORS.HEADER).click({
+		button: 'right'
+	});
+
+	let executed = await page.evaluate(() => window['__listener'].calledOnce);
+
+	await expect(executed).toBe(false);
+
+	await goToPage(page);
+
+	await page.locator(SELECTORS.HEADER).click({
+		button: 'right'
+	});
+
+	executed = await page.evaluate(() => window['__listener'].calledOnce);
+
+	await expect(executed).toBe(false);
+
+	await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
+
+	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+
+	await page.locator(SELECTORS.HEADER).click({
+		button: 'right'
+	});
+
+	executed = await page.evaluate(() => window['__listener'].calledOnce);
+
+	await expect(executed).toBe(true);
+
+});
