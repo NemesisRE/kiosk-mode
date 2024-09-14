@@ -293,3 +293,33 @@ test.describe('Option: block_context_menu', () => {
 
 	});
 });
+
+test('Option: debug and debug_template', async ({ page }) => {
+
+	const messages: string[] = [];
+
+	page.on('console', message => {
+		if (
+			['startGroup', 'startGroupCollapsed', 'endGroup', 'warning', 'info', 'table'].includes(message.type())
+		) {
+			messages.push(message.text());
+		}
+	});
+
+	await goToPage(page);
+
+	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
+	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
+	await page.waitForTimeout(1500);
+
+	expect(messages).toEqual(
+		expect.arrayContaining([
+			'kiosk-mode raw config for lovelace panel',
+			'The template debug has been triggered with the next template:',
+			'%c[[[ is_state(\'input_boolean.kiosk\', \'on\') ? \'yes\' : \'no\' ]]] color: #666',
+			'The evaluation of this template is: %cno font-weight: bold; color: red;',
+			'%c⚠️ This template doesn\'t return a boolean. It cannot be used as a kiosk-mode option. text-decoration: underline'
+		])
+	);
+
+});
