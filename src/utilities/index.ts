@@ -1,5 +1,5 @@
 import { getPromisableResult } from 'get-promisable-result';
-import { HomeAssistant, Version } from '@types';
+import { HomeAsssistantExtended, Version } from '@types';
 import {
 	TRUE,
 	MENU_REFERENCES,
@@ -55,7 +55,7 @@ export const getDisplayNoneRules = (...rules: string[]): Record<string, false> =
 	);
 };
 
-const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string, string>>> => {
+const getHAResources = (ha: HomeAsssistantExtended): Promise<Record<string, Record<string, string>>> => {
 	const referencePaths = Object.values(MENU_REFERENCES);
 	return getPromisableResult(
 		() => ha?.hass?.resources,
@@ -77,7 +77,7 @@ const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string
 };
 
 export const getMenuTranslations = async(
-	ha: HomeAssistant
+	ha: HomeAsssistantExtended
 ): Promise<Record<string, string>> => {
 	const resources = await getHAResources(ha);
 	const language = ha.hass.language;
