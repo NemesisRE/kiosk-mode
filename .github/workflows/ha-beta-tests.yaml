@@ -11,26 +11,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+          run_install: false
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'yarn'
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache
-          key: dependencies-v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          cache: 'pnpm'
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: pnpm install
       - name: E2E Tests
         run: |
           touch .env
           echo HA_TOKEN=${{ secrets.CYPRESS_HA_TOKEN }} >> .env
-          TAG=beta yarn test:ci
+          TAG=beta pnpm test:ci
       - name: Create coverage
-        run: yarn coverage:report
+        run: pnpm coverage:report
       - uses: actions/upload-artifact@v3
         if: always()
         with:
