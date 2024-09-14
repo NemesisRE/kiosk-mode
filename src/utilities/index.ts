@@ -1,4 +1,4 @@
-import { HomeAssistant, Version } from '@types';
+import { HomeAsssistantExtended, Version } from '@types';
 import { getPromisableResult } from 'get-promisable-result';
 import {
 	TRUE,
@@ -57,7 +57,7 @@ export const getDisplayNoneRules = (...rules: string[]): Record<string, false> =
 	);
 };
 
-export const getMenuTranslations = async(ha: HomeAssistant, version: Version): Promise<Record<string, string>> => {
+export const getMenuTranslations = async(ha: HomeAsssistantExtended, version: Version): Promise<Record<string, string>> => {
 
 	const referencePaths = Object.entries(MENU_REFERENCES);
 

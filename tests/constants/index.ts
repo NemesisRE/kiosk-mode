@@ -104,6 +104,7 @@ export const URL_PARAMS = {
 	HIDE_RELOAD_RESOURCES: 'hide_reload_resources',
 	HIDE_EDIT_DASHBOARD: 'hide_edit_dashboard',
 	BLOCK_OVERFLOW: 'block_overflow',
+	BLOCK_CONTEXT_MENU: 'block_context_menu',
 	DISABLE_KM: 'disable_km',
 	CACHE: 'cache',
 	CLEAR_KM_CACHE: 'clear_km_cache',
