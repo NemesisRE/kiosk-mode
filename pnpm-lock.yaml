@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      home-assistant-javascript-templates:
+        specifier: ^5.0.0
+        version: 5.0.0
       home-assistant-query-selector:
         specifier: ^4.2.0
         version: 4.2.0
@@ -947,6 +950,9 @@ packages:
   helpertypes@0.0.19:
     resolution: {integrity: sha512-J00e55zffgi3yVnUp0UdbMztNkr2PnizEkOe9URNohnrNhW5X0QpegkuLpOmFQInpi93Nb8MCjQRHAiCDF42NQ==}
     engines: {node: '>=10.0.0'}
+
+  home-assistant-javascript-templates@5.0.0:
+    resolution: {integrity: sha512-vUdqyfBi7bCGecCcUj1Keon6UynfVCJuab6zxshYO1wVTL/UMvTR6s+AFnizK3VVxY92y5hnV12P7mcqh93E+Q==}
 
   home-assistant-query-selector@4.2.0:
     resolution: {integrity: sha512-8VwrqTunsE3sgakCirBdQgrZTvWgT1SIaVthpgVCeaA/8dUK0qQfn3JFUcwaa8xm0NUa8yDgjRkxKe9lGHA65Q==}
@@ -2511,6 +2517,8 @@ snapshots:
       function-bind: 1.1.2
 
   helpertypes@0.0.19: {}
+
+  home-assistant-javascript-templates@5.0.0: {}
 
   home-assistant-query-selector@4.2.0:
     dependencies:
