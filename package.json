@@ -30,6 +30,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
+    "home-assistant-javascript-templates": "^5.0.0",
     "home-assistant-query-selector": "^4.2.0"
   },
   "devDependencies": {
