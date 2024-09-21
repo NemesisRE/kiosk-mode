@@ -14,6 +14,7 @@ import {
 	ConditionalKioskConfig,
 	SuscriberEvent,
 	EntitySetting,
+	HaSidebar,
 	Version
 } from '@types';
 import {
@@ -26,6 +27,7 @@ import {
 	SUSCRIBE_EVENTS_TYPE,
 	STATE_CHANGED_EVENT,
 	TOGGLE_MENU_EVENT,
+	MC_DRAWER_CLOSED_EVENT,
 	WINDOW_RESIZE_DELAY,
 	NAMESPACE,
 	NON_CRITICAL_WARNING
@@ -76,7 +78,7 @@ class KioskMode implements KioskModeRunner {
 			this.ha = await HOME_ASSISTANT.element as HomeAssistant;
 			this.main = await HOME_ASSISTANT_MAIN.selector.$.element;
 			this.huiRoot = await HUI_ROOT.selector.$.element;
-			this.drawerLayout = await HA_DRAWER.element;
+			this.drawerLayout = await HA_DRAWER.element as HaSidebar;
 			this.appToolbar = await HEADER.selector.query(ELEMENT.TOOLBAR).element;
 			this.sideBarRoot = await HA_SIDEBAR.selector.$.element;
 
@@ -116,7 +118,7 @@ class KioskMode implements KioskModeRunner {
 	private main: ShadowRoot;
 	private user: User;
 	private huiRoot: ShadowRoot;
-	private drawerLayout: Element;
+	private drawerLayout: HaSidebar;
 	private appToolbar: Element;
 	private sideBarRoot: ShadowRoot;
 	private menuTranslations: Record<string, string>;
@@ -277,10 +279,25 @@ class KioskMode implements KioskModeRunner {
 			this.options[OPTION.KIOSK] ||
 			this.options[OPTION.HIDE_SIDEBAR]
 		) {
-			this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockEventHandler, true);
-			addStyle(STYLES.SIDEBAR, this.drawerLayout);
-			addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot);
-			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_SIDEBAR, TRUE);
+
+			const hideSidebarCommands = (): void => {
+				this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockEventHandler, true);
+				addStyle(STYLES.SIDEBAR, this.drawerLayout);
+				addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot);
+				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_SIDEBAR, TRUE);
+				this.drawerLayout.removeEventListener(MC_DRAWER_CLOSED_EVENT, hideSidebarCommands);
+			};
+
+			// Workaround for Companion App, before hiding the sidebar it is needed to wait for the MC Drawer to close
+			// Check the next issue: https://github.com/NemesisRE/kiosk-mode/issues/275
+			if (
+				this.drawerLayout.type === 'modal' &&
+				this.drawerLayout.appContent?.inert
+			) {
+				this.drawerLayout.addEventListener(MC_DRAWER_CLOSED_EVENT, hideSidebarCommands);
+			} else {
+				hideSidebarCommands();
+			}
 		} else {
 			removeStyle(this.drawerLayout);
 			removeStyle(this.drawerLayout.shadowRoot);
