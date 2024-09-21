@@ -75,6 +75,11 @@ export class Lovelace extends HTMLElement {
     };
 }
 
+export class HaSidebar extends HTMLElement {
+	type: 'modal' | '';
+	appContent: HTMLElement;
+}
+
 export type SuscriberEvent = {
     event_type: string;
     data: {
