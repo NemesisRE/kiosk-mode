@@ -35,20 +35,20 @@
   "devDependencies": {
     "@playwright/test": "1.47.2",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "@types/node": "^22.5.5",
+    "@types/node": "^22.7.4",
     "@types/sinon": "^17.0.3",
     "dotenv-cli": "^7.4.2",
-    "eslint": "^9.11.0",
+    "eslint": "^9.11.1",
     "nyc": "^17.1.0",
     "playwright-test-coverage": "^1.2.12",
-    "rollup": "^4.22.4",
+    "rollup": "^4.22.5",
     "rollup-plugin-istanbul": "^5.0.0",
     "rollup-plugin-ts": "^3.4.5",
     "sinon": "^19.0.2",
     "tslib": "^2.7.0",
     "typescript": "^5.6.2",
-    "typescript-eslint": "^8.6.0"
+    "typescript-eslint": "^8.7.0"
   }
 }
