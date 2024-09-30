@@ -91,7 +91,7 @@ views:
 
 ## Config Options
 
-All the options can be set as a boolean and all of them are `false` by default. Excluding `ignore_mobile_settings` and `ignore_disable_km`, all the options can be set as a [JavaScript](#javascript-templates) or a [Jinja](#jinja-templates) template that returns a boolean.
+All the options, excluding `debug_template`, can be set as a boolean and all of them are `false` by default. Excluding `ignore_mobile_settings` and `ignore_disable_km`, all the options can be set as a [JavaScript](#javascript-templates) or a [Jinja](#jinja-templates) template that returns a boolean.
 
 >**Note:** If you set the option as a string but it is not a valid [JavaScript](#javascript-templates) or [Jinja](#jinja-templates) template, the library will throw an error. If you set a `JavaScript` or a `Jinja` template and it doesn't return a boolean, the option will be set as false and a warning will be thrown.
 
@@ -135,6 +135,8 @@ All the options can be set as a boolean and all of them are `false` by default. 
 |`hide_dialog_light_settings_actions`      | Hides the settings actions in the more-info dialogs of light entities. |
 |`ignore_disable_km`<sup>3</sup>           | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
 |`ignore_mobile_settings`<sup>3, 4</sup>   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
+|`debug`<sup>5</sup>                       | Useful for debugging purposes. Check the [debugging section](#debugging). |
+|`debug_template`<sup>5</sup>              | Useful for debugging purposes. Check the [debugging section](#debugging). |
 
 <br/>
 
@@ -145,6 +147,8 @@ All the options can be set as a boolean and all of them are `false` by default. 
 ><sup>3</sup> These options should be booleans. If you try to set them as a [JavaScript](#javascript-templates) or a [Jinja](#jinja-templates) template, an error will be thrown.
 >
 ><sup>4</sup> This option only works if it is placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings) or [user_settings](#user_settings). It will not have any effect if it is placed inside [mobile_settings](#mobile_settings).
+>
+><sup>5</sup> These options will not change anything in the UI. They will log messages in the browser console.
 
 <br/>
 
@@ -435,6 +439,17 @@ This works for all query strings except for the utility strings listed below.
 
 * `?clear_km_cache` will clear all cached preferences
 * `?disable_km` will temporarily disable any modifications (unless `ignore_disable_km` has been used in one of the [conditional configs](#conditional-lovelace-config))
+<br>
+
+## Debugging
+
+`Kiosk-mode` counts with two debugging options and each one has a different purpose:
+
+| Option | Description |
+| ------ | ----------- |
+| `debug` | Prints useful information in the console. The raw config loaded from the Lovelace panel, the resulting final config with all the options, and if a template is rendered, it will print the option that trigered the template, the template code and the evaluated result of it. |
+| `debug_template` | Useful to debug the result of a single template without activating the `debug` mode. |
+
 <br>
 
 ## Kiosk-mode demo
