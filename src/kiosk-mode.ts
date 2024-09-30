@@ -14,7 +14,6 @@ import {
 	HomeAsssistantExtended,
 	Lovelace,
 	KioskConfig,
-	ConditionalKioskConfig,
 	HaSidebar,
 	Options,
 	SubscriberTemplate,
@@ -24,6 +23,7 @@ import {
 import {
 	OPTION,
 	CONDITIONAL_OPTION,
+	DEBUG_CONFIG_OPTION,
 	SPECIAL_QUERY_PARAMS,
 	ELEMENT,
 	TRUE,
@@ -55,7 +55,7 @@ import {
 } from '@utilities';
 import { STYLES } from '@styles';
 
-import { ConInfo } from './conf-info';
+import { ConsoleMessager } from './console-messager';
 
 class KioskMode implements KioskModeRunner {
 	constructor() {
@@ -156,6 +156,23 @@ class KioskMode implements KioskModeRunner {
 		this.panelOptions.set(panelUrl, options);
 	}
 
+	private _isDebug(debug: unknown): boolean {
+		return typeof debug === 'boolean' && debug;
+	}
+
+	private _isKioskModeDisabled(options: Options): boolean {
+		if (
+			!options ||
+			(
+				queryString(SPECIAL_QUERY_PARAMS.DISABLE_KIOSK_MODE) &&
+				!options[CONDITIONAL_OPTION.IGNORE_DISABLE_KM]
+			)
+		) {
+			return true;
+		}
+		return false;
+	}
+
 	private runThrottle() {
 		window.clearTimeout(this._runTimeout);
 		this._runTimeout = window.setTimeout(() => {
@@ -204,14 +221,22 @@ class KioskMode implements KioskModeRunner {
 
 	protected async processConfig(config: KioskConfig) {
 
+		if (this._isDebug(config.debug)) {
+			ConsoleMessager.debugRawConfig(config, this._getPanelUrl());
+		}
+
+		let mergedConfig: KioskConfig = {};
 		const options: Options = {};
 
 		// Set all the options to false
 		Object.values(OPTION).forEach((option: OPTION) => {
-			options[option] = false;
+			mergedConfig[option] = false;
 		});
 		Object.values(CONDITIONAL_OPTION).forEach((option: CONDITIONAL_OPTION) => {
-			options[option] = false;
+			mergedConfig[option] = false;
+		});
+		Object.values(DEBUG_CONFIG_OPTION).forEach((option: DEBUG_CONFIG_OPTION) => {
+			mergedConfig[option] = false;
 		});
 
 		// Get menu translations
@@ -230,11 +255,14 @@ class KioskMode implements KioskModeRunner {
 			queryString(Object.values(OPTION))
 		) {
 			Object.values(OPTION).forEach((option: OPTION): void => {
-				options[option] = cached(option) || queryString(option);
+				mergedConfig[option] = cached(option) || queryString(option);
 			});
 		} else {
 			// Use config values only if config strings and cache aren't used.
-			this.setOptions(options, config, false);
+			mergedConfig = {
+				...mergedConfig,
+				...config
+			};
 		}
 
 		// Admin non-admin config
@@ -243,14 +271,20 @@ class KioskMode implements KioskModeRunner {
 			: config.non_admin_settings;
 
 		if (adminConfig) {
-			this.setOptions(options, adminConfig, true);
+			mergedConfig = {
+				...mergedConfig,
+				...adminConfig
+			};
 		}
 
 		// User settings config
 		if (config.user_settings) {
-			toArray(config.user_settings).forEach((conf) => {
-				if (toArray(conf.users).some((user) => user.toLowerCase() === this.user.name.toLowerCase())) {
-					this.setOptions(options, conf, true);
+			toArray(config.user_settings).forEach((userConfig) => {
+				if (toArray(userConfig.users).some((user) => user.toLowerCase() === this.user.name.toLowerCase())) {
+					mergedConfig = {
+						...mergedConfig,
+						...userConfig
+					};
 				}
 			});
 		}
@@ -265,10 +299,18 @@ class KioskMode implements KioskModeRunner {
 				? mobileConfig.custom_width
 				: CUSTOM_MOBILE_WIDTH_DEFAULT;
 			if (window.innerWidth <= mobileWidth) {
-				this.setOptions(options, mobileConfig, true);
+				mergedConfig = {
+					...mergedConfig,
+					...mobileConfig
+				};
 			}
 		}
 
+		if (this._isDebug(mergedConfig.debug)) {
+			ConsoleMessager.debugFinalConfig(mergedConfig, this._getPanelUrl());
+		}
+
+		this.setOptions(options, mergedConfig);
 		this._storeOptions(options);
 
 		this.insertStyles();
@@ -280,13 +322,7 @@ class KioskMode implements KioskModeRunner {
 		const options = this._getOptions();
 
 		// Do not run kiosk-mode if it is disabled
-		if (
-			!options ||
-			(
-				queryString(SPECIAL_QUERY_PARAMS.DISABLE_KIOSK_MODE) &&
-				!options[CONDITIONAL_OPTION.IGNORE_DISABLE_KM]
-			)
-		) {
+		if (this._isKioskModeDisabled(options)) {
 			return;
 		}
 
@@ -441,13 +477,7 @@ class KioskMode implements KioskModeRunner {
 		const options = this._getOptions();
 
 		// Do not run kiosk-mode if it is disabled
-		if (
-			!options ||
-			(
-				queryString(SPECIAL_QUERY_PARAMS.DISABLE_KIOSK_MODE) &&
-				!options[CONDITIONAL_OPTION.IGNORE_DISABLE_KM]
-			)
-		) {
+		if (this._isKioskModeDisabled(options)) {
 			return;
 		}
 
@@ -716,28 +746,43 @@ class KioskMode implements KioskModeRunner {
 		event.stopImmediatePropagation();
 	}
 
-	protected setOptions(options: Options, config: ConditionalKioskConfig, conditional: boolean) {
-		Object.values(OPTION).forEach((option: OPTION): void => {
-			if (option in config) {
-				this.setOptionsOrSubscribeToSetOptions(options, config, option);
+	protected setOptions(
+		options: Options,
+		mergedConfig: KioskConfig
+	) {
+		Object.values(DEBUG_CONFIG_OPTION).forEach((option: DEBUG_CONFIG_OPTION) => {
+			if (option in mergedConfig) {
+				this.setOptionsOrSubscribeToSetOptions(options, mergedConfig, option);
 			}
 		});
-		if (conditional) {
-			Object.values(CONDITIONAL_OPTION).forEach((option: CONDITIONAL_OPTION): void => {
-				if (option in config) {
-					if (typeof config[option] === 'boolean') {
-						options[option] = config[option];
-					} else {
-						throw SyntaxError(`${NAMESPACE}: the option "${option}" accepts only boolean values`);
-					}
-				}
-			});
-		}
+		Object.values(OPTION).forEach((option: OPTION): void => {
+			if (option in mergedConfig) {
+				this.setOptionsOrSubscribeToSetOptions(options, mergedConfig, option);
+			}
+		});
 	}
 
-	protected setOptionsOrSubscribeToSetOptions(options: Options, config: ConditionalKioskConfig, option: OPTION | CONDITIONAL_OPTION) {
+	protected setOptionsOrSubscribeToSetOptions(
+		options: Options,
+		mergedConfig: KioskConfig,
+		option: OPTION | DEBUG_CONFIG_OPTION
+	) {
 		const panelUrl = this._getPanelUrl();
-		const value = config[option];
+		const value = mergedConfig[option];
+
+		const executeRendering = (value: string, result: unknown): void => {
+			if (this._getPanelUrl() === panelUrl) {
+				if (option === DEBUG_CONFIG_OPTION.DEBUG_TEMPLATE) {
+					ConsoleMessager.debugTemplate(value, result);
+				} else {
+					if (this._isDebug(options.debug)) {
+						ConsoleMessager.debug(option, value, result);
+					}
+					this.runThrottle();
+				}
+			}
+		};
+
 		if (typeof value === 'boolean') {
 
 			options[option] = value;
@@ -750,11 +795,8 @@ class KioskMode implements KioskModeRunner {
 					options[option] = result;
 				} else {
 					options[option] = false;
-					console.warn(`${NAMESPACE}: the JavaScript template "${value}" of the option "${option}" doesn't return a boolean value. The option has been set as false`);
 				}
-				if (this._getPanelUrl() === panelUrl) {
-					this.runThrottle();
-				}
+				executeRendering(value, result);
 			};
 
 			this._renderer.trackTemplate(
@@ -780,11 +822,8 @@ class KioskMode implements KioskModeRunner {
 							options[option] = result === 'true';
 						} else {
 							options[option] = false;
-							console.warn(`${NAMESPACE}: the Jinja template "${value}" of the option "${option}" doesn't return a boolean value. The option has been set as false`);
 						}
-						if (this._getPanelUrl() === panelUrl) {
-							this.runThrottle();
-						}
+						executeRendering(value, result);
 					},
 					{
 						type: RENDER_TEMPLATE_EVENT,
@@ -806,8 +845,7 @@ class KioskMode implements KioskModeRunner {
 }
 
 // Console tag
-const info = new ConInfo();
-info.log();
+ConsoleMessager.logInfo();
 
 // Initial Run
 Promise.resolve(customElements.whenDefined(ELEMENT.HUI_VIEW))
