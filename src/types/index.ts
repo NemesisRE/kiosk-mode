@@ -1,22 +1,33 @@
 import { HomeAssistant, Hass } from 'home-assistant-javascript-templates';
-import { OPTION, CONDITIONAL_OPTION } from '@constants';
+import {
+	OPTION,
+	CONDITIONAL_OPTION,
+	DEBUG_CONFIG_OPTION
+} from '@constants';
 
 export interface KioskModeRunner {
     run: (lovelace: HTMLElement) => Promise<void>;
     runDialogs: (dialog: Element) => void;
 }
 
-export interface MobileSettings extends Exclude<ConditionalKioskConfig, 'ignore_mobile_settings'> {
+export interface MobileSettings extends Exclude<ConditionalConfig, 'ignore_mobile_settings'> {
     custom_width: number;
 }
 
-export interface UserSetting extends ConditionalKioskConfig {
+export interface UserSetting extends ConditionalConfig {
     users: string[];
 }
 
 type BaseKioskConfig = Partial<
     Record<
         OPTION,
+        boolean | string
+    >
+>;
+
+type DebugKioskConfig = Partial<
+    Record<
+        DEBUG_CONFIG_OPTION,
         boolean | string
     >
 >;
@@ -30,19 +41,19 @@ type BaseConditionalKioskConfig = Partial<
 
 export type Options = Partial<
     Record<
-        OPTION | CONDITIONAL_OPTION,
+        OPTION | CONDITIONAL_OPTION | DEBUG_CONFIG_OPTION,
         boolean
     >
 >;
 
-export interface KioskConfig extends BaseKioskConfig {
-    admin_settings?: ConditionalKioskConfig;
-    non_admin_settings?: ConditionalKioskConfig;
+export interface KioskConfig extends BaseKioskConfig, BaseConditionalKioskConfig, DebugKioskConfig {
+    admin_settings?: ConditionalConfig;
+    non_admin_settings?: ConditionalConfig;
     user_settings?: UserSetting[];
     mobile_settings?: MobileSettings;
 }
 
-export type ConditionalKioskConfig = KioskConfig & BaseConditionalKioskConfig;
+export type ConditionalConfig = BaseKioskConfig & BaseConditionalKioskConfig;
 
 export interface HomeAsssistantExtended extends HomeAssistant {
     hass: Hass & {

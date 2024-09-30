@@ -45,6 +45,11 @@ export enum CONDITIONAL_OPTION {
     IGNORE_DISABLE_KM = 'ignore_disable_km'
 }
 
+export enum DEBUG_CONFIG_OPTION {
+    DEBUG = 'debug',
+    DEBUG_TEMPLATE = 'debug_template'
+}
+
 export enum SPECIAL_QUERY_PARAMS {
     CACHE = 'cache',
     CLEAR_CACHE = 'clear_km_cache',
