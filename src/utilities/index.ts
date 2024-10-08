@@ -1,5 +1,5 @@
 import {
-	HomeAssistant,
+	HomeAsssistantExtended,
 	StyleElement,
 	Version
 } from '@types';
@@ -120,7 +120,7 @@ export const getDisplayNoneRulesString = (...rules: string[]): string => {
 	}).join('');
 };
 
-const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string, string>>> => {
+const getHAResources = (ha: HomeAsssistantExtended): Promise<Record<string, Record<string, string>>> => {
 	let attempts = 0;
 	const referencePaths = Object.values(MENU_REFERENCES);
 	return new Promise((resolve, reject) => {
@@ -156,7 +156,7 @@ const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string
 };
 
 export const getMenuTranslations = async(
-	ha: HomeAssistant
+	ha: HomeAsssistantExtended
 ): Promise<Record<string, string>> => {
 	const resources = await getHAResources(ha);
 	const language = ha.hass.language;
