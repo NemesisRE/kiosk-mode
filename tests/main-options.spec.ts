@@ -256,6 +256,8 @@ test.describe('Option: block_context_menu', () => {
 
 		await haRequest(ENTITIES.BLOCK_CONTEXT_MENU, true);
 
+		await page.waitForTimeout(100);
+
 		await page.locator(SELECTORS.HEADER).click({
 			button: 'right'
 		});
@@ -265,6 +267,8 @@ test.describe('Option: block_context_menu', () => {
 		await expect(executed).toBe(false);
 
 		await haRequest(ENTITIES.BLOCK_CONTEXT_MENU, false);
+
+		await page.waitForTimeout(100);
 
 		await page.locator(SELECTORS.HEADER).click({
 			button: 'right'
