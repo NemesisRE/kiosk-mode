@@ -20,7 +20,7 @@ export const STYLES = {
 	PAPER_LISTBOX: (
 		hideMenuButton: boolean,
 		hideNotifications: boolean,
-		hideAccount: boolean		
+		hideAccount: boolean
 	) => {
 		const menuButtonHeight = 56;
 		const notificationsHeight = 48;

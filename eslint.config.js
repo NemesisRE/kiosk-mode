@@ -25,5 +25,11 @@ module.exports = [
 			'@typescript-eslint/no-duplicate-enum-values': 'off',
 			'@typescript-eslint/no-var-requires': 'off'
 		}
+	},
+	{
+		files: ['**/*.js'],
+		rules: {
+			'@typescript-eslint/no-require-imports': 'off'
+		}
 	}
 ];
