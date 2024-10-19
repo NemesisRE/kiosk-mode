@@ -316,10 +316,13 @@ class KioskMode implements KioskModeRunner {
 				this.options[OPTION.HIDE_ACCOUNT] && this.options[OPTION.HIDE_NOTIFICATIONS]
 					? STYLES.DIVIDER
 					: '',
-				this.options[OPTION.HIDE_ACCOUNT] || this.options[OPTION.HIDE_NOTIFICATIONS]
+				this.options[OPTION.HIDE_MENU_BUTTON] ||
+				this.options[OPTION.HIDE_NOTIFICATIONS] ||
+				this.options[OPTION.HIDE_ACCOUNT]
 					? STYLES.PAPER_LISTBOX(
+						this.options[OPTION.HIDE_MENU_BUTTON],
+						this.options[OPTION.HIDE_NOTIFICATIONS],
 						this.options[OPTION.HIDE_ACCOUNT],
-						this.options[OPTION.HIDE_NOTIFICATIONS]
 					)
 					: '',
 				this.options[OPTION.HIDE_MENU_BUTTON]

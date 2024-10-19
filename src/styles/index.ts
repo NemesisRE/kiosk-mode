@@ -17,22 +17,47 @@ export const STYLES = {
 	ACCOUNT: getDisplayNoneRulesString('.profile'),
 	NOTIFICATIONS: getDisplayNoneRulesString('.notifications-container'),
 	DIVIDER: getDisplayNoneRulesString('.divider'),
-	PAPER_LISTBOX: (hideAccount: boolean, hideNotifications: boolean) => {
-		let size = 132;
+	PAPER_LISTBOX: (
+		hideMenuButton: boolean,
+		hideNotifications: boolean,
+		hideAccount: boolean		
+	) => {
+		const menuButtonHeight = 56;
+		const notificationsHeight = 48;
+		const accountHeight = 50;
+		let sizeMinimized = 132;
+		let sizeExpanded = 132;
 		if (hideAccount && hideNotifications) {
-			size = 0;
+			sizeMinimized = 0;
+			sizeExpanded = 0;
 		} else if (hideAccount) {
-			size -= 50;
+			sizeMinimized -= accountHeight;
+			sizeExpanded -= accountHeight;
 		} else if (hideNotifications) {
-			size -= 48;
+			sizeMinimized -= notificationsHeight;
+			sizeExpanded -= notificationsHeight;
+		}
+		if (hideMenuButton) {
+			sizeMinimized -= menuButtonHeight;
 		}
 		return getCSSRulesString({
-			'paper-listbox': {
-				height: `calc(100% - var(--header-height) - ${size}px - env(safe-area-inset-bottom)) !important`
+			':host(:not([expanded])) paper-listbox': {
+				height: `calc(100% - var(--header-height) - ${sizeMinimized}px - env(safe-area-inset-bottom)) !important`
+			},
+			':host([expanded]) paper-listbox': {
+				height: `calc(100% - var(--header-height) - ${sizeExpanded}px - env(safe-area-inset-bottom)) !important`
 			}
 		});
 	},
-	MENU_BUTTON: getDisplayNoneRulesString('.menu ha-icon-button'),
+	//,
+	MENU_BUTTON: `
+		:host(:not([expanded])) {
+			${ getDisplayNoneRulesString('.menu') }
+		}
+		:host([expanded]) {
+			${ getDisplayNoneRulesString('.menu ha-icon-button') }
+		}
+	`,
 	MENU_BUTTON_BURGER: getDisplayNoneRulesString('ha-menu-button'),
 	MOUSE: getCSSRulesString({
 		'body::after': {
