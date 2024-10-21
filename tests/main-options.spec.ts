@@ -227,20 +227,22 @@ test('Option: block_overflow', async ({ page }) => {
 });
 
 test.describe('Option: block_context_menu', () => {
-	test.beforeEach(async ({ context }) => {
+
+	test('Test contextmenu event listener', async ({ context, page }) => {
+
 		await context.addInitScript({
 			path: path.join(__dirname, '..', './node_modules/sinon/pkg/sinon.js'),
 		});
+
 		await context.addInitScript(() => {
 			window['__listener'] = window['sinon'].fake();
 			window.addEventListener('contextmenu', window['__listener']);
 		});
-	});
-	test('Test contextmenu event listener', async ({ page }) => {
 
 		await page.goto(BASE_URL);
 
 		await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
+		await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
 
 		let executed = await page.evaluate(() => window['__listener'].calledOnce);
 
