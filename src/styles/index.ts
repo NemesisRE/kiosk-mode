@@ -49,14 +49,9 @@ export const STYLES = {
 			}
 		});
 	},
-	//,
 	MENU_BUTTON: `
-		:host(:not([expanded])) {
-			${ getDisplayNoneRulesString('.menu') }
-		}
-		:host([expanded]) {
-			${ getDisplayNoneRulesString('.menu ha-icon-button') }
-		}
+		${ getDisplayNoneRulesString(':host(:not([expanded])) .menu') }
+		${ getDisplayNoneRulesString(':host([expanded]) .menu ha-icon-button') }
 	`,
 	MENU_BUTTON_BURGER: getDisplayNoneRulesString('ha-menu-button'),
 	MOUSE: getCSSRulesString({
