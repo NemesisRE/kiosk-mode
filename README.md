@@ -79,7 +79,7 @@ frontend:
 
 ## Simple config example
 
-YAML mode users need to add the configuration manually to the lovelace dashboard file in which they want to enable `kiosk-mode`. Non-YAML users (Storage Mode) need to add the configuration to each lovelace panel going to `Edit Dashboard` option (located in the overflow menu that appears when one clicks on the top-right three-dots button). Once in `Edit Dashboard` mode, click again on the top-right three-dots button and select `Raw configuration editor`.
+YAML mode users need to add the configuration manually to the lovelace dashboard file in which they want to enable `kiosk-mode`. Non-YAML users (Storage Mode) need to add the configuration to each lovelace panel going to `Edit dashboard` option (pencil icon on the top-right of the screen). Once in `Edit Dashboard` mode, click on the top-right three-dots button and select `Raw configuration editor`.
 
 ```
 kiosk_mode:
