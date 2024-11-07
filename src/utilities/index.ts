@@ -1,10 +1,5 @@
+import { HomeAssistant, Version } from '@types';
 import {
-	HomeAssistant,
-	StyleElement,
-	Version
-} from '@types';
-import {
-	STYLES_PREFIX,
 	TRUE,
 	MENU_REFERENCES,
 	MAX_ATTEMPTS,
@@ -17,40 +12,6 @@ import {
 // Convert to array
 export const toArray = <T>(x: T | T[]): T[] => {
 	return Array.isArray(x) ? x : [x];
-};
-
-const getElementName = (elem: Element | ShadowRoot): string => {
-	if (elem instanceof ShadowRoot) {
-		return elem.host.localName;
-	}
-	return elem.localName;
-};
-
-export const styleExists = (elem: Element | ShadowRoot): HTMLStyleElement => {
-	const name = getElementName(elem);
-	return elem.querySelector<HTMLStyleElement>(`#${STYLES_PREFIX}_${name}`);
-};
-
-export const addStyle = (css: string, elem: Element | ShadowRoot | null): void => {
-	if (!elem) return;
-	const name = getElementName(elem);
-	let style = styleExists(elem);
-	if (!style) {
-		style = document.createElement('style');
-		style.setAttribute('id', `${STYLES_PREFIX}_${name}`);
-		elem.appendChild(style);
-	}
-	style.innerHTML = css;
-};
-
-export const removeStyle = (elements: StyleElement | null): void => {
-	if (!elements) return;
-	toArray(elements).forEach((elem) => {
-		const name = getElementName(elem);
-		if (styleExists(elem)) {
-			elem.querySelector(`#${STYLES_PREFIX}_${name}`).remove();
-		}
-	});
 };
 
 // Get cache key
@@ -95,29 +56,11 @@ export const resetCache = () => {
 	});
 };
 
-// Convert a CSS in JS to string
-export const getCSSString = (cssInJs: Record<string, string>): string => {
-	return Object.entries(cssInJs)
-		.map((entry: [string, string]): string => {
-			const [decl, value] = entry;
-			return `${decl}:${value}`;
-		})
-		.join(';') + ';';
-};
-
-// Convert a CSS rules object to string
-export const getCSSRulesString = (cssRulesInJs: Record<string, Record<string, string>>): string => {
-	return Object.entries(cssRulesInJs)
-		.map((entry: [string, Record<string, string>]): string => {
-			const [rule, cssInJs] = entry;
-			return `${rule}{${getCSSString(cssInJs)}}`;
-		}).join('');
-};
-
-export const getDisplayNoneRulesString = (...rules: string[]): string => {
-	return rules.map((rule: string): string => {
-		return `${rule}{display: none !important;}`;
-	}).join('');
+export const getDisplayNoneRules = (...rules: string[]): Record<string, false> => {
+	const rulesEntries = toArray(rules).map((rule: string): [string, false] => {
+		return [rule, false];
+	});
+	return Object.fromEntries(rulesEntries);
 };
 
 const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string, string>>> => {

@@ -104,8 +104,6 @@ export interface HassConnection {
     }
 }
 
-export type StyleElement = Element | ShadowRoot | Element[] | ShadowRoot[];
-
 declare global {
     interface Window {
         kioskModeEntities: Record<string, string[]>;
