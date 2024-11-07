@@ -17,16 +17,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 20
           cache: 'pnpm'
-      - name: Set Playwright version
-        id: playwright-version
-        run: |
-          echo "playwright=$(cat package.json | grep @playwright/test | head -1 | awk -F: '{ print $2 }' | sed 's/[", ]//g')" >> $GITHUB_OUTPUT
-      - name: Cache Docker images
-        uses: ScribeMD/docker-cache@0.3.7
-        with:
-          key: docker-v1-${{ runner.os }}-${{ hashFiles('.hass/config/.HA_VERSION') }}-${{ steps.playwright-version.outputs.playwright }}
       - name: Install
         run: pnpm install
       - name: E2E tests
