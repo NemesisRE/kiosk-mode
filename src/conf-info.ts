@@ -1,4 +1,4 @@
-import { getCSSString } from '@utilities';
+import { getCSSString } from 'home-assistant-styles-manager';
 import { version } from '../package.json';
 
 interface Line {

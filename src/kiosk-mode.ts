@@ -5,6 +5,7 @@ import {
 	OnMoreInfoDialogOpenDetail,
 	OnHistoryAndLogBookDialogOpenDetail
 } from 'home-assistant-query-selector';
+import { HomeAssistantStylesManager } from 'home-assistant-styles-manager';
 import {
 	KioskModeRunner,
 	HomeAssistant,
@@ -29,6 +30,7 @@ import {
 	TOGGLE_MENU_EVENT,
 	MC_DRAWER_CLOSED_EVENT,
 	WINDOW_RESIZE_DELAY,
+	STYLES_PREFIX,
 	NAMESPACE,
 	NON_CRITICAL_WARNING
 } from '@constants';
@@ -37,8 +39,6 @@ import {
 	queryString,
 	setCache,
 	cached,
-	addStyle,
-	removeStyle,
 	getMenuTranslations,
 	getPromisableElement,
 	addMenuItemsDataSelectors,
@@ -59,6 +59,11 @@ class KioskMode implements KioskModeRunner {
 		window.kioskModeEntities = {};
 
 		this.options = {};
+
+		this.styleManager = new HomeAssistantStylesManager({
+			prefix: STYLES_PREFIX,
+			throwWarnings: false
+		});
 
 		const selector = new HAQuerySelector();
 
@@ -114,6 +119,7 @@ class KioskMode implements KioskModeRunner {
 	// Elements
 	private HAElements: OnLovelacePanelLoadDetail;
 	private HAMoreInfoDialogElements: OnMoreInfoDialogOpenDetail | OnHistoryAndLogBookDialogOpenDetail;
+	private styleManager: HomeAssistantStylesManager;
 	private ha: HomeAssistant;
 	private main: ShadowRoot;
 	private user: User;
@@ -266,10 +272,10 @@ class KioskMode implements KioskModeRunner {
 			this.options[OPTION.KIOSK] ||
 			this.options[OPTION.HIDE_HEADER]
 		) {
-			addStyle(STYLES.HEADER, this.huiRoot);
+			this.styleManager.addStyle(STYLES.HEADER, this.huiRoot);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_HEADER, TRUE);
 		} else {
-			removeStyle(this.huiRoot);
+			this.styleManager.removeStyle(this.huiRoot);
 		}
 
 		// Remove toggle menu event
@@ -282,8 +288,8 @@ class KioskMode implements KioskModeRunner {
 
 			const hideSidebarCommands = (): void => {
 				this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockEventHandler, true);
-				addStyle(STYLES.SIDEBAR, this.drawerLayout);
-				addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot);
+				this.styleManager.addStyle(STYLES.SIDEBAR, this.drawerLayout);
+				this.styleManager.addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot);
 				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_SIDEBAR, TRUE);
 				this.drawerLayout.removeEventListener(MC_DRAWER_CLOSED_EVENT, hideSidebarCommands);
 			};
@@ -299,8 +305,8 @@ class KioskMode implements KioskModeRunner {
 				hideSidebarCommands();
 			}
 		} else {
-			removeStyle(this.drawerLayout);
-			removeStyle(this.drawerLayout.shadowRoot);
+			this.styleManager.removeStyle(this.drawerLayout);
+			this.styleManager.removeStyle(this.drawerLayout.shadowRoot);
 		}
 
 		if (
@@ -310,31 +316,31 @@ class KioskMode implements KioskModeRunner {
 		) {
 			const styles = [
 				this.options[OPTION.HIDE_ACCOUNT]
-					? STYLES.ACCOUNT : '',
+					&& STYLES.ACCOUNT,
 				this.options[OPTION.HIDE_NOTIFICATIONS]
-					? STYLES.NOTIFICATIONS : '',
+					&& STYLES.NOTIFICATIONS,
 				this.options[OPTION.HIDE_ACCOUNT] && this.options[OPTION.HIDE_NOTIFICATIONS]
-					? STYLES.DIVIDER
-					: '',
-				this.options[OPTION.HIDE_MENU_BUTTON] ||
-				this.options[OPTION.HIDE_NOTIFICATIONS] ||
-				this.options[OPTION.HIDE_ACCOUNT]
-					? STYLES.PAPER_LISTBOX(
+					&& STYLES.DIVIDER,
+				(
+					this.options[OPTION.HIDE_MENU_BUTTON] ||
+					this.options[OPTION.HIDE_NOTIFICATIONS] ||
+					this.options[OPTION.HIDE_ACCOUNT]
+				)
+					&& STYLES.PAPER_LISTBOX(
 						this.options[OPTION.HIDE_MENU_BUTTON],
 						this.options[OPTION.HIDE_NOTIFICATIONS],
 						this.options[OPTION.HIDE_ACCOUNT],
-					)
-					: '',
+					),
 				this.options[OPTION.HIDE_MENU_BUTTON]
-					? STYLES.MENU_BUTTON : '',
+					&& STYLES.MENU_BUTTON,
 			];
-			addStyle(styles.join(''), this.sideBarRoot);
+			this.styleManager.addStyle(styles, this.sideBarRoot);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
 				if (this.options[OPTION.HIDE_ACCOUNT])       setCache(OPTION.HIDE_ACCOUNT, TRUE);
 				if (this.options[OPTION.HIDE_NOTIFICATIONS]) setCache(OPTION.HIDE_NOTIFICATIONS, TRUE);
 			}
 		} else {
-			removeStyle(this.sideBarRoot);
+			this.styleManager.removeStyle(this.sideBarRoot);
 		}
 
 		if (
@@ -351,25 +357,25 @@ class KioskMode implements KioskModeRunner {
 		) {
 			const styles = [
 				this.options[OPTION.HIDE_SEARCH]
-					? STYLES.SEARCH : '',
+					&& STYLES.SEARCH,
 				this.options[OPTION.HIDE_ASSISTANT]
-					? STYLES.ASSISTANT : '',
+					&& STYLES.ASSISTANT,
 				this.options[OPTION.HIDE_REFRESH]
-					? STYLES.REFRESH : '',
+					&& STYLES.REFRESH,
 				this.options[OPTION.HIDE_UNUSED_ENTITIES]
-					? STYLES.UNUSED_ENTITIES : '',
+					&& STYLES.UNUSED_ENTITIES,
 				this.options[OPTION.HIDE_RELOAD_RESOURCES]
-					? STYLES.RELOAD_RESOURCES : '',
+					&& STYLES.RELOAD_RESOURCES,
 				this.options[OPTION.HIDE_EDIT_DASHBOARD]
-					? STYLES.EDIT_DASHBOARD : '',
+					&& STYLES.EDIT_DASHBOARD,
 				this.options[OPTION.HIDE_OVERFLOW]
-					? STYLES.OVERFLOW_MENU : '',
+					&& STYLES.OVERFLOW_MENU,
 				this.options[OPTION.BLOCK_OVERFLOW]
-					? STYLES.BLOCK_OVERFLOW : '',
-				this.options[OPTION.HIDE_MENU_BUTTON] || this.options[OPTION.HIDE_SIDEBAR]
-					? STYLES.MENU_BUTTON_BURGER : '',
+					&& STYLES.BLOCK_OVERFLOW,
+				(this.options[OPTION.HIDE_MENU_BUTTON] || this.options[OPTION.HIDE_SIDEBAR])
+					&& STYLES.MENU_BUTTON_BURGER
 			];
-			addStyle(styles.join(''), this.appToolbar);
+			this.styleManager.addStyle(styles, this.appToolbar);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
 				if (this.options[OPTION.HIDE_SEARCH])           setCache(OPTION.HIDE_SEARCH, TRUE);
 				if (this.options[OPTION.HIDE_ASSISTANT])        setCache(OPTION.HIDE_ASSISTANT, TRUE);
@@ -382,14 +388,14 @@ class KioskMode implements KioskModeRunner {
 				if (this.options[OPTION.HIDE_MENU_BUTTON])      setCache(OPTION.HIDE_MENU_BUTTON, TRUE);
 			}
 		} else {
-			removeStyle(this.appToolbar);
+			this.styleManager.removeStyle(this.appToolbar);
 		}
 
 		if (this.options[OPTION.BLOCK_MOUSE]) {
-			addStyle(STYLES.MOUSE, document.body);
+			this.styleManager.addStyle(STYLES.MOUSE, document.body);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.BLOCK_MOUSE, TRUE);
 		} else {
-			removeStyle(document.body);
+			this.styleManager.removeStyle(document.body);
 		}
 
 		window.removeEventListener('contextmenu', this.blockEventHandler, true);
@@ -433,14 +439,14 @@ class KioskMode implements KioskModeRunner {
 			this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW]
 		) {
 			const styles = [
-				this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] || this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY]
-					? STYLES.DIALOG_HEADER_HISTORY : '',
-				this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] || this.options[OPTION.HIDE_DIALOG_HEADER_SETTINGS]
-					? STYLES.DIALOG_HEADER_SETTINGS : '',
-				this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] || this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW]
-					? STYLES.DIALOG_HEADER_OVERFLOW : ''
+				(this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] || this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY])
+					&& STYLES.DIALOG_HEADER_HISTORY,
+				(this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] || this.options[OPTION.HIDE_DIALOG_HEADER_SETTINGS])
+					&& STYLES.DIALOG_HEADER_SETTINGS,
+				(this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] || this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW])
+					&& STYLES.DIALOG_HEADER_OVERFLOW
 			];
-			addStyle(styles.join(''), dialog);
+			this.styleManager.addStyle(styles, dialog);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
 				if (this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS]) setCache(OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS, TRUE);
 				if (this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY])      setCache(OPTION.HIDE_DIALOG_HEADER_HISTORY, TRUE);
@@ -448,7 +454,7 @@ class KioskMode implements KioskModeRunner {
 				if (this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW])     setCache(OPTION.HIDE_DIALOG_HEADER_OVERFLOW, TRUE);
 			}
 		} else {
-			removeStyle(dialog);
+			this.styleManager.removeStyle(dialog);
 		}
 
 		// Climate dialog
@@ -471,13 +477,13 @@ class KioskMode implements KioskModeRunner {
 				this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
 				this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]
 			) {
-				addStyle(STYLES.DIALOG_CLIMATE_CONTROL_SELECT, haDialogClimate);
+				this.styleManager.addStyle(STYLES.DIALOG_CLIMATE_CONTROL_SELECT, haDialogClimate);
 				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
 					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS])          setCache(OPTION.HIDE_DIALOG_CLIMATE_ACTIONS, TRUE);
 					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]) setCache(OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS, TRUE);
 				}
 			} else {
-				removeStyle(haDialogClimate);
+				this.styleManager.removeStyle(haDialogClimate);
 			}
 		});
 
@@ -486,12 +492,12 @@ class KioskMode implements KioskModeRunner {
 				this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
 				this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
 			) {
-				addStyle(STYLES.DIALOG_CLIMATE_TEMPERATURE_BUTTONS, haDialogClimateTemperature);
+				this.styleManager.addStyle(STYLES.DIALOG_CLIMATE_TEMPERATURE_BUTTONS, haDialogClimateTemperature);
 				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
 					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]) setCache(OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS, TRUE);
 				}
 			} else {
-				removeStyle(haDialogClimateTemperature);
+				this.styleManager.removeStyle(haDialogClimateTemperature);
 			}
 		});
 
@@ -500,9 +506,9 @@ class KioskMode implements KioskModeRunner {
 				this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS] ||
 				this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]
 			) {
-				addStyle(STYLES.DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION, haDialogClimateCircularSlider);
+				this.styleManager.addStyle(STYLES.DIALOG_CLIMATE_CIRCULAR_SLIDER_INTERACTION, haDialogClimateCircularSlider);
 			} else {
-				removeStyle(haDialogClimateCircularSlider);
+				this.styleManager.removeStyle(haDialogClimateCircularSlider);
 			}
 		});
 
@@ -537,44 +543,34 @@ class KioskMode implements KioskModeRunner {
 					this.options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]
 				) {
 					const styles = [
-						this.options[OPTION.HIDE_DIALOG_ATTRIBUTES] ? STYLES.DIALOG_ATTRIBUTES : '',
-						(
-							this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] &&
-							dialogChild.host.localName === ELEMENT.HA_DIALOG_TIMER
-						)
-							? STYLES.DIALOG_TIMER_ACTIONS
-							: '',
-						(
-							this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS] &&
-							dialogChild.host.localName === ELEMENT.HA_DIALOG_MEDIA_PLAYER
-						)
-							? STYLES.DIALOG_MEDIA_ACTIONS
-							: '',
-						(
-							this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS] &&
-							dialogChild.host.localName === ELEMENT.HA_DIALOG_UPDATE
-						)	? STYLES.DIALOG_UPDATE_ACTIONS
-							: '',
+						this.options[OPTION.HIDE_DIALOG_ATTRIBUTES]
+							&& STYLES.DIALOG_ATTRIBUTES,
+						this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] &&
+						dialogChild.host.localName === ELEMENT.HA_DIALOG_TIMER
+							&& STYLES.DIALOG_TIMER_ACTIONS,
+						this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS] &&
+						dialogChild.host.localName === ELEMENT.HA_DIALOG_MEDIA_PLAYER
+							&& STYLES.DIALOG_MEDIA_ACTIONS,
+						this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS] &&
+						dialogChild.host.localName === ELEMENT.HA_DIALOG_UPDATE
+							&& STYLES.DIALOG_UPDATE_ACTIONS,
 						(
 							this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
 							this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS]
 						)
-							? STYLES.DIALOG_LIGHT_CONTROL_ACTIONS
-							: '',
+							&& STYLES.DIALOG_LIGHT_CONTROL_ACTIONS,
 						(
 							this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
 							this.options[OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS]
 						)
-							? STYLES.DIALOG_LIGHT_COLOR_ACTIONS
-							: '',
+							&& STYLES.DIALOG_LIGHT_COLOR_ACTIONS,
 						(
 							this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
 							this.options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]
 						)
-							? STYLES.DIALOG_LIGHT_SETTINGS_ACTIONS
-							: ''
+							&& STYLES.DIALOG_LIGHT_SETTINGS_ACTIONS
 					];
-					addStyle(styles.join(''), dialogChild);
+					this.styleManager.addStyle(styles, dialogChild);
 					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
 						if (this.options[OPTION.HIDE_DIALOG_ATTRIBUTES])             setCache(OPTION.HIDE_DIALOG_ATTRIBUTES, TRUE);
 						if (this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS])          setCache(OPTION.HIDE_DIALOG_TIMER_ACTIONS, TRUE);
@@ -586,7 +582,7 @@ class KioskMode implements KioskModeRunner {
 						if (this.options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]) setCache(OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS, TRUE);
 					}
 				} else {
-					removeStyle(dialogChild);
+					this.styleManager.removeStyle(dialogChild);
 				}
 
 			});
@@ -598,17 +594,17 @@ class KioskMode implements KioskModeRunner {
 		) {
 			const styles = [
 				this.options[OPTION.HIDE_DIALOG_HISTORY]
-					? STYLES.DIALOG_HISTORY : '',
+					&& STYLES.DIALOG_HISTORY,
 				this.options[OPTION.HIDE_DIALOG_LOGBOOK]
-					? STYLES.DIALOG_LOGBOOK : ''
+					&& STYLES.DIALOG_LOGBOOK
 			];
-			addStyle(styles.join(''), moreInfo);
+			this.styleManager.addStyle(styles, moreInfo);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
 				if (this.options[OPTION.HIDE_DIALOG_HISTORY]) setCache(OPTION.HIDE_DIALOG_HISTORY, TRUE);
 				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK]) setCache(OPTION.HIDE_DIALOG_LOGBOOK, TRUE);
 			}
 		} else {
-			removeStyle(moreInfo);
+			this.styleManager.removeStyle(moreInfo);
 		}
 
 		MORE_INFO_CHILD_ROOT
@@ -617,10 +613,10 @@ class KioskMode implements KioskModeRunner {
 			.element
 			.then((dialogHistory: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE]) {
-					addStyle(STYLES.DIALOG_SHOW_MORE, dialogHistory);
+					this.styleManager.addStyle(STYLES.DIALOG_SHOW_MORE, dialogHistory);
 					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE, TRUE);
 				} else {
-					removeStyle(dialogHistory);
+					this.styleManager.removeStyle(dialogHistory);
 				}
 			});
 
@@ -630,10 +626,10 @@ class KioskMode implements KioskModeRunner {
 			.element
 			.then((dialogLogbook: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE]) {
-					addStyle(STYLES.DIALOG_SHOW_MORE, dialogLogbook);
+					this.styleManager.addStyle(STYLES.DIALOG_SHOW_MORE, dialogLogbook);
 					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE, TRUE);
 				} else {
-					removeStyle(dialogLogbook);
+					this.styleManager.removeStyle(dialogLogbook);
 				}
 			});
 
