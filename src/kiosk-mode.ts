@@ -35,7 +35,6 @@ import {
 	NON_CRITICAL_WARNING
 } from '@constants';
 import {
-	toArray,
 	queryString,
 	setCache,
 	cached,
@@ -194,8 +193,8 @@ class KioskMode implements KioskModeRunner {
 
 		// Retrieve localStorage values & query string options.
 		if (
-			cached(Object.values(OPTION)) ||
-			queryString(Object.values(OPTION))
+			cached(...Object.values(OPTION)) ||
+			queryString(...Object.values(OPTION))
 		) {
 			Object.values(OPTION).forEach((option: OPTION): void => {
 				this.options[option] = cached(option) || queryString(option);
@@ -216,8 +215,8 @@ class KioskMode implements KioskModeRunner {
 
 		// User settings config
 		if (config.user_settings) {
-			toArray(config.user_settings).forEach((conf) => {
-				if (toArray(conf.users).some((x) => x.toLowerCase() === this.user.name.toLowerCase())) {
+			config.user_settings.forEach((conf) => {
+				if (conf.users.some((x) => x.toLowerCase() === this.user.name.toLowerCase())) {
 					this.setOptions(conf, true);
 				}
 			});
@@ -273,7 +272,7 @@ class KioskMode implements KioskModeRunner {
 			this.options[OPTION.HIDE_HEADER]
 		) {
 			this.styleManager.addStyle(STYLES.HEADER, this.huiRoot);
-			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_HEADER, TRUE);
+			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(TRUE, OPTION.HIDE_HEADER);
 		} else {
 			this.styleManager.removeStyle(this.huiRoot);
 		}
@@ -290,7 +289,7 @@ class KioskMode implements KioskModeRunner {
 				this.main?.host?.addEventListener(TOGGLE_MENU_EVENT, this.blockEventHandler, true);
 				this.styleManager.addStyle(STYLES.SIDEBAR, this.drawerLayout);
 				this.styleManager.addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot);
-				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_SIDEBAR, TRUE);
+				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(TRUE, OPTION.HIDE_SIDEBAR);
 				this.drawerLayout.removeEventListener(MC_DRAWER_CLOSED_EVENT, hideSidebarCommands);
 			};
 
@@ -336,8 +335,8 @@ class KioskMode implements KioskModeRunner {
 			];
 			this.styleManager.addStyle(styles, this.sideBarRoot);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (this.options[OPTION.HIDE_ACCOUNT])       setCache(OPTION.HIDE_ACCOUNT, TRUE);
-				if (this.options[OPTION.HIDE_NOTIFICATIONS]) setCache(OPTION.HIDE_NOTIFICATIONS, TRUE);
+				if (this.options[OPTION.HIDE_ACCOUNT])       setCache(TRUE, OPTION.HIDE_ACCOUNT);
+				if (this.options[OPTION.HIDE_NOTIFICATIONS]) setCache(TRUE, OPTION.HIDE_NOTIFICATIONS);
 			}
 		} else {
 			this.styleManager.removeStyle(this.sideBarRoot);
@@ -377,15 +376,15 @@ class KioskMode implements KioskModeRunner {
 			];
 			this.styleManager.addStyle(styles, this.appToolbar);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (this.options[OPTION.HIDE_SEARCH])           setCache(OPTION.HIDE_SEARCH, TRUE);
-				if (this.options[OPTION.HIDE_ASSISTANT])        setCache(OPTION.HIDE_ASSISTANT, TRUE);
-				if (this.options[OPTION.HIDE_REFRESH])          setCache(OPTION.HIDE_REFRESH, TRUE);
-				if (this.options[OPTION.HIDE_UNUSED_ENTITIES])  setCache(OPTION.HIDE_UNUSED_ENTITIES, TRUE);
-				if (this.options[OPTION.HIDE_RELOAD_RESOURCES]) setCache(OPTION.HIDE_RELOAD_RESOURCES, TRUE);
-				if (this.options[OPTION.HIDE_EDIT_DASHBOARD])   setCache(OPTION.HIDE_EDIT_DASHBOARD, TRUE);
-				if (this.options[OPTION.HIDE_OVERFLOW])         setCache(OPTION.HIDE_OVERFLOW, TRUE);
-				if (this.options[OPTION.BLOCK_OVERFLOW])        setCache(OPTION.BLOCK_OVERFLOW, TRUE);
-				if (this.options[OPTION.HIDE_MENU_BUTTON])      setCache(OPTION.HIDE_MENU_BUTTON, TRUE);
+				if (this.options[OPTION.HIDE_SEARCH])           setCache(TRUE, OPTION.HIDE_SEARCH);
+				if (this.options[OPTION.HIDE_ASSISTANT])        setCache(TRUE, OPTION.HIDE_ASSISTANT);
+				if (this.options[OPTION.HIDE_REFRESH])          setCache(TRUE, OPTION.HIDE_REFRESH);
+				if (this.options[OPTION.HIDE_UNUSED_ENTITIES])  setCache(TRUE, OPTION.HIDE_UNUSED_ENTITIES);
+				if (this.options[OPTION.HIDE_RELOAD_RESOURCES]) setCache(TRUE, OPTION.HIDE_RELOAD_RESOURCES);
+				if (this.options[OPTION.HIDE_EDIT_DASHBOARD])   setCache(TRUE, OPTION.HIDE_EDIT_DASHBOARD);
+				if (this.options[OPTION.HIDE_OVERFLOW])         setCache(TRUE, OPTION.HIDE_OVERFLOW);
+				if (this.options[OPTION.BLOCK_OVERFLOW])        setCache(TRUE, OPTION.BLOCK_OVERFLOW);
+				if (this.options[OPTION.HIDE_MENU_BUTTON])      setCache(TRUE, OPTION.HIDE_MENU_BUTTON);
 			}
 		} else {
 			this.styleManager.removeStyle(this.appToolbar);
@@ -393,7 +392,7 @@ class KioskMode implements KioskModeRunner {
 
 		if (this.options[OPTION.BLOCK_MOUSE]) {
 			this.styleManager.addStyle(STYLES.MOUSE, document.body);
-			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.BLOCK_MOUSE, TRUE);
+			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(TRUE, OPTION.BLOCK_MOUSE);
 		} else {
 			this.styleManager.removeStyle(document.body);
 		}
@@ -402,7 +401,7 @@ class KioskMode implements KioskModeRunner {
 
 		if (this.options[OPTION.BLOCK_CONTEXT_MENU]) {
 			window.addEventListener('contextmenu', this.blockEventHandler, true);
-			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.BLOCK_CONTEXT_MENU, TRUE);
+			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(TRUE, OPTION.BLOCK_CONTEXT_MENU);
 		}
 
 		// Resize event
@@ -448,10 +447,10 @@ class KioskMode implements KioskModeRunner {
 			];
 			this.styleManager.addStyle(styles, dialog);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS]) setCache(OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY])      setCache(OPTION.HIDE_DIALOG_HEADER_HISTORY, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_HEADER_SETTINGS])     setCache(OPTION.HIDE_DIALOG_HEADER_SETTINGS, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW])     setCache(OPTION.HIDE_DIALOG_HEADER_OVERFLOW, TRUE);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS]) setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY])      setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_HISTORY);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_SETTINGS])     setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_SETTINGS);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW])     setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_OVERFLOW);
 			}
 		} else {
 			this.styleManager.removeStyle(dialog);
@@ -479,8 +478,8 @@ class KioskMode implements KioskModeRunner {
 			) {
 				this.styleManager.addStyle(STYLES.DIALOG_CLIMATE_CONTROL_SELECT, haDialogClimate);
 				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS])          setCache(OPTION.HIDE_DIALOG_CLIMATE_ACTIONS, TRUE);
-					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]) setCache(OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS, TRUE);
+					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_CLIMATE_ACTIONS);
+					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS]) setCache(TRUE, OPTION.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS);
 				}
 			} else {
 				this.styleManager.removeStyle(haDialogClimate);
@@ -494,7 +493,7 @@ class KioskMode implements KioskModeRunner {
 			) {
 				this.styleManager.addStyle(STYLES.DIALOG_CLIMATE_TEMPERATURE_BUTTONS, haDialogClimateTemperature);
 				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]) setCache(OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS, TRUE);
+					if (this.options[OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS]) setCache(TRUE, OPTION.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS);
 				}
 			} else {
 				this.styleManager.removeStyle(haDialogClimateTemperature);
@@ -572,14 +571,14 @@ class KioskMode implements KioskModeRunner {
 					];
 					this.styleManager.addStyle(styles, dialogChild);
 					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-						if (this.options[OPTION.HIDE_DIALOG_ATTRIBUTES])             setCache(OPTION.HIDE_DIALOG_ATTRIBUTES, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS])          setCache(OPTION.HIDE_DIALOG_TIMER_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS])          setCache(OPTION.HIDE_DIALOG_MEDIA_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS])         setCache(OPTION.HIDE_DIALOG_UPDATE_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS])          setCache(OPTION.HIDE_DIALOG_LIGHT_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS])  setCache(OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS])    setCache(OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS, TRUE);
-						if (this.options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]) setCache(OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS, TRUE);
+						if (this.options[OPTION.HIDE_DIALOG_ATTRIBUTES])             setCache(TRUE, OPTION.HIDE_DIALOG_ATTRIBUTES);
+						if (this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_TIMER_ACTIONS);
+						if (this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_MEDIA_ACTIONS);
+						if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS])         setCache(TRUE, OPTION.HIDE_DIALOG_UPDATE_ACTIONS);
+						if (this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_LIGHT_ACTIONS);
+						if (this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS])  setCache(TRUE, OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS);
+						if (this.options[OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS])    setCache(TRUE, OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS);
+						if (this.options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]) setCache(TRUE, OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS);
 					}
 				} else {
 					this.styleManager.removeStyle(dialogChild);
@@ -600,8 +599,8 @@ class KioskMode implements KioskModeRunner {
 			];
 			this.styleManager.addStyle(styles, moreInfo);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (this.options[OPTION.HIDE_DIALOG_HISTORY]) setCache(OPTION.HIDE_DIALOG_HISTORY, TRUE);
-				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK]) setCache(OPTION.HIDE_DIALOG_LOGBOOK, TRUE);
+				if (this.options[OPTION.HIDE_DIALOG_HISTORY]) setCache(TRUE, OPTION.HIDE_DIALOG_HISTORY);
+				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK]) setCache(TRUE, OPTION.HIDE_DIALOG_LOGBOOK);
 			}
 		} else {
 			this.styleManager.removeStyle(moreInfo);
@@ -614,7 +613,7 @@ class KioskMode implements KioskModeRunner {
 			.then((dialogHistory: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE]) {
 					this.styleManager.addStyle(STYLES.DIALOG_SHOW_MORE, dialogHistory);
-					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE, TRUE);
+					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(TRUE, OPTION.HIDE_DIALOG_HISTORY_SHOW_MORE);
 				} else {
 					this.styleManager.removeStyle(dialogHistory);
 				}
@@ -627,7 +626,7 @@ class KioskMode implements KioskModeRunner {
 			.then((dialogLogbook: ShadowRoot) => {
 				if (this.options[OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE]) {
 					this.styleManager.addStyle(STYLES.DIALOG_SHOW_MORE, dialogLogbook);
-					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE, TRUE);
+					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(TRUE, OPTION.HIDE_DIALOG_LOGBOOK_SHOW_MORE);
 				} else {
 					this.styleManager.removeStyle(dialogLogbook);
 				}
