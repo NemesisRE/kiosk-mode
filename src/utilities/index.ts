@@ -9,11 +9,6 @@ import {
 	OPTION
 } from '@constants';
 
-// Convert to array
-export const toArray = <T>(x: T | T[]): T[] => {
-	return Array.isArray(x) ? x : [x];
-};
-
 // Get cache key
 export const getCacheKey = (option: string): string => {
 	const optionCamelCase = option.replace(/(?:^|_)([a-z])/g, (__match: string, letter): string => {
@@ -23,28 +18,26 @@ export const getCacheKey = (option: string): string => {
 };
 
 // Return true if keyword is found in query strings.
-export const queryString = (keywords: string | string[]): boolean => {
+export const queryString = (...keywords: string[]): boolean => {
 	const params = new URLSearchParams(window.location.search);
-	return toArray(keywords).some((x) => params.has(x));
+	return keywords.some((x) => params.has(x));
 };
 
 // Set localStorage item.
-export const setCache = (options: OPTION | OPTION[], value: string): void => {
-	toArray(options)
-		.forEach(
-			(option) => window.localStorage.setItem(
-				getCacheKey(option),
-				value
-			)
-		);
+export const setCache = (value: string, ...options: OPTION[]): void => {
+	options.forEach(
+		(option) => window.localStorage.setItem(
+			getCacheKey(option),
+			value
+		)
+	);
 };
 
 // Retrieve localStorage item as bool.
-export const cached = (options: OPTION | OPTION[]): boolean => {
-	return toArray(options)
-		.some((option) => {
-			return window.localStorage.getItem(getCacheKey(option)) === TRUE;
-		});
+export const cached = (...options: OPTION[]): boolean => {
+	return options.some((option) => {
+		return window.localStorage.getItem(getCacheKey(option)) === TRUE;
+	});
 };
 
 // Reset all cache items to false
@@ -57,10 +50,9 @@ export const resetCache = () => {
 };
 
 export const getDisplayNoneRules = (...rules: string[]): Record<string, false> => {
-	const rulesEntries = toArray(rules).map((rule: string): [string, false] => {
-		return [rule, false];
-	});
-	return Object.fromEntries(rulesEntries);
+	return Object.fromEntries(
+		rules.map((rule: string): [string, false] => [rule, false])
+	);
 };
 
 const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string, string>>> => {
