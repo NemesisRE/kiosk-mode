@@ -21,4 +21,4 @@ export const haRequest = async (entity: string, state: boolean, retries = 0) => 
 	});
 };
 
-export const getUrlWithParam = (param: string) => `${BASE_URL}?${param}`;
+export const getUrlWithParam = (...params: string[]) => `${BASE_URL}?${params.join('&')}`;
