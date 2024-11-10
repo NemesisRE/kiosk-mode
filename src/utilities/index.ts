@@ -4,7 +4,6 @@ import {
 	MENU_REFERENCES,
 	MAX_ATTEMPTS,
 	RETRY_DELAY,
-	NAMESPACE,
 	ELEMENT,
 	OPTION
 } from '@constants';
@@ -102,30 +101,6 @@ export const getMenuTranslations = async(
 		return [resourcesTranslated[prop], reference];
 	});
 	return Object.fromEntries(menuTranslationsEntries);
-};
-
-export const getPromisableElement = <T>(
-	getElement: () => T,
-	check: (element: T) => boolean,
-	elementName: string
-): Promise<T> => {
-	return new Promise<T>((resolve, reject) => {
-		let attempts = 0;
-		const select = () => {
-			const element: T = getElement();
-			if (element && check(element)) {
-				resolve(element);
-			} else {
-				attempts++;
-				if (attempts < MAX_ATTEMPTS) {
-					setTimeout(select, RETRY_DELAY);
-				} else {
-					reject(new Error(`${NAMESPACE}: Cannot select ${elementName} after ${MAX_ATTEMPTS} attempts. Giving up!`));
-				}
-			}
-		};
-		select();
-	});
 };
 
 export const addMenuItemsDataSelectors = (
