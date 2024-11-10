@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       home-assistant-query-selector:
-        specifier: 4.2.0
-        version: 4.2.0
+        specifier: 4.3.0
+        version: 4.3.0
       home-assistant-styles-manager:
         specifier: 3.0.0
         version: 3.0.0
@@ -915,6 +915,9 @@ packages:
     resolution: {integrity: sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q==}
     engines: {node: '>=8.0.0'}
 
+  get-promisable-result@1.0.1:
+    resolution: {integrity: sha512-hUUKs/s8qoeH4gk3NPcKjCWaCjOv0S+kyT3oTuJXneEWYzwmyfEJHESU2ES7pMZNVHTjMt7X8hpmThFfggTVtg==}
+
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -965,8 +968,8 @@ packages:
     resolution: {integrity: sha512-J00e55zffgi3yVnUp0UdbMztNkr2PnizEkOe9URNohnrNhW5X0QpegkuLpOmFQInpi93Nb8MCjQRHAiCDF42NQ==}
     engines: {node: '>=10.0.0'}
 
-  home-assistant-query-selector@4.2.0:
-    resolution: {integrity: sha512-8VwrqTunsE3sgakCirBdQgrZTvWgT1SIaVthpgVCeaA/8dUK0qQfn3JFUcwaa8xm0NUa8yDgjRkxKe9lGHA65Q==}
+  home-assistant-query-selector@4.3.0:
+    resolution: {integrity: sha512-L+TfdKKlqKAijIp/dWYKmtQWmTT+S9CZOM43L1lu1azPwVqIhJ2nlzf4GZ1MpWlGjY0+kn4sip0TYxvSCpZeeg==}
 
   home-assistant-styles-manager@3.0.0:
     resolution: {integrity: sha512-h3TZeaRGxcxNNFGWr1VPhiecTqgxRiC053wH1/+3A7CSwD/dQ3EfIb+d5G+udRc5hFxijUk9UQnvT2yTp2UMtA==}
@@ -1398,8 +1401,8 @@ packages:
   set-blocking@2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
 
-  shadow-dom-selector@4.1.2:
-    resolution: {integrity: sha512-e0c+frNE71KtDgRmtl9NxLqbnzmzLU7gYMH0bEpZaMMLg4pX7fPfgTROh4XtS51R6GdTiUM9OEp8dd//AyQd0A==}
+  shadow-dom-selector@5.0.1:
+    resolution: {integrity: sha512-f7KFwXGR2DdeQmsFXrjYV3nrYuVAuFUqW0hpwJh/gynMnF/Q8gt+y1n/kPOYj25wo/xFL+EvaUuuZ8EwJ5NYhg==}
 
   shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
@@ -2498,6 +2501,8 @@ snapshots:
 
   get-package-type@0.1.0: {}
 
+  get-promisable-result@1.0.1: {}
+
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -2540,9 +2545,9 @@ snapshots:
 
   helpertypes@0.0.19: {}
 
-  home-assistant-query-selector@4.2.0:
+  home-assistant-query-selector@4.3.0:
     dependencies:
-      shadow-dom-selector: 4.1.2
+      shadow-dom-selector: 5.0.1
 
   home-assistant-styles-manager@3.0.0: {}
 
@@ -2969,7 +2974,9 @@ snapshots:
 
   set-blocking@2.0.0: {}
 
-  shadow-dom-selector@4.1.2: {}
+  shadow-dom-selector@5.0.1:
+    dependencies:
+      get-promisable-result: 1.0.1
 
   shebang-command@2.0.0:
     dependencies:

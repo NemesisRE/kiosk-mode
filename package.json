@@ -33,7 +33,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "home-assistant-query-selector": "4.2.0",
+    "home-assistant-query-selector": "4.3.0",
     "home-assistant-styles-manager": "3.0.0"
   },
   "devDependencies": {
