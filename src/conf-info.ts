@@ -50,10 +50,7 @@ export class ConInfo {
 			let borderWidthStart = '0 0 0 1px';
 			let borderWidthEnd = '0 1px 0 1px';
 
-			if (lastIndex === 0) {
-				borderWidthStart = '1px 0 1px 1px';
-				borderWidthEnd = '1px 1px 1px 0';
-			} else if (index === 0) {
+			if (index === 0) {
 				borderWidthStart = '1px 0 0 1px';
 				borderWidthEnd = '1px 1px 0 0';
 			} else if (index === lastIndex) {
