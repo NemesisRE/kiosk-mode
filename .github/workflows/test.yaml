@@ -28,6 +28,10 @@ jobs:
           pnpm test:all
       - name: Create coverage
         run: pnpm coverage:report
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
