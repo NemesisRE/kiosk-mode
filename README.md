@@ -3,6 +3,7 @@
 [![CodeQL](https://github.com/NemesisRE/kiosk-mode/actions/workflows/github-code-scanning/codeql/badge.svg?style=flat-square)](https://github.com/NemesisRE/kiosk-mode/security/code-scanning/tools/CodeQL/status)
 [![HACS Action](https://github.com/NemesisRE/kiosk-mode/actions/workflows/hacs.yaml/badge.svg)](https://github.com/NemesisRE/kiosk-mode/actions/workflows/hacs.yaml)
 [![Test](https://github.com/NemesisRE/kiosk-mode/actions/workflows/test.yaml/badge.svg)](https://github.com/NemesisRE/kiosk-mode/actions/workflows/test.yaml)
+[![Coverage Status](https://coveralls.io/repos/github/NemesisRE/kiosk-mode/badge.svg?branch=master)](https://coveralls.io/github/NemesisRE/kiosk-mode?branch=master)
 [![release](https://img.shields.io/github/v/release/NemesisRE/kiosk-mode.svg)](https://github.com/NemesisRE/kiosk-mode/releases)
 [![downloads](https://img.shields.io/github/downloads/NemesisRE/kiosk-mode/total)](https://github.com/NemesisRE/kiosk-mode/releases)
 
