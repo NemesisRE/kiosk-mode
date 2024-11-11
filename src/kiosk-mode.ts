@@ -6,6 +6,7 @@ import {
 	OnHistoryAndLogBookDialogOpenDetail
 } from 'home-assistant-query-selector';
 import { HomeAssistantStylesManager } from 'home-assistant-styles-manager';
+import { getPromisableResult } from 'get-promisable-result';
 import {
 	KioskModeRunner,
 	HomeAssistant,
@@ -32,14 +33,15 @@ import {
 	WINDOW_RESIZE_DELAY,
 	STYLES_PREFIX,
 	NAMESPACE,
-	NON_CRITICAL_WARNING
+	NON_CRITICAL_WARNING,
+	MAX_ATTEMPTS,
+	RETRY_DELAY
 } from '@constants';
 import {
 	queryString,
 	setCache,
 	cached,
 	getMenuTranslations,
-	getPromisableElement,
 	addMenuItemsDataSelectors,
 	parseVersion,
 	resetCache
@@ -86,10 +88,14 @@ class KioskMode implements KioskModeRunner {
 			this.appToolbar = await HEADER.selector.query(ELEMENT.TOOLBAR).element;
 			this.sideBarRoot = await HA_SIDEBAR.selector.$.element;
 
-			this.user = await getPromisableElement(
+			this.user = await getPromisableResult(
 				(): User => this.ha?.hass?.user,
 				(user: User) => !!user,
-				`${ELEMENT.HOME_ASSISTANT} > hass > user`
+				{
+					retries: MAX_ATTEMPTS,
+					delay: RETRY_DELAY,
+					rejectMessage: `${NAMESPACE}: Cannot select ${ELEMENT.HOME_ASSISTANT} > hass > user after {{ retries }} attempts. Giving up!`
+				}
 			);
 
 			this.version = parseVersion(this.ha.hass?.config?.version);
@@ -148,10 +154,14 @@ class KioskMode implements KioskModeRunner {
 		}
 
 		// Get the configuration and process it
-		return getPromisableElement(
+		return getPromisableResult(
 			() => lovelace?.lovelace?.config,
 			(config: Lovelace['lovelace']['config']) => !!config,
-			'Lovelace config'
+			{
+				retries: MAX_ATTEMPTS,
+				delay: RETRY_DELAY,
+				rejectMessage: `${NAMESPACE}: Cannot select Lovelace config after {{ retries }} attempts. Giving up!`
+			}
 		)
 			.then((config: Lovelace['lovelace']['config']) => {
 				return this.processConfig(

@@ -1,10 +1,10 @@
+import { getPromisableResult } from 'get-promisable-result';
 import { HomeAssistant, Version } from '@types';
 import {
 	TRUE,
 	MENU_REFERENCES,
 	MAX_ATTEMPTS,
 	RETRY_DELAY,
-	NAMESPACE,
 	ELEMENT,
 	OPTION
 } from '@constants';
@@ -56,38 +56,24 @@ export const getDisplayNoneRules = (...rules: string[]): Record<string, false> =
 };
 
 const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string, string>>> => {
-	let attempts = 0;
 	const referencePaths = Object.values(MENU_REFERENCES);
-	return new Promise((resolve, reject) => {
-		const getResources = () => {
-			const resources = ha?.hass?.resources;
-			let success = false;
-			if (resources) {
-				const language = ha.hass.language;
-				// check if all the resources are available
-				const anyEmptyResource = referencePaths.find((path: string) => {
-					if (resources[language][path]) {
-						return false;
-					}
-					return true;
-				});
-				if (!anyEmptyResource) {
-					success = true;
-				}
+	return getPromisableResult(
+		() => ha?.hass?.resources,
+		(resources: Record<string, Record<string, string>>): boolean => {
+			const language = ha.hass.language;
+			const anyEmptyResource = referencePaths.find((path: string) => {
+				return !resources?.[language][path];
+			});
+			if (!anyEmptyResource) {
+				return true;
 			}
-			if (success) {
-				resolve(resources);
-			} else {
-				attempts++;
-				if (attempts < MAX_ATTEMPTS) {
-					setTimeout(getResources, RETRY_DELAY);
-				} else {
-					reject();
-				}
-			}
-		};
-		getResources();
-	});
+			return false;
+		},
+		{
+			retries: MAX_ATTEMPTS,
+			delay: RETRY_DELAY
+		}
+	);
 };
 
 export const getMenuTranslations = async(
@@ -102,30 +88,6 @@ export const getMenuTranslations = async(
 		return [resourcesTranslated[prop], reference];
 	});
 	return Object.fromEntries(menuTranslationsEntries);
-};
-
-export const getPromisableElement = <T>(
-	getElement: () => T,
-	check: (element: T) => boolean,
-	elementName: string
-): Promise<T> => {
-	return new Promise<T>((resolve, reject) => {
-		let attempts = 0;
-		const select = () => {
-			const element: T = getElement();
-			if (element && check(element)) {
-				resolve(element);
-			} else {
-				attempts++;
-				if (attempts < MAX_ATTEMPTS) {
-					setTimeout(select, RETRY_DELAY);
-				} else {
-					reject(new Error(`${NAMESPACE}: Cannot select ${elementName} after ${MAX_ATTEMPTS} attempts. Giving up!`));
-				}
-			}
-		};
-		select();
-	});
 };
 
 export const addMenuItemsDataSelectors = (
