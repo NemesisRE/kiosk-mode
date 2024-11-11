@@ -5,7 +5,8 @@ export const STYLES = {
 	HEADER: {
 		'#view': {
 			minHeight: '100vh !important',
-			HeaderHeight: '0px'
+			KioskHeaderHeight: '0px',
+			paddingTop: 'calc(var(--kiosk-header-height) + env(safe-area-inset-top)) !important'
 		},
 		'.header': false
 	},
