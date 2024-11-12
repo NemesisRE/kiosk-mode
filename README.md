@@ -401,13 +401,13 @@ This works for all query strings except for the utility strings listed below.
 ## Kiosk-mode demo
 
 * Make sure you have [git](https://git-scm.com/downloads) installed
-* Make sure you have [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed
+* Make sure you have [pnpm](https://pnpm.io/installation) installed
 * Make sure you have Docker installed ([Docker Desktop](https://www.docker.com/products/docker-desktop/) is a quick option)
 * Clone the repository `git clone https://github.com/NemesisRE/kiosk-mode.git` (or [download it in a zip file](https://docs.github.com/en/repositories/working-with-files/using-files/downloading-source-code-archives))
 * Run `Docker Desktop` so you get `docker daemon` running
 * Enter in the repository folder
-* Run `yarn`
-* Run `yarn demo` (`yarn demo:win` on Windows environments)
+* Run `pnpm install`
+* Run `pnpm demo` (`pnpm demo:win` on Windows environments)
 * Open http://localhost:8123/
 
 ## Kiosk-mode complements
