@@ -4,7 +4,7 @@ import {
 	SELECTORS,
 	ENTITIES
 } from './constants';
-import { getUrlWithParam, haRequest } from './utils';
+import { getUrlWithParam, turnBooleanState } from './utils';
 
 test('URL Parameter: ?kiosk', async ({ page }) => {
 
@@ -217,12 +217,12 @@ test('URL Parameter: ?disable_km', async ({ page }) => {
 	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
 
-	await haRequest(ENTITIES.KIOSK, true);
+	await turnBooleanState(page, ENTITIES.KIOSK, true);
 
 	await expect(page.locator(SELECTORS.HEADER)).not.toBeHidden();
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).not.toBeHidden();
 
-	await haRequest(ENTITIES.KIOSK, false);
+	await turnBooleanState(page, ENTITIES.KIOSK, false);
 
 	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();

@@ -24,10 +24,7 @@ jobs:
       - name: Install
         run: pnpm install
       - name: E2E Tests
-        run: |
-          touch .env
-          echo HA_TOKEN=${{ secrets.CYPRESS_HA_TOKEN }} >> .env
-          TAG=beta pnpm test:ci
+        run: TAG=beta pnpm test:ci
       - name: Create coverage
         run: pnpm coverage:report
       - uses: actions/upload-artifact@v3
