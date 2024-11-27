@@ -1,244 +1,240 @@
 import { test, expect } from 'playwright-test-coverage';
 import path from 'path';
-import {
-	BASE_URL,
-	SELECTORS,
-	ENTITIES
-} from './constants';
-import { haRequest } from './utils';
+import { SELECTORS, ENTITIES } from './constants';
+import { turnBooleanState, goToPage } from './utils';
 
 test('Option: kiosk', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
 
-	await haRequest(ENTITIES.KIOSK, true);
+	await turnBooleanState(page, ENTITIES.KIOSK, true);
 
 	await expect(page.locator(SELECTORS.HEADER)).toBeHidden();
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeHidden();
 	await expect(page).toHaveScreenshot('01-kiosk.png');
 
-	await haRequest(ENTITIES.KIOSK, false);
+	await turnBooleanState(page, ENTITIES.KIOSK, false);
 
 });
 
 test('Option: hide_header', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_HEADER, true);
+	await turnBooleanState(page, ENTITIES.HIDE_HEADER, true);
 
 	await expect(page.locator(SELECTORS.HEADER)).toBeHidden();
 	await expect(page).toHaveScreenshot('02-hide_header.png');
 
-	await haRequest(ENTITIES.HIDE_HEADER, false);
+	await turnBooleanState(page, ENTITIES.HIDE_HEADER, false);
 
 });
 
 test('Option: hide_sidebar', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_SIDEBAR, true);
+	await turnBooleanState(page, ENTITIES.HIDE_SIDEBAR, true);
 
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeHidden();
 	await expect(page).toHaveScreenshot('03-hide_sidebar.png');
 
-	await haRequest(ENTITIES.HIDE_SIDEBAR, false);
+	await turnBooleanState(page, ENTITIES.HIDE_SIDEBAR, false);
 
 });
 
 test('Option: hide_menubutton', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.MENU_BUTTON)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_MENU_BUTTON, true);
+	await turnBooleanState(page, ENTITIES.HIDE_MENU_BUTTON, true);
 
 	await expect(page.locator(SELECTORS.MENU_BUTTON)).toBeHidden();
 	await expect(page).toHaveScreenshot('04-hide_menubutton.png');
 
-	await haRequest(ENTITIES.HIDE_MENU_BUTTON, false);
+	await turnBooleanState(page, ENTITIES.HIDE_MENU_BUTTON, false);
 
 });
 
 test('Option: hide_notifications', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.NOTIFICATIONS)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_NOTIFICATIONS, true);
+	await turnBooleanState(page, ENTITIES.HIDE_NOTIFICATIONS, true);
 
 	await expect(page.locator(SELECTORS.NOTIFICATIONS)).toBeHidden();
 	await expect(page).toHaveScreenshot('05-hide_notifications.png');
 
-	await haRequest(ENTITIES.HIDE_NOTIFICATIONS, false);
+	await turnBooleanState(page, ENTITIES.HIDE_NOTIFICATIONS, false);
 
 });
 
 test('Option: hide_account', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.ACCOUNT)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_ACCOUNT, true);
+	await turnBooleanState(page, ENTITIES.HIDE_ACCOUNT, true);
 
 	await expect(page.locator(SELECTORS.ACCOUNT)).toBeHidden();
 	await expect(page).toHaveScreenshot('06-hide_account.png');
 
-	await haRequest(ENTITIES.HIDE_ACCOUNT, false);
+	await turnBooleanState(page, ENTITIES.HIDE_ACCOUNT, false);
 
 });
 
 test('Option: hide_notifications and hide_account at the same time', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.ACCOUNT)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_NOTIFICATIONS, true);
-	await haRequest(ENTITIES.HIDE_ACCOUNT, true);
+	await turnBooleanState(page, ENTITIES.HIDE_NOTIFICATIONS, true);
+	await turnBooleanState(page, ENTITIES.HIDE_ACCOUNT, true);
 
 	await expect(page).toHaveScreenshot('07-hide_notifications-and-hide_account.png');
 
-	await haRequest(ENTITIES.HIDE_NOTIFICATIONS, false);
-	await haRequest(ENTITIES.HIDE_ACCOUNT, false);
+	await turnBooleanState(page, ENTITIES.HIDE_NOTIFICATIONS, false);
+	await turnBooleanState(page, ENTITIES.HIDE_ACCOUNT, false);
 
 });
 
 test('Option: hide_search', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.SEARCH_BUTTON)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_SEARCH, true);
+	await turnBooleanState(page, ENTITIES.HIDE_SEARCH, true);
 
 	await expect(page.locator(SELECTORS.SEARCH_BUTTON)).toBeHidden();
 	await expect(page).toHaveScreenshot('08-hide_search.png');
 
-	await haRequest(ENTITIES.HIDE_SEARCH, false);
+	await turnBooleanState(page, ENTITIES.HIDE_SEARCH, false);
 
 });
 
 test('Option: hide_assistant', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.ASSISTANT_BUTTON)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_ASSISTANT, true);
+	await turnBooleanState(page, ENTITIES.HIDE_ASSISTANT, true);
 
 	await expect(page.locator(SELECTORS.ASSISTANT_BUTTON)).toBeHidden();
 	await expect(page).toHaveScreenshot('09-hide_assistant.png');
 
-	await haRequest(ENTITIES.HIDE_ASSISTANT, false);
+	await turnBooleanState(page, ENTITIES.HIDE_ASSISTANT, false);
 
 });
 
 test('Option: hide_overflow', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_OVERFLOW, true);
+	await turnBooleanState(page, ENTITIES.HIDE_OVERFLOW, true);
 
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toBeHidden();
 	await expect(page).toHaveScreenshot('10-hide_overflow.png');
 
-	await haRequest(ENTITIES.HIDE_OVERFLOW, false);
+	await turnBooleanState(page, ENTITIES.HIDE_OVERFLOW, false);
 
 });
 
 test('Option: hide_refresh', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
 
 	await expect(page.locator(SELECTORS.MENU_REFRESH_ITEM)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_REFRESH, true);
+	await turnBooleanState(page, ENTITIES.HIDE_REFRESH, true);
 
 	await expect(page.locator(SELECTORS.MENU_REFRESH_ITEM)).toBeHidden();
 	await expect(page).toHaveScreenshot('11-hide_refresh.png');
 
-	await haRequest(ENTITIES.HIDE_REFRESH, false);
+	await turnBooleanState(page, ENTITIES.HIDE_REFRESH, false);
 
 });
 
 test('Option: hide_unused_entities', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
 
 	await expect(page.locator(SELECTORS.MENU_UNUSED_ENTITIES_ITEM)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_UNUSED_ENTITIES, true);
+	await turnBooleanState(page, ENTITIES.HIDE_UNUSED_ENTITIES, true);
 
 	await expect(page.locator(SELECTORS.MENU_UNUSED_ENTITIES_ITEM)).toBeHidden();
 	await expect(page).toHaveScreenshot('12-hide_unused_entities.png');
 
-	await haRequest(ENTITIES.HIDE_UNUSED_ENTITIES, false);
+	await turnBooleanState(page, ENTITIES.HIDE_UNUSED_ENTITIES, false);
 
 });
 
 test('Option: hide_reload_resources', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
 
 	await expect(page.locator(SELECTORS.MENU_RELOAD_RESOURCES_ITEM)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_RELOAD_RESOURCES, true);
+	await turnBooleanState(page, ENTITIES.HIDE_RELOAD_RESOURCES, true);
 
 	await expect(page.locator(SELECTORS.MENU_RELOAD_RESOURCES_ITEM)).toBeHidden();
 	await expect(page).toHaveScreenshot('13-hide_reload_resources.png');
 
-	await haRequest(ENTITIES.HIDE_RELOAD_RESOURCES, false);
+	await turnBooleanState(page, ENTITIES.HIDE_RELOAD_RESOURCES, false);
 
 });
 
 test('Option: hide_edit_dashboard', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
 
 	await expect(page.locator(SELECTORS.MENU_EDIT_DASHBOARD_ITEM)).toBeVisible();
 
-	await haRequest(ENTITIES.HIDE_EDIT_DASHBOARD, true);
+	await turnBooleanState(page, ENTITIES.HIDE_EDIT_DASHBOARD, true);
 
 	await expect(page.locator(SELECTORS.MENU_EDIT_DASHBOARD_ITEM)).toBeHidden();
 	await expect(page).toHaveScreenshot('14-hide_edit_dashboard.png');
 
-	await haRequest(ENTITIES.HIDE_EDIT_DASHBOARD, false);
+	await turnBooleanState(page, ENTITIES.HIDE_EDIT_DASHBOARD, false);
 
 });
 
 test('Option: block_overflow', async ({ page }) => {
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).not.toHaveCSS('pointer-events', 'none');
 
-	await haRequest(ENTITIES.BLOCK_OVERFLOW, true);
+	await turnBooleanState(page, ENTITIES.BLOCK_OVERFLOW, true);
 
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');
 
-	await haRequest(ENTITIES.BLOCK_OVERFLOW, false);
+	await turnBooleanState(page, ENTITIES.BLOCK_OVERFLOW, false);
 
 });
 
@@ -255,7 +251,7 @@ test.describe('Option: block_context_menu', () => {
 			window.addEventListener('contextmenu', window['__listener']);
 		});
 
-		await page.goto(BASE_URL);
+		await goToPage(page);
 
 		await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
 		await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
@@ -272,7 +268,7 @@ test.describe('Option: block_context_menu', () => {
 
 		await expect(executed).toBe(true);
 
-		await haRequest(ENTITIES.BLOCK_CONTEXT_MENU, true);
+		await turnBooleanState(page, ENTITIES.BLOCK_CONTEXT_MENU, true);
 
 		await page.locator(SELECTORS.HEADER).click({
 			button: 'right'
@@ -282,7 +278,7 @@ test.describe('Option: block_context_menu', () => {
 
 		await expect(executed).toBe(false);
 
-		await haRequest(ENTITIES.BLOCK_CONTEXT_MENU, false);
+		await turnBooleanState(page, ENTITIES.BLOCK_CONTEXT_MENU, false);
 
 		await page.locator(SELECTORS.HEADER).click({
 			button: 'right'

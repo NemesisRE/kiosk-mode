@@ -1,10 +1,6 @@
 import { test, expect } from 'playwright-test-coverage';
-import {
-	BASE_URL,
-	URL_PARAMS,
-	SELECTORS
-} from './constants';
-import { getUrlWithParam } from './utils';
+import { URL_PARAMS, SELECTORS } from './constants';
+import { getUrlWithParam, goToPage } from './utils';
 
 [
 	{
@@ -68,7 +64,7 @@ import { getUrlWithParam } from './utils';
 			await expect(page.locator(selector)).toBeHidden();
 		});
 
-		await page.goto(BASE_URL);
+		await goToPage(page);
 
 		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 
@@ -124,7 +120,7 @@ import { getUrlWithParam } from './utils';
 		await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
 		await expect(page.locator(selector)).toBeHidden();
 
-		await page.goto(BASE_URL);
+		await goToPage(page);
 
 		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 		await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
@@ -156,7 +152,7 @@ test('Caching URL Parameter: ?block_overflow', async ({ page }) => {
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');
 
-	await page.goto(BASE_URL);
+	await goToPage(page);
 
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');

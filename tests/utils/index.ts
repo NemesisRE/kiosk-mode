@@ -1,24 +1,38 @@
-import { BASE_URL, REQUEST_MAXIMUM_RETRIES } from '../constants';
+import { Page } from '@playwright/test';
+import { expect } from 'playwright-test-coverage';
+import { BASE_URL } from '../constants';
 
-export const haRequest = async (entity: string, state: boolean, retries = 0) => {
-	return fetch(
-		`${BASE_URL}/api/services/input_boolean/turn_${state ? 'on' : 'off'}`,
-		{
-			method: 'POST',
-			headers: {
-				'Authorization': `Bearer ${process.env.HA_TOKEN}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
+interface Context {
+    id: string;
+    user_id: string;
+}
+
+interface HomeAssistant extends HTMLElement {
+    hass: {
+        callService: (domain: string, service: string, data: Record<string, unknown>) => Promise<Context>;
+    };
+}
+
+export const goToPage = async (page: Page) => {
+	await page.goto('/');
+	await expect(page.locator('hui-view')).toBeVisible();
+};
+
+export const turnBooleanState = async (
+	page: Page,
+	entity: string,
+	state: boolean
+) => {
+	await page.evaluate(async ({ entity, state }) => {
+		const homeAssistant = document.querySelector('home-assistant') as HomeAssistant;
+		await homeAssistant.hass.callService(
+			'input_boolean',
+			`turn_${state ? 'on' : 'off'}`,
+			{
 				entity_id: `input_boolean.${entity}`
-			})
-		}
-	).then((response: Response) => {
-		if (response.ok || retries >= REQUEST_MAXIMUM_RETRIES) {
-			return response;
-		}
-		return haRequest(entity, state, retries + 1);
-	});
+			}
+		);
+	}, { entity, state });
 };
 
 export const getUrlWithParam = (...params: string[]) => `${BASE_URL}?${params.join('&')}`;
