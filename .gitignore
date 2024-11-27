@@ -1,5 +1,4 @@
 /node_modules
-/dist
 .DS_Store
 .hass/config/www/kiosk-mode.js
 /.nyc_output
