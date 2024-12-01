@@ -15,8 +15,8 @@ importers:
         specifier: 4.3.0
         version: 4.3.0
       home-assistant-styles-manager:
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: 3.1.0
+        version: 3.1.0
     devDependencies:
       '@playwright/test':
         specifier: 1.49.0
@@ -965,8 +965,8 @@ packages:
   home-assistant-query-selector@4.3.0:
     resolution: {integrity: sha512-L+TfdKKlqKAijIp/dWYKmtQWmTT+S9CZOM43L1lu1azPwVqIhJ2nlzf4GZ1MpWlGjY0+kn4sip0TYxvSCpZeeg==}
 
-  home-assistant-styles-manager@3.0.0:
-    resolution: {integrity: sha512-h3TZeaRGxcxNNFGWr1VPhiecTqgxRiC053wH1/+3A7CSwD/dQ3EfIb+d5G+udRc5hFxijUk9UQnvT2yTp2UMtA==}
+  home-assistant-styles-manager@3.1.0:
+    resolution: {integrity: sha512-ui8JNAZUovDPBYODGNZgj7hjCKy2PlUYkW4MQJ0yTttbshfa4cAaNA536e4QQ3twEogpVp1TSD7Y4GZ5uBVwhQ==}
 
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
@@ -2531,7 +2531,7 @@ snapshots:
     dependencies:
       shadow-dom-selector: 5.0.1
 
-  home-assistant-styles-manager@3.0.0: {}
+  home-assistant-styles-manager@3.1.0: {}
 
   html-escaper@2.0.2: {}
 
