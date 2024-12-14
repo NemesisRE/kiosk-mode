@@ -247,12 +247,15 @@ class KioskMode implements KioskModeRunner {
 		// Set all the options to false
 		Object.values(OPTION).forEach((option: OPTION) => {
 			mergedConfig[option] = false;
+			options[option] = false;
 		});
 		Object.values(CONDITIONAL_OPTION).forEach((option: CONDITIONAL_OPTION) => {
 			mergedConfig[option] = false;
+			options[option] = false;
 		});
 		Object.values(DEBUG_CONFIG_OPTION).forEach((option: DEBUG_CONFIG_OPTION) => {
 			mergedConfig[option] = false;
+			options[option] = false;
 		});
 
 		getMenuTranslations(this.ha)
@@ -761,12 +764,10 @@ class KioskMode implements KioskModeRunner {
 		options: Options,
 		mergedConfig: KioskConfig
 	) {
-		Object.values(DEBUG_CONFIG_OPTION).forEach((option: DEBUG_CONFIG_OPTION) => {
-			if (option in mergedConfig) {
-				this.setOptionsOrSubscribeToSetOptions(options, mergedConfig, option);
-			}
-		});
-		Object.values(OPTION).forEach((option: OPTION): void => {
+		Object.values({
+			...DEBUG_CONFIG_OPTION,
+			...OPTION
+		}).forEach((option: DEBUG_CONFIG_OPTION | OPTION) => {
 			if (option in mergedConfig) {
 				this.setOptionsOrSubscribeToSetOptions(options, mergedConfig, option);
 			}
