@@ -535,7 +535,8 @@ class KioskMode implements KioskModeRunner {
 					ELEMENT.HA_DIALOG_SIREN,
 					ELEMENT.HA_DIALOG_TIMER,
 					ELEMENT.HA_DIALOG_UPDATE,
-					ELEMENT.HA_DIALOG_VACUUM
+					ELEMENT.HA_DIALOG_VACUUM,
+					ELEMENT.HA_DIALOG_CAMERA
 				].join(',')
 			)
 			.$
@@ -547,6 +548,7 @@ class KioskMode implements KioskModeRunner {
 					this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] ||
 					this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS] ||
 					this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS] ||
+					this.options[OPTION.HIDE_DIALOG_CAMERA_ACTIONS] ||
 					this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
 					this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS] ||
 					this.options[OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS] ||
@@ -564,6 +566,8 @@ class KioskMode implements KioskModeRunner {
 						this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS] &&
 						dialogChild.host.localName === ELEMENT.HA_DIALOG_UPDATE
 							&& STYLES.DIALOG_UPDATE_ACTIONS,
+						dialogChild.host.localName === ELEMENT.HA_DIALOG_CAMERA
+							&& STYLES.DIALOG_CAMERA_ACTIONS,
 						(
 							this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS] ||
 							this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS]
@@ -586,6 +590,7 @@ class KioskMode implements KioskModeRunner {
 						if (this.options[OPTION.HIDE_DIALOG_TIMER_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_TIMER_ACTIONS);
 						if (this.options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_MEDIA_ACTIONS);
 						if (this.options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS])         setCache(TRUE, OPTION.HIDE_DIALOG_UPDATE_ACTIONS);
+						if (this.options[OPTION.HIDE_DIALOG_CAMERA_ACTIONS])         setCache(TRUE, OPTION.HIDE_DIALOG_CAMERA_ACTIONS);
 						if (this.options[OPTION.HIDE_DIALOG_LIGHT_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_LIGHT_ACTIONS);
 						if (this.options[OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS])  setCache(TRUE, OPTION.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS);
 						if (this.options[OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS])    setCache(TRUE, OPTION.HIDE_DIALOG_LIGHT_COLOR_ACTIONS);
