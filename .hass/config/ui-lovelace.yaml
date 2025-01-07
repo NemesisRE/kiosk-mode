@@ -64,8 +64,35 @@ kiosk_mode:
         input_boolean.kiosk_hide_dialog_update_actions: 'on'
       hide_dialog_update_actions: true
     - entity:
+        input_boolean.kiosk_hide_dialog_camera_actions: 'on'
+      hide_dialog_camera_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_media_actions: 'on'
+      hide_dialog_media_actions: true
+    - entity:
         input_boolean.kiosk_hide_dialog_timer_actions: 'on'
       hide_dialog_timer_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_climate_actions: 'on'
+      hide_dialog_climate_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_climate_temperature_actions: 'on'
+      hide_dialog_climate_temperature_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_climate_settings_actions: 'on'
+      hide_dialog_climate_settings_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_light_actions: 'on'
+      hide_dialog_light_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_light_control_actions: 'on'
+      hide_dialog_light_control_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_light_color_actions: 'on'
+      hide_dialog_light_color_actions: true
+    - entity:
+        input_boolean.kiosk_hide_dialog_light_settings_actions: 'on'
+      hide_dialog_light_settings_actions: true
     - entity:
         input_boolean.kiosk_hide_dialog_history_show_more: 'on'
       hide_dialog_history_show_more: true
@@ -111,9 +138,6 @@ views:
           - entity: input_boolean.kiosk_block_context_menu
           - type: section
             label: More-info dialogs options
-          - entity: sun.sun
-          - entity: zone.home
-          - entity: timer.laundry
           - entity: input_boolean.kiosk_hide_dialog_header_history
           - entity: input_boolean.kiosk_hide_dialog_header_settings
           - entity: input_boolean.kiosk_hide_dialog_header_overflow
@@ -122,6 +146,26 @@ views:
           - entity: input_boolean.kiosk_hide_dialog_logbook
           - entity: input_boolean.kiosk_hide_dialog_attributes
           - entity: input_boolean.kiosk_hide_dialog_update_actions
+          - entity: input_boolean.kiosk_hide_dialog_camera_actions
+          - entity: input_boolean.kiosk_hide_dialog_media_actions
+          - entity: input_boolean.kiosk_hide_dialog_climate_actions
+          - entity: input_boolean.kiosk_hide_dialog_climate_temperature_actions
+          - entity: input_boolean.kiosk_hide_dialog_climate_settings_actions
+          - entity: input_boolean.kiosk_hide_dialog_light_actions
+          - entity: input_boolean.kiosk_hide_dialog_light_control_actions
+          - entity: input_boolean.kiosk_hide_dialog_light_color_actions
+          - entity: input_boolean.kiosk_hide_dialog_light_settings_actions
           - entity: input_boolean.kiosk_hide_dialog_timer_actions
           - entity: input_boolean.kiosk_hide_dialog_history_show_more
           - entity: input_boolean.kiosk_hide_dialog_logbook_show_more
+          - type: section
+            label: Entities
+          - entity: sun.sun
+          - entity: zone.home
+          - entity: timer.laundry
+          - entity: climate.ecobee
+          - entity: media_player.bedroom
+          - entity: camera.demo_camera
+          - entity: light.bed_light
+          - entity: update.demo_add_on
+          - entity: binary_sensor.basement_floor_wet

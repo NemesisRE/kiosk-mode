@@ -91,3 +91,5 @@ frontend:
 timer:
   laundry:
     duration: "00:01:00"
+
+demo:
