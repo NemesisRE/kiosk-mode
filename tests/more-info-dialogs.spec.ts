@@ -2,27 +2,16 @@ import { test, expect } from 'playwright-test-coverage';
 import {
 	SELECTORS,
 	DIALOGS_SELECTORS,
+	TEXT_SELECTORS,
 	ENTITIES
 } from './constants';
 import { turnBooleanState, goToPage } from './utils';
-
-const demoHomeText = { hasText: 'Home' };
-const demoBynarySensorText = { hasText: 'Basement Floor Wet' };
-const demoAddonText = { hasText: 'Demo add-on' };
-const demoCamera = { hasText: 'Demo camera' };
-const demoClimateText = { hasText: 'Ecobee' };
-const demoLightText = { hasText: 'Bed Light' };
-const demoTimerText = { hasText: 'laundry' };
-
-const updateActionsTest = { hasText: 'Update' };
-const attributesTest = { hasText: 'Attributes' };
-const cameraActionsTest = { hasText: 'Download snapshot' };
 
 test('Option: hide_dialog_header_history', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, demoAddonText).click();
+	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.HISTORY_BUTTON)).toBeVisible();
 
@@ -39,7 +28,7 @@ test('Option: hide_dialog_header_settings', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, demoAddonText).click();
+	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.SETTINGS_BUTTON)).toBeVisible();
 
@@ -56,7 +45,7 @@ test('Option: hide_dialog_header_overflow', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, demoAddonText).click();
+	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 	await expect(page.locator(DIALOGS_SELECTORS.OVERFLOW_BUTTON)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_OVERFLOW_BUTTON, true);
@@ -72,7 +61,7 @@ test('Option: hide_dialog_header_action_items', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, demoAddonText).click();
+	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.HISTORY_BUTTON)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.SETTINGS_BUTTON)).toBeVisible();
@@ -93,7 +82,7 @@ test('Option: hide_dialog_history', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.ENTITY_ROW, demoHomeText).click();
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.HOME).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.HISTORY)).toBeVisible();
 
@@ -110,7 +99,7 @@ test('Option: hide_dialog_logbook', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.ENTITY_ROW, demoBynarySensorText).click();
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.BINARY_SENSOR).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.LOGBOOK)).toBeVisible();
 
@@ -127,13 +116,13 @@ test('Option: hide_dialog_attributes', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.ENTITY_ROW, demoHomeText).click();
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.HOME).click();
 
-	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES, attributesTest)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES, TEXT_SELECTORS.ATTRIBUTES)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_ATTRIBUTES, true);
 
-	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES, attributesTest)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES, TEXT_SELECTORS.ATTRIBUTES)).toBeHidden();
 	await expect(page).toHaveScreenshot('07-hide_dialog_attributes.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_ATTRIBUTES, false);
@@ -144,13 +133,13 @@ test('Option: hide_dialog_update_actions', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, demoAddonText).click();
+	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, updateActionsTest)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.UPDATE_ACTION)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_UPDATE_ACTIONS, true);
 
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, updateActionsTest)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.UPDATE_ACTION)).toBeHidden();
 	await expect(page).toHaveScreenshot('08-hide_dialog_update_actions.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_UPDATE_ACTIONS, false);
@@ -161,13 +150,13 @@ test('Option: hide_dialog_camera_actions', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.ENTITY_ROW, demoCamera).click();
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
 
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, cameraActionsTest)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.CAMERA_ACTION)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_CAMERA_ACTIONS, true);
 
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, cameraActionsTest)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.CAMERA_ACTION)).toBeHidden();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_CAMERA_ACTIONS, false);
 
@@ -190,11 +179,11 @@ test('Option: hide_dialog_media_actions', async ({ page }) => {
 
 });
 
-test('Option: hide_dialog_climate_actions, kiosk_hide_dialog_climate_temperature_actions and kiosk_hide_dialog_climate_settings_actions', async ({ page }) => {
+test('Option: hide_dialog_climate_actions, hide_dialog_climate_temperature_actions and hide_dialog_climate_settings_actions', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.CLIMATE_ENTITY_ROW, demoClimateText).click();
+	await page.locator(SELECTORS.CLIMATE_ENTITY_ROW, TEXT_SELECTORS.CLIMATE).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.CLIMATE_TEMPERATURE_BUTTONS)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.CLIMATE_SETTINGS_BUTTONS)).toBeVisible();
@@ -238,7 +227,7 @@ test('Option: hide_dialog_light_actions, hide_dialog_light_control_actions, hide
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.TOGGLE_ENTITY_ROW, demoLightText).click();
+	await page.locator(SELECTORS.TOGGLE_ENTITY_ROW, TEXT_SELECTORS.LIGHT).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_CONTROL_ACTIONS)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_COLOR_ACTIONS)).toBeVisible();
@@ -304,7 +293,7 @@ test('Option: hide_dialog_timer_actions', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.TIMER_ENTITY_ROW, demoTimerText).click();
+	await page.locator(SELECTORS.TIMER_ENTITY_ROW, TEXT_SELECTORS.TIMER).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.TIMER_ACTIONS)).toBeVisible();
 
@@ -321,7 +310,7 @@ test('Option: hide_dialog_history_show_more', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.ENTITY_ROW, demoHomeText).click();
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.HOME).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.HISTORY_LINK)).toBeVisible();
 
@@ -338,7 +327,7 @@ test('Option: hide_dialog_logbook_show_more', async ({ page }) => {
 
 	await goToPage(page);
 
-	await page.locator(SELECTORS.ENTITY_ROW, demoBynarySensorText).click();
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.BINARY_SENSOR).click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.LOGBOOK_LINK)).toBeVisible();
 
