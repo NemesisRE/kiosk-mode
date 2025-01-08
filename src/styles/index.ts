@@ -129,6 +129,7 @@ export const STYLES = {
 		'.actions',
 		`hr:has(+ .actions)`
 	),
+	DIALOG_CAMERA_ACTIONS: getDisplayNoneRules('.actions'),
 	DIALOG_CLIMATE_CONTROL_SELECT: getDisplayNoneRules(
 		ELEMENT.HA_DIALOG_CLIMATE_CONTROL_SELECT
 	),

@@ -121,6 +121,7 @@ views:
 |`hide_dialog_attributes`                  | Boolean | false   | Hides the "Attributes" section in the more-info dialogs. |
 |`hide_dialog_media_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of media-player entities. |
 |`hide_dialog_update_actions`              | Boolean | false   | Hides the actions block in the more-info dialogs of update entities. |
+|`hide_dialog_camera_actions`              | Boolean | false   | Hides the actions block in the more-info dialogs of camera entities. |
 |`hide_dialog_timer_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of timer entities. |
 |`hide_dialog_climate_actions`             | Boolean | false   | Hides all the actions in the more-info dialogs of climate entities. |
 |`hide_dialog_climate_temperature_actions` | Boolean | false   | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
@@ -374,6 +375,7 @@ The query string options are:
 * `?hide_dialog_attributes` to hide the "Attributes" section in the more-info dialogs
 * `?hide_dialog_media_actions` to hide the actions block in the more-info dialogs of media-player entities
 * `?hide_dialog_update_actions` to hide the actions block in the more-info dialogs of update entities
+* `?hide_dialog_camera_actions` to hide the actions block in the more-info dialogs of camera entities
 * `?hide_dialog_timer_actions` to hide the actions block in the more-info dialogs of timer entities
 * `?hide_dialog_climate_actions` to hide all the actions in the more-info dialogs of climate entities
 * `?hide_dialog_climate_temperature_actions` to hide the temperature cotrol actions in the more-info dialogs of climate entities
