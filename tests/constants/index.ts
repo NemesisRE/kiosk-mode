@@ -32,9 +32,11 @@ export const DIALOGS_SELECTORS = {
 	HISTORY_LINK: 'ha-more-info-history .header > a',
 	LOGBOOK: '.content > ha-more-info-logbook',
 	LOGBOOK_LINK: 'ha-more-info-logbook .header > a',
-	ATTRIBUTES: 'slot[name="header"] > .header',
+	ATTRIBUTES: 'more-info-default ha-attributes',
 	ACTIONS: '.actions',
+	UPDATE_ACTIONS: 'more-info-update .actions',
 	MEDIA_ACTIONS: '.controls > .basic-controls',
+	CAMERA_ACTIONS: 'more-info-camera .actions',
 	CLIMATE_TEMPERATURE_BUTTONS: 'more-info-climate ha-state-control-climate-temperature .container .buttons',
 	CLIMATE_SETTINGS_BUTTONS: 'more-info-climate > ha-more-info-control-select-container',
 	LIGHT_CONTROL_ACTIONS: 'more-info-light .controls > ha-icon-button-group',
@@ -130,6 +132,5 @@ export const TEXT_SELECTORS = {
 	CLIMATE: { hasText: 'Ecobee' },
 	LIGHT: { hasText: 'Bed Light' },
 	TIMER: { hasText: 'laundry' },
-	UPDATE_ACTION: { hasText: 'Update' },
-	ATTRIBUTES: { hasText: 'Attributes' }
+	UPDATE_ACTION: { hasText: 'Update' }
 };

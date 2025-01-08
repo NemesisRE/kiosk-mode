@@ -245,7 +245,7 @@ test('URL Parameter: ?hide_dialog_attributes', async ({ page }) => {
 
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.HOME).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
-	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES, TEXT_SELECTORS.ATTRIBUTES)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES)).toBeHidden();
 	await expect(page).toHaveScreenshot('20-hide_dialog_attributes.png');
 
 });
@@ -256,7 +256,7 @@ test('URL Parameter: ?hide_dialog_update_actions', async ({ page }) => {
 
 	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.UPDATE_ACTION)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.UPDATE_ACTIONS)).toBeHidden();
 	await expect(page).toHaveScreenshot('21-hide_dialog_update_actions.png');
 
 });
@@ -267,7 +267,7 @@ test('URL Parameter: ?hide_dialog_camera_actions', async ({ page }) => {
 
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.CAMERA_ACTION)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeHidden();
 
 });
 

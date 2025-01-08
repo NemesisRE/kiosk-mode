@@ -118,11 +118,11 @@ test('Option: hide_dialog_attributes', async ({ page }) => {
 
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.HOME).click();
 
-	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES, TEXT_SELECTORS.ATTRIBUTES)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_ATTRIBUTES, true);
 
-	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES, TEXT_SELECTORS.ATTRIBUTES)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES)).toBeHidden();
 	await expect(page).toHaveScreenshot('07-hide_dialog_attributes.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_ATTRIBUTES, false);
@@ -135,11 +135,11 @@ test('Option: hide_dialog_update_actions', async ({ page }) => {
 
 	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.UPDATE_ACTION)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.UPDATE_ACTIONS)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_UPDATE_ACTIONS, true);
 
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.UPDATE_ACTION)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.UPDATE_ACTIONS)).toBeHidden();
 	await expect(page).toHaveScreenshot('08-hide_dialog_update_actions.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_UPDATE_ACTIONS, false);
@@ -152,11 +152,11 @@ test('Option: hide_dialog_camera_actions', async ({ page }) => {
 
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
 
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.CAMERA_ACTION)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_CAMERA_ACTIONS, true);
 
-	await expect(page.locator(DIALOGS_SELECTORS.ACTIONS, TEXT_SELECTORS.CAMERA_ACTION)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeHidden();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_CAMERA_ACTIONS, false);
 
