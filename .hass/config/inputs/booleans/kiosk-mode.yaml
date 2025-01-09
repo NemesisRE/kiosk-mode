@@ -40,8 +40,26 @@ kiosk_hide_dialog_attributes:
   name: Kiosk hide dialog attributes
 kiosk_hide_dialog_update_actions:
   name: Kiosk hide dialog update actions
+kiosk_hide_dialog_camera_actions:
+  name: Kiosk hide dialog camera actions
+kiosk_hide_dialog_media_actions:
+  name: Kiosk hide dialog media actions
 kiosk_hide_dialog_timer_actions:
   name: Kiosk hide dialog timer actions
+kiosk_hide_dialog_climate_actions:
+  name: Kiosk hide dialog climate actions
+kiosk_hide_dialog_climate_temperature_actions:
+  name: Kiosk hide dialog climate temperature actions
+kiosk_hide_dialog_climate_settings_actions:
+  name: Kiosk hide dialog climate settings actions
+kiosk_hide_dialog_light_actions:
+  name: Kiosk hide dialog light actions
+kiosk_hide_dialog_light_control_actions:
+  name: Kiosk hide dialog light control actions
+kiosk_hide_dialog_light_color_actions:
+  name: Kiosk hide dialog light color actions
+kiosk_hide_dialog_light_settings_actions:
+  name: Kiosk hide dialog light settings actions
 kiosk_hide_dialog_history_show_more:
   name: Kiosk hide dialog history show more link
 kiosk_hide_dialog_logbook_show_more:

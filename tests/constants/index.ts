@@ -14,17 +14,35 @@ export const SELECTORS = {
 	MENU_UNUSED_ENTITIES_ITEM: 'mwc-list-item[data-selector="UNUSED_ENTITIES"]',
 	MENU_RELOAD_RESOURCES_ITEM: 'mwc-list-item[data-selector="RELOAD_RESOURCES"]',
 	MENU_EDIT_DASHBOARD_ITEM: 'mwc-list-item[data-selector="EDIT_DASHBOARD"]',
-	ENTITY_ROW: 'hui-simple-entity-row'
+	ENTITY_ROW: 'hui-simple-entity-row',
+	TOGGLE_ENTITY_ROW: 'hui-toggle-entity-row',
+	UPDATE_ENTITY_ROW: 'hui-update-entity-row',
+	MEDIA_PLAYER_ENTITY_ROW: 'hui-media-player-entity-row state-badge',
+	CLIMATE_ENTITY_ROW: 'hui-climate-entity-row',
+	TIMER_ENTITY_ROW: 'hui-timer-entity-row'
 };
 
 export const DIALOGS_SELECTORS = {
+	MORE_INFO_INFO: 'ha-more-info-info',
 	HISTORY_BUTTON: 'ha-icon-button[data-selector="DIALOG_HISTORY"]',
 	SETTINGS_BUTTON: 'ha-icon-button[data-selector="DIALOG_SETTINGS"]',
 	OVERFLOW_BUTTON: 'ha-icon-button[data-selector="DIALOG_SETTINGS"] + ha-button-menu',
 	CLOSE_BUTTON: 'ha-icon-button[data-selector="DIALOG_DISMISS"]',
 	HISTORY: '.content > ha-more-info-history',
-	HISTORY_LINK: '.header > .title + a',
-	ATTRIBUTES: 'slot[name="header"] > .header'
+	HISTORY_LINK: 'ha-more-info-history .header > a',
+	LOGBOOK: '.content > ha-more-info-logbook',
+	LOGBOOK_LINK: 'ha-more-info-logbook .header > a',
+	ATTRIBUTES: 'more-info-default ha-attributes',
+	ACTIONS: '.actions',
+	UPDATE_ACTIONS: 'more-info-update .actions',
+	MEDIA_ACTIONS: '.controls > .basic-controls',
+	CAMERA_ACTIONS: 'more-info-camera .actions',
+	CLIMATE_TEMPERATURE_BUTTONS: 'more-info-climate ha-state-control-climate-temperature .container .buttons',
+	CLIMATE_SETTINGS_BUTTONS: 'more-info-climate > ha-more-info-control-select-container',
+	LIGHT_CONTROL_ACTIONS: 'more-info-light .controls > ha-icon-button-group',
+	LIGHT_COLOR_ACTIONS: 'more-info-light ha-more-info-light-favorite-colors',
+	LIGHT_SETTINGS_ACTIONS: 'more-info-light ha-more-info-control-select-container',
+	TIMER_ACTIONS: 'more-info-timer .actions'
 };
 
 export const ENTITIES = {
@@ -48,8 +66,21 @@ export const ENTITIES = {
 	HIDE_DIALOG_OVERFLOW_BUTTON: 'kiosk_hide_dialog_header_overflow',
 	HIDE_DIALOG_ACTION_ITEMS: 'kiosk_hide_dialog_header_action_items',
 	HIDE_DIALOG_HISTORY: 'kiosk_hide_dialog_history',
+	HIDE_DIALOG_LOGBOOK: 'kiosk_hide_dialog_logbook',
 	HIDE_DIALOG_ATTRIBUTES: 'kiosk_hide_dialog_attributes',
-	HIDE_DIALOG_HISTORY_SHOW_MORE: 'kiosk_hide_dialog_history_show_more'
+	HIDE_DIALOG_UPDATE_ACTIONS: 'kiosk_hide_dialog_update_actions',
+	HIDE_DIALOG_CAMERA_ACTIONS: 'kiosk_hide_dialog_camera_actions',
+	HIDE_DIALOG_MEDIA_ACTIONS: 'kiosk_hide_dialog_media_actions',
+	HIDE_DIALOG_CLIMATE_ACTIONS: 'kiosk_hide_dialog_climate_actions',
+	HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS: 'kiosk_hide_dialog_climate_temperature_actions',
+	HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS: 'kiosk_hide_dialog_climate_settings_actions',
+	HIDE_DIALOG_LIGHT_ACTIONS: 'kiosk_hide_dialog_light_actions',
+	HIDE_DIALOG_LIGHT_CONTROL_ACTIONS: 'kiosk_hide_dialog_light_control_actions',
+	HIDE_DIALOG_LIGHT_COLOR_ACTIONS: 'kiosk_hide_dialog_light_color_actions',
+	HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS: 'kiosk_hide_dialog_light_settings_actions',
+	HIDE_DIALOG_TIMER_ACTIONS: 'kiosk_hide_dialog_timer_actions',
+	HIDE_DIALOG_HISTORY_SHOW_MORE: 'kiosk_hide_dialog_history_show_more',
+	HIDE_DIALOG_LOGBOOK_SHOW_MORE: 'kiosk_hide_dialog_logbook_show_more'
 };
 
 export const URL_PARAMS = {
@@ -69,5 +100,37 @@ export const URL_PARAMS = {
 	BLOCK_OVERFLOW: 'block_overflow',
 	DISABLE_KM: 'disable_km',
 	CACHE: 'cache',
-	CLEAR_KM_CACHE: 'clear_km_cache'
+	CLEAR_KM_CACHE: 'clear_km_cache',
+	HIDE_DIALOG_HEADER_HISTORY: 'hide_dialog_header_history',
+	HIDE_DIALOG_HEADER_SETTINGS: 'hide_dialog_header_settings',
+	HIDE_DIALOG_HEADER_OVERFLOW: 'hide_dialog_header_overflow',
+	HIDE_DIALOG_HEADER_ACTION_ITEMS: 'hide_dialog_header_action_items',
+	HIDE_DIALOG_HISTORY: 'hide_dialog_history',
+	HIDE_DIALOG_LOGBOOK: 'hide_dialog_logbook',
+	HIDE_DIALOG_ATTRIBUTES: 'hide_dialog_attributes',
+	HIDE_DIALOG_UPDATE_ACTIONS: 'hide_dialog_update_actions',
+	HIDE_DIALOG_CAMERA_ACTIONS: 'hide_dialog_camera_actions',
+	HIDE_DIALOG_MEDIA_ACTIONS: 'hide_dialog_media_actions',
+	HIDE_DIALOG_CLIMATE_ACTIONS: 'hide_dialog_climate_actions',
+	HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS: 'hide_dialog_climate_temperature_actions',
+	HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS: 'hide_dialog_climate_settings_actions',
+	HIDE_DIALOG_LIGHT_ACTIONS: 'hide_dialog_light_actions',
+	HIDE_DIALOG_LIGHT_CONTROL_ACTIONS: 'hide_dialog_light_control_actions',
+	HIDE_DIALOG_LIGHT_COLOR_ACTIONS: 'hide_dialog_light_color_actions',
+	HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS: 'hide_dialog_light_settings_actions',
+	HIDE_DIALOG_TIMER_ACTIONS: 'hide_dialog_timer_actions',
+	HIDE_DIALOG_HISTORY_SHOW_MORE: 'hide_dialog_history_show_more',
+	HIDE_DIALOG_LOGBOOK_SHOW_MORE: 'hide_dialog_logbook_show_more'
+};
+
+export const TEXT_SELECTORS = {
+	HOME: { hasText: 'Home' },
+	BINARY_SENSOR: { hasText: 'Basement Floor Wet' },
+	ADDON: { hasText: 'Demo add-on' },
+	CAMERA: { hasText: 'Demo camera' },
+	CAMERA_ACTION: { hasText: 'Download snapshot' },
+	CLIMATE: { hasText: 'Ecobee' },
+	LIGHT: { hasText: 'Bed Light' },
+	TIMER: { hasText: 'laundry' },
+	UPDATE_ACTION: { hasText: 'Update' }
 };

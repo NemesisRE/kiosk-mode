@@ -1,6 +1,11 @@
 import { test, expect } from 'playwright-test-coverage';
-import { URL_PARAMS, SELECTORS } from './constants';
-import { getUrlWithParam, goToPage } from './utils';
+import {
+	URL_PARAMS,
+	SELECTORS,
+	DIALOGS_SELECTORS,
+	TEXT_SELECTORS
+} from './constants';
+import { goToPageWithParams, goToPage } from './utils';
 
 [
 	{
@@ -51,12 +56,7 @@ import { getUrlWithParam, goToPage } from './utils';
 
 	test(`Caching URL Parameter: ?${param}`, async ({ page }) => {
 
-		await page.goto(
-			getUrlWithParam(
-				param,
-				URL_PARAMS.CACHE
-			)
-		);
+		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
 
 		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 
@@ -72,11 +72,7 @@ import { getUrlWithParam, goToPage } from './utils';
 			await expect(page.locator(selector)).toBeHidden();
 		});
 
-		await page.goto(
-			getUrlWithParam(
-				URL_PARAMS.CLEAR_KM_CACHE
-			)
-		);
+		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
 		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 
@@ -109,12 +105,7 @@ import { getUrlWithParam, goToPage } from './utils';
 
 	test(`Caching URL Parameter: ?${param}`, async ({ page }) => {
 
-		await page.goto(
-			getUrlWithParam(
-				param,
-				URL_PARAMS.CACHE
-			)
-		);
+		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
 
 		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 		await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
@@ -126,11 +117,7 @@ import { getUrlWithParam, goToPage } from './utils';
 		await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
 		await expect(page.locator(selector)).toBeHidden();
 
-		await page.goto(
-			getUrlWithParam(
-				URL_PARAMS.CLEAR_KM_CACHE
-			)
-		);
+		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
 		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 		await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
@@ -140,14 +127,203 @@ import { getUrlWithParam, goToPage } from './utils';
 
 });
 
+[
+	{
+		param: URL_PARAMS.HIDE_DIALOG_HEADER_HISTORY,
+		selector: DIALOGS_SELECTORS.HISTORY_BUTTON,
+		entitySelector: SELECTORS.UPDATE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.ADDON
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_HEADER_SETTINGS,
+		selector: DIALOGS_SELECTORS.SETTINGS_BUTTON,
+		entitySelector: SELECTORS.UPDATE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.ADDON
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_HEADER_OVERFLOW,
+		selector: DIALOGS_SELECTORS.OVERFLOW_BUTTON,
+		entitySelector: SELECTORS.UPDATE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.ADDON
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_HEADER_ACTION_ITEMS,
+		selector: [
+			DIALOGS_SELECTORS.HISTORY_BUTTON,
+			DIALOGS_SELECTORS.SETTINGS_BUTTON,
+			DIALOGS_SELECTORS.OVERFLOW_BUTTON
+		],
+		entitySelector: SELECTORS.UPDATE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.ADDON
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_HISTORY,
+		selector: DIALOGS_SELECTORS.HISTORY,
+		entitySelector: SELECTORS.ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.HOME
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_LOGBOOK,
+		selector: DIALOGS_SELECTORS.LOGBOOK,
+		entitySelector: SELECTORS.ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.BINARY_SENSOR
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_ATTRIBUTES,
+		selector: DIALOGS_SELECTORS.ATTRIBUTES,
+		entitySelector: SELECTORS.ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.HOME
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_UPDATE_ACTIONS,
+		selector: DIALOGS_SELECTORS.UPDATE_ACTIONS,
+		entitySelector: SELECTORS.UPDATE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.ADDON
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_CAMERA_ACTIONS,
+		selector: DIALOGS_SELECTORS.CAMERA_ACTIONS,
+		entitySelector: SELECTORS.ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.CAMERA
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_MEDIA_ACTIONS,
+		selector: DIALOGS_SELECTORS.MEDIA_ACTIONS,
+		entitySelector: SELECTORS.MEDIA_PLAYER_ENTITY_ROW
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_CLIMATE_ACTIONS,
+		selector: [
+			DIALOGS_SELECTORS.CLIMATE_TEMPERATURE_BUTTONS,
+			DIALOGS_SELECTORS.CLIMATE_SETTINGS_BUTTONS
+		],
+		entitySelector: SELECTORS.CLIMATE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.CLIMATE
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_CLIMATE_TEMPERATURE_ACTIONS,
+		selector: DIALOGS_SELECTORS.CLIMATE_TEMPERATURE_BUTTONS,
+		entitySelector: SELECTORS.CLIMATE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.CLIMATE
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_CLIMATE_SETTINGS_ACTIONS,
+		selector: DIALOGS_SELECTORS.CLIMATE_SETTINGS_BUTTONS,
+		entitySelector: SELECTORS.CLIMATE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.CLIMATE
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_LIGHT_ACTIONS,
+		selector: [
+			DIALOGS_SELECTORS.LIGHT_CONTROL_ACTIONS,
+			DIALOGS_SELECTORS.LIGHT_COLOR_ACTIONS,
+			DIALOGS_SELECTORS.LIGHT_SETTINGS_ACTIONS
+		],
+		entitySelector: SELECTORS.TOGGLE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.LIGHT
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_LIGHT_CONTROL_ACTIONS,
+		selector: DIALOGS_SELECTORS.LIGHT_CONTROL_ACTIONS,
+		entitySelector: SELECTORS.TOGGLE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.LIGHT
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_LIGHT_COLOR_ACTIONS,
+		selector: DIALOGS_SELECTORS.LIGHT_COLOR_ACTIONS,
+		entitySelector: SELECTORS.TOGGLE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.LIGHT
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS,
+		selector: DIALOGS_SELECTORS.LIGHT_SETTINGS_ACTIONS,
+		entitySelector: SELECTORS.TOGGLE_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.LIGHT
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_TIMER_ACTIONS,
+		selector: DIALOGS_SELECTORS.TIMER_ACTIONS,
+		entitySelector: SELECTORS.TIMER_ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.TIMER
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_HISTORY_SHOW_MORE,
+		selector: DIALOGS_SELECTORS.HISTORY_LINK,
+		entitySelector: SELECTORS.ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.HOME
+	},
+	{
+		param: URL_PARAMS.HIDE_DIALOG_LOGBOOK_SHOW_MORE,
+		selector: DIALOGS_SELECTORS.LOGBOOK_LINK,
+		entitySelector: SELECTORS.ENTITY_ROW,
+		entitySelectorText: TEXT_SELECTORS.BINARY_SENSOR
+	}
+].forEach(({ param, selector, entitySelector, entitySelectorText }) => {
+
+	const selectors = Array.isArray(selector)
+		? selector
+		: [selector];
+
+	test(`Caching URL Parameter: ?${param}`, async ({ page }) => {
+
+		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
+
+		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+
+		if (entitySelectorText) {
+			await page.locator(entitySelector, entitySelectorText).click();
+		} else {
+			await page.locator(entitySelector).click();
+		}
+
+		await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
+		await page.waitForTimeout(500);
+
+		selectors.forEach(async (selector) => {
+			await expect(page.locator(selector)).toBeHidden();
+		});
+
+		await goToPage(page);
+
+		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+
+		if (entitySelectorText) {
+			await page.locator(entitySelector, entitySelectorText).click();
+		} else {
+			await page.locator(entitySelector).click();
+		}
+
+		await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
+		await page.waitForTimeout(500);
+
+		selectors.forEach(async (selector) => {
+			await expect(page.locator(selector)).toBeHidden();
+		});
+
+		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
+
+		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+
+		if (entitySelectorText) {
+			await page.locator(entitySelector, entitySelectorText).click();
+		} else {
+			await page.locator(entitySelector).click();
+		}
+
+		await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
+		await page.waitForTimeout(500);
+
+		selectors.forEach(async (selector) => {
+			await expect(page.locator(selector)).toBeVisible();
+		});
+
+	});
+
+});
+
 test('Caching URL Parameter: ?block_overflow', async ({ page }) => {
 
-	await page.goto(
-		getUrlWithParam(
-			URL_PARAMS.BLOCK_OVERFLOW,
-			URL_PARAMS.CACHE
-		)
-	);
+	await goToPageWithParams(page, URL_PARAMS.BLOCK_OVERFLOW, URL_PARAMS.CACHE);
 
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');
@@ -157,13 +333,10 @@ test('Caching URL Parameter: ?block_overflow', async ({ page }) => {
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');
 
-	await page.goto(
-		getUrlWithParam(
-			URL_PARAMS.CLEAR_KM_CACHE
-		)
-	);
+	await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).not.toHaveCSS('pointer-events', 'none');
 
 });
+

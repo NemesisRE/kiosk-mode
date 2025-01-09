@@ -18,6 +18,13 @@ export const goToPage = async (page: Page) => {
 	await expect(page.locator('hui-view')).toBeVisible();
 };
 
+export const goToPageWithParams = async (page: Page, ...params: string[]) => {
+	await page.goto(
+		getUrlWithParam(...params)
+	);
+	await expect(page.locator('hui-view')).toBeVisible();
+};
+
 export const turnBooleanState = async (
 	page: Page,
 	entity: string,
