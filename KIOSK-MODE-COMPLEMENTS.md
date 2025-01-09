@@ -57,7 +57,7 @@ your-custom-theme:
       .toolbar ha-icon-button-arrow-prev {
         display: none !important;
       }
-    
+```
 
 ### More-info dialogs
 
