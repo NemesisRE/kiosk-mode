@@ -419,7 +419,6 @@ Some features are outside `kiosk-mode` scope and they would be hard to maintain 
 ### Related
 
 * [Fully Kiosk Browser](https://www.fully-kiosk.com/) - Great for wall mounted tablets
-* [Applicationize](https://applicationize.me/) - Convert web apps into desktop apps
 * [KTibow/fullscreen-card](https://github.com/KTibow/fullscreen-card) - Make your Home Assistant browser fullscreen
 <br>
 
