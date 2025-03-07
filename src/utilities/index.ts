@@ -3,6 +3,7 @@ import { HomeAssistant, Version } from '@types';
 import {
 	TRUE,
 	MENU_REFERENCES,
+	MENU_REFERENCES_LEGACY,
 	MAX_ATTEMPTS,
 	RETRY_DELAY,
 	ELEMENT,
@@ -55,8 +56,17 @@ export const getDisplayNoneRules = (...rules: string[]): Record<string, false> =
 	);
 };
 
-const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string, string>>> => {
-	const referencePaths = Object.values(MENU_REFERENCES);
+const getHAResources = (
+	ha: HomeAssistant,
+	isLegacyHomeAssistant: boolean
+): Promise<Record<string, Record<string, string>>> => {
+
+	const referencePaths = Object.values(
+		isLegacyHomeAssistant
+			? MENU_REFERENCES_LEGACY
+			: MENU_REFERENCES
+	);
+
 	return getPromisableResult(
 		() => ha?.hass?.resources,
 		(resources: Record<string, Record<string, string>>): boolean => {
@@ -77,12 +87,18 @@ const getHAResources = (ha: HomeAssistant): Promise<Record<string, Record<string
 };
 
 export const getMenuTranslations = async(
-	ha: HomeAssistant
+	ha: HomeAssistant,
+	isLegacyHomeAssistant: boolean
 ): Promise<Record<string, string>> => {
-	const resources = await getHAResources(ha);
+	const resources = await getHAResources(ha, isLegacyHomeAssistant);
 	const language = ha.hass.language;
 	const resourcesTranslated = resources[language];
-	const entries = Object.entries(MENU_REFERENCES);
+
+	const entries = Object.entries(
+		isLegacyHomeAssistant
+			? MENU_REFERENCES_LEGACY
+			: MENU_REFERENCES
+	);
 	const menuTranslationsEntries = entries.map((entry: [string, string]) => {
 		const [reference, prop] = entry;
 		return [resourcesTranslated[prop], reference];

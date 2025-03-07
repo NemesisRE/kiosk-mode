@@ -81,8 +81,13 @@ export const MENU_REFERENCES = Object.freeze({
 	[MENU.EDIT_DASHBOARD]: `${MENU_PREFIX}.configure_ui`,
 	[MENU.DIALOG_HISTORY]: `${DIALOGS_PREFIX}.history`,
 	[MENU.DIALOG_SETTINGS]: `${DIALOGS_PREFIX}.settings`,
-	[MENU.DIALOG_DISMISS]: `${DIALOGS_PREFIX}.dismiss`
+	[MENU.DIALOG_DISMISS]: `${COMMON_PREFIX}.close`
+});
 
+// This constant is only to support Home Assistant < 2025.3.x
+export const MENU_REFERENCES_LEGACY = Object.freeze({
+	...MENU_REFERENCES,
+	[MENU.DIALOG_DISMISS]: `${DIALOGS_PREFIX}.dismiss`
 });
 
 export enum ELEMENT {

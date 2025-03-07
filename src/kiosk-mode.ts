@@ -192,7 +192,10 @@ class KioskMode implements KioskModeRunner {
 		});
 
 		// Get menu translations
-		getMenuTranslations(this.ha)
+		// Store Home Assistant Legacy variable (Home Assistant < 2025.3.x)
+		const isLegacyHomeAssistant = this.version?.[0] < 2025 || this.version?.[1] < 3;
+
+		getMenuTranslations(this.ha, isLegacyHomeAssistant)
 			.then((menuTranslations: Record<string, string>) => {
 				this.menuTranslations = menuTranslations;
 				this.updateMenuItemsLabels();
