@@ -11,6 +11,9 @@ importers:
       get-promisable-result:
         specifier: ^1.0.1
         version: 1.0.1
+      home-assistant-javascript-templates:
+        specifier: ^5.5.1
+        version: 5.5.1
       home-assistant-query-selector:
         specifier: 4.3.0
         version: 4.3.0
@@ -951,6 +954,9 @@ packages:
   helpertypes@0.0.19:
     resolution: {integrity: sha512-J00e55zffgi3yVnUp0UdbMztNkr2PnizEkOe9URNohnrNhW5X0QpegkuLpOmFQInpi93Nb8MCjQRHAiCDF42NQ==}
     engines: {node: '>=10.0.0'}
+
+  home-assistant-javascript-templates@5.5.1:
+    resolution: {integrity: sha512-U2TWGGl+9/9mTgLaFk7tw9BfrQQxpnUV5fvZIRa0LLyQf+xSJ+eoQ+kouhdPYaE95tOTgLv8waKTS/WRp5ZyUw==}
 
   home-assistant-query-selector@4.3.0:
     resolution: {integrity: sha512-L+TfdKKlqKAijIp/dWYKmtQWmTT+S9CZOM43L1lu1azPwVqIhJ2nlzf4GZ1MpWlGjY0+kn4sip0TYxvSCpZeeg==}
@@ -2522,6 +2528,10 @@ snapshots:
       function-bind: 1.1.2
 
   helpertypes@0.0.19: {}
+
+  home-assistant-javascript-templates@5.5.1:
+    dependencies:
+      get-promisable-result: 1.0.1
 
   home-assistant-query-selector@4.3.0:
     dependencies:
