@@ -16,3 +16,18 @@ updates:
     labels:
       - dependencies
     versioning-strategy: increase
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "09:00"
+      timezone: "Europe/Amsterdam"
+    commit-message:
+      prefix: "[Github Actions]"
+    groups:
+      actions-deps:
+        patterns:
+          - "*"
+    labels:
+      - configuration
