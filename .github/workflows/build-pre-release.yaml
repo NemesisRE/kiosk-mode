@@ -1,0 +1,86 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-(alpha|beta|rc).[0-9]+'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+      - name: Set-up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Install deps
+        run: pnpm install
+      - name: E2E tests
+        run: pnpm test:all
+      - name: Create coverage
+        run: pnpm coverage:report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-report
+          path: |
+            playwright-report/
+            coverage/
+          retention-days: 30
+      - name: Build Changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v5
+        with:
+          configurationJson: |
+            {
+              "categories": [
+                {
+                  "title": "## 🚀 Features",
+                  "labels": ["🌟 feature", "✨ feature-request", "enhancement", "request"]
+                },
+                {
+                  "title": "## 🛠 Fixes",
+                  "labels": ["fix", "🐛 bug"]
+                },
+                {
+                  "title": "## 🧩 Dependencies",
+                  "labels": ["dependencies"]
+                },
+                {
+                  "title": "## ⚙️ Configuration",
+                  "labels": ["configuration"]
+                },
+                {
+                  "title": "## 📝 Documentation",
+                  "labels": ["📝 documentation"]
+                },
+                {
+                  "title": "## 📦 Other",
+                  "labels": []
+                }
+              ],
+              "template": "#{{CHANGELOG}}",
+              "pr_template": "- #{{TITLE}}\n   - PR: ##{{NUMBER}} by @#{{AUTHOR}}",
+              "empty_template": "#{{OWNER}}\n#{{REPO}}\n#{{FROM_TAG}}\n#{{TO_TAG}}",
+              "max_pull_requests": 1000,
+              "max_back_track_time_days": 1000
+            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a pre release
+        uses: softprops/action-gh-release@v2
+        with:
+          prerelease: true
+          target_commitish: ${{ github.ref_name }}
+          files: |
+            dist/kiosk-mode.js
+          body: |
+            ${{ steps.build_changelog.outputs.changelog }}
