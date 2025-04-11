@@ -1,6 +1,6 @@
 {
   "name": "kiosk-mode",
-  "version": "7.0.0-beta.1",
+  "version": "7.0.0-beta",
   "description": "Hides the Home Assistant header and/or sidebar",
   "main": "kiosk-mode.js",
   "repository": "git@github.com:NemesisRE/kiosk-mode.git",
