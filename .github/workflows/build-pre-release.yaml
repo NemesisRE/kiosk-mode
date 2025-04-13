@@ -80,7 +80,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           prerelease: true
-          target_commitish: ${{ github.ref_name }}
+          target_commitish: ${{ github.sha }}
           files: |
             dist/kiosk-mode.js
           body: |
