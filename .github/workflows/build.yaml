@@ -4,11 +4,29 @@ on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-beta'
+      - 'v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-alpha'
+      - 'v[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-rc'
+      - 'v[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+'
 
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
+      - name: Check Tag
+        id: check-tag
+        run: |
+          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+-.+([0-9]+)?$ ]]; then
+            echo "CHANGELOG_MODE=COMMIT" >> $GITHUB_OUTPUT
+            echo "PRERELEASE=true" >> $GITHUB_OUTPUT
+            echo "TARGET_COMMITISH=${{ github.sha }}" >> $GITHUB_OUTPUT
+          else
+            echo "CHANGELOG_MODE=PR" >> $GITHUB_OUTPUT
+            echo "PRERELEASE=false" >> $GITHUB_OUTPUT
+            echo "TARGET_COMMITISH=${{ github.event.repository.default_branch }}" >> $GITHUB_OUTPUT
+          fi
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install pnpm
@@ -39,6 +57,7 @@ jobs:
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v5
         with:
+          mode: ${{ steps.check-tag.outputs.CHANGELOG_MODE }}
           configurationJson: |
             {
               "categories": [
@@ -78,6 +97,8 @@ jobs:
       - name: Create a release
         uses: softprops/action-gh-release@v2
         with:
+          prerelease: ${{ steps.check-tag.outputs.PRERELEASE }}
+          target_commitish: ${{ steps.check-tag.outputs.TARGET_COMMITISH }}
           files: |
             dist/kiosk-mode.js
           body: |
