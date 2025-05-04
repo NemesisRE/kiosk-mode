@@ -3,11 +3,14 @@ import {
 	ButtonItemTooltip,
 	Version
 } from '@types';
+import { getPromisableResult } from 'get-promisable-result';
 import {
 	TRUE,
 	MENU_REFERENCES,
 	ELEMENT,
 	OPTION,
+	MAX_ATTEMPTS,
+	RETRY_DELAY,
 	RESOURCE_WITH_SUFFIX_REGEXP
 } from '@constants';
 
@@ -58,13 +61,24 @@ export const getDisplayNoneRules = (...rules: string[]): Record<string, false> =
 };
 
 export const getMenuTranslations = async(ha: HomeAssistant): Promise<Record<string, string>> => {
-	const entries = Object.entries(MENU_REFERENCES);
-	const menuTranslationsEntries = entries.map((entry: [string, string]) => {
-		const [reference, prop] = entry;
-		const translated = ha.hass.localize(prop);
-		return [translated, reference];
-	});
-	return Object.fromEntries(menuTranslationsEntries);
+
+	const referencePaths = Object.entries(MENU_REFERENCES);
+
+	const translations = await getPromisableResult(
+		() => referencePaths.map((entry): [string, string] => {
+			const [key, translationPath] = entry;
+			return [ha.hass.localize(translationPath), key];
+		}),
+		(translationEntries: [string, string][]): boolean => {
+			return !translationEntries.find((entry) => !entry[0]);
+		},
+		{
+			retries: MAX_ATTEMPTS,
+			delay: RETRY_DELAY
+		}
+	);
+
+	return Object.fromEntries(translations);
 };
 
 export const addMenuItemsDataSelectors = (
