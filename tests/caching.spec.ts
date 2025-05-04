@@ -56,9 +56,11 @@ import { goToPageWithParams, goToPage } from './utils';
 
 	test(`Caching URL Parameter: ?${param}`, async ({ page }) => {
 
+		const masonryView = page.locator(SELECTORS.HUI_MASONRY_VIEW);
+
 		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+		await expect(masonryView).toBeVisible();
 
 		selectors.forEach(async (selector) => {
 			await expect(page.locator(selector)).toBeHidden();
@@ -66,7 +68,7 @@ import { goToPageWithParams, goToPage } from './utils';
 
 		await goToPage(page);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+		await expect(masonryView).toBeVisible();
 
 		selectors.forEach(async (selector) => {
 			await expect(page.locator(selector)).toBeHidden();
@@ -74,7 +76,7 @@ import { goToPageWithParams, goToPage } from './utils';
 
 		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+		await expect(masonryView).toBeVisible();
 
 		selectors.forEach(async (selector) => {
 			await expect(page.locator(selector)).toBeVisible();
@@ -105,22 +107,25 @@ import { goToPageWithParams, goToPage } from './utils';
 
 	test(`Caching URL Parameter: ?${param}`, async ({ page }) => {
 
+		const masonryView = page.locator(SELECTORS.HUI_MASONRY_VIEW);
+		const overflowButton = page.locator(SELECTORS.OVERFLOW_BUTTON);
+
 		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
-		await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
+		await expect(masonryView).toBeVisible();
+		await overflowButton.click();
 		await expect(page.locator(selector)).toBeHidden();
 
 		await goToPage(page);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
-		await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
+		await expect(masonryView).toBeVisible();
+		await overflowButton.click();
 		await expect(page.locator(selector)).toBeHidden();
 
 		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
-		await page.locator(SELECTORS.OVERFLOW_BUTTON).click();
+		await expect(masonryView).toBeVisible();
+		await overflowButton.click();
 		await expect(page.locator(selector)).toBeVisible();
 
 	});
@@ -266,9 +271,12 @@ import { goToPageWithParams, goToPage } from './utils';
 
 	test(`Caching URL Parameter: ?${param}`, async ({ page }) => {
 
+		const masonryView = page.locator(SELECTORS.HUI_MASONRY_VIEW);
+		const moreInfoDialog = page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO);
+
 		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+		await expect(masonryView).toBeVisible();
 
 		if (entitySelectorText) {
 			await page.locator(entitySelector, entitySelectorText).click();
@@ -276,7 +284,7 @@ import { goToPageWithParams, goToPage } from './utils';
 			await page.locator(entitySelector).click();
 		}
 
-		await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
+		await expect(moreInfoDialog).toBeVisible();
 		await page.waitForTimeout(500);
 
 		selectors.forEach(async (selector) => {
@@ -285,7 +293,7 @@ import { goToPageWithParams, goToPage } from './utils';
 
 		await goToPage(page);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+		await expect(masonryView).toBeVisible();
 
 		if (entitySelectorText) {
 			await page.locator(entitySelector, entitySelectorText).click();
@@ -293,7 +301,7 @@ import { goToPageWithParams, goToPage } from './utils';
 			await page.locator(entitySelector).click();
 		}
 
-		await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
+		await expect(moreInfoDialog).toBeVisible();
 		await page.waitForTimeout(500);
 
 		selectors.forEach(async (selector) => {
@@ -302,7 +310,7 @@ import { goToPageWithParams, goToPage } from './utils';
 
 		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
-		await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+		await expect(masonryView).toBeVisible();
 
 		if (entitySelectorText) {
 			await page.locator(entitySelector, entitySelectorText).click();
@@ -310,7 +318,7 @@ import { goToPageWithParams, goToPage } from './utils';
 			await page.locator(entitySelector).click();
 		}
 
-		await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
+		await expect(moreInfoDialog).toBeVisible();
 		await page.waitForTimeout(500);
 
 		selectors.forEach(async (selector) => {
@@ -323,20 +331,23 @@ import { goToPageWithParams, goToPage } from './utils';
 
 test('Caching URL Parameter: ?block_overflow', async ({ page }) => {
 
+	const masonryView = page.locator(SELECTORS.HUI_MASONRY_VIEW);
+	const overflowButton = page.locator(SELECTORS.OVERFLOW_BUTTON);
+
 	await goToPageWithParams(page, URL_PARAMS.BLOCK_OVERFLOW, URL_PARAMS.CACHE);
 
-	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
-	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');
+	await expect(masonryView).toBeVisible();
+	await expect(overflowButton).toHaveCSS('pointer-events', 'none');
 
 	await goToPage(page);
 
-	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
-	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toHaveCSS('pointer-events', 'none');
+	await expect(masonryView).toBeVisible();
+	await expect(overflowButton).toHaveCSS('pointer-events', 'none');
 
 	await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
-	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
-	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).not.toHaveCSS('pointer-events', 'none');
+	await expect(masonryView).toBeVisible();
+	await expect(overflowButton).not.toHaveCSS('pointer-events', 'none');
 
 });
 
