@@ -10,10 +10,10 @@ export const STYLES = {
 		},
 		'.header': false
 	},
-	ACCOUNT: getDisplayNoneRules('.profile'),
-	NOTIFICATIONS: getDisplayNoneRules('.notifications-container'),
+	ACCOUNT: getDisplayNoneRules('ha-md-list-item.user'),
+	NOTIFICATIONS: getDisplayNoneRules('ha-md-list-item.notifications'),
 	DIVIDER: getDisplayNoneRules('.divider'),
-	PAPER_LISTBOX: (
+	SIDEBAR_ITEMS_CONTAINER: (
 		hideMenuButton: boolean,
 		hideNotifications: boolean,
 		hideAccount: boolean
@@ -37,10 +37,10 @@ export const STYLES = {
 			sizeMinimized -= menuButtonHeight;
 		}
 		return {
-			':host(:not([expanded])) paper-listbox': {
+			':host(:not([expanded])) ha-md-list.ha-scrollbar': {
 				height: `calc(100% - var(--header-height) - ${sizeMinimized}px - env(safe-area-inset-bottom)) !important`
 			},
-			':host([expanded]) paper-listbox': {
+			':host([expanded]) ha-md-list.ha-scrollbar': {
 				height: `calc(100% - var(--header-height) - ${sizeExpanded}px - env(safe-area-inset-bottom)) !important`
 			}
 		};
@@ -85,11 +85,11 @@ export const STYLES = {
 		}
 	},
 	SEARCH: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-icon-button[data-selector="${MENU.SEARCH}"]`,
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-tooltip[data-selector="${MENU.SEARCH}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.SEARCH}"]`
 	),
 	ASSISTANT: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-icon-button[data-selector="${MENU.ASSIST}"]`,
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-tooltip[data-selector="${MENU.ASSIST}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ASSIST}"]`
 	),
 	REFRESH: getDisplayNoneRules(

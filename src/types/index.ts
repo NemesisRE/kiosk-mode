@@ -59,11 +59,14 @@ export class HomeAssistant extends HTMLElement {
         config: {
             version: string;
         };
-        language: string;
-        resources: Record<string, Record<string, string>>;
+        localize: (path: string) => string;
         panelUrl: string;
         states: Record<string, EntityState>;
     };
+}
+
+export class ButtonItemTooltip extends HTMLElement {
+    content: string;
 }
 
 export class Lovelace extends HTMLElement {

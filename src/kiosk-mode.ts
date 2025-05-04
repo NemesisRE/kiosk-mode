@@ -11,6 +11,7 @@ import {
 	KioskModeRunner,
 	HomeAssistant,
 	User,
+	ButtonItemTooltip,
 	Lovelace,
 	KioskConfig,
 	ConditionalKioskConfig,
@@ -43,6 +44,7 @@ import {
 	cached,
 	getMenuTranslations,
 	addMenuItemsDataSelectors,
+	addDialogsMenuItemsDataSelectors,
 	parseVersion,
 	resetCache
 } from '@utilities';
@@ -191,17 +193,7 @@ class KioskMode implements KioskModeRunner {
 			this.options[option] = false;
 		});
 
-		// Get menu translations
-		// Store Home Assistant Legacy variable (Home Assistant < 2025.3.x)
-		const isLegacyHomeAssistant = (
-			this.version?.[0] < 2025 ||
-			(
-				this.version?.[0] === 2025 &&
-				this.version?.[1] < 3
-			)
-		);
-
-		getMenuTranslations(this.ha, isLegacyHomeAssistant)
+		getMenuTranslations(this.ha)
 			.then((menuTranslations: Record<string, string>) => {
 				this.menuTranslations = menuTranslations;
 				this.updateMenuItemsLabels();
@@ -344,7 +336,7 @@ class KioskMode implements KioskModeRunner {
 					this.options[OPTION.HIDE_NOTIFICATIONS] ||
 					this.options[OPTION.HIDE_ACCOUNT]
 				)
-					&& STYLES.PAPER_LISTBOX(
+					&& STYLES.SIDEBAR_ITEMS_CONTAINER(
 						this.options[OPTION.HIDE_MENU_BUTTON],
 						this.options[OPTION.HIDE_NOTIFICATIONS],
 						this.options[OPTION.HIDE_ACCOUNT],
@@ -438,7 +430,7 @@ class KioskMode implements KioskModeRunner {
 			.selector.query(`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`)
 			.all
 			.then((menuItems: NodeListOf<HTMLElement>) => {
-				addMenuItemsDataSelectors(menuItems, this.menuTranslations);
+				addDialogsMenuItemsDataSelectors(menuItems, this.menuTranslations);
 			});
 
 		const dialog = await this.HAMoreInfoDialogElements.HA_DIALOG.element;
@@ -672,9 +664,9 @@ class KioskMode implements KioskModeRunner {
 
 		if (!this.menuTranslations) return;
 
-		this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`).all
-			.then((menuItems: NodeListOf<HTMLElement>) => {
-				addMenuItemsDataSelectors(menuItems, this.menuTranslations);
+		this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.TOOLTIP}`).all
+			.then((buttonItemsTooltips: NodeListOf<ButtonItemTooltip>) => {
+				addMenuItemsDataSelectors(buttonItemsTooltips, this.menuTranslations);
 			});
 
 		if (this.user.is_admin) {
