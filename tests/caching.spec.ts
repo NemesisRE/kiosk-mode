@@ -61,29 +61,26 @@ import { goToPageWithParams, goToPage } from './utils';
 		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
-		selectors.forEach(async (selector) => {
+		for (const selector of selectors) {
 			await expect(page.locator(selector)).toBeHidden();
-		});
+		}
 
 		await goToPage(page);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
-		selectors.forEach(async (selector) => {
+		for (const selector of selectors) {
 			await expect(page.locator(selector)).toBeHidden();
-		});
+		}
 
 		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
-		selectors.forEach(async (selector) => {
+		for (const selector of selectors) {
 			await expect(page.locator(selector)).toBeVisible();
-		});
+		}
 
 	});
 
@@ -116,7 +113,6 @@ import { goToPageWithParams, goToPage } from './utils';
 		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
 		await overflowButton.click();
 
@@ -125,7 +121,6 @@ import { goToPageWithParams, goToPage } from './utils';
 		await goToPage(page);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
 		await overflowButton.click();
 
@@ -134,7 +129,6 @@ import { goToPageWithParams, goToPage } from './utils';
 		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
 		await overflowButton.click();
 
@@ -289,7 +283,6 @@ import { goToPageWithParams, goToPage } from './utils';
 		await goToPageWithParams(page, param, URL_PARAMS.CACHE);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
 		if (entitySelectorText) {
 			await page.locator(entitySelector, entitySelectorText).click();
@@ -298,16 +291,14 @@ import { goToPageWithParams, goToPage } from './utils';
 		}
 
 		await expect(moreInfoDialog).toBeVisible();
-		await page.waitForTimeout(500);
 
-		selectors.forEach(async (selector) => {
+		for (const selector of selectors) {
 			await expect(page.locator(selector)).toBeHidden();
-		});
+		}
 
 		await goToPage(page);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
 		if (entitySelectorText) {
 			await page.locator(entitySelector, entitySelectorText).click();
@@ -316,16 +307,14 @@ import { goToPageWithParams, goToPage } from './utils';
 		}
 
 		await expect(moreInfoDialog).toBeVisible();
-		await page.waitForTimeout(500);
 
-		selectors.forEach(async (selector) => {
+		for (const selector of selectors) {
 			await expect(page.locator(selector)).toBeHidden();
-		});
+		}
 
 		await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
 
 		await expect(masonryView).toBeVisible();
-		await page.waitForTimeout(500);
 
 		if (entitySelectorText) {
 			await page.locator(entitySelector, entitySelectorText).click();
@@ -334,11 +323,10 @@ import { goToPageWithParams, goToPage } from './utils';
 		}
 
 		await expect(moreInfoDialog).toBeVisible();
-		await page.waitForTimeout(500);
 
-		selectors.forEach(async (selector) => {
+		for (const selector of selectors) {
 			await expect(page.locator(selector)).toBeVisible();
-		});
+		}
 
 	});
 
