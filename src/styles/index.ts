@@ -37,6 +37,11 @@ export const STYLES = {
 			sizeMinimized -= menuButtonHeight;
 		}
 		return {
+			':host([expanded]) .title': {
+				marginLeft: hideMenuButton
+					? '19px'
+					: '3px'
+			},
 			':host(:not([expanded])) ha-md-list.ha-scrollbar': {
 				height: `calc(100% - var(--header-height) - ${sizeMinimized}px - env(safe-area-inset-bottom)) !important`
 			},
