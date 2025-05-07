@@ -40,6 +40,7 @@ export const turnBooleanState = async (
 			}
 		);
 	}, { entity, state });
+	await page.waitForTimeout(100);
 };
 
 export const getUrlWithParam = (...params: string[]) => `${BASE_URL}?${params.join('&')}`;

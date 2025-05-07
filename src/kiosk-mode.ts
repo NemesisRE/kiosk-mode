@@ -228,7 +228,7 @@ class KioskMode implements KioskModeRunner {
 		const haDialog = dialog?.shadowRoot.querySelector<MoreInfoDialog>(ELEMENT.HA_DIALOG);
 		if (
 			!haDialog ||
-			!haDialog.__open
+			!haDialog.open
 		) {
 			return;
 		}

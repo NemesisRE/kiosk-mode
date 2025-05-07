@@ -88,7 +88,7 @@ export interface SubscriberTemplate {
 }
 
 export interface MoreInfoDialog extends HTMLElement {
-    __open: boolean;
+    open: boolean;
 }
 
 declare global {
