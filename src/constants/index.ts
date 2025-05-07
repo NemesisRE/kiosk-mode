@@ -73,8 +73,8 @@ export enum MENU {
 }
 
 export const MENU_REFERENCES = Object.freeze({
-	[MENU.SEARCH]: `${MENU_PREFIX}.search`,
-	[MENU.ASSIST]: `${MENU_PREFIX}.assist`,
+	[MENU.SEARCH]: `${MENU_PREFIX}.search_entities`,
+	[MENU.ASSIST]: `${MENU_PREFIX}.assist_tooltip`,
 	[MENU.REFRESH]: `${COMMON_PREFIX}.refresh`,
 	[MENU.UNUSED_ENTITIES]: `${LOVELACE_PREFIX}.unused_entities.title`,
 	[MENU.RELOAD_RESOURCES]: `${MENU_PREFIX}.reload_resources`,
@@ -84,20 +84,15 @@ export const MENU_REFERENCES = Object.freeze({
 	[MENU.DIALOG_DISMISS]: `${COMMON_PREFIX}.close`
 });
 
-// This constant is only to support Home Assistant < 2025.3.x
-export const MENU_REFERENCES_LEGACY = Object.freeze({
-	...MENU_REFERENCES,
-	[MENU.DIALOG_DISMISS]: `${DIALOGS_PREFIX}.dismiss`
-});
-
 export enum ELEMENT {
     HOME_ASSISTANT = 'home-assistant',
     HA_PANEL_LOVELACE = 'ha-panel-lovelace',
     HUI_VIEW = 'hui-view',
     MENU_ITEM = 'ha-icon-button',
+    TOOLTIP = 'ha-tooltip',
     MENU_ITEM_ICON = 'mwc-icon-button',
     BUTTON_MENU = 'ha-button-menu',
-    OVERLAY_MENU_ITEM = 'mwc-list-item',
+    OVERLAY_MENU_ITEM = 'ha-list-item',
     TOOLBAR = '.toolbar',
     ACTION_ITEMS = '.action-items',
     HA_MORE_INFO_DIALOG = 'ha-more-info-dialog',
@@ -134,6 +129,8 @@ export enum ELEMENT {
     HA_DIALOG_LIGHT_SETTINGS = 'ha-more-info-control-select-container',
     HA_DIALOG_ATTRIBUTES = 'ha-attributes'
 }
+
+export const RESOURCE_WITH_SUFFIX_REGEXP = /^(.*?)( \([A-Z]\))?$/;
 
 export const TRUE = 'true';
 export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;

@@ -242,6 +242,9 @@ test.describe('Option: block_context_menu', () => {
 
 	test('Test contextmenu event listener', async ({ context, page }) => {
 
+		const header = page.locator(SELECTORS.HEADER);
+		const sidebar = page.locator(SELECTORS.HA_SIDEBAR);
+
 		await context.addInitScript({
 			path: path.join(__dirname, '..', './node_modules/sinon/pkg/sinon.js'),
 		});
@@ -253,14 +256,14 @@ test.describe('Option: block_context_menu', () => {
 
 		await goToPage(page);
 
-		await expect(page.locator(SELECTORS.HEADER)).toBeVisible();
-		await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
+		await expect(header).toBeVisible();
+		await expect(sidebar).toBeVisible();
 
 		let executed = await page.evaluate(() => window['__listener'].calledOnce);
 
 		await expect(executed).toBe(false);
 
-		await page.locator(SELECTORS.HEADER).click({
+		await header.click({
 			button: 'right'
 		});
 
@@ -270,7 +273,7 @@ test.describe('Option: block_context_menu', () => {
 
 		await turnBooleanState(page, ENTITIES.BLOCK_CONTEXT_MENU, true);
 
-		await page.locator(SELECTORS.HEADER).click({
+		await header.click({
 			button: 'right'
 		});
 
@@ -280,7 +283,7 @@ test.describe('Option: block_context_menu', () => {
 
 		await turnBooleanState(page, ENTITIES.BLOCK_CONTEXT_MENU, false);
 
-		await page.locator(SELECTORS.HEADER).click({
+		await header.click({
 			button: 'right'
 		});
 

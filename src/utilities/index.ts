@@ -1,13 +1,17 @@
+import {
+	HomeAssistant,
+	ButtonItemTooltip,
+	Version
+} from '@types';
 import { getPromisableResult } from 'get-promisable-result';
-import { HomeAssistant, Version } from '@types';
 import {
 	TRUE,
 	MENU_REFERENCES,
-	MENU_REFERENCES_LEGACY,
+	ELEMENT,
+	OPTION,
 	MAX_ATTEMPTS,
 	RETRY_DELAY,
-	ELEMENT,
-	OPTION
+	RESOURCE_WITH_SUFFIX_REGEXP
 } from '@constants';
 
 // Get cache key
@@ -56,60 +60,49 @@ export const getDisplayNoneRules = (...rules: string[]): Record<string, false> =
 	);
 };
 
-const getHAResources = (
-	ha: HomeAssistant,
-	isLegacyHomeAssistant: boolean
-): Promise<Record<string, Record<string, string>>> => {
+export const getMenuTranslations = async(ha: HomeAssistant): Promise<Record<string, string>> => {
 
-	const referencePaths = Object.values(
-		isLegacyHomeAssistant
-			? MENU_REFERENCES_LEGACY
-			: MENU_REFERENCES
-	);
+	const referencePaths = Object.entries(MENU_REFERENCES);
 
-	return getPromisableResult(
-		() => ha?.hass?.resources,
-		(resources: Record<string, Record<string, string>>): boolean => {
-			const language = ha.hass.language;
-			const anyEmptyResource = referencePaths.find((path: string) => {
-				return !resources?.[language][path];
-			});
-			if (!anyEmptyResource) {
-				return true;
-			}
-			return false;
+	const translations = await getPromisableResult(
+		() => referencePaths.map((entry): [string, string] => {
+			const [key, translationPath] = entry;
+			return [ha.hass.localize(translationPath), key];
+		}),
+		(translationEntries: [string, string][]): boolean => {
+			return !translationEntries.find((entry) => !entry[0]);
 		},
 		{
 			retries: MAX_ATTEMPTS,
 			delay: RETRY_DELAY
 		}
 	);
-};
 
-export const getMenuTranslations = async(
-	ha: HomeAssistant,
-	isLegacyHomeAssistant: boolean
-): Promise<Record<string, string>> => {
-	const resources = await getHAResources(ha, isLegacyHomeAssistant);
-	const language = ha.hass.language;
-	const resourcesTranslated = resources[language];
-
-	const entries = Object.entries(
-		isLegacyHomeAssistant
-			? MENU_REFERENCES_LEGACY
-			: MENU_REFERENCES
-	);
-	const menuTranslationsEntries = entries.map((entry: [string, string]) => {
-		const [reference, prop] = entry;
-		return [resourcesTranslated[prop], reference];
-	});
-	return Object.fromEntries(menuTranslationsEntries);
+	return Object.fromEntries(translations);
 };
 
 export const addMenuItemsDataSelectors = (
-	menuItems: NodeListOf<HTMLElement>,
+	buttonItemsTooltips: NodeListOf<ButtonItemTooltip>,
 	translations: Record<string, string>
 ): void => {
+	buttonItemsTooltips.forEach((buttonItemTooltip: ButtonItemTooltip): void => {
+		if (
+			buttonItemTooltip &&
+			buttonItemTooltip.dataset &&
+			!buttonItemTooltip.dataset.selector
+		) {
+			const translation = buttonItemTooltip
+				.content
+				.replace(RESOURCE_WITH_SUFFIX_REGEXP, '$1');
+			buttonItemTooltip.dataset.selector = translations[translation];
+		}
+	});
+};
+
+export const addDialogsMenuItemsDataSelectors = (
+	menuItems: NodeListOf<HTMLElement>,
+	translations: Record<string, string>
+) => {
 	menuItems.forEach((menuItem: HTMLElement): void => {
 		if (
 			menuItem &&

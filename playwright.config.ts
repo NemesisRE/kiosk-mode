@@ -44,6 +44,8 @@ export default defineConfig({
 	},
 	snapshotDir: 'test-snapshots',
 	snapshotPathTemplate: '{snapshotDir}/{testFilePath}/{projectName}/{arg}{ext}',
+	// Update snapshots
+    // updateSnapshots: 'all',
 	/* Configure projects for major browsers */
 	projects: [
 		{
