@@ -1,5 +1,6 @@
 {
   "name": "Kiosk Mode",
   "filename": "kiosk-mode.js",
-  "render_readme": true
+  "render_readme": true,
+  "homeassistant": "2025.5.0"
 }
