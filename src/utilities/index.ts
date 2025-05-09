@@ -93,7 +93,8 @@ export const addMenuItemsDataSelectors = (
 		) {
 			const translation = buttonItemTooltip
 				.content
-				.replace(RESOURCE_WITH_SUFFIX_REGEXP, '$1');
+				.replace(RESOURCE_WITH_SUFFIX_REGEXP, '$1')
+				.trim();
 			buttonItemTooltip.dataset.selector = translations[translation];
 		}
 	});
