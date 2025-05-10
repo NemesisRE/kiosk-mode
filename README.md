@@ -17,22 +17,31 @@ Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assi
 
 >If you want to learn how to install and set some basic configurations in `kiosk-mode` through a video, check the [next one](https://youtu.be/G3lT4zgjER8) from [@smarthomejunkie](https://github.com/smarthomejunkie).
 
+> [!IMPORTANT]  
+> If you have `Home Assistant` `2025.5.0` or greater installed, the minimum compatible version that you can install is `Kiosk Mode` `v7.0.0`. If you are in a lower version of `Home Assistant`, the latest compatible version that you can install is `v6.7.0`.
+
 <details>
   <summary><b>Installation through HACS</b></summary>
-<br>
 
-1. In the "Frontend" section of [HACS](https://github.com/hacs/integration) hit the plus icon in the bottom right
-2. Search for `Kiosk Mode` and install it
-3. If using YAML mode or if HACS doesn't automatically add it, you'll need to add the resource manually:
+#### Go to the HACS plugin's page
+
+If you have not disabled the [My Home Assistant](https://www.home-assistant.io/integrations/my/) integration, just click on [this link](https://my.home-assistant.io/redirect/hacs_repository/?owner=NemesisRE&repository=kiosk-mode&category=plugin) to go to the plugin's page, otherwise follow the next steps:
+
+1. Go to `HACS` dashboard
+2. Search for `Kiosk Mode` and click on it
+
+#### Install the plugin
+
+1. On the plugin page, click on the `Download` yellow button in the bottom-right corner
+2. Click on `Download` in the more-info dialog
+3. If you are using `YAML` mode or if `HACS` doesn't automatically add it, you'll need to add the resource manually:
 
 Go to your [configuration.yaml](https://www.home-assistant.io/docs/configuration/) file and add the url of the plugin as an [extra_module_url](https://www.home-assistant.io/integrations/frontend/#extra_module_url):
 
 ```yaml
-# You should update the version number at the end of the url
-# after every update to avoid the old version being cached by Home Assistant
 frontend:
   extra_module_url:
-    - /hacsfiles/kiosk-mode/kiosk-mode.js?v1.0.0
+    - /hacsfiles/kiosk-mode/kiosk-mode.js
 ```
 
 <br>
@@ -62,11 +71,13 @@ Go to your [configuration.yaml](https://www.home-assistant.io/docs/configuration
 # after every update to avoid the old version being cached by Home Assistant
 frontend:
   extra_module_url:
-    - /hacsfiles/kiosk-mode/kiosk-mode.js?v1.0.0
+    - /local/kiosk-mode.js?v1.0.0
 ```
 
 <br>
 </details>
+
+<br/>
 
 *If you have trouble installing please [read this guide](https://github.com/thomasloven/hass-config/wiki/Lovelace-Plugins)*
 
