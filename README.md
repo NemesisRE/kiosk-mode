@@ -7,6 +7,8 @@
 [![release](https://img.shields.io/github/v/release/NemesisRE/kiosk-mode.svg)](https://github.com/NemesisRE/kiosk-mode/releases)
 [![downloads](https://img.shields.io/github/downloads/NemesisRE/kiosk-mode/total)](https://github.com/NemesisRE/kiosk-mode/releases)
 
+[![Home Assistant Nightly Beta Tests](https://github.com/NemesisRE/kiosk-mode/actions/workflows/ha-beta-tests.yaml/badge.svg)](https://github.com/NemesisRE/kiosk-mode/actions/workflows/ha-beta-tests.yaml)
+
 Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assistant.io/) lovelace dashboards.
 
 ![image](example.png)
