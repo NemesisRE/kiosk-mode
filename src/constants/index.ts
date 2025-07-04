@@ -16,6 +16,7 @@ export enum OPTION {
     HIDE_UNUSED_ENTITIES = 'hide_unused_entities',
     HIDE_RELOAD_RESOURCES = 'hide_reload_resources',
     HIDE_EDIT_DASHBOARD = 'hide_edit_dashboard',
+    HIDE_DIALOG_HEADER_BREADCRUMB_NAVIGATION = 'hide_dialog_header_breadcrumb_navigation',
     HIDE_DIALOG_HEADER_ACTION_ITEMS = 'hide_dialog_header_action_items',
     HIDE_DIALOG_HEADER_HISTORY = 'hide_dialog_header_history',
     HIDE_DIALOG_HEADER_SETTINGS = 'hide_dialog_header_settings',

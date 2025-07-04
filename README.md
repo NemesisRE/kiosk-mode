@@ -105,57 +105,61 @@ views:
 
 ## Config Options
 
-| Config Option                            | Type    | Default | Description |
-|:-----------------------------------------|:--------|:--------|:------------|
-|`kiosk`                                   | Boolean | false   | Hides both the header and sidebar. |
-|`hide_header`<sup>1</sup>                 | Boolean | false   | Hides only the header. |
-|`hide_sidebar`                            | Boolean | false   | Hides only the sidebar. |
-|`hide_menubutton`<sup>1</sup>             | Boolean | false   | Hides only the sidebar menu icon. |
-|`hide_notifications`                      | Boolean | false   | Hide the notifications entry-point. |
-|`hide_account`                            | Boolean | false   | Hides the account icon. |
-|`hide_search`                             | Boolean | false   | Hides the search icon. |
-|`hide_assistant`                          | Boolean | false   | Hides the assistant icon. |
-|`hide_overflow`                           | Boolean | false   | Hides the top right overflow menu. |
-|`block_overflow`                          | Boolean | false   | Blocks the top right overflow menu mouse interactions. |
-|`hide_refresh`                            | Boolean | false   | Hides the "Refresh" button inside the top right overflow menu in lovelace yaml mode. |
-|`hide_unused_entities`                    | Boolean | false   | Hides the "Unused entities" button inside the top right overflow menu in lovelace yaml mode. |
-|`hide_reload_resources`                   | Boolean | false   | Hides the "Reload resources" button inside the top right overflow menu in lovelace yaml mode. |
-|`hide_edit_dashboard`                     | Boolean | false   | Hides the "Edit dashboard" button inside the top right overflow menu. |
-|`block_mouse`                             | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
-|`block_context_menu`                      | Boolean | false   | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices). |
-|`hide_dialog_header_history`              | Boolean | false   | Hides the "History" icon in the header of more-info dialogs. |
-|`hide_dialog_header_settings`<sup>2</sup> | Boolean | false   | Hides the "Settings" icon in the header of more-info dialogs. |
-|`hide_dialog_header_overflow`<sup>2</sup> | Boolean | false   | Hides the top right overflow menu in the header of more-info dialogs. |
-|`hide_dialog_header_action_items`         | Boolean | false   | Hides all the action items from the header of more-info dialogs. |
-|`hide_dialog_history`                     | Boolean | false   | Hides the "History" section in the more-info dialogs. |
-|`hide_dialog_history_show_more`           | Boolean | false   | Hides the "Show more" link in the "History" section of more-info dialogs.  |
-|`hide_dialog_logbook`                     | Boolean | false   | Hides the "Logbook" section in the more-info dialogs. |
-|`hide_dialog_logbook_show_more`           | Boolean | false   | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
-|`hide_dialog_attributes`                  | Boolean | false   | Hides the "Attributes" section in the more-info dialogs. |
-|`hide_dialog_media_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of media-player entities. |
-|`hide_dialog_update_actions`              | Boolean | false   | Hides the actions block in the more-info dialogs of update entities. |
-|`hide_dialog_camera_actions`              | Boolean | false   | Hides the actions block in the more-info dialogs of camera entities. |
-|`hide_dialog_timer_actions`               | Boolean | false   | Hides the actions block in the more-info dialogs of timer entities. |
-|`hide_dialog_climate_actions`             | Boolean | false   | Hides all the actions in the more-info dialogs of climate entities. |
-|`hide_dialog_climate_temperature_actions` | Boolean | false   | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
-|`hide_dialog_climate_settings_actions`    | Boolean | false   | Hides the mode and preset actions in the more-info dialogs of climate entities. |
-|`hide_dialog_light_actions`               | Boolean | false   | Hides all the actions in the more-info dialogs of light entities. |
-|`hide_dialog_light_control_actions`       | Boolean | false   | Hides the control actions in the more-info dialogs of light entities. |
-|`hide_dialog_light_color_actions`         | Boolean | false   | Hides the favorite colors actions in the more-info dialogs of light entities. |
-|`hide_dialog_light_settings_actions`      | Boolean | false   | Hides the settings actions in the more-info dialogs of light entities. |
-|`ignore_entity_settings`<sup>3</sup>      | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
-|`ignore_mobile_settings`<sup>4</sup>      | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
-|`ignore_disable_km`<sup>3</sup>           | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
+| Config Option                              | Type    | Default | Description |
+|:-------------------------------------------|:--------|:--------|:------------|
+|`kiosk`                                     | Boolean | false   | Hides both the header and sidebar. |
+|`hide_header`<sup>1</sup>                   | Boolean | false   | Hides only the header. |
+|`hide_sidebar`                              | Boolean | false   | Hides only the sidebar. |
+|`hide_menubutton`<sup>1</sup>               | Boolean | false   | Hides only the sidebar menu icon. |
+|`hide_notifications`                        | Boolean | false   | Hide the notifications entry-point. |
+|`hide_account`                              | Boolean | false   | Hides the account icon. |
+|`hide_search`                               | Boolean | false   | Hides the search icon. |
+|`hide_assistant`                            | Boolean | false   | Hides the assistant icon. |
+|`hide_overflow`                             | Boolean | false   | Hides the top right overflow menu. |
+|`block_overflow`                            | Boolean | false   | Blocks the top right overflow menu mouse interactions. |
+|`hide_refresh`                              | Boolean | false   | Hides the "Refresh" button inside the top right overflow menu in lovelace yaml mode. |
+|`hide_unused_entities`                      | Boolean | false   | Hides the "Unused entities" button inside the top right overflow menu in lovelace yaml mode. |
+|`hide_reload_resources`                     | Boolean | false   | Hides the "Reload resources" button inside the top right overflow menu in lovelace yaml mode. |
+|`hide_edit_dashboard`                       | Boolean | false   | Hides the "Edit dashboard" button inside the top right overflow menu. |
+|`block_mouse`                               | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
+|`block_context_menu`                        | Boolean | false   | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices). |
+|`hide_dialog_header_breadcrumb_navigation`<sup>2</sup>| Boolean | false   | Hides the breadcrumb navigation over the title of more-info dialogs |
+|`hide_dialog_header_history`                | Boolean | false   | Hides the "History" icon in the header of more-info dialogs. |
+|`hide_dialog_header_settings`<sup>3</sup>   | Boolean | false   | Hides the "Settings" icon in the header of more-info dialogs. |
+|`hide_dialog_header_overflow`<sup>3</sup>   | Boolean | false   | Hides the top right overflow menu in the header of more-info dialogs. |
+|`hide_dialog_header_action_items`           | Boolean | false   | Hides all the action items from the header of more-info dialogs. |
+|`hide_dialog_history`                       | Boolean | false   | Hides the "History" section in the more-info dialogs. |
+|`hide_dialog_history_show_more`             | Boolean | false   | Hides the "Show more" link in the "History" section of more-info dialogs.  |
+|`hide_dialog_logbook`                       | Boolean | false   | Hides the "Logbook" section in the more-info dialogs. |
+|`hide_dialog_logbook_show_more`             | Boolean | false   | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
+|`hide_dialog_attributes`                    | Boolean | false   | Hides the "Attributes" section in the more-info dialogs. |
+|`hide_dialog_media_actions`                 | Boolean | false   | Hides the actions block in the more-info dialogs of media-player entities. |
+|`hide_dialog_update_actions`                | Boolean | false   | Hides the actions block in the more-info dialogs of update entities. |
+|`hide_dialog_camera_actions`                | Boolean | false   | Hides the actions block in the more-info dialogs of camera entities. |
+|`hide_dialog_timer_actions`                 | Boolean | false   | Hides the actions block in the more-info dialogs of timer entities. |
+|`hide_dialog_climate_actions`               | Boolean | false   | Hides all the actions in the more-info dialogs of climate entities. |
+|`hide_dialog_climate_temperature_actions`   | Boolean | false   | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
+|`hide_dialog_climate_settings_actions`      | Boolean | false   | Hides the mode and preset actions in the more-info dialogs of climate entities. |
+|`hide_dialog_light_actions`                 | Boolean | false   | Hides all the actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_control_actions`         | Boolean | false   | Hides the control actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_color_actions`           | Boolean | false   | Hides the favorite colors actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_settings_actions`        | Boolean | false   | Hides the settings actions in the more-info dialogs of light entities. |
+|`ignore_entity_settings`<sup>4</sup>        | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
+|`ignore_mobile_settings`<sup>5</sup>        | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
+|`ignore_disable_km`<sup>4</sup>             | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
 
 <br/>
 
 ><sup>1</sup> Take into account that swipe gesture to open the sidebar was removed from Home Assistant in version 2023.4, if you hide the header or the sidebar menu icon, you will not have any way to access the sidebar natively in a browser.
 >
-><sup>2</sup> These elements are not visible by default if the account is not an admin account.
+><sup>2</sup> These elements are not clickable if the account is not an admin account.
 >
-><sup>3</sup> These options only work if they are placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings), [user_settings](#user_settings) or [mobile_settings](#mobile_settings). They will not have any effect if they are placed inside [entity_settings](#entity_settings)
 >
-><sup>4</sup> This option only works if it is placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings) or [user_settings](#user_settings). It will not have any effect if it is placed inside [mobile_settings](#mobile_settings) or [entity_settings](#entity_settings)
+><sup>3</sup> These elements are not visible by default if the account is not an admin account.
+>
+><sup>4</sup> These options only work if they are placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings), [user_settings](#user_settings) or [mobile_settings](#mobile_settings). They will not have any effect if they are placed inside [entity_settings](#entity_settings)
+>
+><sup>5</sup> This option only works if it is placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings) or [user_settings](#user_settings). It will not have any effect if it is placed inside [mobile_settings](#mobile_settings) or [entity_settings](#entity_settings)
 
 <br/>
 
@@ -200,13 +204,14 @@ views:
 <br>*More info dialog (media entity)*
 <br>
 
-| Options                           | Hides |
-|:----------------------------------|:------|
-| `hide_dialog_header_action_items` | 13    |
-| `hide_dialog_header_history`      | 14    |
-| `hide_dialog_header_settings`     | 15    |
-| `hide_dialog_header_overflow`     | 16    |
-| `hide_dialog_media_actions`       | 17    |
+| Options                                    | Hides |
+|:-------------------------------------------|:------|
+| `hide_dialog_header_breadcrumb_navigation` | 13    |
+| `hide_dialog_header_action_items`          | 14    |
+| `hide_dialog_header_history`               | 15    |
+| `hide_dialog_header_settings`              | 16    |
+| `hide_dialog_header_overflow`              | 17    |
+| `hide_dialog_media_actions`                | 18    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-climate-entity.png)
@@ -215,9 +220,9 @@ views:
 
 | Options                                   | Hides |
 |:------------------------------------------|:------|
-| `hide_dialog_climate_actions`             | 18    |
-| `hide_dialog_climate_temperature_actions` | 19    |
-| `hide_dialog_climate_settings_actions`    | 20    |
+| `hide_dialog_climate_actions`             | 19    |
+| `hide_dialog_climate_temperature_actions` | 20    |
+| `hide_dialog_climate_settings_actions`    | 21    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-light-entity.png)
@@ -226,10 +231,10 @@ views:
 
 | Options                                   | Hides |
 |:------------------------------------------|:------|
-| `hide_dialog_light_actions`               | 21    |
-| `hide_dialog_light_control_actions`       | 22    |
-| `hide_dialog_light_color_actions`         | 23    |
-| `hide_dialog_light_settings_actions`      | 24    |
+| `hide_dialog_light_actions`               | 22    |
+| `hide_dialog_light_control_actions`       | 23    |
+| `hide_dialog_light_color_actions`         | 24    |
+| `hide_dialog_light_settings_actions`      | 25    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-update-entity.png)
@@ -238,8 +243,8 @@ views:
 
 | Options                      | Hides |
 |:-----------------------------|:------|
-| `hide_dialog_update_actions` | 25    |
-| `hide_dialog_timer_actions`  | 25    |
+| `hide_dialog_update_actions` | 26    |
+| `hide_dialog_timer_actions`  | 26    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-history-logbook-attributes.png)
@@ -248,11 +253,11 @@ views:
 
 | Options                         | Hides |
 |:--------------------------------|:------|
-| `hide_dialog_history`           | 26    |
-| `hide_dialog_logbook`           | 27    |
-| `hide_dialog_attributes`        | 28    |
-| `hide_dialog_history_show_more` | 29    |
-| `hide_dialog_logbook_show_more` | 30    |
+| `hide_dialog_history`           | 27    |
+| `hide_dialog_logbook`           | 28    |
+| `hide_dialog_attributes`        | 29    |
+| `hide_dialog_history_show_more` | 30    |
+| `hide_dialog_logbook_show_more` | 31    |
 
 <br>
 
@@ -377,6 +382,7 @@ The query string options are:
 * `?hide_edit_dashboard` to hide the "Edit dashboard" button inside the top right menu
 * `?block_mouse` to block completely the mouse
 * `?block_context_menu` to prevent opening a right-click context menu
+* `?hide_dialog_header_breadcrumb_navigation` to hide the breadcrumb navigation over the title of more-info dialogs
 * `?hide_dialog_header_history` to hide the "History" icon in the header of more-info dialogs
 * `?hide_dialog_header_settings` to hide the "Settings" icon in the header of more-info dialogs
 * `?hide_dialog_header_overflow` to hide the top right overflow menu in the header of more-info dialogs

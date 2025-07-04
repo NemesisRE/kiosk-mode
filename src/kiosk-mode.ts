@@ -443,12 +443,15 @@ class KioskMode implements KioskModeRunner {
 
 		// General dialog elements
 		if (
+			this.options[OPTION.HIDE_DIALOG_HEADER_BREADCRUMB_NAVIGATION] ||
 			this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] ||
 			this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY] ||
 			this.options[OPTION.HIDE_DIALOG_HEADER_SETTINGS] ||
 			this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW]
 		) {
 			const styles = [
+				this.options[OPTION.HIDE_DIALOG_HEADER_BREADCRUMB_NAVIGATION]
+					&& STYLES.DIALOG_HEADER_BREADCRUMB_NAVIGATION,
 				(this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] || this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY])
 					&& STYLES.DIALOG_HEADER_HISTORY,
 				(this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS] || this.options[OPTION.HIDE_DIALOG_HEADER_SETTINGS])
@@ -458,10 +461,11 @@ class KioskMode implements KioskModeRunner {
 			];
 			this.styleManager.addStyle(styles, dialog);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS]) setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS);
-				if (this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY])      setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_HISTORY);
-				if (this.options[OPTION.HIDE_DIALOG_HEADER_SETTINGS])     setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_SETTINGS);
-				if (this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW])     setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_OVERFLOW);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_BREADCRUMB_NAVIGATION]) setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_BREADCRUMB_NAVIGATION);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS])          setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_ACTION_ITEMS);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_HISTORY])               setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_HISTORY);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_SETTINGS])              setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_SETTINGS);
+				if (this.options[OPTION.HIDE_DIALOG_HEADER_OVERFLOW])              setCache(TRUE, OPTION.HIDE_DIALOG_HEADER_OVERFLOW);
 			}
 		} else {
 			this.styleManager.removeStyle(dialog);
