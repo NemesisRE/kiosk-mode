@@ -110,6 +110,9 @@ export const STYLES = {
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-tooltip[data-selector="${MENU.EDIT_DASHBOARD}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`
 	),
+	DIALOG_HEADER_BREADCRUMB_NAVIGATION: getDisplayNoneRules(
+		`${ELEMENT.HA_DIALOG_HEADER} > .title > .breadcrumb`
+	),
 	DIALOG_HEADER_HISTORY: getDisplayNoneRules(
 		`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_HISTORY}"]`
 	),

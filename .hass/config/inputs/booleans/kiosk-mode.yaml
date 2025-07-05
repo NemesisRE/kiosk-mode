@@ -24,6 +24,8 @@ kiosk_hide_reload_resources:
   name: Kiosk hide reload resources
 kiosk_hide_edit_dashboard:
   name: Kiosk hide edit dashboard
+kiosk_hide_dialog_header_breadcrumb_navigation:
+  name: Kiosk hide dialog header breadcrumb navigation
 kiosk_hide_dialog_header_history:
   name: Kiosk hide dialog header history
 kiosk_hide_dialog_header_settings:

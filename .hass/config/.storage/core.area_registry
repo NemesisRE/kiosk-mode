@@ -6,42 +6,55 @@
     "areas": [
       {
         "aliases": [],
-        "name": "Salón",
-        "id": "salon",
-        "picture": null,
-        "icon": null,
         "floor_id": null,
-        "labels": [],
-        "created_at": "1970-01-01T00:00:00+00:00",
-        "modified_at": "1970-01-01T00:00:00+00:00",
         "humidity_entity_id": null,
-        "temperature_entity_id": null
+        "icon": null,
+        "id": "woonkamer",
+        "labels": [],
+        "name": "Woonkamer",
+        "picture": null,
+        "temperature_entity_id": null,
+        "created_at": "1970-01-01T00:00:00+00:00",
+        "modified_at": "1970-01-01T00:00:00+00:00"
       },
       {
         "aliases": [],
-        "name": "Cocina",
-        "id": "cocina",
-        "picture": null,
-        "icon": null,
         "floor_id": null,
-        "labels": [],
-        "created_at": "1970-01-01T00:00:00+00:00",
-        "modified_at": "1970-01-01T00:00:00+00:00",
         "humidity_entity_id": null,
-        "temperature_entity_id": null
+        "icon": null,
+        "id": "keuken",
+        "labels": [],
+        "name": "Keuken",
+        "picture": null,
+        "temperature_entity_id": null,
+        "created_at": "1970-01-01T00:00:00+00:00",
+        "modified_at": "1970-01-01T00:00:00+00:00"
       },
       {
         "aliases": [],
-        "name": "Dormitorio",
-        "id": "dormitorio",
-        "picture": null,
-        "icon": null,
         "floor_id": null,
-        "labels": [],
-        "created_at": "1970-01-01T00:00:00+00:00",
-        "modified_at": "1970-01-01T00:00:00+00:00",
         "humidity_entity_id": null,
-        "temperature_entity_id": null
+        "icon": null,
+        "id": "slaapkamer",
+        "labels": [],
+        "name": "Slaapkamer",
+        "picture": null,
+        "temperature_entity_id": null,
+        "created_at": "1970-01-01T00:00:00+00:00",
+        "modified_at": "1970-01-01T00:00:00+00:00"
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "humidity_entity_id": null,
+        "icon": null,
+        "id": "kelder",
+        "labels": [],
+        "name": "Kelder",
+        "picture": null,
+        "temperature_entity_id": null,
+        "created_at": "2025-07-04T19:31:13.322435+00:00",
+        "modified_at": "2025-07-04T19:31:13.322440+00:00"
       }
     ]
   }

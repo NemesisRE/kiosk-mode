@@ -40,6 +40,9 @@ kiosk_mode:
         input_boolean.kiosk_hide_reload_resources: 'on'
       hide_reload_resources: true
     - entity:
+        input_boolean.kiosk_hide_dialog_header_breadcrumb_navigation: 'on'
+      hide_dialog_header_breadcrumb_navigation: true
+    - entity:
         input_boolean.kiosk_hide_dialog_header_history: 'on'
       hide_dialog_header_history: true
     - entity:
@@ -138,6 +141,7 @@ views:
           - entity: input_boolean.kiosk_block_context_menu
           - type: section
             label: More-info dialogs options
+          - entity: input_boolean.kiosk_hide_dialog_header_breadcrumb_navigation
           - entity: input_boolean.kiosk_hide_dialog_header_history
           - entity: input_boolean.kiosk_hide_dialog_header_settings
           - entity: input_boolean.kiosk_hide_dialog_header_overflow

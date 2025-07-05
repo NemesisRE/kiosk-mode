@@ -171,6 +171,17 @@ test('URL Parameter: ?disable_km', async ({ page }) => {
 
 });
 
+test('URL Parameter: ?hide_dialog_header_breadcrumb_navigation', async ({ page }) => {
+
+	await goToPageWithParams(page, URL_PARAMS.HIDE_DIALOG_HEADER_BREADCRUMB_NAVIGATION);
+
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.BINARY_SENSOR).click();
+	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.BREADCRUMB_NAVIGATION)).toBeHidden();
+	await expect(page).toHaveScreenshot('14-hide_dialog_header_breadcrumb_navigation.png');
+
+});
+
 test('URL Parameter: ?hide_dialog_header_history', async ({ page }) => {
 
 	await goToPageWithParams(page, URL_PARAMS.HIDE_DIALOG_HEADER_HISTORY);
@@ -178,7 +189,7 @@ test('URL Parameter: ?hide_dialog_header_history', async ({ page }) => {
 	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.HISTORY_BUTTON)).toBeHidden();
-	await expect(page).toHaveScreenshot('14-hide_dialog_header_history.png');
+	await expect(page).toHaveScreenshot('15-hide_dialog_header_history.png');
 
 });
 
@@ -189,7 +200,7 @@ test('URL Parameter: ?hide_dialog_header_settings', async ({ page }) => {
 	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.SETTINGS_BUTTON)).toBeHidden();
-	await expect(page).toHaveScreenshot('15-hide_dialog_header_settings.png');
+	await expect(page).toHaveScreenshot('16-hide_dialog_header_settings.png');
 
 });
 
@@ -200,7 +211,7 @@ test('URL Parameter: ?hide_dialog_header_overflow', async ({ page }) => {
 	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.OVERFLOW_BUTTON)).toBeHidden();
-	await expect(page).toHaveScreenshot('16-hide_dialog_header_overflow.png');
+	await expect(page).toHaveScreenshot('17-hide_dialog_header_overflow.png');
 
 });
 
@@ -213,7 +224,7 @@ test('URL Parameter: ?hide_dialog_header_action_items', async ({ page }) => {
 	await expect(page.locator(DIALOGS_SELECTORS.HISTORY_BUTTON)).toBeHidden();
 	await expect(page.locator(DIALOGS_SELECTORS.SETTINGS_BUTTON)).toBeHidden();
 	await expect(page.locator(DIALOGS_SELECTORS.OVERFLOW_BUTTON)).toBeHidden();
-	await expect(page).toHaveScreenshot('17-hide_dialog_header_action_items.png');
+	await expect(page).toHaveScreenshot('18-hide_dialog_header_action_items.png');
 
 });
 
@@ -224,7 +235,7 @@ test('URL Parameter: ?hide_dialog_history', async ({ page }) => {
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.HOME).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.HISTORY)).toBeHidden();
-	await expect(page).toHaveScreenshot('18-hide_dialog_history.png');
+	await expect(page).toHaveScreenshot('19-hide_dialog_history.png');
 
 });
 
@@ -235,7 +246,7 @@ test('URL Parameter: ?hide_dialog_logbook', async ({ page }) => {
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.BINARY_SENSOR).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.LOGBOOK)).toBeHidden();
-	await expect(page).toHaveScreenshot('19-hide_dialog_logbook.png');
+	await expect(page).toHaveScreenshot('20-hide_dialog_logbook.png');
 
 });
 
@@ -246,7 +257,7 @@ test('URL Parameter: ?hide_dialog_attributes', async ({ page }) => {
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.HOME).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.ATTRIBUTES)).toBeHidden();
-	await expect(page).toHaveScreenshot('20-hide_dialog_attributes.png');
+	await expect(page).toHaveScreenshot('21-hide_dialog_attributes.png');
 
 });
 
@@ -257,7 +268,7 @@ test('URL Parameter: ?hide_dialog_update_actions', async ({ page }) => {
 	await page.locator(SELECTORS.UPDATE_ENTITY_ROW, TEXT_SELECTORS.ADDON).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.UPDATE_ACTIONS)).toBeHidden();
-	await expect(page).toHaveScreenshot('21-hide_dialog_update_actions.png');
+	await expect(page).toHaveScreenshot('22-hide_dialog_update_actions.png');
 
 });
 
@@ -278,7 +289,7 @@ test('URL Parameter: ?hide_dialog_media_actions', async ({ page }) => {
 	await page.locator(SELECTORS.MEDIA_PLAYER_ENTITY_ROW).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.MEDIA_ACTIONS)).toBeHidden();
-	await expect(page).toHaveScreenshot('22-hide_dialog_media_actions.png');
+	await expect(page).toHaveScreenshot('23-hide_dialog_media_actions.png');
 
 });
 
@@ -290,7 +301,7 @@ test('URL Parameter: ?hide_dialog_climate_actions', async ({ page }) => {
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.CLIMATE_TEMPERATURE_BUTTONS)).toBeHidden();
 	await expect(page.locator(DIALOGS_SELECTORS.CLIMATE_SETTINGS_BUTTONS)).toBeHidden();
-	await expect(page).toHaveScreenshot('23-hide_dialog_climate_actions.png');
+	await expect(page).toHaveScreenshot('24-hide_dialog_climate_actions.png');
 
 });
 
@@ -302,7 +313,7 @@ test('URL Parameter: ?hide_dialog_climate_temperature_actions', async ({ page })
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.CLIMATE_TEMPERATURE_BUTTONS)).toBeHidden();
 	await expect(page.locator(DIALOGS_SELECTORS.CLIMATE_SETTINGS_BUTTONS)).toBeVisible();
-	await expect(page).toHaveScreenshot('24-hide_dialog_climate_temperature_actions.png');
+	await expect(page).toHaveScreenshot('25-hide_dialog_climate_temperature_actions.png');
 
 });
 
@@ -314,7 +325,7 @@ test('URL Parameter: ?hide_dialog_climate_settings_actions', async ({ page }) =>
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.CLIMATE_TEMPERATURE_BUTTONS)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.CLIMATE_SETTINGS_BUTTONS)).toBeHidden();
-	await expect(page).toHaveScreenshot('25-hide_dialog_climate_settings_actions.png');
+	await expect(page).toHaveScreenshot('26-hide_dialog_climate_settings_actions.png');
 
 });
 
@@ -328,7 +339,7 @@ test('URL Parameter: ?hide_dialog_light_actions', async ({ page }) => {
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_CONTROL_ACTIONS)).toBeHidden();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_COLOR_ACTIONS)).toBeHidden();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_SETTINGS_ACTIONS)).toBeHidden();
-	await expect(page).toHaveScreenshot('26-hide_dialog_light_actions.png');
+	await expect(page).toHaveScreenshot('27-hide_dialog_light_actions.png');
 
 });
 
@@ -344,7 +355,7 @@ test('URL Parameter: ?hide_dialog_light_control_actions', async ({ page }) => {
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_CONTROL_ACTIONS)).toBeHidden();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_COLOR_ACTIONS)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_SETTINGS_ACTIONS)).toBeVisible();
-	await expect(page).toHaveScreenshot('27-hide_dialog_light_control_actions.png');
+	await expect(page).toHaveScreenshot('28-hide_dialog_light_control_actions.png');
 
 });
 
@@ -360,7 +371,7 @@ test('URL Parameter: ?hide_dialog_light_color_actions', async ({ page }) => {
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_CONTROL_ACTIONS)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_COLOR_ACTIONS)).toBeHidden();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_SETTINGS_ACTIONS)).toBeVisible();
-	await expect(page).toHaveScreenshot('28-hide_dialog_light_color_actions.png');
+	await expect(page).toHaveScreenshot('29-hide_dialog_light_color_actions.png');
 
 });
 
@@ -376,7 +387,7 @@ test('URL Parameter: ?hide_dialog_light_settings_actions', async ({ page }) => {
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_CONTROL_ACTIONS)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_COLOR_ACTIONS)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.LIGHT_SETTINGS_ACTIONS)).toBeHidden();
-	await expect(page).toHaveScreenshot('29-hide_dialog_light_settings_actions.png');
+	await expect(page).toHaveScreenshot('30-hide_dialog_light_settings_actions.png');
 
 });
 
@@ -387,7 +398,7 @@ test('URL Parameter: ?hide_dialog_timer_actions', async ({ page }) => {
 	await page.locator(SELECTORS.TIMER_ENTITY_ROW, TEXT_SELECTORS.TIMER).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.TIMER_ACTIONS)).toBeHidden();
-	await expect(page).toHaveScreenshot('30-hide_dialog_timer_actions.png');
+	await expect(page).toHaveScreenshot('31-hide_dialog_timer_actions.png');
 
 });
 
@@ -398,7 +409,7 @@ test('URL Parameter: ?hide_dialog_history_show_more', async ({ page }) => {
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.HOME).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.HISTORY_LINK)).toBeHidden();
-	await expect(page).toHaveScreenshot('31-hide_dialog_history_show_more.png');
+	await expect(page).toHaveScreenshot('32-hide_dialog_history_show_more.png');
 
 });
 
@@ -409,6 +420,6 @@ test('URL Parameter: ?hide_dialog_logbook_show_more', async ({ page }) => {
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.BINARY_SENSOR).click();
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.LOGBOOK_LINK)).toBeHidden();
-	await expect(page).toHaveScreenshot('32-hide_dialog_logbook_show_more.png');
+	await expect(page).toHaveScreenshot('33-hide_dialog_logbook_show_more.png');
 
 });
