@@ -37,23 +37,23 @@
     "home-assistant-styles-manager": "3.1.0"
   },
   "devDependencies": {
-    "@playwright/test": "1.54.1",
+    "@playwright/test": "1.54.2",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
-    "@types/node": "^24.1.0",
+    "@types/node": "^24.2.1",
     "@types/sinon": "^17.0.4",
-    "eslint": "9.32.0",
+    "eslint": "9.33.0",
     "globals": "^16.3.0",
     "nyc": "^17.1.0",
     "playwright-test-coverage": "^1.2.12",
-    "rollup": "^4.46.0",
+    "rollup": "^4.46.2",
     "rollup-plugin-istanbul": "^5.0.0",
     "rollup-plugin-ts": "^3.4.5",
     "sinon": "^21.0.0",
     "tslib": "^2.8.1",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.39.0"
   },
   "pnpm": {
     "overrides": {
