@@ -1,7 +1,9 @@
-name: Create release
+name: Build and Release
 
 on:
   push:
+    branches:
+      - master
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - 'v[0-9]+.[0-9]+.[0-9]+-beta'
@@ -15,15 +17,19 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - name: Check Tag
-        id: check-tag
+      - name: Check Event Type
+        id: check-event
         run: |
-          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+-.+([0-9]+)?$ ]]; then
-            echo "CHANGELOG_MODE=COMMIT" >> $GITHUB_OUTPUT
-            echo "PRERELEASE=true" >> $GITHUB_OUTPUT
+          if [[ ${{ github.ref_type }} == "tag" ]]; then
+            echo "EVENT_TYPE=tag" >> $GITHUB_OUTPUT
+            if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+-.+([0-9]+)?$ ]]; then
+              echo "PRERELEASE=true" >> $GITHUB_OUTPUT
+            else
+              echo "PRERELEASE=false" >> $GITHUB_OUTPUT
+            fi
             echo "TARGET_COMMITISH=${{ github.sha }}" >> $GITHUB_OUTPUT
           else
-            echo "CHANGELOG_MODE=PR" >> $GITHUB_OUTPUT
+            echo "EVENT_TYPE=push" >> $GITHUB_OUTPUT
             echo "PRERELEASE=false" >> $GITHUB_OUTPUT
             echo "TARGET_COMMITISH=${{ github.event.repository.default_branch }}" >> $GITHUB_OUTPUT
           fi
@@ -53,53 +59,28 @@ jobs:
             playwright-report/
             coverage/
           retention-days: 30
-      - name: Build Changelog
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v5
+      - name: Update draft release
+        if: steps.check-event.outputs.EVENT_TYPE == 'push'
+        uses: release-drafter/release-drafter@v6
         with:
-          mode: ${{ steps.check-tag.outputs.CHANGELOG_MODE }}
-          configurationJson: |
-            {
-              "categories": [
-                {
-                  "title": "## 🚀 Features",
-                  "labels": ["🌟 feature", "✨ feature-request", "enhancement", "request"]
-                },
-                {
-                  "title": "## 🛠 Fixes",
-                  "labels": ["fix", "🐛 bug"]
-                },
-                {
-                  "title": "## 🧩 Dependencies",
-                  "labels": ["dependencies"]
-                },
-                {
-                  "title": "## ⚙️ Configuration",
-                  "labels": ["configuration"]
-                },
-                {
-                  "title": "## 📝 Documentation",
-                  "labels": ["📝 documentation"]
-                },
-                {
-                  "title": "## 📦 Other",
-                  "labels": []
-                }
-              ],
-              "template": "#{{CHANGELOG}}",
-              "pr_template": "- #{{TITLE}}\n   - PR: ##{{NUMBER}} by @#{{AUTHOR}}",
-              "empty_template": "#{{OWNER}}\n#{{REPO}}\n#{{FROM_TAG}}\n#{{TO_TAG}}",
-              "max_pull_requests": 1000,
-              "max_back_track_time_days": 1000
-            }
+          config-name: release-drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create a release
+      - name: Create tagged release
+        if: steps.check-event.outputs.EVENT_TYPE == 'tag'
+        uses: release-drafter/release-drafter@v6
+        with:
+          config-name: release-drafter.yml
+          publish: true
+          tag: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          prerelease: ${{ steps.check-event.outputs.PRERELEASE }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload release assets
+        if: steps.check-event.outputs.EVENT_TYPE == 'tag'
         uses: softprops/action-gh-release@v2
         with:
-          prerelease: ${{ steps.check-tag.outputs.PRERELEASE }}
-          target_commitish: ${{ steps.check-tag.outputs.TARGET_COMMITISH }}
+          tag_name: ${{ github.ref_name }}
           files: |
             dist/kiosk-mode.js
-          body: |
-            ${{ steps.build_changelog.outputs.changelog }}
