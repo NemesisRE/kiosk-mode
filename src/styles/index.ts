@@ -70,7 +70,8 @@ export const STYLES = {
 	},
 	SIDEBAR: {
 		':host': {
-			MdcDrawerWidth: '0px !important'
+			MdcDrawerWidth: '0px !important',
+			KioskSidebarWidth: '0px'
 		},
 		'partial-panel-resolver': {
 			MdcTopAppBarWidth: '100% !important'
