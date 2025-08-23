@@ -22,6 +22,9 @@ kiosk_mode:
         input_boolean.kiosk_hide_account: 'on'
       hide_account: true
     - entity:
+        input_boolean.kiosk_hide_add_to_ha: 'on'
+      hide_add_to_ha: true
+    - entity:
         input_boolean.kiosk_hide_search: 'on'
       hide_search: true
     - entity:
@@ -39,6 +42,18 @@ kiosk_mode:
     - entity:
         input_boolean.kiosk_hide_reload_resources: 'on'
       hide_reload_resources: true
+    - entity:
+        input_boolean.kiosk_hide_add_device: 'on'
+      hide_add_device: true
+    - entity:
+        input_boolean.kiosk_hide_create_automation: 'on'
+      hide_create_automation: true
+    - entity:
+        input_boolean.kiosk_hide_add_area: 'on'
+      hide_add_area: true
+    - entity:
+        input_boolean.kiosk_hide_invite_person: 'on'
+      hide_invite_person: true
     - entity:
         input_boolean.kiosk_hide_dialog_header_breadcrumb_navigation: 'on'
       hide_dialog_header_breadcrumb_navigation: true
@@ -129,6 +144,7 @@ views:
           - entity: input_boolean.kiosk_hide_menubutton
           - entity: input_boolean.kiosk_hide_notifications
           - entity: input_boolean.kiosk_hide_account
+          - entity: input_boolean.kiosk_hide_add_to_ha
           - entity: input_boolean.kiosk_hide_search
           - entity: input_boolean.kiosk_hide_assistant
           - entity: input_boolean.kiosk_hide_overflow
@@ -136,6 +152,10 @@ views:
           - entity: input_boolean.kiosk_hide_unused_entities
           - entity: input_boolean.kiosk_hide_reload_resources
           - entity: input_boolean.kiosk_hide_edit_dashboard
+          - entity: input_boolean.kiosk_hide_add_device
+          - entity: input_boolean.kiosk_hide_create_automation
+          - entity: input_boolean.kiosk_hide_add_area
+          - entity: input_boolean.kiosk_hide_invite_person
           - entity: input_boolean.kiosk_block_overflow
           - entity: input_boolean.kiosk_block_mouse
           - entity: input_boolean.kiosk_block_context_menu

@@ -83,13 +83,16 @@ export const STYLES = {
 	},
 	ASIDE: getDisplayNoneRules('.mdc-drawer'),
 	OVERFLOW_MENU: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.OVERFLOW}"]`
 	),
 	BLOCK_OVERFLOW: {
 		[`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`]: {
 			'pointer-events': 'none !important'
 		}
 	},
+	ADD_TO_HA: getDisplayNoneRules(
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.ADD}"]`
+	),
 	SEARCH: getDisplayNoneRules(
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-tooltip[data-selector="${MENU.SEARCH}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.SEARCH}"]`
@@ -110,6 +113,18 @@ export const STYLES = {
 	EDIT_DASHBOARD: getDisplayNoneRules(
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-tooltip[data-selector="${MENU.EDIT_DASHBOARD}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`
+	),
+	ADD_DEVICE: getDisplayNoneRules(
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ADD_DEVICE}"]`
+	),
+	CREATE_AUTOMATION: getDisplayNoneRules(
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.CREATE_AUTOMATION}"]`
+	),
+	ADD_AREA: getDisplayNoneRules(
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ADD_AREA}"]`
+	),
+	INVITE_PERSON: getDisplayNoneRules(
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.INVITE_PERSON}"]`
 	),
 	DIALOG_HEADER_BREADCRUMB_NAVIGATION: getDisplayNoneRules(
 		`${ELEMENT.HA_DIALOG_HEADER} > .title > .breadcrumb`

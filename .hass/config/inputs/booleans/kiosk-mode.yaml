@@ -12,6 +12,8 @@ kiosk_hide_account:
   name: Kiosk hide account
 kiosk_hide_notifications:
   name: Kiosk hide notifications
+kiosk_hide_add_to_ha:
+  name: Kiosk hide add to HA
 kiosk_hide_search:
   name: Kiosk hide search
 kiosk_hide_assistant:
@@ -24,6 +26,14 @@ kiosk_hide_reload_resources:
   name: Kiosk hide reload resources
 kiosk_hide_edit_dashboard:
   name: Kiosk hide edit dashboard
+kiosk_hide_add_device:
+  name: Kiosk hide add device
+kiosk_hide_create_automation:
+  name: Kiosk hide create automation
+kiosk_hide_add_area:
+  name: Kiosk hide add area
+kiosk_hide_invite_person:
+  name: Kiosk hide invite person
 kiosk_hide_dialog_header_breadcrumb_navigation:
   name: Kiosk hide dialog header breadcrumb navigation
 kiosk_hide_dialog_header_history:

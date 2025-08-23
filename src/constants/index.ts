@@ -6,6 +6,7 @@ export enum OPTION {
     KIOSK = 'kiosk',
     HIDE_SIDEBAR = 'hide_sidebar',
     HIDE_HEADER = 'hide_header',
+    HIDE_ADD_TO_HA = 'hide_add_to_ha',
     HIDE_OVERFLOW = 'hide_overflow',
     HIDE_MENU_BUTTON = 'hide_menubutton',
     HIDE_ACCOUNT = 'hide_account',
@@ -16,6 +17,10 @@ export enum OPTION {
     HIDE_UNUSED_ENTITIES = 'hide_unused_entities',
     HIDE_RELOAD_RESOURCES = 'hide_reload_resources',
     HIDE_EDIT_DASHBOARD = 'hide_edit_dashboard',
+    HIDE_ADD_DEVICE = 'hide_add_device',
+    HIDE_CREATE_AUTOMATION = 'hide_create_automation',
+    HIDE_ADD_AREA = 'hide_add_area',
+    HIDE_INVITE_PERSON = 'hide_invite_person',
     HIDE_DIALOG_HEADER_BREADCRUMB_NAVIGATION = 'hide_dialog_header_breadcrumb_navigation',
     HIDE_DIALOG_HEADER_ACTION_ITEMS = 'hide_dialog_header_action_items',
     HIDE_DIALOG_HEADER_HISTORY = 'hide_dialog_header_history',
@@ -59,30 +64,48 @@ const COMMON_PREFIX = `${UI_PREFIX}.common`;
 const PANEL_PREFIX = `${UI_PREFIX}.panel`;
 const LOVELACE_PREFIX = `${PANEL_PREFIX}.lovelace`;
 const MENU_PREFIX = `${LOVELACE_PREFIX}.menu`;
+const EDITOR_PREFIX = `${LOVELACE_PREFIX}.editor`;
+const MENU_EDITOR_PREFIX = `${EDITOR_PREFIX}.menu`;
 const DIALOGS_PREFIX = `${UI_PREFIX}.dialogs.more_info_control`;
 
 export enum MENU {
+    ADD = 'ADD',
+    OVERFLOW = 'OVERFLOW',
     SEARCH = 'SEARCH',
     ASSIST = 'ASSIST',
+    // Overflow menu translations
     REFRESH = 'REFRESH',
     UNUSED_ENTITIES = 'UNUSED_ENTITIES',
     RELOAD_RESOURCES = 'RELOAD_RESOURCES',
     EDIT_DASHBOARD = 'EDIT_DASHBOARD',
     DIALOG_DISMISS = 'DIALOG_DISMISS',
     DIALOG_HISTORY = 'DIALOG_HISTORY',
-    DIALOG_SETTINGS = 'DIALOG_SETTINGS'
+    DIALOG_SETTINGS = 'DIALOG_SETTINGS',
+    // Add to Home Assistant overflow translations
+    ADD_DEVICE = 'ADD_DEVICE',
+    CREATE_AUTOMATION = 'CREATE_AUTOMATION',
+    ADD_AREA = 'ADD_AREA',
+    INVITE_PERSON = 'INVITE_PERSON'
 }
 
 export const MENU_REFERENCES = Object.freeze({
+	[MENU.ADD]: `${MENU_PREFIX}.add`,
+	[MENU.OVERFLOW]: `${MENU_EDITOR_PREFIX}.open`,
 	[MENU.SEARCH]: `${MENU_PREFIX}.search_entities`,
 	[MENU.ASSIST]: `${MENU_PREFIX}.assist_tooltip`,
+	// Overflow menu translations
 	[MENU.REFRESH]: `${COMMON_PREFIX}.refresh`,
 	[MENU.UNUSED_ENTITIES]: `${LOVELACE_PREFIX}.unused_entities.title`,
 	[MENU.RELOAD_RESOURCES]: `${MENU_PREFIX}.reload_resources`,
 	[MENU.EDIT_DASHBOARD]: `${MENU_PREFIX}.configure_ui`,
 	[MENU.DIALOG_HISTORY]: `${DIALOGS_PREFIX}.history`,
 	[MENU.DIALOG_SETTINGS]: `${DIALOGS_PREFIX}.settings`,
-	[MENU.DIALOG_DISMISS]: `${COMMON_PREFIX}.close`
+	[MENU.DIALOG_DISMISS]: `${COMMON_PREFIX}.close`,
+	// Add to Home Assistant overflow translations
+	[MENU.ADD_DEVICE]: `${MENU_PREFIX}.add_device`,
+	[MENU.CREATE_AUTOMATION]: `${MENU_PREFIX}.create_automation`,
+	[MENU.ADD_AREA]: `${MENU_PREFIX}.add_area`,
+	[MENU.INVITE_PERSON]: `${MENU_PREFIX}.invite_person`
 });
 
 export enum ELEMENT {
