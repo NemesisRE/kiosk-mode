@@ -6,6 +6,7 @@ import {
 import { getPromisableResult } from 'get-promisable-result';
 import {
 	TRUE,
+	MENU,
 	MENU_REFERENCES,
 	ELEMENT,
 	OPTION,
@@ -60,12 +61,30 @@ export const getDisplayNoneRules = (...rules: string[]): Record<string, false> =
 	);
 };
 
-export const getMenuTranslations = async(ha: HomeAssistant): Promise<Record<string, string>> => {
+export const getMenuTranslations = async(ha: HomeAssistant, version: Version): Promise<Record<string, string>> => {
 
 	const referencePaths = Object.entries(MENU_REFERENCES);
 
+	// This code is needed for Home Assistant versions older than 2025.9.x
+	const isLegacy = (
+		version[0] < 2025
+		|| (
+			version[0] === 2025
+			&& version[1] < 9
+		)
+	);
+	const ignoreLegacyTranslations: (typeof MENU_REFERENCES)[keyof typeof MENU_REFERENCES][] = [
+		MENU_REFERENCES[MENU.ADD]
+	];
+	const finalReferencePaths = isLegacy
+		? referencePaths.filter(([, key]) => {
+			return !ignoreLegacyTranslations.includes(key);
+		})
+		: referencePaths;
+	// End of custom code for Home Assistant versions older than 2025.9.x
+
 	const translations = await getPromisableResult(
-		() => referencePaths.map((entry): [string, string] => {
+		() => finalReferencePaths.map((entry): [string, string] => {
 			const [key, translationPath] = entry;
 			return [ha.hass.localize(translationPath), key];
 		}),
@@ -100,6 +119,24 @@ export const addMenuItemsDataSelectors = (
 	});
 };
 
+export const addHeaderButtonsDataSelectors = (
+	headerButtons: NodeListOf<HTMLElement>,
+	translations: Record<string, string>
+) => {
+	headerButtons.forEach((headerButton: HTMLElement): void => {
+		const menuItem: HTMLElement | null = headerButton
+			.querySelector<HTMLElement>(ELEMENT.MENU_ITEM);
+		if (
+			menuItem &&
+			menuItem.dataset &&
+			!menuItem.dataset.selector
+		) {
+			const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
+			menuItem.dataset.selector = translations[icon.title.trim()];
+		}
+	});
+};
+
 export const addDialogsMenuItemsDataSelectors = (
 	menuItems: NodeListOf<HTMLElement>,
 	translations: Record<string, string>
@@ -111,7 +148,23 @@ export const addDialogsMenuItemsDataSelectors = (
 			!menuItem.dataset.selector
 		) {
 			const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-			menuItem.dataset.selector = translations[icon.title];
+			menuItem.dataset.selector = translations[icon.title.trim()];
+		}
+	});
+};
+
+export const addOverlayMenuItemsDataSelectors = (
+	overflowMenuItems: NodeListOf<HTMLElement>,
+	translations: Record<string, string>
+) => {
+	overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
+		if (
+			overflowMenuItem &&
+			overflowMenuItem.dataset &&
+			!overflowMenuItem.dataset.selector
+		) {
+			const textContent = overflowMenuItem.textContent.trim();
+			overflowMenuItem.dataset.selector = translations[textContent];
 		}
 	});
 };
