@@ -22,6 +22,9 @@ kiosk_mode:
         input_boolean.kiosk_hide_account: 'on'
       hide_account: true
     - entity:
+        input_boolean.kiosk_hide_add_to_home_assistant: 'on'
+      hide_add_to_home_assistant: true
+    - entity:
         input_boolean.kiosk_hide_search: 'on'
       hide_search: true
     - entity:
@@ -129,6 +132,7 @@ views:
           - entity: input_boolean.kiosk_hide_menubutton
           - entity: input_boolean.kiosk_hide_notifications
           - entity: input_boolean.kiosk_hide_account
+          - entity: input_boolean.kiosk_hide_add_to_home_assistant
           - entity: input_boolean.kiosk_hide_search
           - entity: input_boolean.kiosk_hide_assistant
           - entity: input_boolean.kiosk_hide_overflow

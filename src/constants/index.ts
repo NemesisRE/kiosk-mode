@@ -6,6 +6,7 @@ export enum OPTION {
     KIOSK = 'kiosk',
     HIDE_SIDEBAR = 'hide_sidebar',
     HIDE_HEADER = 'hide_header',
+    HIDE_ADD_TO_HOME_ASSISTANT = 'hide_add_to_home_assistant',
     HIDE_OVERFLOW = 'hide_overflow',
     HIDE_MENU_BUTTON = 'hide_menubutton',
     HIDE_ACCOUNT = 'hide_account',
@@ -59,9 +60,13 @@ const COMMON_PREFIX = `${UI_PREFIX}.common`;
 const PANEL_PREFIX = `${UI_PREFIX}.panel`;
 const LOVELACE_PREFIX = `${PANEL_PREFIX}.lovelace`;
 const MENU_PREFIX = `${LOVELACE_PREFIX}.menu`;
+const EDITOR_PREFIX = `${LOVELACE_PREFIX}.editor`;
+const MENU_EDITOR_PREFIX = `${EDITOR_PREFIX}.menu`;
 const DIALOGS_PREFIX = `${UI_PREFIX}.dialogs.more_info_control`;
 
 export enum MENU {
+    ADD = 'ADD',
+    OVERFLOW = 'OVERFLOW',
     SEARCH = 'SEARCH',
     ASSIST = 'ASSIST',
     REFRESH = 'REFRESH',
@@ -74,6 +79,8 @@ export enum MENU {
 }
 
 export const MENU_REFERENCES = Object.freeze({
+	[MENU.ADD]: `${MENU_PREFIX}.add`,
+	[MENU.OVERFLOW]: `${MENU_EDITOR_PREFIX}.open`,
 	[MENU.SEARCH]: `${MENU_PREFIX}.search_entities`,
 	[MENU.ASSIST]: `${MENU_PREFIX}.assist_tooltip`,
 	[MENU.REFRESH]: `${COMMON_PREFIX}.refresh`,

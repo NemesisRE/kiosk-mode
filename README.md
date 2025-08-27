@@ -111,7 +111,7 @@ views:
 |`hide_header`<sup>1</sup>                   | Boolean | false   | Hides only the header. |
 |`hide_sidebar`                              | Boolean | false   | Hides only the sidebar. |
 |`hide_menubutton`<sup>1</sup>               | Boolean | false   | Hides only the sidebar menu icon. |
-|`hide_notifications`                        | Boolean | false   | Hide the notifications entry-point. |
+|`hide_notifications`                        | Boolean | false   | Hides the notifications entry-point. |
 |`hide_account`                              | Boolean | false   | Hides the account icon. |
 |`hide_search`                               | Boolean | false   | Hides the search icon. |
 |`hide_assistant`                            | Boolean | false   | Hides the assistant icon. |
@@ -121,6 +121,9 @@ views:
 |`hide_unused_entities`                      | Boolean | false   | Hides the "Unused entities" button inside the top right overflow menu in lovelace yaml mode. |
 |`hide_reload_resources`                     | Boolean | false   | Hides the "Reload resources" button inside the top right overflow menu in lovelace yaml mode. |
 |`hide_edit_dashboard`                       | Boolean | false   | Hides the "Edit dashboard" button inside the top right overflow menu. |
+
+|`hide_add_to_home_assistant`                | Boolean | false   | Hides the "Add to Home Assistant" overflow menu |
+
 |`block_mouse`                               | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
 |`block_context_menu`                        | Boolean | false   | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices). |
 |`hide_dialog_header_breadcrumb_navigation`<sup>2</sup>| Boolean | false   | Hides the breadcrumb navigation over the title of more-info dialogs |
