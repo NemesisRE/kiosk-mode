@@ -140,7 +140,8 @@ export const STYLES = {
 	DIALOG_TIMER_ACTIONS: getDisplayNoneRules('.actions'),
 	DIALOG_UPDATE_ACTIONS: getDisplayNoneRules(
 		'.actions',
-		`hr:has(+ .actions)`
+		'ha-md-list:has(+ .actions)',
+		'hr:has(+ .actions)'
 	),
 	DIALOG_CAMERA_ACTIONS: getDisplayNoneRules('.actions'),
 	DIALOG_CLIMATE_CONTROL_SELECT: getDisplayNoneRules(
