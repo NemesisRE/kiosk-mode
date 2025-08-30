@@ -37,6 +37,10 @@ import { goToPageWithParams, goToPage } from './utils';
 		selector: SELECTORS.ACCOUNT
 	},
 	{
+		param: URL_PARAMS.HIDE_ADD_TO_HOME_ASSISTANT,
+		selector: SELECTORS.ADD_TO_HOME_ASSISTANT
+	},
+	{
 		param: URL_PARAMS.HIDE_SEARCH,
 		selector: SELECTORS.SEARCH_BUTTON
 	},
