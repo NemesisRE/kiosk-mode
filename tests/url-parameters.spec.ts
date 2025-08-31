@@ -69,7 +69,7 @@ test('URL Parameter: ?hide_account', async ({ page }) => {
 
 });
 
-test('@testing URL Parameter: ?hide_add_to_home_assistant', async ({ page }) => {
+test('URL Parameter: ?hide_add_to_home_assistant', async ({ page }) => {
 
 	await goToPageWithParams(page, URL_PARAMS.HIDE_ADD_TO_HOME_ASSISTANT);
 
