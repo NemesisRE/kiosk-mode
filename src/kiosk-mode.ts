@@ -39,14 +39,16 @@ import {
 	RETRY_DELAY
 } from '@constants';
 import {
-	queryString,
-	setCache,
+	addDialogsMenuItemsDataSelectors,
+	addHeaderButtonsDataSelectors,
+	addMenuItemsDataSelectors,
+	addOverlayMenuItemsDataSelectors,
 	cached,
 	getMenuTranslations,
-	addMenuItemsDataSelectors,
-	addDialogsMenuItemsDataSelectors,
 	parseVersion,
-	resetCache
+	queryString,
+	resetCache,
+	setCache
 } from '@utilities';
 import { STYLES } from '@styles';
 
@@ -193,7 +195,7 @@ class KioskMode implements KioskModeRunner {
 			this.options[option] = false;
 		});
 
-		getMenuTranslations(this.ha)
+		getMenuTranslations(this.ha, this.version)
 			.then((menuTranslations: Record<string, string>) => {
 				this.menuTranslations = menuTranslations;
 				this.updateMenuItemsLabels();
@@ -354,18 +356,23 @@ class KioskMode implements KioskModeRunner {
 		}
 
 		if (
+			this.options[OPTION.HIDE_ADD_TO_HOME_ASSISTANT] ||
+			this.options[OPTION.HIDE_OVERFLOW] ||
 			this.options[OPTION.HIDE_SEARCH] ||
 			this.options[OPTION.HIDE_ASSISTANT] ||
 			this.options[OPTION.HIDE_REFRESH] ||
 			this.options[OPTION.HIDE_UNUSED_ENTITIES] ||
 			this.options[OPTION.HIDE_RELOAD_RESOURCES] ||
 			this.options[OPTION.HIDE_EDIT_DASHBOARD] ||
-			this.options[OPTION.HIDE_OVERFLOW] ||
 			this.options[OPTION.BLOCK_OVERFLOW] ||
 			this.options[OPTION.HIDE_SIDEBAR] ||
 			this.options[OPTION.HIDE_MENU_BUTTON]
 		) {
 			const styles = [
+				this.options[OPTION.HIDE_ADD_TO_HOME_ASSISTANT]
+					&& STYLES.ADD_TO_HOME_ASSISTANT,
+				this.options[OPTION.HIDE_OVERFLOW]
+					&& STYLES.OVERFLOW_MENU,
 				this.options[OPTION.HIDE_SEARCH]
 					&& STYLES.SEARCH,
 				this.options[OPTION.HIDE_ASSISTANT]
@@ -378,8 +385,6 @@ class KioskMode implements KioskModeRunner {
 					&& STYLES.RELOAD_RESOURCES,
 				this.options[OPTION.HIDE_EDIT_DASHBOARD]
 					&& STYLES.EDIT_DASHBOARD,
-				this.options[OPTION.HIDE_OVERFLOW]
-					&& STYLES.OVERFLOW_MENU,
 				this.options[OPTION.BLOCK_OVERFLOW]
 					&& STYLES.BLOCK_OVERFLOW,
 				(this.options[OPTION.HIDE_MENU_BUTTON] || this.options[OPTION.HIDE_SIDEBAR])
@@ -387,15 +392,16 @@ class KioskMode implements KioskModeRunner {
 			];
 			this.styleManager.addStyle(styles, this.appToolbar);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (this.options[OPTION.HIDE_SEARCH])           setCache(TRUE, OPTION.HIDE_SEARCH);
-				if (this.options[OPTION.HIDE_ASSISTANT])        setCache(TRUE, OPTION.HIDE_ASSISTANT);
-				if (this.options[OPTION.HIDE_REFRESH])          setCache(TRUE, OPTION.HIDE_REFRESH);
-				if (this.options[OPTION.HIDE_UNUSED_ENTITIES])  setCache(TRUE, OPTION.HIDE_UNUSED_ENTITIES);
-				if (this.options[OPTION.HIDE_RELOAD_RESOURCES]) setCache(TRUE, OPTION.HIDE_RELOAD_RESOURCES);
-				if (this.options[OPTION.HIDE_EDIT_DASHBOARD])   setCache(TRUE, OPTION.HIDE_EDIT_DASHBOARD);
-				if (this.options[OPTION.HIDE_OVERFLOW])         setCache(TRUE, OPTION.HIDE_OVERFLOW);
-				if (this.options[OPTION.BLOCK_OVERFLOW])        setCache(TRUE, OPTION.BLOCK_OVERFLOW);
-				if (this.options[OPTION.HIDE_MENU_BUTTON])      setCache(TRUE, OPTION.HIDE_MENU_BUTTON);
+				if (this.options[OPTION.HIDE_ADD_TO_HOME_ASSISTANT]) setCache(TRUE, OPTION.HIDE_ADD_TO_HOME_ASSISTANT);
+				if (this.options[OPTION.HIDE_OVERFLOW])              setCache(TRUE, OPTION.HIDE_OVERFLOW);
+				if (this.options[OPTION.HIDE_SEARCH])                setCache(TRUE, OPTION.HIDE_SEARCH);
+				if (this.options[OPTION.HIDE_ASSISTANT])             setCache(TRUE, OPTION.HIDE_ASSISTANT);
+				if (this.options[OPTION.HIDE_REFRESH])               setCache(TRUE, OPTION.HIDE_REFRESH);
+				if (this.options[OPTION.HIDE_UNUSED_ENTITIES])       setCache(TRUE, OPTION.HIDE_UNUSED_ENTITIES);
+				if (this.options[OPTION.HIDE_RELOAD_RESOURCES])      setCache(TRUE, OPTION.HIDE_RELOAD_RESOURCES);
+				if (this.options[OPTION.HIDE_EDIT_DASHBOARD])        setCache(TRUE, OPTION.HIDE_EDIT_DASHBOARD);
+				if (this.options[OPTION.BLOCK_OVERFLOW])             setCache(TRUE, OPTION.BLOCK_OVERFLOW);
+				if (this.options[OPTION.HIDE_MENU_BUTTON])           setCache(TRUE, OPTION.HIDE_MENU_BUTTON);
 			}
 		} else {
 			this.styleManager.removeStyle(this.appToolbar);
@@ -674,18 +680,24 @@ class KioskMode implements KioskModeRunner {
 			});
 
 		if (this.user.is_admin) {
+
+			this.HAElements.HEADER
+				.selector
+				.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`)
+				.all
+				.then((headerButtons: NodeListOf<HTMLElement>) => {
+					addHeaderButtonsDataSelectors(
+						headerButtons,
+						this.menuTranslations
+					);
+				});
+
 			this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} ${ELEMENT.OVERLAY_MENU_ITEM}`).all
 				.then((overflowMenuItems: NodeListOf<HTMLElement>) => {
-					overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
-						if (
-							overflowMenuItem &&
-							overflowMenuItem.dataset &&
-							!overflowMenuItem.dataset.selector
-						) {
-							const textContent = overflowMenuItem.textContent.trim();
-							overflowMenuItem.dataset.selector = this.menuTranslations[textContent];
-						}
-					});
+					addOverlayMenuItemsDataSelectors(
+						overflowMenuItems,
+						this.menuTranslations
+					);
 				});
 		}
 	}

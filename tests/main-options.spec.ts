@@ -111,6 +111,21 @@ test('Option: hide_notifications and hide_account at the same time', async ({ pa
 
 });
 
+test('Option: hide_add_to_home_assistant', async ({ page }) => {
+
+	await goToPage(page);
+
+	await expect(page.locator(SELECTORS.ADD_TO_HOME_ASSISTANT)).toBeVisible();
+
+	await turnBooleanState(page, ENTITIES.HIDE_ADD_TO_HOME_ASSISTANT, true);
+
+	await expect(page.locator(SELECTORS.ADD_TO_HOME_ASSISTANT)).toBeHidden();
+	await expect(page).toHaveScreenshot('08-hide_add_to_home_assistant.png');
+
+	await turnBooleanState(page, ENTITIES.HIDE_ADD_TO_HOME_ASSISTANT, false);
+
+});
+
 test('Option: hide_search', async ({ page }) => {
 
 	await goToPage(page);
@@ -120,7 +135,7 @@ test('Option: hide_search', async ({ page }) => {
 	await turnBooleanState(page, ENTITIES.HIDE_SEARCH, true);
 
 	await expect(page.locator(SELECTORS.SEARCH_BUTTON)).toBeHidden();
-	await expect(page).toHaveScreenshot('08-hide_search.png');
+	await expect(page).toHaveScreenshot('09-hide_search.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_SEARCH, false);
 
@@ -135,7 +150,7 @@ test('Option: hide_assistant', async ({ page }) => {
 	await turnBooleanState(page, ENTITIES.HIDE_ASSISTANT, true);
 
 	await expect(page.locator(SELECTORS.ASSISTANT_BUTTON)).toBeHidden();
-	await expect(page).toHaveScreenshot('09-hide_assistant.png');
+	await expect(page).toHaveScreenshot('10-hide_assistant.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_ASSISTANT, false);
 
@@ -150,7 +165,7 @@ test('Option: hide_overflow', async ({ page }) => {
 	await turnBooleanState(page, ENTITIES.HIDE_OVERFLOW, true);
 
 	await expect(page.locator(SELECTORS.OVERFLOW_BUTTON)).toBeHidden();
-	await expect(page).toHaveScreenshot('10-hide_overflow.png');
+	await expect(page).toHaveScreenshot('11-hide_overflow.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_OVERFLOW, false);
 
@@ -167,7 +182,7 @@ test('Option: hide_refresh', async ({ page }) => {
 	await turnBooleanState(page, ENTITIES.HIDE_REFRESH, true);
 
 	await expect(page.locator(SELECTORS.MENU_REFRESH_ITEM)).toBeHidden();
-	await expect(page).toHaveScreenshot('11-hide_refresh.png');
+	await expect(page).toHaveScreenshot('12-hide_refresh.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_REFRESH, false);
 
@@ -184,7 +199,7 @@ test('Option: hide_unused_entities', async ({ page }) => {
 	await turnBooleanState(page, ENTITIES.HIDE_UNUSED_ENTITIES, true);
 
 	await expect(page.locator(SELECTORS.MENU_UNUSED_ENTITIES_ITEM)).toBeHidden();
-	await expect(page).toHaveScreenshot('12-hide_unused_entities.png');
+	await expect(page).toHaveScreenshot('13-hide_unused_entities.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_UNUSED_ENTITIES, false);
 
@@ -201,7 +216,7 @@ test('Option: hide_reload_resources', async ({ page }) => {
 	await turnBooleanState(page, ENTITIES.HIDE_RELOAD_RESOURCES, true);
 
 	await expect(page.locator(SELECTORS.MENU_RELOAD_RESOURCES_ITEM)).toBeHidden();
-	await expect(page).toHaveScreenshot('13-hide_reload_resources.png');
+	await expect(page).toHaveScreenshot('14-hide_reload_resources.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_RELOAD_RESOURCES, false);
 
@@ -218,7 +233,7 @@ test('Option: hide_edit_dashboard', async ({ page }) => {
 	await turnBooleanState(page, ENTITIES.HIDE_EDIT_DASHBOARD, true);
 
 	await expect(page.locator(SELECTORS.MENU_EDIT_DASHBOARD_ITEM)).toBeHidden();
-	await expect(page).toHaveScreenshot('14-hide_edit_dashboard.png');
+	await expect(page).toHaveScreenshot('15-hide_edit_dashboard.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_EDIT_DASHBOARD, false);
 

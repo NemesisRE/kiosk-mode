@@ -12,6 +12,8 @@ kiosk_hide_account:
   name: Kiosk hide account
 kiosk_hide_notifications:
   name: Kiosk hide notifications
+kiosk_hide_add_to_home_assistant:
+  name: Kiosk hide add to Home Assistant
 kiosk_hide_search:
   name: Kiosk hide search
 kiosk_hide_assistant:

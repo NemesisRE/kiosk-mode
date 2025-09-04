@@ -111,7 +111,7 @@ views:
 |`hide_header`<sup>1</sup>                   | Boolean | false   | Hides only the header. |
 |`hide_sidebar`                              | Boolean | false   | Hides only the sidebar. |
 |`hide_menubutton`<sup>1</sup>               | Boolean | false   | Hides only the sidebar menu icon. |
-|`hide_notifications`                        | Boolean | false   | Hide the notifications entry-point. |
+|`hide_notifications`                        | Boolean | false   | Hides the notifications entry-point. |
 |`hide_account`                              | Boolean | false   | Hides the account icon. |
 |`hide_search`                               | Boolean | false   | Hides the search icon. |
 |`hide_assistant`                            | Boolean | false   | Hides the assistant icon. |
@@ -121,6 +121,7 @@ views:
 |`hide_unused_entities`                      | Boolean | false   | Hides the "Unused entities" button inside the top right overflow menu in lovelace yaml mode. |
 |`hide_reload_resources`                     | Boolean | false   | Hides the "Reload resources" button inside the top right overflow menu in lovelace yaml mode. |
 |`hide_edit_dashboard`                       | Boolean | false   | Hides the "Edit dashboard" button inside the top right overflow menu. |
+|`hide_add_to_home_assistant`                | Boolean | false   | Hides the "Add to Home Assistant" overflow menu |
 |`block_mouse`                               | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
 |`block_context_menu`                        | Boolean | false   | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices). |
 |`hide_dialog_header_breadcrumb_navigation`<sup>2</sup>| Boolean | false   | Hides the breadcrumb navigation over the title of more-info dialogs |
@@ -170,20 +171,21 @@ views:
 <br>*Lovelace dashboard*
 <br>
 
-| Options              | Hides / Blocks      |
-|:---------------------|:--------------------|
-| `kiosk`              | 1 and 2             |
-| `hide_header`        | 1                   |
-| `hide_sidebar`       | 2                   |
-| `hide_menubutton`    | 3                   |
-| `hide_notifications` | 4                   |
-| `hide_account`       | 5                   |
-| `hide_search`        | 6                   |
-| `hide_assistant`     | 7                   |
-| `hide_overflow`      | 8                   |
-| `block_overflow`     | 8                   |
-| `block_mouse`        | whole interface     |
-| `block_context_menu` | right click anywhere|
+| Options                      | Hides / Blocks       |
+|:-----------------------------|:---------------------|
+| `kiosk`                      | 1 and 2              |
+| `hide_header`                | 1                    |
+| `hide_sidebar`               | 2                    |
+| `hide_menubutton`            | 3                    |
+| `hide_notifications`         | 4                    |
+| `hide_account`               | 5                    |
+| `hide_add_to_home_assistant` | 6                    | 
+| `hide_search`                | 7                    |
+| `hide_assistant`             | 8                    |
+| `hide_overflow`              | 9                    |
+| `block_overflow`             | 9                    |
+| `block_mouse`                | whole interface      |
+| `block_context_menu`         | right click anywhere |
 
 <br>
 
@@ -193,10 +195,10 @@ views:
 
 | Options                 | Hides |
 |:------------------------|:------|
-| `hide_refresh`          | 9     |
-| `hide_unused_entities`  | 10    |
-| `hide_reload_resources` | 11    |
-| `hide_edit_dashboard`   | 12    |
+| `hide_refresh`          | 10    |
+| `hide_unused_entities`  | 11    |
+| `hide_reload_resources` | 12    |
+| `hide_edit_dashboard`   | 13    |
 
 <br>
 
@@ -206,12 +208,12 @@ views:
 
 | Options                                    | Hides |
 |:-------------------------------------------|:------|
-| `hide_dialog_header_breadcrumb_navigation` | 13    |
-| `hide_dialog_header_action_items`          | 14    |
-| `hide_dialog_header_history`               | 15    |
-| `hide_dialog_header_settings`              | 16    |
-| `hide_dialog_header_overflow`              | 17    |
-| `hide_dialog_media_actions`                | 18    |
+| `hide_dialog_header_breadcrumb_navigation` | 14    |
+| `hide_dialog_header_action_items`          | 15    |
+| `hide_dialog_header_history`               | 16    |
+| `hide_dialog_header_settings`              | 17    |
+| `hide_dialog_header_overflow`              | 18    |
+| `hide_dialog_media_actions`                | 19    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-climate-entity.png)
@@ -220,9 +222,9 @@ views:
 
 | Options                                   | Hides |
 |:------------------------------------------|:------|
-| `hide_dialog_climate_actions`             | 19    |
-| `hide_dialog_climate_temperature_actions` | 20    |
-| `hide_dialog_climate_settings_actions`    | 21    |
+| `hide_dialog_climate_actions`             | 20    |
+| `hide_dialog_climate_temperature_actions` | 21    |
+| `hide_dialog_climate_settings_actions`    | 22    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-light-entity.png)
@@ -231,20 +233,28 @@ views:
 
 | Options                                   | Hides |
 |:------------------------------------------|:------|
-| `hide_dialog_light_actions`               | 22    |
-| `hide_dialog_light_control_actions`       | 23    |
-| `hide_dialog_light_color_actions`         | 24    |
-| `hide_dialog_light_settings_actions`      | 25    |
+| `hide_dialog_light_actions`               | 23    |
+| `hide_dialog_light_control_actions`       | 24    |
+| `hide_dialog_light_color_actions`         | 25    |
+| `hide_dialog_light_settings_actions`      | 26    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-update-entity.png)
-<br>*More info dialog (update entity / timer entity)*
+<br>*More info dialog (update entity)*
 <br>
 
 | Options                      | Hides |
 |:-----------------------------|:------|
-| `hide_dialog_update_actions` | 26    |
-| `hide_dialog_timer_actions`  | 26    |
+| `hide_dialog_update_actions` | 27    |
+<br>
+
+![Lovelace Dashboard](images/more-info-dialog-timer-entity.png)
+<br>*More info dialog (timer entity)*
+<br>
+
+| Options                      | Hides |
+|:-----------------------------|:------|
+| `hide_dialog_timer_actions`  | 28    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-history-logbook-attributes.png)
@@ -253,11 +263,11 @@ views:
 
 | Options                         | Hides |
 |:--------------------------------|:------|
-| `hide_dialog_history`           | 27    |
-| `hide_dialog_logbook`           | 28    |
-| `hide_dialog_attributes`        | 29    |
-| `hide_dialog_history_show_more` | 30    |
-| `hide_dialog_logbook_show_more` | 31    |
+| `hide_dialog_history`           | 29    |
+| `hide_dialog_logbook`           | 30    |
+| `hide_dialog_attributes`        | 31    |
+| `hide_dialog_history_show_more` | 32    |
+| `hide_dialog_logbook_show_more` | 33    |
 
 <br>
 
@@ -372,6 +382,7 @@ The query string options are:
 * `?hide_menubutton` to hide sidebar menu button
 * `?hide_notifications` to hide the notifications entry-point
 * `?hide_account` to hide the account icon
+* `?hide_add_to_home_assistant` to hide the "Add to Home Assistant" overflow
 * `?hide_search` to hide the search icon
 * `?hide_assistant` to hide the assistant icon
 * `?hide_overflow` to hide the top right menu

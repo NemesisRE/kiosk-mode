@@ -83,13 +83,17 @@ export const STYLES = {
 	},
 	ASIDE: getDisplayNoneRules('.mdc-drawer'),
 	OVERFLOW_MENU: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.OVERFLOW}"]`
 	),
 	BLOCK_OVERFLOW: {
 		[`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`]: {
 			'pointer-events': 'none !important'
 		}
 	},
+	ADD_TO_HOME_ASSISTANT: getDisplayNoneRules(
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.ADD}"]`,
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ADD}"]`
+	),
 	SEARCH: getDisplayNoneRules(
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-tooltip[data-selector="${MENU.SEARCH}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.SEARCH}"]`
@@ -136,7 +140,8 @@ export const STYLES = {
 	DIALOG_TIMER_ACTIONS: getDisplayNoneRules('.actions'),
 	DIALOG_UPDATE_ACTIONS: getDisplayNoneRules(
 		'.actions',
-		`hr:has(+ .actions)`
+		'ha-md-list:has(+ .actions)',
+		'hr:has(+ .actions)'
 	),
 	DIALOG_CAMERA_ACTIONS: getDisplayNoneRules('.actions'),
 	DIALOG_CLIMATE_CONTROL_SELECT: getDisplayNoneRules(
