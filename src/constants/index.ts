@@ -44,9 +44,13 @@ export enum OPTION {
 }
 
 export enum CONDITIONAL_OPTION {
-    IGNORE_ENTITY_SETTINGS = 'ignore_entity_settings',
     IGNORE_MOBILE_SETTINGS = 'ignore_mobile_settings',
     IGNORE_DISABLE_KM = 'ignore_disable_km'
+}
+
+export enum DEBUG_CONFIG_OPTION {
+    DEBUG = 'debug',
+    DEBUG_TEMPLATE = 'debug_template'
 }
 
 export enum SPECIAL_QUERY_PARAMS {
@@ -123,7 +127,6 @@ export enum ELEMENT {
     HA_DIALOG_LOCK = 'more-info-lock',
     HA_DIALOG_CLIMATE = 'more-info-climate',
     HA_DIALOG_CLIMATE_CONTROL_SELECT = 'ha-more-info-control-select-container',
-    HA_DIALOG_CLIMATE_TEMPERATURE = 'ha-more-info-climate-temperature', // Home Assistant < 2023.12.0
     HA_STATE_CONTROL_CLIMATE_TEMPERATURE = 'ha-state-control-climate-temperature',
     HA_DIALOG_CLIMATE_TEMPERATURE_BUTTONS = '.buttons',
     HA_DIALOG_CLIMATE_CIRCULAR_SLIDER = 'ha-control-circular-slider',
@@ -141,11 +144,14 @@ export enum ELEMENT {
 export const RESOURCE_WITH_SUFFIX_REGEXP = /^(.*?)( \([A-Z]\))?$/;
 
 export const TRUE = 'true';
+export const JS_TEMPLATE_REG = /^\s*\[\[\[([\s\S]+)\]\]\]\s*$/;
+export const JINJA_TEMPLATE_REG = /\{\{[\s\S]*\}\}|\{%[\s\S]*%\}/;
 export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;
-export const SUSCRIBE_EVENTS_TYPE = 'subscribe_events';
-export const STATE_CHANGED_EVENT = 'state_changed';
 export const TOGGLE_MENU_EVENT = 'hass-toggle-menu';
 export const MC_DRAWER_CLOSED_EVENT = 'MDCDrawer:closed';
+export const CONTEXT_MENU_EVENT = 'contextmenu';
+export const RENDER_TEMPLATE_EVENT = 'render_template';
+export const RESIZE_EVENT = 'resize';
 export const MAX_ATTEMPTS = 500;
 export const RETRY_DELAY = 50;
 export const WINDOW_RESIZE_DELAY = 250;

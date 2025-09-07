@@ -1,119 +1,44 @@
 kiosk_mode:
-  entity_settings:
-    - entity:
-        input_boolean.kiosk: 'on'
-      kiosk: true
-    - entity:
-        input_boolean.kiosk_hide_header: 'on'
-      hide_header: true
-    - entity:
-        input_boolean.kiosk_hide_sidebar: 'on'
-      hide_sidebar: true
-    - entity:
-        input_boolean.kiosk_hide_menubutton: 'on'
-      hide_menubutton: true
-    - entity:
-        input_boolean.kiosk_hide_overflow: 'on'
-      hide_overflow: true
-    - entity:
-        input_boolean.kiosk_hide_notifications: 'on'
-      hide_notifications: true
-    - entity:
-        input_boolean.kiosk_hide_account: 'on'
-      hide_account: true
-    - entity:
-        input_boolean.kiosk_hide_add_to_home_assistant: 'on'
-      hide_add_to_home_assistant: true
-    - entity:
-        input_boolean.kiosk_hide_search: 'on'
-      hide_search: true
-    - entity:
-        input_boolean.kiosk_hide_assistant: 'on'
-      hide_assistant: true
-    - entity:
-        input_boolean.kiosk_hide_edit_dashboard: 'on'
-      hide_edit_dashboard: true
-    - entity:
-        input_boolean.kiosk_hide_refresh: 'on'
-      hide_refresh: true
-    - entity:
-        input_boolean.kiosk_hide_unused_entities: 'on'
-      hide_unused_entities: true
-    - entity:
-        input_boolean.kiosk_hide_reload_resources: 'on'
-      hide_reload_resources: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_header_breadcrumb_navigation: 'on'
-      hide_dialog_header_breadcrumb_navigation: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_header_history: 'on'
-      hide_dialog_header_history: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_header_settings: 'on'
-      hide_dialog_header_settings: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_header_action_items: 'on'
-      hide_dialog_header_action_items: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_header_overflow: 'on'
-      hide_dialog_header_overflow: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_history: 'on'
-      hide_dialog_history: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_logbook: 'on'
-      hide_dialog_logbook: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_attributes: 'on'
-      hide_dialog_attributes: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_update_actions: 'on'
-      hide_dialog_update_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_camera_actions: 'on'
-      hide_dialog_camera_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_media_actions: 'on'
-      hide_dialog_media_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_timer_actions: 'on'
-      hide_dialog_timer_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_climate_actions: 'on'
-      hide_dialog_climate_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_climate_temperature_actions: 'on'
-      hide_dialog_climate_temperature_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_climate_settings_actions: 'on'
-      hide_dialog_climate_settings_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_light_actions: 'on'
-      hide_dialog_light_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_light_control_actions: 'on'
-      hide_dialog_light_control_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_light_color_actions: 'on'
-      hide_dialog_light_color_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_light_settings_actions: 'on'
-      hide_dialog_light_settings_actions: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_history_show_more: 'on'
-      hide_dialog_history_show_more: true
-    - entity:
-        input_boolean.kiosk_hide_dialog_logbook_show_more: 'on'
-      hide_dialog_logbook_show_more: true
-    - entity:
-        input_boolean.kiosk_block_overflow: 'on'
-      block_overflow: true
-    - entity:
-        input_boolean.kiosk_block_mouse: 'on'
-      block_mouse: true
-    - entity:
-        input_boolean.kiosk_block_context_menu: 'on'
-      block_context_menu: true
+  debug: true
+  debug_template: "[[[ is_state('input_boolean.kiosk', 'on') ? 'yes' : 'no' ]]]"
+  kiosk: "{{ is_state('input_boolean.kiosk', 'on') }}"
+  hide_header: "[[[ is_state('input_boolean.kiosk_hide_header', 'on') ]]]"
+  hide_sidebar: "{{ is_state('input_boolean.kiosk_hide_sidebar', 'on') }}"
+  hide_menubutton: "[[[ is_state('input_boolean.kiosk_hide_menubutton', 'on') ]]]"
+  hide_overflow: "{{ is_state('input_boolean.kiosk_hide_overflow', 'on') }}"
+  hide_notifications: "{{ is_state('input_boolean.kiosk_hide_notifications', 'on') }}"
+  hide_account: "{{ is_state('input_boolean.kiosk_hide_account', 'on') }}"
+  hide_add_to_home_assistant: "[[[ is_state('input_boolean.kiosk_hide_add_to_home_assistant', 'on') ]]]"
+  hide_search: "[[[ is_state('input_boolean.kiosk_hide_search', 'on') ]]]"
+  hide_assistant: "{{ is_state('input_boolean.kiosk_hide_assistant', 'on') }}"
+  hide_edit_dashboard: "{{ is_state('input_boolean.kiosk_hide_edit_dashboard', 'on') }}"
+  hide_refresh: "{{ is_state('input_boolean.kiosk_hide_refresh', 'on') }}"
+  hide_unused_entities: "[[[ is_state('input_boolean.kiosk_hide_unused_entities', 'on') ]]]"
+  hide_reload_resources: "{{ is_state('input_boolean.kiosk_hide_reload_resources', 'on') }}"
+  hide_dialog_header_breadcrumb_navigation: "{{ is_state('input_boolean.kiosk_hide_dialog_header_breadcrumb_navigation', 'on') }}"
+  hide_dialog_header_history: "{{ is_state('input_boolean.kiosk_hide_dialog_header_history', 'on') }}"
+  hide_dialog_header_settings: "{{ is_state('input_boolean.kiosk_hide_dialog_header_settings', 'on') }}"
+  hide_dialog_header_action_items: "{{ is_state('input_boolean.kiosk_hide_dialog_header_action_items', 'on') }}"
+  hide_dialog_header_overflow: "{{ is_state('input_boolean.kiosk_hide_dialog_header_overflow', 'on') }}"
+  hide_dialog_history: "{{ is_state('input_boolean.kiosk_hide_dialog_history', 'on') }}"
+  hide_dialog_logbook: "{{ is_state('input_boolean.kiosk_hide_dialog_logbook', 'on') }}"
+  hide_dialog_attributes: "{{ is_state('input_boolean.kiosk_hide_dialog_attributes', 'on') }}"
+  hide_dialog_update_actions: "{{ is_state('input_boolean.kiosk_hide_dialog_update_actions', 'on') }}"
+  hide_dialog_camera_actions: "[[[ is_state('input_boolean.kiosk_hide_dialog_camera_actions', 'on') ]]]"
+  hide_dialog_media_actions: "[[[ is_state('input_boolean.kiosk_hide_dialog_media_actions', 'on') ]]]"
+  hide_dialog_timer_actions: "{{ is_state('input_boolean.kiosk_hide_dialog_timer_actions', 'on') }}"
+  hide_dialog_climate_actions: "{{ is_state('input_boolean.kiosk_hide_dialog_climate_actions', 'on') }}"
+  hide_dialog_climate_temperature_actions: "[[[ is_state('input_boolean.kiosk_hide_dialog_climate_temperature_actions', 'on') ]]]"
+  hide_dialog_climate_settings_actions: "{{ is_state('input_boolean.kiosk_hide_dialog_climate_settings_actions', 'on') }}"
+  hide_dialog_light_actions: "[[[ is_state('input_boolean.kiosk_hide_dialog_light_actions', 'on') ]]]"
+  hide_dialog_light_control_actions: "{{ is_state('input_boolean.kiosk_hide_dialog_light_control_actions', 'on') }}"
+  hide_dialog_light_color_actions: "[[[ is_state('input_boolean.kiosk_hide_dialog_light_color_actions', 'on') ]]]"
+  hide_dialog_light_settings_actions: "{{ is_state('input_boolean.kiosk_hide_dialog_light_settings_actions', 'on') }}"
+  hide_dialog_history_show_more: "{{ is_state('input_boolean.kiosk_hide_dialog_history_show_more', 'on') }}"
+  hide_dialog_logbook_show_more: "{{ is_state('input_boolean.kiosk_hide_dialog_logbook_show_more', 'on') }}"
+  block_overflow: "{{ is_state('input_boolean.kiosk_block_overflow', 'on') }}"
+  block_mouse: "{{ is_state('input_boolean.kiosk_block_mouse', 'on') }}"
+  block_context_menu: "{{ is_state('input_boolean.kiosk_block_context_menu', 'on') }}"
 title: Kiosk-mode Overview
 views:
   - theme: Backend-selected

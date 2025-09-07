@@ -95,59 +95,64 @@ frontend:
 
 YAML mode users need to add the configuration manually to the lovelace dashboard file in which they want to enable `kiosk-mode`. Non-YAML users (Storage Mode) need to add the configuration to each lovelace panel going to `Edit dashboard` option (pencil icon on the top-right of the screen). Once in `Edit Dashboard` mode, click on the top-right three-dots button and select `Raw configuration editor`.
 
-```
+```yaml
 kiosk_mode:
   hide_header: true
-  
+  hide_sidebar: '{{ is_state("input_boolean.hide_sidebar", "on") }}'
 views:
 ```
 *Note: `views:` is added in the example above to show where `kiosk_mode:` should be placed in your Lovelace config*<br><br>
 
 ## Config Options
 
-| Config Option                              | Type    | Default | Description |
-|:-------------------------------------------|:--------|:--------|:------------|
-|`kiosk`                                     | Boolean | false   | Hides both the header and sidebar. |
-|`hide_header`<sup>1</sup>                   | Boolean | false   | Hides only the header. |
-|`hide_sidebar`                              | Boolean | false   | Hides only the sidebar. |
-|`hide_menubutton`<sup>1</sup>               | Boolean | false   | Hides only the sidebar menu icon. |
-|`hide_notifications`                        | Boolean | false   | Hides the notifications entry-point. |
-|`hide_account`                              | Boolean | false   | Hides the account icon. |
-|`hide_search`                               | Boolean | false   | Hides the search icon. |
-|`hide_assistant`                            | Boolean | false   | Hides the assistant icon. |
-|`hide_overflow`                             | Boolean | false   | Hides the top right overflow menu. |
-|`block_overflow`                            | Boolean | false   | Blocks the top right overflow menu mouse interactions. |
-|`hide_refresh`                              | Boolean | false   | Hides the "Refresh" button inside the top right overflow menu in lovelace yaml mode. |
-|`hide_unused_entities`                      | Boolean | false   | Hides the "Unused entities" button inside the top right overflow menu in lovelace yaml mode. |
-|`hide_reload_resources`                     | Boolean | false   | Hides the "Reload resources" button inside the top right overflow menu in lovelace yaml mode. |
-|`hide_edit_dashboard`                       | Boolean | false   | Hides the "Edit dashboard" button inside the top right overflow menu. |
-|`hide_add_to_home_assistant`                | Boolean | false   | Hides the "Add to Home Assistant" overflow menu |
-|`block_mouse`                               | Boolean | false   | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
-|`block_context_menu`                        | Boolean | false   | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices). |
-|`hide_dialog_header_breadcrumb_navigation`<sup>2</sup>| Boolean | false   | Hides the breadcrumb navigation over the title of more-info dialogs |
-|`hide_dialog_header_history`                | Boolean | false   | Hides the "History" icon in the header of more-info dialogs. |
-|`hide_dialog_header_settings`<sup>3</sup>   | Boolean | false   | Hides the "Settings" icon in the header of more-info dialogs. |
-|`hide_dialog_header_overflow`<sup>3</sup>   | Boolean | false   | Hides the top right overflow menu in the header of more-info dialogs. |
-|`hide_dialog_header_action_items`           | Boolean | false   | Hides all the action items from the header of more-info dialogs. |
-|`hide_dialog_history`                       | Boolean | false   | Hides the "History" section in the more-info dialogs. |
-|`hide_dialog_history_show_more`             | Boolean | false   | Hides the "Show more" link in the "History" section of more-info dialogs.  |
-|`hide_dialog_logbook`                       | Boolean | false   | Hides the "Logbook" section in the more-info dialogs. |
-|`hide_dialog_logbook_show_more`             | Boolean | false   | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
-|`hide_dialog_attributes`                    | Boolean | false   | Hides the "Attributes" section in the more-info dialogs. |
-|`hide_dialog_media_actions`                 | Boolean | false   | Hides the actions block in the more-info dialogs of media-player entities. |
-|`hide_dialog_update_actions`                | Boolean | false   | Hides the actions block in the more-info dialogs of update entities. |
-|`hide_dialog_camera_actions`                | Boolean | false   | Hides the actions block in the more-info dialogs of camera entities. |
-|`hide_dialog_timer_actions`                 | Boolean | false   | Hides the actions block in the more-info dialogs of timer entities. |
-|`hide_dialog_climate_actions`               | Boolean | false   | Hides all the actions in the more-info dialogs of climate entities. |
-|`hide_dialog_climate_temperature_actions`   | Boolean | false   | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
-|`hide_dialog_climate_settings_actions`      | Boolean | false   | Hides the mode and preset actions in the more-info dialogs of climate entities. |
-|`hide_dialog_light_actions`                 | Boolean | false   | Hides all the actions in the more-info dialogs of light entities. |
-|`hide_dialog_light_control_actions`         | Boolean | false   | Hides the control actions in the more-info dialogs of light entities. |
-|`hide_dialog_light_color_actions`           | Boolean | false   | Hides the favorite colors actions in the more-info dialogs of light entities. |
-|`hide_dialog_light_settings_actions`        | Boolean | false   | Hides the settings actions in the more-info dialogs of light entities. |
-|`ignore_entity_settings`<sup>4</sup>        | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `entity_settings` to be ignored. |
-|`ignore_mobile_settings`<sup>5</sup>        | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
-|`ignore_disable_km`<sup>4</sup>             | Boolean | false   | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
+All the options, excluding `debug_template`, can be set as a boolean and all of them are `false` by default. Excluding `ignore_mobile_settings` and `ignore_disable_km`, all the options can be set as a [JavaScript](#javascript-templates) or a [Jinja](#jinja-templates) template that returns a boolean.
+
+>**Note:** If you set the option as a string but it is not a valid [JavaScript](#javascript-templates) or [Jinja](#jinja-templates) template, the library will throw an error. If you set a `JavaScript` or a `Jinja` template and it doesn't return a boolean, the option will be set as false and a warning will be thrown.
+
+| Config Option                                        | Description |
+|:-----------------------------------------------------|:------------|
+|`kiosk`                                               | Hides both the header and sidebar. |
+|`hide_header`<sup>1</sup>                             | Hides only the header. |
+|`hide_sidebar`                                        | Hides only the sidebar. |
+|`hide_menubutton`<sup>1</sup>                         | Hides only the sidebar menu icon. |
+|`hide_notifications`                                  | Hides the notifications entry-point. |
+|`hide_account`                                        | Hides the account icon. |
+|`hide_search`                                         | Hides the search icon. |
+|`hide_assistant`                                      | Hides the assistant icon. |
+|`hide_overflow`                                       | Hides the top right overflow menu. |
+|`block_overflow`                                      | Blocks the top right overflow menu mouse interactions. |
+|`hide_refresh`                                        | Hides the "Refresh" button inside the top right overflow menu in lovelace yaml mode. |
+|`hide_unused_entities`                                | Hides the "Unused entities" button inside the top right overflow menu in lovelace yaml mode. |
+|`hide_reload_resources`                               | Hides the "Reload resources" button inside the top right overflow menu in lovelace yaml mode. |
+|`hide_edit_dashboard`                                 | Hides the "Edit dashboard" button inside the top right overflow menu. |
+|`hide_add_to_home_assistant`                          | Hides the "Add to Home Assistant" overflow menu |
+|`block_mouse`                                         | Blocks completely the mouse. No interaction is allowed and the mouse will not be visible. **Can only be disabled with `?disable_km` query parameter in the URL.**. |
+|`block_context_menu`                                  | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices).|
+|`hide_dialog_header_breadcrumb_navigation`<sup>2</sup>| Hides the breadcrumb navigation over the title of more-info dialogs |
+|`hide_dialog_header_history`                          | Hides the "History" icon in the header of more-info dialogs. |
+|`hide_dialog_header_settings`<sup>3</sup>             | Hides the "Settings" icon in the header of more-info dialogs. |
+|`hide_dialog_header_overflow`<sup>3</sup>             | Hides the top right overflow menu in the header of more-info dialogs. |
+|`hide_dialog_header_action_items`                     | Hides all the action items from the header of more-info dialogs. |
+|`hide_dialog_history`                                 | Hides the "History" section in the more-info dialogs. |
+|`hide_dialog_history_show_more`                       | Hides the "Show more" link in the "History" section of more-info dialogs.  |
+|`hide_dialog_logbook`                                 | Hides the "Logbook" section in the more-info dialogs. |
+|`hide_dialog_logbook_show_more`                       | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
+|`hide_dialog_attributes`                              | Hides the "Attributes" section in the more-info dialogs. |
+|`hide_dialog_media_actions`                           | Hides the actions block in the more-info dialogs of media-player entities. |
+|`hide_dialog_update_actions`                          | Hides the actions block in the more-info dialogs of update entities. |
+|`hide_dialog_camera_actions`                          | Hides the actions block in the more-info dialogs of camera entities. |
+|`hide_dialog_timer_actions`                           | Hides the actions block in the more-info dialogs of timer entities. |
+|`hide_dialog_climate_actions`                         | Hides all the actions in the more-info dialogs of climate entities. |
+|`hide_dialog_climate_temperature_actions`             | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
+|`hide_dialog_climate_settings_actions`                | Hides the mode and preset actions in the more-info dialogs of climate entities. |
+|`hide_dialog_light_actions`                           | Hides all the actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_control_actions`                   | Hides the control actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_color_actions`                     | Hides the favorite colors actions in the more-info dialogs of light entities. |
+|`hide_dialog_light_settings_actions`                  | Hides the settings actions in the more-info dialogs of light entities. |
+|`ignore_disable_km`<sup>4</sup>                       | Useful for [conditional configs](#conditional-lovelace-config) and will cause `disable_km` URL parameter to be ignored. |
+|`ignore_mobile_settings`<sup>4, 5</sup>               | Useful for [conditional configs](#conditional-lovelace-config) and will cause `mobile_settings` to be ignored. |
+|`debug`<sup>6</sup>                                   | Useful for debugging purposes. Check the [debugging section](#debugging). |
+|`debug_template`<sup>6</sup>                          | Useful for debugging purposes. Check the [debugging section](#debugging). |
 
 <br/>
 
@@ -155,12 +160,13 @@ views:
 >
 ><sup>2</sup> These elements are not clickable if the account is not an admin account.
 >
->
 ><sup>3</sup> These elements are not visible by default if the account is not an admin account.
 >
-><sup>4</sup> These options only work if they are placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings), [user_settings](#user_settings) or [mobile_settings](#mobile_settings). They will not have any effect if they are placed inside [entity_settings](#entity_settings)
+><sup>4</sup> These options should be booleans. If you try to set them as a [JavaScript](#javascript-templates) or a [Jinja](#jinja-templates) template, an error will be thrown.
 >
-><sup>5</sup> This option only works if it is placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings) or [user_settings](#user_settings). It will not have any effect if it is placed inside [mobile_settings](#mobile_settings) or [entity_settings](#entity_settings)
+><sup>5</sup> This option only works if it is placed inside [admin_settings](#admin_settings), [non_admin_settings](#non_admin_settings) or [user_settings](#user_settings). It will not have any effect if it is placed inside [mobile_settings](#mobile_settings).
+>
+><sup>6</sup> These options will not change anything in the UI. They will log messages in the browser console.
 
 <br/>
 
@@ -271,13 +277,83 @@ views:
 
 <br>
 
+## Templates in options
+
+Most of the config options admit templates. `kiosk-mode` admits two templating systems, [JavaScript templates](#javascript-templates) or [Jinja templates](#jinja-templates). `JavaScript` templates are processed faster because the rendering is done in client side, `Jinja` templates need to perform a [websocket call] to receive the template result, but in general you should not notice many differences between the two in terms of performance. The main difference between the two templating systems (apart from the syntax) is that `JavaScript` can access client side data like DOM APIs meanwhile `Jinja` templates are almost agnostic to the device in which `Home Assistant` is being executed.
+
+>**Note:** Regardless of the template system that you use, remember that the template must return a `boolean`, if it doesn't return a boolean it will be ignored.
+
+### JavaScript templates
+
+This templating system IS NOT [the same that Home Assistant implements](https://www.home-assistant.io/docs/configuration/templating). It is basically a `JavaScript` code block in which you can use certain client-side objects, variables and methods. To set a property as a `JavaScript` template block, include the code between three square brackets `[[[ JavaScript code ]]]`. If you don‘t use the square brackets, then you will receive an error because the string will not be recognise as a template.
+
+The `JavaScript` code will be taken as something that you want to return, but if you have a more complex logic, you can create your own variables and return the desired result at the end.
+
+The entities and domains used in the templates will be stored, so if the state of these entities change, it will update the templates used in the options.
+
+#### JavaScript templates example
+
+```yaml
+kiosk_mode:
+  hide_header: '[[[ user_name === "ElChiniNet" ]]]'
+  hide_sidebar: '[[[ is_state("input_boolean.hide_sidebar", "on") ]]]'
+```
+
+>Note: `kiosk-mode` uses [Home Assistant Javascript Templates] for the `JavaScript` templating system. To know all the objects, variables and methods available in the `JavaScript` templates, consult the [proper section](https://github.com/elchininet/home-assistant-javascript-templates?tab=readme-ov-file#objects-and-methods-available-in-the-templates) in the repository.
+
+### Jinja templates
+
+This templating system is [the same that Home Assistant implements](https://www.home-assistant.io/docs/configuration/templating). You can use the majority of the template methods and objects. The entire template will be processed, rendered and the result will be used in the desired option. `Jinja templates` don't have access to client side variables or DOM APIs, but the next client side varianles will be available:
+
+* `user_name`: String with the logged user's name
+* `user_is_admin`: Bolean value than indicates if the logged user is admin or not
+* `user_is_owner`: Bolean value than indicates if the logged user is the owner or not
+* `user_agent`: User agent of the browser in which Home Assistant is being executed
+
+#### Jinja templates example
+
+```yaml
+kiosk_mode:
+  hide_header: '{{ user_name == "ElChiniNet" }}'
+  hide_sidebar: '{{ is_state("input_boolean.hide_sidebar", "on") }}'
+```
+
+### Simplify your templates
+
+Using templates for the options gives a lot of flexibility and depending on your objectives you can omit the usage of the [conditional configs](#conditional-lovelace-config), so when you start to create conditional configurations, ask yourself if it can be achieved with templates. For example:
+
+```yaml
+kiosk_mode:
+  hide_sidebar: false
+  hide_header: false
+  user_settings:
+    - users:
+      - "ryan meek"
+      - "maykar"
+      hide_header: true
+  non_admin_settings:
+    hide_sidebar: true
+```
+
+Can be transformed into a simpler version:
+
+```yaml
+kiosk_mode:
+  hide_header: '{{ user_name in ("maykar", "ryan meek") }}'
+  hide_sidebar: '[[[ !user_is_admin ]]]'
+```
+
+Both options are valid. At the end, using one or the other is up to you.
+
+<br>
+
 ## Conditional Lovelace Config
 Contitional configs take priority and if a condition matches all other config options/methods are ignored.
 These use the same options as above, but placed under one of the following user/entity conditions:<br><br>
 
 ### admin_settings:
 Sets the config for every admin user.<br>
-*Overwritten by user_settings, mobile_settings, and entity_settings ( unless one of the ignore options is used ).*<br>
+*Overwritten by user_settings and mobile_settings ( unless `ignore_mobile_settings` is used ).*<br>
 
 ```
 kiosk_mode:
@@ -288,19 +364,18 @@ kiosk_mode:
 
 ### non_admin_settings:
 Sets the config for every regular user.<br>
-*Overwritten by user_settings, mobile_settings, and entity_settings ( unless one of the ignore options is used ).*<br>
+*Overwritten by user_settings and mobile_settings ( unless `ignore_mobile_settings` is used ).*<br>
 
 ```
 kiosk_mode:
   non_admin_settings:
     hide_header: true
-    ignore_entity_settings: true
 ```
 <br>
 
 ### user_settings:
 Sets the config for specific users. **This uses a user's name, not their username (if they're different)**.<br>
-*Overwritten by mobile_settings, and entity_settings ( unless one of the ignore options is used ).*<br>
+*Overwritten by mobile_settings ( unless `ignore_mobile_settings` is used ).*<br>
 
 ```
 kiosk_mode:
@@ -312,52 +387,17 @@ kiosk_mode:
     - users:
         - "the wife"
       kiosk: true
-      ignore_entity_settings: true
 ```
 <br>
 
 ### mobile_settings:
-Sets the config for mobile devices. The default breakpoint is 812px, which can be changed by setting the `custom_width` option.<br>
-*Overwritten by entity_settings, unless `ignore_entity_settings` is used, can be ignored with `ignore_mobile_settings`.*<br>
+Sets the config for mobile devices. The default breakpoint is `812px`, which can be changed by setting the `custom_width` option.<br>
 
 ```
 kiosk_mode:
   mobile_settings:
     hide_header: true
-    ignore_entity_settings: true
     custom_width: 768
-```
-<br>
-
-### entity_settings:
-Dynamically change config on any entity's state. Under `entity:` list the entity followed by the state that will enable the config below. For more complex logic use this with a template sensor.<br>
-*Takes priority over all other config settings unless they use `ignore_entity_settings`.*<br><br>
-
-*Any condition that doesn't match will then fall back to previous configurations if another "false" entity condition hasn't also been set (see the 2nd example).*
-```
-kiosk_mode:
-  entity_settings:
-    - entity:
-        input_boolean.hide_sidebar: 'on'
-      hide_sidebar: true
-    - entity:
-        sensor.hide_header: 'on'
-      hide_header: true
-    - entity:
-        input_text.kiosk: 'true'
-      kiosk: true
-```
-
-```
-kiosk_mode:
-  entity_settings:
-    # hide_sidebar has both true and false conditions to be a true override.
-    - entity:
-        input_boolean.hide_sidebar: 'on'
-      hide_sidebar: true
-    - entity:
-        input_boolean.hide_sidebar: 'off'
-      hide_sidebar: false
 ```
 <br>
 
@@ -424,10 +464,23 @@ You save settings in a devices cache by using the cache keyword once on the devi
 Example: `?hide_header&cache` makes all views & dashboards hide the header.<br>
 This works for all query strings except for the utility strings listed below.
 
+>**Note:** Do not use the query string cache if you are using Jinja templates for the options or you will get weird results.
+
 **Utility Query Strings**
 
 * `?clear_km_cache` will clear all cached preferences
 * `?disable_km` will temporarily disable any modifications (unless `ignore_disable_km` has been used in one of the [conditional configs](#conditional-lovelace-config))
+<br>
+
+## Debugging
+
+`Kiosk-mode` counts with two debugging options and each one has a different purpose:
+
+| Option | Description |
+| ------ | ----------- |
+| `debug` | Prints useful information in the console. The raw config loaded from the Lovelace panel, the resulting final config with all the options, and if a template is rendered, it will print the option that trigered the template, the template code and the evaluated result of it. |
+| `debug_template` | Useful to debug the result of a single template without activating the `debug` mode. |
+
 <br>
 
 ## Kiosk-mode demo
@@ -460,3 +513,6 @@ Big thank you to [matt8707](https://github.com/matt8707) for starting this proje
 Many thanks to [KTibow](https://github.com/KTibow) as well, for the github release action and support.
 
 And another big thanks to [maykar](https://github.com/maykar) for the original kiosk mode
+
+[Home Assistant Javascript Templates]: https://github.com/elchininet/home-assistant-javascript-templates
+[websocket call]: https://developers.home-assistant.io/docs/api/websocket
