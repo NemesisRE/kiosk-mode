@@ -679,27 +679,24 @@ class KioskMode implements KioskModeRunner {
 				addMenuItemsDataSelectors(buttonItemsTooltips, this.menuTranslations);
 			});
 
-		if (this.user.is_admin) {
+		this.HAElements.HEADER
+			.selector
+			.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`)
+			.all
+			.then((headerButtons: NodeListOf<HTMLElement>) => {
+				addHeaderButtonsDataSelectors(
+					headerButtons,
+					this.menuTranslations
+				);
+			});
 
-			this.HAElements.HEADER
-				.selector
-				.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`)
-				.all
-				.then((headerButtons: NodeListOf<HTMLElement>) => {
-					addHeaderButtonsDataSelectors(
-						headerButtons,
-						this.menuTranslations
-					);
-				});
-
-			this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} ${ELEMENT.OVERLAY_MENU_ITEM}`).all
-				.then((overflowMenuItems: NodeListOf<HTMLElement>) => {
-					addOverlayMenuItemsDataSelectors(
-						overflowMenuItems,
-						this.menuTranslations
-					);
-				});
-		}
+		this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} ${ELEMENT.OVERLAY_MENU_ITEM}`).all
+			.then((overflowMenuItems: NodeListOf<HTMLElement>) => {
+				addOverlayMenuItemsDataSelectors(
+					overflowMenuItems,
+					this.menuTranslations
+				);
+			});
 	}
 
 	// Run on entity change
