@@ -209,7 +209,10 @@ import { goToPageWithParams, goToPage } from './utils';
 	},
 	{
 		param: URL_PARAMS.HIDE_DIALOG_MEDIA_ACTIONS,
-		selector: DIALOGS_SELECTORS.MEDIA_ACTIONS,
+		selector: [
+			DIALOGS_SELECTORS.MEDIA_ACTIONS_MAIN,
+			DIALOGS_SELECTORS.MEDIA_ACTIONS_SECONDARY
+		],
 		entitySelector: SELECTORS.MEDIA_PLAYER_ENTITY_ROW
 	},
 	{

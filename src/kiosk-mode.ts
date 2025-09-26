@@ -11,7 +11,6 @@ import {
 	KioskModeRunner,
 	HomeAssistant,
 	User,
-	ButtonItemTooltip,
 	Lovelace,
 	KioskConfig,
 	ConditionalKioskConfig,
@@ -674,9 +673,9 @@ class KioskMode implements KioskModeRunner {
 
 		if (!this.menuTranslations) return;
 
-		this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.TOOLTIP}`).all
-			.then((buttonItemsTooltips: NodeListOf<ButtonItemTooltip>) => {
-				addMenuItemsDataSelectors(buttonItemsTooltips, this.menuTranslations);
+		this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`).all
+			.then((haIconButtons: NodeListOf<HTMLElement>) => {
+				addMenuItemsDataSelectors(haIconButtons, this.menuTranslations);
 			});
 
 		this.HAElements.HEADER

@@ -95,11 +95,11 @@ export const STYLES = {
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ADD}"]`
 	),
 	SEARCH: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-tooltip[data-selector="${MENU.SEARCH}"]`,
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.SEARCH}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.SEARCH}"]`
 	),
 	ASSISTANT: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ha-tooltip[data-selector="${MENU.ASSIST}"]`,
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.ASSIST}"]`,
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ASSIST}"]`
 	),
 	REFRESH: getDisplayNoneRules(
@@ -136,7 +136,9 @@ export const STYLES = {
 	DIALOG_ATTRIBUTES: getDisplayNoneRules(
 		ELEMENT.HA_DIALOG_ATTRIBUTES
 	),
-	DIALOG_MEDIA_ACTIONS: getDisplayNoneRules('.controls'),
+	DIALOG_MEDIA_ACTIONS: getDisplayNoneRules(
+		'.bottom-controls > :is(.main-controls, .controls-row)'
+	),
 	DIALOG_TIMER_ACTIONS: getDisplayNoneRules('.actions'),
 	DIALOG_UPDATE_ACTIONS: getDisplayNoneRules(
 		'.actions',

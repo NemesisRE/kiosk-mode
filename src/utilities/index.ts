@@ -1,8 +1,4 @@
-import {
-	HomeAssistant,
-	ButtonItemTooltip,
-	Version
-} from '@types';
+import { HomeAssistant, Version } from '@types';
 import { getPromisableResult } from 'get-promisable-result';
 import {
 	TRUE,
@@ -106,17 +102,21 @@ const getTranslationWithoutShorcutSuffix = (text: string): string => {
 };
 
 export const addMenuItemsDataSelectors = (
-	buttonItemsTooltips: NodeListOf<ButtonItemTooltip>,
+	haIconButtons: NodeListOf<HTMLElement>,
 	translations: Record<string, string>
 ): void => {
-	buttonItemsTooltips.forEach((buttonItemTooltip: ButtonItemTooltip): void => {
+	haIconButtons.forEach((haIconButton: HTMLElement): void => {
 		if (
-			buttonItemTooltip &&
-			buttonItemTooltip.dataset &&
-			!buttonItemTooltip.dataset.selector
+			haIconButton &&
+			haIconButton.dataset &&
+			!haIconButton.dataset.selector
 		) {
-			const translation = getTranslationWithoutShorcutSuffix(buttonItemTooltip.content);
-			buttonItemTooltip.dataset.selector = translations[translation];
+			const labelledBy = haIconButton.getAttribute('aria-labelledby');
+			if (!labelledBy) return;
+			const tooltip = haIconButton.parentElement.querySelector<HTMLElement>(`#${labelledBy.trim()}`);
+			if (!tooltip) return;
+			const translation = getTranslationWithoutShorcutSuffix(tooltip.textContent);
+			haIconButton.dataset.selector = translations[translation];
 		}
 	});
 };

@@ -97,7 +97,6 @@ export enum ELEMENT {
     HA_PANEL_LOVELACE = 'ha-panel-lovelace',
     HUI_VIEW = 'hui-view',
     MENU_ITEM = 'ha-icon-button',
-    TOOLTIP = 'ha-tooltip',
     MENU_ITEM_ICON = 'mwc-icon-button',
     BUTTON_MENU = 'ha-button-menu',
     OVERLAY_MENU_ITEM = 'ha-list-item',
