@@ -185,11 +185,13 @@ test('Option: hide_dialog_media_actions', async ({ page }) => {
 
 	await page.locator(SELECTORS.MEDIA_PLAYER_ENTITY_ROW).click();
 
-	await expect(page.locator(DIALOGS_SELECTORS.MEDIA_ACTIONS)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.MEDIA_ACTIONS_MAIN)).toBeVisible();
+	await expect(page.locator(DIALOGS_SELECTORS.MEDIA_ACTIONS_SECONDARY)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_MEDIA_ACTIONS, true);
 
-	await expect(page.locator(DIALOGS_SELECTORS.MEDIA_ACTIONS)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.MEDIA_ACTIONS_MAIN)).toBeHidden();
+	await expect(page.locator(DIALOGS_SELECTORS.MEDIA_ACTIONS_SECONDARY)).toBeHidden();
 	await expect(page).toHaveScreenshot('10-hide_dialog_media_actions.png');
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_MEDIA_ACTIONS, false);

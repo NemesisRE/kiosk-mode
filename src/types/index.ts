@@ -65,10 +65,6 @@ export class HomeAssistant extends HTMLElement {
     };
 }
 
-export class ButtonItemTooltip extends HTMLElement {
-	content: string;
-}
-
 export class Lovelace extends HTMLElement {
 	lovelace: {
         config: {
