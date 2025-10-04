@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { expect } from 'playwright-test-coverage';
-import { BASE_URL } from '../constants';
+import { BASE_URL, SELECTORS } from '../constants';
 
 interface Context {
     id: string;
@@ -15,7 +15,7 @@ interface HomeAssistant extends HTMLElement {
 
 export const goToPage = async (page: Page) => {
 	await page.goto('/');
-	await expect(page.locator('hui-view')).toBeVisible();
+	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
 };
 
 export const goToPageWithParams = async (page: Page, ...params: string[]) => {
@@ -40,6 +40,7 @@ export const turnBooleanState = async (
 			}
 		);
 	}, { entity, state });
+	await page.waitForTimeout(100);
 };
 
 export const getUrlWithParam = (...params: string[]) => `${BASE_URL}?${params.join('&')}`;

@@ -1,67 +1,67 @@
-import { OPTION, CONDITIONAL_OPTION } from '@constants';
+import { HomeAssistant, Hass } from 'home-assistant-javascript-templates';
+import {
+	OPTION,
+	CONDITIONAL_OPTION,
+	DEBUG_CONFIG_OPTION
+} from '@constants';
 
 export interface KioskModeRunner {
     run: (lovelace: HTMLElement) => Promise<void>;
     runDialogs: (dialog: Element) => void;
 }
 
-export interface User {
-    name: string;
-    is_admin: boolean;
-}
-
-export interface MobileSettings extends Exclude<ConditionalKioskConfig, 'ignore_mobile_settings'> {
-    hide_header: boolean;
+export interface MobileSettings extends Exclude<ConditionalConfig, 'ignore_mobile_settings'> {
     custom_width: number;
 }
 
-export interface UserSetting extends ConditionalKioskConfig {
+export interface UserSetting extends ConditionalConfig {
     users: string[];
 }
-
-export interface EntitySetting extends KioskConfig {
-    entity: Record<string, string>;
-}
-
-export type EntitySettings = EntitySetting[];
 
 type BaseKioskConfig = Partial<
     Record<
         OPTION,
-        boolean
+        boolean | string
+    >
+>;
+
+type DebugKioskConfig = Partial<
+    Record<
+        DEBUG_CONFIG_OPTION,
+        boolean | string
     >
 >;
 
 type BaseConditionalKioskConfig = Partial<
     Record<
         CONDITIONAL_OPTION,
+        boolean | string
+    >
+>;
+
+export type Options = Partial<
+    Record<
+        OPTION | CONDITIONAL_OPTION | DEBUG_CONFIG_OPTION,
         boolean
     >
 >;
 
-export interface KioskConfig extends BaseKioskConfig {
-    admin_settings?: ConditionalKioskConfig;
-    non_admin_settings?: ConditionalKioskConfig;
+export interface KioskConfig extends BaseKioskConfig, BaseConditionalKioskConfig, DebugKioskConfig {
+    admin_settings?: ConditionalConfig;
+    non_admin_settings?: ConditionalConfig;
     user_settings?: UserSetting[];
     mobile_settings?: MobileSettings;
-    entity_settings?: EntitySettings;
 }
 
-export type ConditionalKioskConfig = KioskConfig & BaseConditionalKioskConfig;
+export type ConditionalConfig = BaseKioskConfig & BaseConditionalKioskConfig;
 
-export interface EntityState {
-    state: string;
-}
-
-export class HomeAssistant extends HTMLElement {
-	hass: {
-        user: User;
+export interface HomeAsssistantExtended extends HomeAssistant {
+    hass: Hass & {
         config: {
             version: string;
         };
         localize: (path: string) => string;
         panelUrl: string;
-        states: Record<string, EntityState>;
     };
 }
 
@@ -79,35 +79,17 @@ export class HaSidebar extends HTMLElement {
 	appContent: HTMLElement;
 }
 
-export type SuscriberEvent = {
-    event_type: string;
-    data: {
-        entity_id: string;
-        old_state?: {
-            state: string;
-        };
-        new_state: {
-            state: string;
-        };
-    }
-};
-export type SuscriberCallback = (event: SuscriberEvent) => void;
-export type SuscriberOptions = {
-    type: string;
-    event_type: string;
-};
+export interface SubscriberTemplate {
+    result: string;
+}
 
-export interface HassConnection {
-    conn: {
-        subscribeMessage: (callback: SuscriberCallback, options: SuscriberOptions) => void;
-    }
+export interface MoreInfoDialog extends HTMLElement {
+    open: boolean;
 }
 
 declare global {
     interface Window {
-        kioskModeEntities: Record<string, string[]>;
         KioskMode: KioskModeRunner;
-        hassConnection: Promise<HassConnection>;
     }
 }
 
