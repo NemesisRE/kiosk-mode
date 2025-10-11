@@ -126,15 +126,22 @@ export const addHeaderButtonsDataSelectors = (
 	translations: Record<string, string>
 ) => {
 	headerButtons.forEach((headerButton: HTMLElement): void => {
-		const menuItem: HTMLElement | null = headerButton
-			.querySelector<HTMLElement>(ELEMENT.MENU_ITEM);
+		const menuItem: HTMLElement | null = headerButton.querySelector<HTMLElement>(ELEMENT.MENU_ITEM);
 		if (
 			menuItem &&
 			menuItem.dataset &&
 			!menuItem.dataset.selector
 		) {
-			const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-			menuItem.dataset.selector = translations[icon.title.trim()];
+			const labelledBy = menuItem.getAttribute('aria-labelledby');
+			if (labelledBy) {
+				const tooltip = headerButton.parentElement.querySelector<HTMLElement>(`#${labelledBy.trim()}`);
+				if (!tooltip) return;
+				const translation = getTranslationWithoutShorcutSuffix(tooltip.textContent);
+				menuItem.dataset.selector = translations[translation];
+			} else {
+				const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
+				menuItem.dataset.selector = translations[icon.title.trim()];
+			}
 		}
 	});
 };
