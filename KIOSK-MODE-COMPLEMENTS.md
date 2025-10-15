@@ -38,8 +38,8 @@ This method aligns the Home Assistant header tabs to the center. You need to use
 your-custom-theme:
   card-mod-theme: your-custom-theme
   card-mod-root-yaml: |
-    ha-tabs$: |
-      #tabsContainer {
+    .: |
+      .toolbar ha-tab-group {
         display: flex;
         justify-content: center;
       }
