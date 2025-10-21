@@ -309,7 +309,7 @@ class KioskMode implements KioskModeRunner {
 		}
 
 		// Mobile config
-		const mobileConfig = options[CONDITIONAL_OPTION.IGNORE_MOBILE_SETTINGS]
+		const mobileConfig = mergedConfig[CONDITIONAL_OPTION.IGNORE_MOBILE_SETTINGS]
 			? null
 			: config.mobile_settings;
 
@@ -326,7 +326,16 @@ class KioskMode implements KioskModeRunner {
 		}
 
 		if (this._isDebug(mergedConfig.debug)) {
-			ConsoleMessenger.debugFinalConfig(mergedConfig, this._getPanelUrl());
+			const {
+				/* eslint-disable @typescript-eslint/no-unused-vars */
+				admin_settings,
+				non_admin_settings,
+				user_settings,
+				mobile_settings,
+				/* eslint-enable @typescript-eslint/no-unused-vars */
+				...restConfig
+			} = mergedConfig;
+			ConsoleMessenger.debugFinalConfig(restConfig, this._getPanelUrl());
 		}
 
 		this.setOptions(options, mergedConfig);
