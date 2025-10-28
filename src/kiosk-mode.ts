@@ -796,12 +796,16 @@ class KioskMode implements KioskModeRunner {
 				this.setOptionsOrSubscribeToSetOptions(options, mergedConfig, option);
 			}
 		});
+		// Set ignore config in the options
+		if (CONDITIONAL_OPTION.IGNORE_DISABLE_KM in mergedConfig) {
+			this.setOptionsOrSubscribeToSetOptions(options, mergedConfig, CONDITIONAL_OPTION.IGNORE_DISABLE_KM);
+		}
 	}
 
 	protected setOptionsOrSubscribeToSetOptions(
 		options: Options,
 		mergedConfig: KioskConfig,
-		option: OPTION | DEBUG_CONFIG_OPTION
+		option: OPTION | DEBUG_CONFIG_OPTION | CONDITIONAL_OPTION
 	) {
 		const panelUrl = this._getPanelUrl();
 		const value = mergedConfig[option];
