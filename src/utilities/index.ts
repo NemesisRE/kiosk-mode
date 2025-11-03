@@ -140,7 +140,12 @@ export const addHeaderButtonsDataSelectors = (
 				menuItem.dataset.selector = translations[translation];
 			} else {
 				const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-				menuItem.dataset.selector = translations[icon.title.trim()];
+				if (icon.title) {
+					menuItem.dataset.selector = translations[icon.title.trim()];
+				} else {
+					const button = icon.shadowRoot.querySelector('button');
+					menuItem.dataset.selector = translations[button.getAttribute('aria-label').trim()];
+				}
 			}
 		}
 	});
