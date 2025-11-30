@@ -1,7 +1,8 @@
 name: Build and Release
+permissions:
+  contents: read
 
 on:
-  push:
     branches:
       - master
     tags:
