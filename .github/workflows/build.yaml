@@ -3,6 +3,7 @@ permissions:
   contents: read
 
 on:
+  push:
     branches:
       - master
     tags:
@@ -17,6 +18,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Check Event Type
         id: check-event
