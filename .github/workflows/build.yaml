@@ -1,4 +1,6 @@
 name: Build and Release
+permissions:
+  contents: read
 
 on:
   push:
@@ -16,6 +18,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Check Event Type
         id: check-event
