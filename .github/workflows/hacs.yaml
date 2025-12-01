@@ -1,4 +1,6 @@
 name: HACS Action
+permissions:
+  contents: read
 
 on:
   push:
