@@ -1,4 +1,6 @@
 name: Home Assistant Beta Nightly Tests
+permissions:
+  contents: read
 
 on:
   schedule:
