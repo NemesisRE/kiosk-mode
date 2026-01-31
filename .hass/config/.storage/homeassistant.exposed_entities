@@ -291,6 +291,55 @@
             "should_expose": false
           }
         }
+      },
+      "vacuum.demo_vacuum_0_ground_floor": {
+        "assistants": {
+          "conversation": {
+            "should_expose": true
+          }
+        }
+      },
+      "vacuum.demo_vacuum_1_first_floor": {
+        "assistants": {
+          "conversation": {
+            "should_expose": true
+          }
+        }
+      },
+      "vacuum.demo_vacuum_2_second_floor": {
+        "assistants": {
+          "conversation": {
+            "should_expose": true
+          }
+        }
+      },
+      "vacuum.demo_vacuum_3_third_floor": {
+        "assistants": {
+          "conversation": {
+            "should_expose": true
+          }
+        }
+      },
+      "vacuum.demo_vacuum_4_fourth_floor": {
+        "assistants": {
+          "conversation": {
+            "should_expose": true
+          }
+        }
+      },
+      "valve.back_garden": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
+      },
+      "valve.trees": {
+        "assistants": {
+          "conversation": {
+            "should_expose": false
+          }
+        }
       }
     }
   }

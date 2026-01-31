@@ -17,8 +17,13 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 lovelace:
-  mode: yaml
   dashboards:
+    lovelace:
+      mode: yaml
+      title: Kiosk-mode Overview
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
+      filename: ui-lovelace.yaml
     lovelace-header:
       mode: yaml
       title: Kiosk-mode hide header

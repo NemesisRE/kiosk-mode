@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "minor_version": 8,
+  "minor_version": 9,
   "key": "core.area_registry",
   "data": {
     "areas": [
@@ -9,13 +9,13 @@
         "floor_id": null,
         "humidity_entity_id": null,
         "icon": null,
-        "id": "woonkamer",
+        "id": "kelder",
         "labels": [],
-        "name": "Woonkamer",
+        "name": "Kelder",
         "picture": null,
         "temperature_entity_id": null,
-        "created_at": "1970-01-01T00:00:00+00:00",
-        "modified_at": "1970-01-01T00:00:00+00:00"
+        "created_at": "2025-07-04T19:31:13.322435+00:00",
+        "modified_at": "2025-07-04T19:31:13.322440+00:00"
       },
       {
         "aliases": [],
@@ -48,13 +48,13 @@
         "floor_id": null,
         "humidity_entity_id": null,
         "icon": null,
-        "id": "kelder",
+        "id": "woonkamer",
         "labels": [],
-        "name": "Kelder",
+        "name": "Woonkamer",
         "picture": null,
         "temperature_entity_id": null,
-        "created_at": "2025-07-04T19:31:13.322435+00:00",
-        "modified_at": "2025-07-04T19:31:13.322440+00:00"
+        "created_at": "1970-01-01T00:00:00+00:00",
+        "modified_at": "1970-01-01T00:00:00+00:00"
       }
     ]
   }
