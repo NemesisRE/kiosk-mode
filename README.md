@@ -116,6 +116,7 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 |`hide_header`<sup>1</sup>                             | Hides only the header. |
 |`hide_sidebar`                                        | Hides only the sidebar. |
 |`hide_menubutton`<sup>1</sup>                         | Hides only the sidebar menu icon. |
+|`hide_config`                                         | Hides the config item. |
 |`hide_notifications`                                  | Hides the notifications entry-point. |
 |`hide_account`                                        | Hides the account icon. |
 |`hide_search`                                         | Hides the search icon. |
@@ -138,7 +139,6 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 |`hide_dialog_history_show_more`                       | Hides the "Show more" link in the "History" section of more-info dialogs.  |
 |`hide_dialog_logbook`                                 | Hides the "Logbook" section in the more-info dialogs. |
 |`hide_dialog_logbook_show_more`                       | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
-|`hide_dialog_attributes`                              | Hides the "Attributes" section in the more-info dialogs. |
 |`hide_dialog_media_actions`                           | Hides the actions block in the more-info dialogs of media-player entities. |
 |`hide_dialog_update_actions`                          | Hides the actions block in the more-info dialogs of update entities. |
 |`hide_dialog_camera_actions`                          | Hides the actions block in the more-info dialogs of camera entities. |
@@ -421,6 +421,7 @@ The query string options are:
 * `?hide_header` to hide only the header
 * `?hide_sidebar` to hide only the sidebar
 * `?hide_menubutton` to hide sidebar menu button
+* `?hide_config` to hide the config item
 * `?hide_notifications` to hide the notifications entry-point
 * `?hide_account` to hide the account icon
 * `?hide_add_to_home_assistant` to hide the "Add to Home Assistant" overflow
@@ -443,7 +444,6 @@ The query string options are:
 * `?hide_dialog_history_show_more` to hide the "Show more" link in the "History" section of more-info dialogs
 * `?hide_dialog_logbook` to hide the "Logbook" section in the more-info dialogs
 * `?hide_dialog_logbook_show_more` to hide the "Show more" link in the "Logbook" section of more-info dialogs
-* `?hide_dialog_attributes` to hide the "Attributes" section in the more-info dialogs
 * `?hide_dialog_media_actions` to hide the actions block in the more-info dialogs of media-player entities
 * `?hide_dialog_update_actions` to hide the actions block in the more-info dialogs of update entities
 * `?hide_dialog_camera_actions` to hide the actions block in the more-info dialogs of camera entities

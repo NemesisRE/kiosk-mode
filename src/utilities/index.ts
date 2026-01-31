@@ -57,28 +57,12 @@ export const getDisplayNoneRules = (...rules: string[]): Record<string, false> =
 	);
 };
 
-export const getMenuTranslations = async(ha: HomeAsssistantExtended, version: Version): Promise<Record<string, string>> => {
+export const getMenuTranslations = async(ha: HomeAsssistantExtended): Promise<Record<string, string>> => {
 
 	const referencePaths = Object.entries(MENU_REFERENCES);
 
-	// This code is needed for Home Assistant versions older than 2025.9.x
-	const isLegacy = (
-		version[0] < 2025
-		|| (
-			version[0] === 2025
-			&& version[1] < 9
-		)
-	);
-	const finalReferencePaths = isLegacy
-		? referencePaths.filter(([, key]) => {
-			// This translation doesn't exist in Home Assistant < 2025.9.x
-			return MENU_REFERENCES[MENU.ADD] !== key;
-		})
-		: referencePaths;
-	// End of custom code for Home Assistant versions older than 2025.9.x
-
 	const translations = await getPromisableResult(
-		() => finalReferencePaths.map((entry): [string, string] => {
+		() => referencePaths.map((entry): [string, string] => {
 			const [key, translationPath] = entry;
 			return [ha.hass.localize(translationPath), key];
 		}),
@@ -121,32 +105,20 @@ export const addMenuItemsDataSelectors = (
 	});
 };
 
-export const addHeaderButtonsDataSelectors = (
-	headerButtons: NodeListOf<HTMLElement>,
+export const addHeaderDropdownsDataSelectors = (
+	headerDropdowns: NodeListOf<HTMLElement>,
 	translations: Record<string, string>
 ) => {
-	headerButtons.forEach((headerButton: HTMLElement): void => {
-		const menuItem: HTMLElement | null = headerButton.querySelector<HTMLElement>(ELEMENT.MENU_ITEM);
+	headerDropdowns.forEach((headerDropdown: HTMLElement): void => {
+		const menuItem: HTMLElement | null = headerDropdown.querySelector<HTMLElement>(ELEMENT.MENU_ITEM);
 		if (
 			menuItem &&
 			menuItem.dataset &&
 			!menuItem.dataset.selector
 		) {
-			const labelledBy = menuItem.getAttribute('aria-labelledby');
-			if (labelledBy) {
-				const tooltip = headerButton.parentElement.querySelector<HTMLElement>(`#${labelledBy.trim()}`);
-				if (!tooltip) return;
-				const translation = getTranslationWithoutShorcutSuffix(tooltip.textContent);
-				menuItem.dataset.selector = translations[translation];
-			} else {
-				const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-				if (icon.title) {
-					menuItem.dataset.selector = translations[icon.title.trim()];
-				} else {
-					const button = icon.shadowRoot.querySelector('button');
-					menuItem.dataset.selector = translations[button.getAttribute('aria-label').trim()];
-				}
-			}
+			const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
+			const button = icon.shadowRoot.querySelector('button');
+			menuItem.dataset.selector = translations[button.getAttribute('aria-label').trim()];
 		}
 	});
 };
@@ -167,18 +139,18 @@ export const addDialogsMenuItemsDataSelectors = (
 	});
 };
 
-export const addOverlayMenuItemsDataSelectors = (
-	overflowMenuItems: NodeListOf<HTMLElement>,
+export const addDropdownMenuItemsDataSelectors = (
+	dropdownMenuItems: NodeListOf<HTMLElement>,
 	translations: Record<string, string>
 ) => {
-	overflowMenuItems.forEach((overflowMenuItem: HTMLElement): void => {
+	dropdownMenuItems.forEach((dropdownMenuItem: HTMLElement): void => {
 		if (
-			overflowMenuItem &&
-			overflowMenuItem.dataset &&
-			!overflowMenuItem.dataset.selector
+			dropdownMenuItem &&
+			dropdownMenuItem.dataset &&
+			!dropdownMenuItem.dataset.selector
 		) {
-			const textContent = getTranslationWithoutShorcutSuffix(overflowMenuItem.textContent);
-			overflowMenuItem.dataset.selector = translations[textContent];
+			const textContent = getTranslationWithoutShorcutSuffix(dropdownMenuItem.textContent);
+			dropdownMenuItem.dataset.selector = translations[textContent];
 		}
 	});
 };
