@@ -10,7 +10,7 @@ export const STYLES = {
 		},
 		'.header': false
 	},
-	CONFIG: getDisplayNoneRules('ha-md-list-item.configuration'),
+	SETTINGS: getDisplayNoneRules('ha-md-list-item.configuration'),
 	NOTIFICATIONS: getDisplayNoneRules('ha-md-list-item.notifications'),
 	ACCOUNT: getDisplayNoneRules('ha-md-list-item.user'),
 	LIST_AFTER_SPACER: getDisplayNoneRules('ha-md-list.after-spacer'),

@@ -8,8 +8,8 @@ kiosk_hide_menubutton:
   name: Kiosk hide menu button
 kiosk_hide_overflow:
   name: Kiosk hide overflow
-kiosk_hide_config:
-  name: Kiosk hide config
+kiosk_hide_settings:
+  name: Kiosk hide settings
 kiosk_hide_notifications:
   name: Kiosk hide notifications
 kiosk_hide_account:

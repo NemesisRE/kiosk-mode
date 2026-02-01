@@ -30,8 +30,8 @@ import { goToPageWithParams, goToPage } from './utils';
 		selector: SELECTORS.MENU_BUTTON
 	},
 	{
-		param: URL_PARAMS.HIDE_CONFIG,
-		selector: SELECTORS.CONFIG
+		param: URL_PARAMS.HIDE_SETTINGS,
+		selector: SELECTORS.SETTINGS
 	},
 	{
 		param: URL_PARAMS.HIDE_NOTIFICATIONS,

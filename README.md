@@ -117,7 +117,7 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 |`hide_header`<sup>1</sup>                             | Hides only the header. |
 |`hide_sidebar`                                        | Hides only the sidebar. |
 |`hide_menubutton`<sup>1</sup>                         | Hides only the sidebar menu icon. |
-|`hide_config`                                         | Hides the config item. |
+|`hide_settings`                                       | Hides the settings item. |
 |`hide_notifications`                                  | Hides the notifications entry-point. |
 |`hide_account`                                        | Hides the account icon. |
 |`hide_search`                                         | Hides the search icon. |
@@ -185,7 +185,7 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 | `hide_header`                | 1                    |
 | `hide_sidebar`               | 2                    |
 | `hide_menubutton`            | 3                    |
-| `hide_config`                | 4                    |
+| `hide_settings               | 4                    |
 | `hide_notifications`         | 5                    |
 | `hide_account`               | 6                    |
 | `hide_add_to_home_assistant` | 7                    | 
@@ -422,7 +422,7 @@ The query string options are:
 * `?hide_header` to hide only the header
 * `?hide_sidebar` to hide only the sidebar
 * `?hide_menubutton` to hide sidebar menu button
-* `?hide_config` to hide the config item
+* `?hide_settings` to hide the settings item
 * `?hide_notifications` to hide the notifications entry-point
 * `?hide_account` to hide the account icon
 * `?hide_add_to_home_assistant` to hide the "Add to Home Assistant" overflow

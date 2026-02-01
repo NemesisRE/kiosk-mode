@@ -9,7 +9,7 @@ export enum OPTION {
     HIDE_ADD_TO_HOME_ASSISTANT = 'hide_add_to_home_assistant',
     HIDE_OVERFLOW = 'hide_overflow',
     HIDE_MENU_BUTTON = 'hide_menubutton',
-    HIDE_CONFIG = 'hide_config',
+    HIDE_SETTINGS = 'hide_settings',
     HIDE_NOTIFICATIONS = 'hide_notifications',
     HIDE_ACCOUNT = 'hide_account',
     HIDE_SEARCH = 'hide_search',

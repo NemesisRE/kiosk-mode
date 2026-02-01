@@ -65,18 +65,18 @@ test('Option: hide_menubutton', async ({ page }) => {
 
 });
 
-test('Option: hide_config', async ({ page }) => {
+test('Option: hide_settings', async ({ page }) => {
 
 	await goToPage(page);
 
-	await expect(page.locator(SELECTORS.CONFIG)).toBeVisible();
+	await expect(page.locator(SELECTORS.SETTINGS)).toBeVisible();
 
-	await turnBooleanState(page, ENTITIES.HIDE_CONFIG, true);
+	await turnBooleanState(page, ENTITIES.HIDE_SETTINGS, true);
 
-	await expect(page.locator(SELECTORS.CONFIG)).toBeHidden();
-	await expect(page).toHaveScreenshot('05-hide_config.png');
+	await expect(page.locator(SELECTORS.SETTINGS)).toBeHidden();
+	await expect(page).toHaveScreenshot('05-hide_settings.png');
 
-	await turnBooleanState(page, ENTITIES.HIDE_CONFIG, false);
+	await turnBooleanState(page, ENTITIES.HIDE_SETTINGS, false);
 
 });
 
@@ -110,21 +110,21 @@ test('Option: hide_account', async ({ page }) => {
 
 });
 
-test('Option: hide_config, hide_notifications and hide_account at the same time', async ({ page }) => {
+test('Option: hide_settings, hide_notifications and hide_account at the same time', async ({ page }) => {
 
 	await goToPage(page);
 
-	await expect(page.locator(SELECTORS.CONFIG)).toBeVisible();
+	await expect(page.locator(SELECTORS.SETTINGS)).toBeVisible();
 	await expect(page.locator(SELECTORS.NOTIFICATIONS)).toBeVisible();
 	await expect(page.locator(SELECTORS.ACCOUNT)).toBeVisible();
 
-	await turnBooleanState(page, ENTITIES.HIDE_CONFIG, true);
+	await turnBooleanState(page, ENTITIES.HIDE_SETTINGS, true);
 	await turnBooleanState(page, ENTITIES.HIDE_NOTIFICATIONS, true);
 	await turnBooleanState(page, ENTITIES.HIDE_ACCOUNT, true);
 
-	await expect(page).toHaveScreenshot('08-hide_config-hide_notifications-and-hide_account.png');
+	await expect(page).toHaveScreenshot('08-hide_settings-hide_notifications-and-hide_account.png');
 
-	await turnBooleanState(page, ENTITIES.HIDE_CONFIG, false);
+	await turnBooleanState(page, ENTITIES.HIDE_SETTINGS, false);
 	await turnBooleanState(page, ENTITIES.HIDE_NOTIFICATIONS, false);
 	await turnBooleanState(page, ENTITIES.HIDE_ACCOUNT, false);
 

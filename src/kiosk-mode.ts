@@ -396,26 +396,26 @@ class KioskMode implements KioskModeRunner {
 		}
 
 		if (
-			options[OPTION.HIDE_CONFIG] ||
+			options[OPTION.HIDE_SETTINGS] ||
 			options[OPTION.HIDE_NOTIFICATIONS] ||
 			options[OPTION.HIDE_ACCOUNT] ||
 			options[OPTION.HIDE_MENU_BUTTON]
 		) {
 			const styles = [
-				options[OPTION.HIDE_CONFIG]
-					&& STYLES.CONFIG,
+				options[OPTION.HIDE_SETTINGS]
+					&& STYLES.SETTINGS,
 				options[OPTION.HIDE_NOTIFICATIONS]
 					&& STYLES.NOTIFICATIONS,
 				options[OPTION.HIDE_ACCOUNT]
 					&& STYLES.ACCOUNT,
-				options[OPTION.HIDE_CONFIG] && options[OPTION.HIDE_ACCOUNT] && options[OPTION.HIDE_NOTIFICATIONS]
+				options[OPTION.HIDE_SETTINGS] && options[OPTION.HIDE_ACCOUNT] && options[OPTION.HIDE_NOTIFICATIONS]
 					&& STYLES.LIST_AFTER_SPACER,
 				options[OPTION.HIDE_MENU_BUTTON]
 					&& STYLES.MENU_BUTTON
 			];
 			this.styleManager.addStyle(styles, this.sideBarRoot);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-				if (options[OPTION.HIDE_CONFIG])        setCache(TRUE, OPTION.HIDE_CONFIG);
+				if (options[OPTION.HIDE_SETTINGS])      setCache(TRUE, OPTION.HIDE_SETTINGS);
 				if (options[OPTION.HIDE_ACCOUNT])       setCache(TRUE, OPTION.HIDE_ACCOUNT);
 				if (options[OPTION.HIDE_NOTIFICATIONS]) setCache(TRUE, OPTION.HIDE_NOTIFICATIONS);
 			}

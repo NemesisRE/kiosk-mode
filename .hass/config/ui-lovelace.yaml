@@ -6,7 +6,7 @@ kiosk_mode:
   hide_sidebar: "{{ is_state('input_boolean.kiosk_hide_sidebar', 'on') }}"
   hide_menubutton: "[[[ is_state('input_boolean.kiosk_hide_menubutton', 'on') ]]]"
   hide_overflow: "{{ is_state('input_boolean.kiosk_hide_overflow', 'on') }}"
-  hide_config: "[[[ is_state('input_boolean.kiosk_hide_config', 'on') ]]]"
+  hide_settings: "[[[ is_state('input_boolean.kiosk_hide_settings', 'on') ]]]"
   hide_notifications: "{{ is_state('input_boolean.kiosk_hide_notifications', 'on') }}"
   hide_account: "{{ is_state('input_boolean.kiosk_hide_account', 'on') }}"
   hide_add_to_home_assistant: "[[[ is_state('input_boolean.kiosk_hide_add_to_home_assistant', 'on') ]]]"
@@ -55,7 +55,7 @@ views:
           - entity: input_boolean.kiosk_hide_header
           - entity: input_boolean.kiosk_hide_sidebar
           - entity: input_boolean.kiosk_hide_menubutton
-          - entity: input_boolean.kiosk_hide_config
+          - entity: input_boolean.kiosk_hide_settings
           - entity: input_boolean.kiosk_hide_notifications
           - entity: input_boolean.kiosk_hide_account
           - entity: input_boolean.kiosk_hide_add_to_home_assistant

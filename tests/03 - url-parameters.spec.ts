@@ -50,13 +50,13 @@ test('URL Parameter: ?hide_menubutton', async ({ page }) => {
 
 });
 
-test('URL Parameter: ?hide_config', async ({ page }) => {
+test('URL Parameter: ?hide_settings', async ({ page }) => {
 
-	await goToPageWithParams(page, URL_PARAMS.HIDE_CONFIG);
+	await goToPageWithParams(page, URL_PARAMS.HIDE_SETTINGS);
 
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
-	await expect(page.locator(SELECTORS.CONFIG)).toBeHidden();
-	await expect(page).toHaveScreenshot('05-hide_config.png');
+	await expect(page.locator(SELECTORS.SETTINGS)).toBeHidden();
+	await expect(page).toHaveScreenshot('05-hide_settings.png');
 
 });
 
