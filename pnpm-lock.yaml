@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       get-promisable-result:
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^1.0.2
+        version: 1.0.2
       home-assistant-javascript-templates:
         specifier: 6.0.0
         version: 6.0.0
@@ -949,8 +949,8 @@ packages:
     resolution: {integrity: sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q==}
     engines: {node: '>=8.0.0'}
 
-  get-promisable-result@1.0.1:
-    resolution: {integrity: sha512-hUUKs/s8qoeH4gk3NPcKjCWaCjOv0S+kyT3oTuJXneEWYzwmyfEJHESU2ES7pMZNVHTjMt7X8hpmThFfggTVtg==}
+  get-promisable-result@1.0.2:
+    resolution: {integrity: sha512-sej/Qo0t+bKs1kl9OsFokNSARL7oQ5F3t6QnRiIka+yOOxXe4Rbng7y01tD7DNFjWdE16CCZzi89kO/Ng1T+ew==}
 
   glob-parent@6.0.2:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
@@ -2518,7 +2518,7 @@ snapshots:
 
   get-package-type@0.1.0: {}
 
-  get-promisable-result@1.0.1: {}
+  get-promisable-result@1.0.2: {}
 
   glob-parent@6.0.2:
     dependencies:
@@ -2558,7 +2558,7 @@ snapshots:
 
   home-assistant-javascript-templates@6.0.0:
     dependencies:
-      get-promisable-result: 1.0.1
+      get-promisable-result: 1.0.2
 
   home-assistant-query-selector@4.3.0:
     dependencies:
@@ -2971,7 +2971,7 @@ snapshots:
 
   shadow-dom-selector@5.0.1:
     dependencies:
-      get-promisable-result: 1.0.1
+      get-promisable-result: 1.0.2
 
   shebang-command@2.0.0:
     dependencies:
