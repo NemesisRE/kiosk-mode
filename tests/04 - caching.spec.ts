@@ -30,6 +30,10 @@ import { goToPageWithParams, goToPage } from './utils';
 		selector: SELECTORS.MENU_BUTTON
 	},
 	{
+		param: URL_PARAMS.HIDE_CONFIG,
+		selector: SELECTORS.CONFIG
+	},
+	{
 		param: URL_PARAMS.HIDE_NOTIFICATIONS,
 		selector: SELECTORS.NOTIFICATIONS
 	},
@@ -189,12 +193,6 @@ import { goToPageWithParams, goToPage } from './utils';
 		selector: DIALOGS_SELECTORS.LOGBOOK,
 		entitySelector: SELECTORS.ENTITY_ROW,
 		entitySelectorText: TEXT_SELECTORS.BINARY_SENSOR
-	},
-	{
-		param: URL_PARAMS.HIDE_DIALOG_ATTRIBUTES,
-		selector: DIALOGS_SELECTORS.ATTRIBUTES,
-		entitySelector: SELECTORS.ENTITY_ROW,
-		entitySelectorText: TEXT_SELECTORS.HOME
 	},
 	{
 		param: URL_PARAMS.HIDE_DIALOG_UPDATE_ACTIONS,
@@ -375,8 +373,8 @@ test('Caching URL Parameter: ?block_context_menu', async ({ context, page }) => 
 	});
 
 	await context.addInitScript(() => {
-		window['__listener'] = window['sinon'].fake();
-		window.addEventListener('contextmenu', window['__listener']);
+		window.__listener = window.sinon.fake();
+		window.addEventListener('contextmenu', window.__listener);
 	});
 
 	await goToPageWithParams(
@@ -391,7 +389,7 @@ test('Caching URL Parameter: ?block_context_menu', async ({ context, page }) => 
 		button: 'right'
 	});
 
-	let executed = await page.evaluate(() => window['__listener'].calledOnce);
+	let executed = await page.evaluate(() => window.__listener.calledOnce);
 
 	await expect(executed).toBe(false);
 
@@ -401,7 +399,7 @@ test('Caching URL Parameter: ?block_context_menu', async ({ context, page }) => 
 		button: 'right'
 	});
 
-	executed = await page.evaluate(() => window['__listener'].calledOnce);
+	executed = await page.evaluate(() => window.__listener.calledOnce);
 
 	await expect(executed).toBe(false);
 
@@ -413,7 +411,7 @@ test('Caching URL Parameter: ?block_context_menu', async ({ context, page }) => 
 		button: 'right'
 	});
 
-	executed = await page.evaluate(() => window['__listener'].calledOnce);
+	executed = await page.evaluate(() => window.__listener.calledOnce);
 
 	await expect(executed).toBe(true);
 
