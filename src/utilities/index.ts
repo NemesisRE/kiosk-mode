@@ -2,7 +2,6 @@ import { HomeAsssistantExtended, Version } from '@types';
 import { getPromisableResult } from 'get-promisable-result';
 import {
 	TRUE,
-	MENU,
 	MENU_REFERENCES,
 	ELEMENT,
 	OPTION,

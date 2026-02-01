@@ -6,5 +6,5 @@ declare global {
         __listener: SinonSpy;
     }
 }
-  
+
 export {};
