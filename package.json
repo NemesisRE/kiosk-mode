@@ -13,7 +13,7 @@
     "test:ts": "tsc --noEmit",
     "test:tag": "pnpm reset:ha && pnpm demo && pnpm tag:playwright && pnpm stop:ha",
     "test:clean": "rm -rf dist .nyc_output coverage || true",
-    "start:playwright": "docker run --rm --network host --add-host host.docker.internal:host-gateway -v $(pwd):$(pwd) -w $(pwd) -i mcr.microsoft.com/playwright:v$(jq -r '.devDependencies[\"@playwright/test\"]' package.json)-jammy sh -c \"npx playwright test\"",
+    "start:playwright": "docker run -e CI=true --rm --network host --add-host host.docker.internal:host-gateway -v $(pwd):$(pwd) -w $(pwd) -i mcr.microsoft.com/playwright:v$(jq -r '.devDependencies[\"@playwright/test\"]' package.json)-jammy sh -c \"npx playwright test\"",
     "tag:playwright": "docker run --rm --network host --add-host host.docker.internal:host-gateway -v $(pwd):/$(pwd)/ -w $(pwd) -i mcr.microsoft.com/playwright:v$(jq -r '.devDependencies[\"@playwright/test\"]' package.json)-jammy sh -c \"npx playwright test --grep @testing --trace on\"",
     "test:open": "playwright test --ui",
     "test:update": "playwright test --update-snapshots",

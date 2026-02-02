@@ -17,6 +17,7 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 lovelace:
+  resource_mode: yaml
   dashboards:
     lovelace:
       mode: yaml
