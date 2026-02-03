@@ -45,7 +45,7 @@
     "@types/node": "^25.1.0",
     "@types/sinon": "^21.0.0",
     "eslint": "9.39.2",
-    "globals": "^17.2.0",
+    "globals": "^17.3.0",
     "nyc": "^17.1.0",
     "playwright-test-coverage": "^1.2.12",
     "rollup": "^4.57.1",
