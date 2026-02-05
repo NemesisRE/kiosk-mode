@@ -46,9 +46,9 @@ import {
 } from '@constants';
 import {
 	addDialogsMenuItemsDataSelectors,
-	addHeaderButtonsDataSelectors,
+	addHeaderDropdownsDataSelectors,
 	addMenuItemsDataSelectors,
-	addOverlayMenuItemsDataSelectors,
+	addDropdownMenuItemsDataSelectors,
 	cached,
 	getMenuTranslations,
 	parseVersion,
@@ -259,7 +259,7 @@ class KioskMode implements KioskModeRunner {
 			options[option] = false;
 		});
 
-		getMenuTranslations(this.ha, this.version)
+		getMenuTranslations(this.ha)
 			.then((menuTranslations: Record<string, string>) => {
 				this.menuTranslations = menuTranslations;
 				this.updateMenuItemsLabels();
@@ -396,32 +396,26 @@ class KioskMode implements KioskModeRunner {
 		}
 
 		if (
-			options[OPTION.HIDE_ACCOUNT] ||
+			options[OPTION.HIDE_SETTINGS] ||
 			options[OPTION.HIDE_NOTIFICATIONS] ||
+			options[OPTION.HIDE_ACCOUNT] ||
 			options[OPTION.HIDE_MENU_BUTTON]
 		) {
 			const styles = [
-				options[OPTION.HIDE_ACCOUNT]
-					&& STYLES.ACCOUNT,
+				options[OPTION.HIDE_SETTINGS]
+					&& STYLES.SETTINGS,
 				options[OPTION.HIDE_NOTIFICATIONS]
 					&& STYLES.NOTIFICATIONS,
-				options[OPTION.HIDE_ACCOUNT] && options[OPTION.HIDE_NOTIFICATIONS]
-					&& STYLES.DIVIDER,
-				(
-					options[OPTION.HIDE_MENU_BUTTON] ||
-					options[OPTION.HIDE_NOTIFICATIONS] ||
-					options[OPTION.HIDE_ACCOUNT]
-				)
-					&& STYLES.SIDEBAR_ITEMS_CONTAINER(
-						options[OPTION.HIDE_MENU_BUTTON],
-						options[OPTION.HIDE_NOTIFICATIONS],
-						options[OPTION.HIDE_ACCOUNT]
-					),
+				options[OPTION.HIDE_ACCOUNT]
+					&& STYLES.ACCOUNT,
+				options[OPTION.HIDE_SETTINGS] && options[OPTION.HIDE_ACCOUNT] && options[OPTION.HIDE_NOTIFICATIONS]
+					&& STYLES.LIST_AFTER_SPACER,
 				options[OPTION.HIDE_MENU_BUTTON]
 					&& STYLES.MENU_BUTTON
 			];
 			this.styleManager.addStyle(styles, this.sideBarRoot);
 			if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
+				if (options[OPTION.HIDE_SETTINGS])      setCache(TRUE, OPTION.HIDE_SETTINGS);
 				if (options[OPTION.HIDE_ACCOUNT])       setCache(TRUE, OPTION.HIDE_ACCOUNT);
 				if (options[OPTION.HIDE_NOTIFICATIONS]) setCache(TRUE, OPTION.HIDE_NOTIFICATIONS);
 			}
@@ -635,7 +629,6 @@ class KioskMode implements KioskModeRunner {
 			.then((dialogChild: ShadowRoot) => {
 
 				if (
-					options[OPTION.HIDE_DIALOG_ATTRIBUTES] ||
 					options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] ||
 					options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS] ||
 					options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS] ||
@@ -646,8 +639,6 @@ class KioskMode implements KioskModeRunner {
 					options[OPTION.HIDE_DIALOG_LIGHT_SETTINGS_ACTIONS]
 				) {
 					const styles = [
-						options[OPTION.HIDE_DIALOG_ATTRIBUTES]
-							&& STYLES.DIALOG_ATTRIBUTES,
 						options[OPTION.HIDE_DIALOG_TIMER_ACTIONS] &&
 						dialogChild.host.localName === ELEMENT.HA_DIALOG_TIMER
 							&& STYLES.DIALOG_TIMER_ACTIONS,
@@ -677,7 +668,6 @@ class KioskMode implements KioskModeRunner {
 					];
 					this.styleManager.addStyle(styles, dialogChild);
 					if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) {
-						if (options[OPTION.HIDE_DIALOG_ATTRIBUTES])             setCache(TRUE, OPTION.HIDE_DIALOG_ATTRIBUTES);
 						if (options[OPTION.HIDE_DIALOG_TIMER_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_TIMER_ACTIONS);
 						if (options[OPTION.HIDE_DIALOG_MEDIA_ACTIONS])          setCache(TRUE, OPTION.HIDE_DIALOG_MEDIA_ACTIONS);
 						if (options[OPTION.HIDE_DIALOG_UPDATE_ACTIONS])         setCache(TRUE, OPTION.HIDE_DIALOG_UPDATE_ACTIONS);
@@ -754,26 +744,31 @@ class KioskMode implements KioskModeRunner {
 
 		if (!this.menuTranslations) return;
 
-		this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`).all
+		this.HAElements.HEADER
+			.selector
+			.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}`).all
 			.then((haIconButtons: NodeListOf<HTMLElement>) => {
 				addMenuItemsDataSelectors(haIconButtons, this.menuTranslations);
 			});
 
 		this.HAElements.HEADER
 			.selector
-			.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`)
+			.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN}`)
 			.all
-			.then((headerButtons: NodeListOf<HTMLElement>) => {
-				addHeaderButtonsDataSelectors(
-					headerButtons,
+			.then((headerDropdowns: NodeListOf<HTMLElement>) => {
+				addHeaderDropdownsDataSelectors(
+					headerDropdowns,
 					this.menuTranslations
 				);
 			});
 
-		this.HAElements.HEADER.selector.query(`${ELEMENT.TOOLBAR} ${ELEMENT.OVERLAY_MENU_ITEM}`).all
-			.then((overflowMenuItems: NodeListOf<HTMLElement>) => {
-				addOverlayMenuItemsDataSelectors(
-					overflowMenuItems,
+		this.HAElements.HEADER
+			.selector
+			.query(`${ELEMENT.TOOLBAR} ${ELEMENT.DROPDOWN_MENU_ITEM}`)
+			.all
+			.then((dropdownMenuItems: NodeListOf<HTMLElement>) => {
+				addDropdownMenuItemsDataSelectors(
+					dropdownMenuItems,
 					this.menuTranslations
 				);
 			});

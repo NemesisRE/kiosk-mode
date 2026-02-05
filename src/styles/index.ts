@@ -10,50 +10,19 @@ export const STYLES = {
 		},
 		'.header': false
 	},
-	ACCOUNT: getDisplayNoneRules('ha-md-list-item.user'),
+	SETTINGS: getDisplayNoneRules('ha-md-list-item.configuration'),
 	NOTIFICATIONS: getDisplayNoneRules('ha-md-list-item.notifications'),
-	DIVIDER: getDisplayNoneRules('.divider'),
-	SIDEBAR_ITEMS_CONTAINER: (
-		hideMenuButton: boolean,
-		hideNotifications: boolean,
-		hideAccount: boolean
-	) => {
-		const menuButtonHeight = 56;
-		const notificationsHeight = 48;
-		const accountHeight = 50;
-		let sizeMinimized = 132;
-		let sizeExpanded = 132;
-		if (hideAccount && hideNotifications) {
-			sizeMinimized = 0;
-			sizeExpanded = 0;
-		} else if (hideAccount) {
-			sizeMinimized -= accountHeight;
-			sizeExpanded -= accountHeight;
-		} else if (hideNotifications) {
-			sizeMinimized -= notificationsHeight;
-			sizeExpanded -= notificationsHeight;
+	ACCOUNT: getDisplayNoneRules('ha-md-list-item.user'),
+	LIST_AFTER_SPACER: getDisplayNoneRules('ha-md-list.after-spacer'),
+	MENU_BUTTON: {
+		...getDisplayNoneRules(
+			':host(:not([expanded])) .menu',
+			':host([expanded]) .menu ha-icon-button'
+		),
+		':host([expanded]) .title': {
+			marginLeft: '19px'
 		}
-		if (hideMenuButton) {
-			sizeMinimized -= menuButtonHeight;
-		}
-		return {
-			':host([expanded]) .title': {
-				marginLeft: hideMenuButton
-					? '19px'
-					: '3px'
-			},
-			':host(:not([expanded])) ha-md-list.ha-scrollbar': {
-				height: `calc(100% - var(--header-height) - ${sizeMinimized}px - env(safe-area-inset-bottom)) !important`
-			},
-			':host([expanded]) ha-md-list.ha-scrollbar': {
-				height: `calc(100% - var(--header-height) - ${sizeExpanded}px - env(safe-area-inset-bottom)) !important`
-			}
-		};
 	},
-	MENU_BUTTON: getDisplayNoneRules(
-		':host(:not([expanded])) .menu',
-		':host([expanded]) .menu ha-icon-button'
-	),
 	MENU_BUTTON_BURGER: getDisplayNoneRules('ha-menu-button'),
 	MOUSE: {
 		'body::after': {
@@ -83,37 +52,37 @@ export const STYLES = {
 	},
 	ASIDE: getDisplayNoneRules('.mdc-drawer'),
 	OVERFLOW_MENU: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.OVERFLOW}"]`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.OVERFLOW}"]`
 	),
 	BLOCK_OVERFLOW: {
-		[`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU}`]: {
+		[`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.OVERFLOW}"]`]: {
 			'pointer-events': 'none !important'
 		}
 	},
 	ADD_TO_HOME_ASSISTANT: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.ADD}"]`,
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ADD}"]`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.ADD}"]`,
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.DROPDOWN_MENU_ITEM}[data-selector="${MENU.ADD}"]`
 	),
 	SEARCH: getDisplayNoneRules(
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.SEARCH}"]`,
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.SEARCH}"]`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.DROPDOWN_MENU_ITEM}[data-selector="${MENU.SEARCH}"]`
 	),
 	ASSISTANT: getDisplayNoneRules(
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.ASSIST}"]`,
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.ASSIST}"]`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.DROPDOWN_MENU_ITEM}[data-selector="${MENU.ASSIST}"]`
 	),
 	REFRESH: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.REFRESH}"]`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.DROPDOWN_MENU_ITEM}[data-selector="${MENU.REFRESH}"]`
 	),
 	UNUSED_ENTITIES: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.UNUSED_ENTITIES}"]`,
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.DROPDOWN_MENU_ITEM}[data-selector="${MENU.UNUSED_ENTITIES}"]`,
 	),
 	RELOAD_RESOURCES: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.RELOAD_RESOURCES}"]`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.DROPDOWN_MENU_ITEM}[data-selector="${MENU.RELOAD_RESOURCES}"]`
 	),
 	EDIT_DASHBOARD: getDisplayNoneRules(
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`,
-		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.BUTTON_MENU} > ${ELEMENT.OVERLAY_MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`,
+		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.DROPDOWN_MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`
 	),
 	DIALOG_HEADER_BREADCRUMB_NAVIGATION: getDisplayNoneRules(
 		`${ELEMENT.HA_DIALOG_HEADER} > .title > .breadcrumb`
@@ -125,16 +94,13 @@ export const STYLES = {
 		`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_SETTINGS}"]`
 	),
 	DIALOG_HEADER_OVERFLOW: getDisplayNoneRules(
-		`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.BUTTON_MENU}`
+		`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.DROPDOWN}`
 	),
 	DIALOG_HISTORY: getDisplayNoneRules(
 		ELEMENT.HA_DIALOG_HISTORY
 	),
 	DIALOG_LOGBOOK: getDisplayNoneRules(
 		ELEMENT.HA_DIALOG_LOGBOOK
-	),
-	DIALOG_ATTRIBUTES: getDisplayNoneRules(
-		ELEMENT.HA_DIALOG_ATTRIBUTES
 	),
 	DIALOG_MEDIA_ACTIONS: getDisplayNoneRules(
 		'.bottom-controls > :is(.main-controls, .controls-row)'

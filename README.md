@@ -22,6 +22,7 @@ Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assi
 > [!IMPORTANT]  
 > 1. If you have `Home Assistant` `2025.5.1` or greater installed, the minimum compatible version that you can install is `Kiosk Mode` `v7.0.0`. If you are in a lower version of `Home Assistant`, the latest compatible version that you can install is `v6.7.0`.
 > 2. If you have `Home Assistant` `2025.10.0` or greater installed, the minimum compatible version that you can install is `Kiosk Mode` `v8.0.0`. If you are in a version of `Home Assistant` between `2025.5.1` and `2025.10.0`, the latest compatible version that you can install is `v7.4.0`.
+>3. If you have `Home Assistant` `2026.2.0` or greater installed, the minimum compatible version that you can install is `Kiosk Mode` `v10.0.0`. If you are in a version of `Home Assistant` between `2025.10.0` and `2025.1.3`, the latest compatible version that you can install is `v9.0.2`.
 
 <details>
   <summary><b>Installation through HACS</b></summary>
@@ -116,6 +117,7 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 |`hide_header`<sup>1</sup>                             | Hides only the header. |
 |`hide_sidebar`                                        | Hides only the sidebar. |
 |`hide_menubutton`<sup>1</sup>                         | Hides only the sidebar menu icon. |
+|`hide_settings`                                       | Hides the settings item. |
 |`hide_notifications`                                  | Hides the notifications entry-point. |
 |`hide_account`                                        | Hides the account icon. |
 |`hide_search`                                         | Hides the search icon. |
@@ -138,7 +140,6 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 |`hide_dialog_history_show_more`                       | Hides the "Show more" link in the "History" section of more-info dialogs.  |
 |`hide_dialog_logbook`                                 | Hides the "Logbook" section in the more-info dialogs. |
 |`hide_dialog_logbook_show_more`                       | Hides the "Show more" link in the "Logbook" section of more-info dialogs. |
-|`hide_dialog_attributes`                              | Hides the "Attributes" section in the more-info dialogs. |
 |`hide_dialog_media_actions`                           | Hides the actions block in the more-info dialogs of media-player entities. |
 |`hide_dialog_update_actions`                          | Hides the actions block in the more-info dialogs of update entities. |
 |`hide_dialog_camera_actions`                          | Hides the actions block in the more-info dialogs of camera entities. |
@@ -184,13 +185,14 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 | `hide_header`                | 1                    |
 | `hide_sidebar`               | 2                    |
 | `hide_menubutton`            | 3                    |
-| `hide_notifications`         | 4                    |
-| `hide_account`               | 5                    |
-| `hide_add_to_home_assistant` | 6                    | 
-| `hide_search`                | 7                    |
-| `hide_assistant`             | 8                    |
-| `hide_overflow`              | 9                    |
-| `block_overflow`             | 9                    |
+| `hide_settings               | 4                    |
+| `hide_notifications`         | 5                    |
+| `hide_account`               | 6                    |
+| `hide_add_to_home_assistant` | 7                    | 
+| `hide_search`                | 8                    |
+| `hide_assistant`             | 9                    |
+| `hide_overflow`              | 10                   |
+| `block_overflow`             | 10                   |
 | `block_mouse`                | whole interface      |
 | `block_context_menu`         | right click anywhere |
 
@@ -202,10 +204,10 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 
 | Options                 | Hides |
 |:------------------------|:------|
-| `hide_refresh`          | 10    |
-| `hide_unused_entities`  | 11    |
-| `hide_reload_resources` | 12    |
-| `hide_edit_dashboard`   | 13    |
+| `hide_refresh`          | 11    |
+| `hide_unused_entities`  | 12    |
+| `hide_reload_resources` | 13    |
+| `hide_edit_dashboard`   | 14    |
 
 <br>
 
@@ -215,12 +217,12 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 
 | Options                                    | Hides |
 |:-------------------------------------------|:------|
-| `hide_dialog_header_breadcrumb_navigation` | 14    |
-| `hide_dialog_header_action_items`          | 15    |
-| `hide_dialog_header_history`               | 16    |
-| `hide_dialog_header_settings`              | 17    |
-| `hide_dialog_header_overflow`              | 18    |
-| `hide_dialog_media_actions`                | 19    |
+| `hide_dialog_header_breadcrumb_navigation` | 15    |
+| `hide_dialog_header_action_items`          | 16    |
+| `hide_dialog_header_history`               | 17    |
+| `hide_dialog_header_settings`              | 18    |
+| `hide_dialog_header_overflow`              | 19    |
+| `hide_dialog_media_actions`                | 20    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-climate-entity.png)
@@ -229,9 +231,9 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 
 | Options                                   | Hides |
 |:------------------------------------------|:------|
-| `hide_dialog_climate_actions`             | 20    |
-| `hide_dialog_climate_temperature_actions` | 21    |
-| `hide_dialog_climate_settings_actions`    | 22    |
+| `hide_dialog_climate_actions`             | 21    |
+| `hide_dialog_climate_temperature_actions` | 22    |
+| `hide_dialog_climate_settings_actions`    | 23    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-light-entity.png)
@@ -240,10 +242,10 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 
 | Options                                   | Hides |
 |:------------------------------------------|:------|
-| `hide_dialog_light_actions`               | 23    |
-| `hide_dialog_light_control_actions`       | 24    |
-| `hide_dialog_light_color_actions`         | 25    |
-| `hide_dialog_light_settings_actions`      | 26    |
+| `hide_dialog_light_actions`               | 24    |
+| `hide_dialog_light_control_actions`       | 25    |
+| `hide_dialog_light_color_actions`         | 26    |
+| `hide_dialog_light_settings_actions`      | 27    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-update-entity.png)
@@ -252,7 +254,7 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 
 | Options                      | Hides |
 |:-----------------------------|:------|
-| `hide_dialog_update_actions` | 27    |
+| `hide_dialog_update_actions` | 28    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-timer-entity.png)
@@ -261,7 +263,7 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 
 | Options                      | Hides |
 |:-----------------------------|:------|
-| `hide_dialog_timer_actions`  | 28    |
+| `hide_dialog_timer_actions`  | 29    |
 <br>
 
 ![Lovelace Dashboard](images/more-info-dialog-history-logbook-attributes.png)
@@ -270,9 +272,8 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 
 | Options                         | Hides |
 |:--------------------------------|:------|
-| `hide_dialog_history`           | 29    |
-| `hide_dialog_logbook`           | 30    |
-| `hide_dialog_attributes`        | 31    |
+| `hide_dialog_history`           | 30    |
+| `hide_dialog_logbook`           | 31    |
 | `hide_dialog_history_show_more` | 32    |
 | `hide_dialog_logbook_show_more` | 33    |
 
@@ -421,6 +422,7 @@ The query string options are:
 * `?hide_header` to hide only the header
 * `?hide_sidebar` to hide only the sidebar
 * `?hide_menubutton` to hide sidebar menu button
+* `?hide_settings` to hide the settings item
 * `?hide_notifications` to hide the notifications entry-point
 * `?hide_account` to hide the account icon
 * `?hide_add_to_home_assistant` to hide the "Add to Home Assistant" overflow
@@ -443,7 +445,6 @@ The query string options are:
 * `?hide_dialog_history_show_more` to hide the "Show more" link in the "History" section of more-info dialogs
 * `?hide_dialog_logbook` to hide the "Logbook" section in the more-info dialogs
 * `?hide_dialog_logbook_show_more` to hide the "Show more" link in the "Logbook" section of more-info dialogs
-* `?hide_dialog_attributes` to hide the "Attributes" section in the more-info dialogs
 * `?hide_dialog_media_actions` to hide the actions block in the more-info dialogs of media-player entities
 * `?hide_dialog_update_actions` to hide the actions block in the more-info dialogs of update entities
 * `?hide_dialog_camera_actions` to hide the actions block in the more-info dialogs of camera entities

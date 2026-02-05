@@ -10,6 +10,9 @@
       "date_format": "language",
       "time_zone": "local",
       "first_weekday": "language"
+    },
+    "core": {
+      "default_panel": "lovelace"
     }
   }
 }

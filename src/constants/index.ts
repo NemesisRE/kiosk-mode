@@ -9,8 +9,9 @@ export enum OPTION {
     HIDE_ADD_TO_HOME_ASSISTANT = 'hide_add_to_home_assistant',
     HIDE_OVERFLOW = 'hide_overflow',
     HIDE_MENU_BUTTON = 'hide_menubutton',
-    HIDE_ACCOUNT = 'hide_account',
+    HIDE_SETTINGS = 'hide_settings',
     HIDE_NOTIFICATIONS = 'hide_notifications',
+    HIDE_ACCOUNT = 'hide_account',
     HIDE_SEARCH = 'hide_search',
     HIDE_ASSISTANT = 'hide_assistant',
     HIDE_REFRESH = 'hide_refresh',
@@ -24,7 +25,6 @@ export enum OPTION {
     HIDE_DIALOG_HEADER_OVERFLOW = 'hide_dialog_header_overflow',
     HIDE_DIALOG_HISTORY = 'hide_dialog_history',
     HIDE_DIALOG_LOGBOOK = 'hide_dialog_logbook',
-    HIDE_DIALOG_ATTRIBUTES = 'hide_dialog_attributes',
     HIDE_DIALOG_MEDIA_ACTIONS = 'hide_dialog_media_actions',
     HIDE_DIALOG_UPDATE_ACTIONS = 'hide_dialog_update_actions',
     HIDE_DIALOG_CAMERA_ACTIONS = 'hide_dialog_camera_actions',
@@ -85,7 +85,7 @@ export enum MENU {
 export const MENU_REFERENCES = Object.freeze({
 	[MENU.ADD]: `${MENU_PREFIX}.add`,
 	[MENU.OVERFLOW]: `${MENU_EDITOR_PREFIX}.open`,
-	[MENU.SEARCH]: `${MENU_PREFIX}.search_entities`,
+	[MENU.SEARCH]: `${MENU_PREFIX}.search_home_assistant`,
 	[MENU.ASSIST]: `${MENU_PREFIX}.assist_tooltip`,
 	[MENU.REFRESH]: `${COMMON_PREFIX}.refresh`,
 	[MENU.UNUSED_ENTITIES]: `${LOVELACE_PREFIX}.unused_entities.title`,
@@ -102,8 +102,8 @@ export enum ELEMENT {
     HUI_VIEW = 'hui-view',
     MENU_ITEM = 'ha-icon-button',
     MENU_ITEM_ICON = 'mwc-icon-button',
-    BUTTON_MENU = 'ha-button-menu',
-    OVERLAY_MENU_ITEM = 'ha-list-item',
+    DROPDOWN = 'ha-dropdown',
+    DROPDOWN_MENU_ITEM = 'ha-dropdown-item',
     TOOLBAR = '.toolbar',
     ACTION_ITEMS = '.action-items',
     HA_MORE_INFO_DIALOG = 'ha-more-info-dialog',
@@ -136,8 +136,7 @@ export enum ELEMENT {
     HA_DIALOG_LIGHT_BRIGHTNESS = 'ha-state-control-light-brightness',
     HA_DIALOG_LIGHT_CONTROLS = 'ha-icon-button-group',
     HA_DIALOG_LIGHT_COLORS = 'ha-more-info-light-favorite-colors',
-    HA_DIALOG_LIGHT_SETTINGS = 'ha-more-info-control-select-container',
-    HA_DIALOG_ATTRIBUTES = 'ha-attributes'
+    HA_DIALOG_LIGHT_SETTINGS = 'ha-more-info-control-select-container'
 }
 
 export const RESOURCE_WITH_SUFFIX_REGEXP = /^(.*?)( \([A-Z]\))?$/;

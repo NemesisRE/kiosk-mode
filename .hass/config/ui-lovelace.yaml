@@ -6,6 +6,7 @@ kiosk_mode:
   hide_sidebar: "{{ is_state('input_boolean.kiosk_hide_sidebar', 'on') }}"
   hide_menubutton: "[[[ is_state('input_boolean.kiosk_hide_menubutton', 'on') ]]]"
   hide_overflow: "{{ is_state('input_boolean.kiosk_hide_overflow', 'on') }}"
+  hide_settings: "[[[ is_state('input_boolean.kiosk_hide_settings', 'on') ]]]"
   hide_notifications: "{{ is_state('input_boolean.kiosk_hide_notifications', 'on') }}"
   hide_account: "{{ is_state('input_boolean.kiosk_hide_account', 'on') }}"
   hide_add_to_home_assistant: "[[[ is_state('input_boolean.kiosk_hide_add_to_home_assistant', 'on') ]]]"
@@ -22,7 +23,6 @@ kiosk_mode:
   hide_dialog_header_overflow: "{{ is_state('input_boolean.kiosk_hide_dialog_header_overflow', 'on') }}"
   hide_dialog_history: "{{ is_state('input_boolean.kiosk_hide_dialog_history', 'on') }}"
   hide_dialog_logbook: "{{ is_state('input_boolean.kiosk_hide_dialog_logbook', 'on') }}"
-  hide_dialog_attributes: "{{ is_state('input_boolean.kiosk_hide_dialog_attributes', 'on') }}"
   hide_dialog_update_actions: "{{ is_state('input_boolean.kiosk_hide_dialog_update_actions', 'on') }}"
   hide_dialog_camera_actions: "[[[ is_state('input_boolean.kiosk_hide_dialog_camera_actions', 'on') ]]]"
   hide_dialog_media_actions: "[[[ is_state('input_boolean.kiosk_hide_dialog_media_actions', 'on') ]]]"
@@ -55,6 +55,7 @@ views:
           - entity: input_boolean.kiosk_hide_header
           - entity: input_boolean.kiosk_hide_sidebar
           - entity: input_boolean.kiosk_hide_menubutton
+          - entity: input_boolean.kiosk_hide_settings
           - entity: input_boolean.kiosk_hide_notifications
           - entity: input_boolean.kiosk_hide_account
           - entity: input_boolean.kiosk_hide_add_to_home_assistant
@@ -77,7 +78,6 @@ views:
           - entity: input_boolean.kiosk_hide_dialog_header_action_items
           - entity: input_boolean.kiosk_hide_dialog_history
           - entity: input_boolean.kiosk_hide_dialog_logbook
-          - entity: input_boolean.kiosk_hide_dialog_attributes
           - entity: input_boolean.kiosk_hide_dialog_update_actions
           - entity: input_boolean.kiosk_hide_dialog_camera_actions
           - entity: input_boolean.kiosk_hide_dialog_media_actions
