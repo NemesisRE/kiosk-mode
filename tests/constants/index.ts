@@ -2,6 +2,7 @@ export const BASE_URL = 'http://host.docker.internal:8123';
 
 export const SELECTORS = {
 	HUI_MASONRY_VIEW: 'hui-masonry-view',
+	HUI_SECTIONS_VIEW: 'hui-sections-view',
 	HA_SIDEBAR: 'ha-sidebar',
 	HEADER: '.header',
 	MENU_BUTTON: '.menu > ha-icon-button',
@@ -16,12 +17,28 @@ export const SELECTORS = {
 	MENU_UNUSED_ENTITIES_ITEM: 'ha-dropdown-item[data-selector="UNUSED_ENTITIES"]',
 	MENU_RELOAD_RESOURCES_ITEM: 'ha-dropdown-item[data-selector="RELOAD_RESOURCES"]',
 	MENU_EDIT_DASHBOARD_ITEM: 'ha-dropdown-item[data-selector="EDIT_DASHBOARD"]',
+	MENU_EDIT_DASHBOARD_PENCIL: '.toolbar .action-items ha-icon-button[data-selector="EDIT_DASHBOARD"]',
 	ENTITY_ROW: 'hui-simple-entity-row',
 	TOGGLE_ENTITY_ROW: 'hui-toggle-entity-row',
 	UPDATE_ENTITY_ROW: 'hui-update-entity-row',
 	MEDIA_PLAYER_ENTITY_ROW: 'hui-media-player-entity-row state-badge',
 	CLIMATE_ENTITY_ROW: 'hui-climate-entity-row',
-	TIMER_ENTITY_ROW: 'hui-timer-entity-row'
+	TIMER_ENTITY_ROW: 'hui-timer-entity-row',
+	TOAST: 'ha-toast',
+	DASHBOARDS_PANEL: 'ha-panel-config ha-config-lovelace ha-config-lovelace-dashboards',
+	ADD_DASHBOARD_BUTTON: 'ha-fab button[aria-label="Add dashboard"]',
+	ADD_DASHBOARD_DIALOG: 'ha-dialog-new-dashboard ha-dialog .content',
+	NEW_DASHBOARD_CARD: 'dashboard-card .card[aria-label="New dashboard from scratch"]',
+	ADD_NEW_DASHBOARD_DIALOG: 'dialog-lovelace-dashboard-detail ha-dialog ha-form',
+	ADD_NEW_DASBOARD_TITLE: 'ha-textfield input[name="title"]',
+	ADD_NEW_DASHBOARD_ICON: 'ha-picker-field[aria-label="Icon"]',
+	ADD_NEW_DASHBOARD_ICON_LIST: 'wa-popover[aria-label="Icon"] ha-picker-combo-box .virtualizer-wrapper #list-item-0',
+	ADD_NEW_DASHBOARD_BUTTON: 'dialog-lovelace-dashboard-detail ha-dialog > ha-button[slot="primaryAction"] > button',
+	EXIT_EDIT_MODE: 'ha-button.exit-edit-mode',
+	OVERFLOW_MENU_EDIT_MODE: '.action-items > ha-dropdown > ha-icon-button',
+	CODE_EDITOR: 'ha-code-editor[mode="yaml"]',
+	SAVE_BUTTON: 'hui-editor ha-top-app-bar-fixed ha-button[slot="actionItems"]',
+	CLOSE_EDIT_MODE: 'hui-editor ha-top-app-bar-fixed ha-icon-button[slot="navigationIcon"] mwc-icon-button[title="Close"]'
 };
 
 export const DIALOGS_SELECTORS = {
