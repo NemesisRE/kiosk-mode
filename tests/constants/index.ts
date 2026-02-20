@@ -33,12 +33,12 @@ export const SELECTORS = {
 	ADD_NEW_DASBOARD_TITLE: 'ha-textfield input[name="title"]',
 	ADD_NEW_DASHBOARD_ICON: 'ha-picker-field[aria-label="Icon"]',
 	ADD_NEW_DASHBOARD_ICON_LIST: 'wa-popover[aria-label="Icon"] ha-picker-combo-box .virtualizer-wrapper #list-item-0',
-	ADD_NEW_DASHBOARD_BUTTON: 'dialog-lovelace-dashboard-detail ha-dialog > ha-button[slot="primaryAction"] > button',
+	ADD_NEW_DASHBOARD_BUTTON: 'dialog-lovelace-dashboard-detail ha-dialog > ha-dialog-footer > ha-button[slot="primaryAction"] button',
 	EXIT_EDIT_MODE: 'ha-button.exit-edit-mode',
 	OVERFLOW_MENU_EDIT_MODE: '.action-items > ha-dropdown > ha-icon-button',
 	CODE_EDITOR: 'ha-code-editor[mode="yaml"]',
 	SAVE_BUTTON: 'hui-editor ha-top-app-bar-fixed ha-button[slot="actionItems"]',
-	CLOSE_EDIT_MODE: 'hui-editor ha-top-app-bar-fixed ha-icon-button[slot="navigationIcon"] mwc-icon-button[title="Close"]'
+	CLOSE_EDIT_MODE: 'hui-editor ha-top-app-bar-fixed ha-icon-button[slot="navigationIcon"] ha-button[title="Close"]'
 };
 
 export const DIALOGS_SELECTORS = {
@@ -47,7 +47,7 @@ export const DIALOGS_SELECTORS = {
 	SETTINGS_BUTTON: 'ha-icon-button[data-selector="DIALOG_SETTINGS"]',
 	OVERFLOW_BUTTON: 'ha-icon-button[data-selector="DIALOG_SETTINGS"] + ha-dropdown',
 	CLOSE_BUTTON: 'ha-icon-button[data-selector="DIALOG_DISMISS"]',
-	BREADCRUMB_NAVIGATION: 'ha-dialog-header > .title > .breadcrumb',
+	BREADCRUMB_NAVIGATION: 'ha-adaptive-dialog > .title > .breadcrumb',
 	HISTORY: '.content > ha-more-info-history',
 	HISTORY_LINK: 'ha-more-info-history .header > a',
 	LOGBOOK: '.content > ha-more-info-logbook',

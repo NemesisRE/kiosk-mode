@@ -115,8 +115,7 @@ export const addHeaderDropdownsDataSelectors = (
 			menuItem.dataset &&
 			!menuItem.dataset.selector
 		) {
-			const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-			const button = icon.shadowRoot.querySelector('button');
+			const button = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.HA_BUTTON);
 			menuItem.dataset.selector = translations[button.getAttribute('aria-label').trim()];
 		}
 	});
@@ -132,8 +131,8 @@ export const addDialogsMenuItemsDataSelectors = (
 			menuItem.dataset &&
 			!menuItem.dataset.selector
 		) {
-			const icon = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.MENU_ITEM_ICON);
-			menuItem.dataset.selector = translations[icon.title.trim()];
+			const button = menuItem.shadowRoot.querySelector<HTMLElement>(ELEMENT.HA_BUTTON);
+			menuItem.dataset.selector = translations[button.title.trim()];
 		}
 	});
 };

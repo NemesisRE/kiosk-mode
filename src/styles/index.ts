@@ -1,4 +1,4 @@
-import { MENU, ELEMENT } from '@constants';
+import { ELEMENT, MENU } from '@constants';
 import { getDisplayNoneRules } from '@utilities';
 
 export const STYLES = {
@@ -85,16 +85,16 @@ export const STYLES = {
 		`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN} > ${ELEMENT.DROPDOWN_MENU_ITEM}[data-selector="${MENU.EDIT_DASHBOARD}"]`
 	),
 	DIALOG_HEADER_BREADCRUMB_NAVIGATION: getDisplayNoneRules(
-		`${ELEMENT.HA_DIALOG_HEADER} > .title > .breadcrumb`
+		`.title > .breadcrumb`
 	),
 	DIALOG_HEADER_HISTORY: getDisplayNoneRules(
-		`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_HISTORY}"]`
+		`${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_HISTORY}"]`
 	),
 	DIALOG_HEADER_SETTINGS: getDisplayNoneRules(
-		`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_SETTINGS}"]`
+		`${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_SETTINGS}"]`
 	),
 	DIALOG_HEADER_OVERFLOW: getDisplayNoneRules(
-		`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.DROPDOWN}`
+		`${ELEMENT.DROPDOWN}`
 	),
 	DIALOG_HISTORY: getDisplayNoneRules(
 		ELEMENT.HA_DIALOG_HISTORY
