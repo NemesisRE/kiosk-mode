@@ -508,7 +508,7 @@ class KioskMode implements KioskModeRunner {
 		}
 
 		this.HAMoreInfoDialogElements.HA_DIALOG
-			.selector.query(`${ELEMENT.HA_DIALOG_HEADER} > ${ELEMENT.MENU_ITEM}`)
+			.selector.query(`:scope > ${ELEMENT.MENU_ITEM}`)
 			.all
 			.then((menuItems: NodeListOf<HTMLElement>) => {
 				addDialogsMenuItemsDataSelectors(menuItems, this.menuTranslations);
