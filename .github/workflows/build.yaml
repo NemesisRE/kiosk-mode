@@ -66,14 +66,14 @@ jobs:
           retention-days: 30
       - name: Update draft release
         if: steps.check-event.outputs.EVENT_TYPE == 'push'
-        uses: release-drafter/release-drafter@v6
+        uses: release-drafter/release-drafter@v7
         with:
           config-name: release-drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create tagged release
         if: steps.check-event.outputs.EVENT_TYPE == 'tag'
-        uses: release-drafter/release-drafter@v6
+        uses: release-drafter/release-drafter@v7
         with:
           config-name: release-drafter.yml
           publish: true
