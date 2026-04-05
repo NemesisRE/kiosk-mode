@@ -33,10 +33,10 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "get-promisable-result": "^1.0.2",
-    "home-assistant-javascript-templates": "6.0.1",
-    "home-assistant-query-selector": "5.0.0",
-    "home-assistant-styles-manager": "3.1.0"
+    "get-promisable-result": "^2.0.0",
+    "home-assistant-javascript-templates": "7.0.0",
+    "home-assistant-query-selector": "6.0.1",
+    "home-assistant-styles-manager": "4.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -15,17 +15,17 @@ importers:
   .:
     dependencies:
       get-promisable-result:
-        specifier: ^1.0.2
-        version: 1.0.2
+        specifier: ^2.0.0
+        version: 2.0.0
       home-assistant-javascript-templates:
-        specifier: 6.0.1
-        version: 6.0.1
+        specifier: 7.0.0
+        version: 7.0.0(get-promisable-result@2.0.0)
       home-assistant-query-selector:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 6.0.1
+        version: 6.0.1(shadow-dom-selector@5.0.1)
       home-assistant-styles-manager:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 4.1.0
+        version: 4.1.0
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -414,79 +414,66 @@ packages:
     resolution: {integrity: sha512-RzeBwv0B3qtVBWtcuABtSuCzToo2IEAIQrcyB/b2zMvBWVbjo8bZDjACUpnaafaxhTw2W+imQbP2BD1usasK4g==}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.60.0':
     resolution: {integrity: sha512-Sf7zusNI2CIU1HLzuu9Tc5YGAHEZs5Lu7N1ssJG4Tkw6e0MEsN7NdjUDDfGNHy2IU+ENyWT+L2obgWiguWibWQ==}
     cpu: [arm]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.60.0':
     resolution: {integrity: sha512-DX2x7CMcrJzsE91q7/O02IJQ5/aLkVtYFryqCjduJhUfGKG6yJV8hxaw8pZa93lLEpPTP/ohdN4wFz7yp/ry9A==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.60.0':
     resolution: {integrity: sha512-09EL+yFVbJZlhcQfShpswwRZ0Rg+z/CsSELFCnPt3iK+iqwGsI4zht3secj5vLEs957QvFFXnzAT0FFPIxSrkQ==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-loong64-gnu@4.60.0':
     resolution: {integrity: sha512-i9IcCMPr3EXm8EQg5jnja0Zyc1iFxJjZWlb4wr7U2Wx/GrddOuEafxRdMPRYVaXjgbhvqalp6np07hN1w9kAKw==}
     cpu: [loong64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-loong64-musl@4.60.0':
     resolution: {integrity: sha512-DGzdJK9kyJ+B78MCkWeGnpXJ91tK/iKA6HwHxF4TAlPIY7GXEvMe8hBFRgdrR9Ly4qebR/7gfUs9y2IoaVEyog==}
     cpu: [loong64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-ppc64-gnu@4.60.0':
     resolution: {integrity: sha512-RwpnLsqC8qbS8z1H1AxBA1H6qknR4YpPR9w2XX0vo2Sz10miu57PkNcnHVaZkbqyw/kUWfKMI73jhmfi9BRMUQ==}
     cpu: [ppc64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-ppc64-musl@4.60.0':
     resolution: {integrity: sha512-Z8pPf54Ly3aqtdWC3G4rFigZgNvd+qJlOE52fmko3KST9SoGfAdSRCwyoyG05q1HrrAblLbk1/PSIV+80/pxLg==}
     cpu: [ppc64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-riscv64-gnu@4.60.0':
     resolution: {integrity: sha512-3a3qQustp3COCGvnP4SvrMHnPQ9d1vzCakQVRTliaz8cIp/wULGjiGpbcqrkv0WrHTEp8bQD/B3HBjzujVWLOA==}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-musl@4.60.0':
     resolution: {integrity: sha512-pjZDsVH/1VsghMJ2/kAaxt6dL0psT6ZexQVrijczOf+PeP2BUqTHYejk3l6TlPRydggINOeNRhvpLa0AYpCWSQ==}
     cpu: [riscv64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-linux-s390x-gnu@4.60.0':
     resolution: {integrity: sha512-3ObQs0BhvPgiUVZrN7gqCSvmFuMWvWvsjG5ayJ3Lraqv+2KhOsp+pUbigqbeWqueGIsnn+09HBw27rJ+gYK4VQ==}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.60.0':
     resolution: {integrity: sha512-EtylprDtQPdS5rXvAayrNDYoJhIz1/vzN2fEubo3yLE7tfAw+948dO0g4M0vkTVFhKojnF+n6C8bDNe+gDRdTg==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.60.0':
     resolution: {integrity: sha512-k09oiRCi/bHU9UVFqD17r3eJR9bn03TyKraCrlz5ULFJGdJGi7VOmm9jl44vOJvRJ6P7WuBi/s2A97LxxHGIdw==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@rollup/rollup-openbsd-x64@4.60.0':
     resolution: {integrity: sha512-1o/0/pIhozoSaDJoDcec+IVLbnRtQmHwPV730+AOD29lHEEo4F5BEUB24H0OBdhbBBDwIOSuf7vgg0Ywxdfiiw==}
@@ -946,6 +933,9 @@ packages:
   get-promisable-result@1.0.2:
     resolution: {integrity: sha512-sej/Qo0t+bKs1kl9OsFokNSARL7oQ5F3t6QnRiIka+yOOxXe4Rbng7y01tD7DNFjWdE16CCZzi89kO/Ng1T+ew==}
 
+  get-promisable-result@2.0.0:
+    resolution: {integrity: sha512-DdA168VtnVn9A87CUsjPR8phpfYZRbKPA1wpzxMdZek6RZXxpphCUVgn0mqD4JJlHkLKChQd4y3bkFOEOZwcIA==}
+
   glob-parent@6.0.2:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
@@ -985,14 +975,18 @@ packages:
     resolution: {integrity: sha512-J00e55zffgi3yVnUp0UdbMztNkr2PnizEkOe9URNohnrNhW5X0QpegkuLpOmFQInpi93Nb8MCjQRHAiCDF42NQ==}
     engines: {node: '>=10.0.0'}
 
-  home-assistant-javascript-templates@6.0.1:
-    resolution: {integrity: sha512-kbPS76MJx22Y8gwq+HwWUBlaxWDwiawoDl0LrgGvA0QM2+C+69a1YV7ccyMrqHtx+YTJ28mmhpBeq3h4GpanRw==}
+  home-assistant-javascript-templates@7.0.0:
+    resolution: {integrity: sha512-p/KQtBjxLlYc5i4OpWB9m1mJRf45AKkUfUKWbAoABuptcRnmqvhrkDGF1N7WVTpXDNeFU6pyBYZbFiwnG1dOfw==}
+    peerDependencies:
+      get-promisable-result: ^1.0.2
 
-  home-assistant-query-selector@5.0.0:
-    resolution: {integrity: sha512-QY1tR1FNIDbHocw5GNuPfZzIXg/7x8lLt58fNGMNvZgCHCjasFsQ6vk93/Fq+8kBO+J/jc8YrziFVknTfvjwCw==}
+  home-assistant-query-selector@6.0.1:
+    resolution: {integrity: sha512-/0hkaT4Y4CouDsc4wJ90Eyguh4tvrOcTMQ8Q+EVQPRWZM0OZ1vx7cbOLUXfQhzy1AxI7Z9o6qRLefUh3qnoFSw==}
+    peerDependencies:
+      shadow-dom-selector: ^5.0.1
 
-  home-assistant-styles-manager@3.1.0:
-    resolution: {integrity: sha512-ui8JNAZUovDPBYODGNZgj7hjCKy2PlUYkW4MQJ0yTttbshfa4cAaNA536e4QQ3twEogpVp1TSD7Y4GZ5uBVwhQ==}
+  home-assistant-styles-manager@4.1.0:
+    resolution: {integrity: sha512-9aH363cY0eatS+y6uZ8w6oIl8WskMMaHie6lpFYsgOlgjHDTcMlxqQk2X2bLaNniBVKsdanM4FfqjQewAjrY4A==}
 
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
@@ -2444,6 +2438,8 @@ snapshots:
 
   get-promisable-result@1.0.2: {}
 
+  get-promisable-result@2.0.0: {}
+
   glob-parent@6.0.2:
     dependencies:
       is-glob: 4.0.3
@@ -2475,15 +2471,15 @@ snapshots:
 
   helpertypes@0.0.19: {}
 
-  home-assistant-javascript-templates@6.0.1:
+  home-assistant-javascript-templates@7.0.0(get-promisable-result@2.0.0):
     dependencies:
-      get-promisable-result: 1.0.2
+      get-promisable-result: 2.0.0
 
-  home-assistant-query-selector@5.0.0:
+  home-assistant-query-selector@6.0.1(shadow-dom-selector@5.0.1):
     dependencies:
       shadow-dom-selector: 5.0.1
 
-  home-assistant-styles-manager@3.1.0: {}
+  home-assistant-styles-manager@4.1.0: {}
 
   html-escaper@2.0.2: {}
 
