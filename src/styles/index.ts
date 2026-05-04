@@ -6,7 +6,7 @@ export const STYLES = {
 		'#view': {
 			minHeight: '100vh !important',
 			KioskHeaderHeight: '0px',
-			paddingTop: 'calc(var(--kiosk-header-height) + env(safe-area-inset-top)) !important'
+			paddingTop: 'calc(var(--kiosk-header-height) + var(--safe-area-inset-top) + var(--view-container-padding-top, 0px)) !important'
 		},
 		'.header': false
 	},
