@@ -41,23 +41,23 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "1.59.1",
+    "@playwright/test": "1.60.0",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@types/node": "^25.6.2",
+    "@types/node": "^25.8.0",
     "@types/sinon": "^21.0.1",
-    "eslint": "10.3.0",
+    "eslint": "10.4.0",
     "globals": "^17.6.0",
     "nyc": "^18.0.0",
     "playwright-test-coverage": "^1.2.12",
-    "rollup": "^4.60.3",
+    "rollup": "^4.60.4",
     "rollup-plugin-istanbul": "^5.0.0",
     "sinon": "^22.0.0",
     "tslib": "^2.8.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.2"
+    "typescript-eslint": "^8.59.3"
   },
   "pnpm": {
     "overrides": {
