@@ -777,7 +777,7 @@ class KioskMode implements KioskModeRunner {
 
 		const dropdownMenuItemsPromise = this.HAElements.HEADER
 			.selector
-			.query(`${ELEMENT.TOOLBAR} ${ELEMENT.DROPDOWN_MENU_ITEM}`)
+			.query(`${ELEMENT.TOOLBAR} > ${ELEMENT.ACTION_ITEMS} > ${ELEMENT.DROPDOWN}[placement="bottom-start"] ${ELEMENT.DROPDOWN_MENU_ITEM}`)
 			.all as Promise<NodeListOf<HTMLElement>>;
 
 		Promise.all([
