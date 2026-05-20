@@ -43,12 +43,12 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v6
         with:
-          version: 10
+          version: 11
           run_install: false
       - name: Set-up Node
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
           cache: 'pnpm'
       - name: Install deps
         run: pnpm install
