@@ -118,11 +118,7 @@ export const addHeaderDropdownsDataSelectors = (
 ) => {
 	headerDropdowns.forEach((headerDropdown: HTMLElement): void => {
 		const menuItem: HTMLElement | null = headerDropdown.querySelector<HTMLElement>(ELEMENT.MENU_ITEM);
-		if (
-			menuItem &&
-			menuItem.dataset &&
-			!menuItem.dataset.selector
-		) {
+		if (menuItem) {
 			const button = menuItem.shadowRoot!.querySelector<HTMLElement>(ELEMENT.HA_BUTTON);
 			menuItem.dataset.selector = translations[button!.getAttribute('aria-label')!.trim()];
 		}
@@ -134,11 +130,7 @@ export const addDialogsMenuItemsDataSelectors = (
 	translations: Record<string, string>
 ) => {
 	menuItems.forEach((menuItem: HTMLElement): void => {
-		if (
-			menuItem &&
-			menuItem.dataset &&
-			!menuItem.dataset.selector
-		) {
+		if (menuItem) {
 			const button = menuItem.shadowRoot!.querySelector<HTMLElement>(ELEMENT.HA_BUTTON);
 			menuItem.dataset.selector = translations[button!.title.trim()];
 		}
@@ -150,11 +142,7 @@ export const addDropdownMenuItemsDataSelectors = (
 	translations: Record<string, string>
 ) => {
 	dropdownMenuItems.forEach((dropdownMenuItem: HTMLElement): void => {
-		if (
-			dropdownMenuItem &&
-			dropdownMenuItem.dataset &&
-			!dropdownMenuItem.dataset.selector
-		) {
+		if (dropdownMenuItem) {
 			const textContent = getTranslationWithoutShorcutSuffix(dropdownMenuItem.textContent);
 			dropdownMenuItem.dataset.selector = translations[textContent];
 		}
