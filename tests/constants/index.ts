@@ -26,7 +26,7 @@ export const SELECTORS = {
 	TIMER_ENTITY_ROW: 'hui-timer-entity-row',
 	TOAST: 'ha-toast',
 	DASHBOARDS_PANEL: 'ha-panel-config ha-config-lovelace ha-config-lovelace-dashboards',
-	ADD_DASHBOARD_BUTTON: 'ha-fab button[aria-label="Add dashboard"]',
+	ADD_DASHBOARD_BUTTON: 'ha-button[slot="fab"]',
 	ADD_DASHBOARD_DIALOG: 'ha-dialog-new-dashboard ha-dialog .content',
 	NEW_DASHBOARD_CARD: 'dashboard-card .card[aria-label="New dashboard from scratch"]',
 	ADD_NEW_DASHBOARD_DIALOG: 'dialog-lovelace-dashboard-detail ha-dialog ha-form',
