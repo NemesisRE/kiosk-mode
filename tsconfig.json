@@ -19,6 +19,10 @@
       "@styles": ["./src/styles"]   
     }
   },
-  "include": ["src/**/*.ts", "package.json"],
+  "include": [
+    "src/**/*.ts",
+    "package.json",
+    "playwright.config.ts"
+  ],
   "exclude": ["node_modules"]
 }

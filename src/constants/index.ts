@@ -136,7 +136,9 @@ export enum ELEMENT {
     HA_DIALOG_LIGHT_BRIGHTNESS = 'ha-state-control-light-brightness',
     HA_DIALOG_LIGHT_CONTROLS = 'ha-icon-button-group',
     HA_DIALOG_LIGHT_COLORS = 'ha-more-info-light-favorite-colors',
-    HA_DIALOG_LIGHT_SETTINGS = 'ha-more-info-control-select-container'
+    HA_DIALOG_LIGHT_SETTINGS = 'ha-more-info-control-select-container',
+    SIDEBAR_SHELL = '.sidebar-shell',
+    WA_DRAWER = 'wa-drawer'
 }
 
 export const RESOURCE_WITH_SUFFIX_REGEXP = /^(.*?)( \([^)]+\))?$/;
@@ -146,7 +148,7 @@ export const JS_TEMPLATE_REG = /^\s*\[\[\[([\s\S]+)\]\]\]\s*$/;
 export const JINJA_TEMPLATE_REG = /\{\{[\s\S]*\}\}|\{%[\s\S]*%\}/;
 export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;
 export const TOGGLE_MENU_EVENT = 'hass-toggle-menu';
-export const MC_DRAWER_CLOSED_EVENT = 'MDCDrawer:closed';
+export const SIDEBAR_CLOSED_EVENT = 'hass-drawer-closed';
 export const CONTEXT_MENU_EVENT = 'contextmenu';
 export const RENDER_TEMPLATE_EVENT = 'render_template';
 export const RESIZE_EVENT = 'resize';
