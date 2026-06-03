@@ -381,7 +381,7 @@ class KioskMode implements KioskModeRunner {
 				this.drawerLayout.removeEventListener(SIDEBAR_CLOSED_EVENT, hideSidebarCommands);
 			};
 
-			// Workaround for Companion App, before hiding the sidebar it is needed to wait for the MC Drawer to close
+			// Workaround for Companion App, before hiding the sidebar it is needed to wait for the WA Drawer/Sidebar Shell to close
 			// Check the next issue: https://github.com/NemesisRE/kiosk-mode/issues/275
 			if (
 				this.drawerLayout.type === 'modal' &&
