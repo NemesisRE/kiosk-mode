@@ -24,6 +24,7 @@ Hides the header and/or sidebar drawer in [Home Assistant](https://www.home-assi
 > 2. If you have `Home Assistant` `2025.10.0` or greater installed, the minimum compatible version that you can install is `Kiosk Mode` `v8.0.0`. If you are in a version of `Home Assistant` between `2025.5.1` and `2025.10.0`, the latest compatible version that you can install is `v7.4.0`.
 >3. If you have `Home Assistant` `2026.2.0` or greater installed, the minimum compatible version that you can install is `Kiosk Mode` `v10.0.0`. If you are in a version of `Home Assistant` between `2025.10.0` and `2025.1.3`, the latest compatible version that you can install is `v9.0.2`.
 >4. If you have `Home Assistant` `2026.3.0` or greater installed, the minimum compatible version that you can install is `Kiosk Mode` `v11.0.0`. If you are in a version of `Home Assistant` between `2025.2.0` and `2025.2.3`, the latest compatible version that you can install is `v10.0.0`.
+>5. If you have `Home Assistant` `2026.6.0` or greater installed, the minimum compatible version that you can install is `Kiosk Mode` `v14.0.0`. If you are in a version of `Home Assistant` between `2025.3.0` and `2025.6.0`, the latest compatible version that you can install is `v13.1.0`.
 
 <details>
   <summary><b>Installation through HACS</b></summary>
