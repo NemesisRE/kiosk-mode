@@ -31,7 +31,7 @@ import {
 	TRUE,
 	CUSTOM_MOBILE_WIDTH_DEFAULT,
 	TOGGLE_MENU_EVENT,
-	MC_DRAWER_CLOSED_EVENT,
+	DRAWER_CLOSED_EVENT,
 	CONTEXT_MENU_EVENT,
 	RESIZE_EVENT,
 	RENDER_TEMPLATE_EVENT,
@@ -378,16 +378,16 @@ class KioskMode implements KioskModeRunner {
 				this.styleManager.addStyle(STYLES.SIDEBAR, this.drawerLayout);
 				this.styleManager.addStyle(STYLES.ASIDE, this.drawerLayout.shadowRoot!);
 				if (queryString(SPECIAL_QUERY_PARAMS.CACHE)) setCache(TRUE, OPTION.HIDE_SIDEBAR);
-				this.drawerLayout.removeEventListener(MC_DRAWER_CLOSED_EVENT, hideSidebarCommands);
+				this.drawerLayout.removeEventListener(DRAWER_CLOSED_EVENT, hideSidebarCommands);
 			};
 
 			// Workaround for Companion App, before hiding the sidebar it is needed to wait for the MC Drawer to close
 			// Check the next issue: https://github.com/NemesisRE/kiosk-mode/issues/275
 			if (
 				this.drawerLayout.type === 'modal' &&
-				this.drawerLayout.appContent?.inert
+				this.drawerLayout.open
 			) {
-				this.drawerLayout.addEventListener(MC_DRAWER_CLOSED_EVENT, hideSidebarCommands);
+				this.drawerLayout.addEventListener(DRAWER_CLOSED_EVENT, hideSidebarCommands);
 			} else {
 				hideSidebarCommands();
 			}
