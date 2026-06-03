@@ -76,7 +76,7 @@ export class Lovelace extends HTMLElement {
 
 export class HaSidebar extends HTMLElement {
 	type!: 'modal' | '';
-	appContent!: HTMLElement;
+	open!: boolean;
 }
 
 export interface SubscriberTemplate {

@@ -385,7 +385,7 @@ class KioskMode implements KioskModeRunner {
 			// Check the next issue: https://github.com/NemesisRE/kiosk-mode/issues/275
 			if (
 				this.drawerLayout.type === 'modal' &&
-				this.drawerLayout.appContent?.inert
+				this.drawerLayout.open
 			) {
 				this.drawerLayout.addEventListener(SIDEBAR_CLOSED_EVENT, hideSidebarCommands);
 			} else {
