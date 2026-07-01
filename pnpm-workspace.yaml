@@ -1,6 +1,4 @@
 minimumReleaseAgeExclude:
-  - brace-expansion@5.0.6
-  - shadow-dom-selector@6.2.3
-  - home-assistant-query-selector@7.0.0-beta.1
+  - home-assistant-query-selector@7.0.0
 overrides:
   brace-expansion@>=5.0.0 <5.0.6: ^5.0.6
