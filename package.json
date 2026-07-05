@@ -35,7 +35,7 @@
   "dependencies": {
     "get-promisable-result": "^2.0.0",
     "home-assistant-javascript-templates": "7.1.0",
-    "home-assistant-query-selector": "6.2.1",
+    "home-assistant-query-selector": "7.0.0",
     "home-assistant-styles-manager": "4.1.2",
     "shadow-dom-selector": "6.2.3"
   },
