@@ -6,6 +6,8 @@ updates:
       interval: "weekly"
       day: "sunday"
       time: "09:00"
+    cooldown:
+      default-days: 1
     commit-message:
       prefix: "[Dependencies]"
     groups:
