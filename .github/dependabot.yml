@@ -12,6 +12,7 @@ updates:
       prefix: "[Dependencies]"
     ignore:
       - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
     groups:
       dependencies-prod:
         dependency-type: "production"
