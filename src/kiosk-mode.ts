@@ -489,6 +489,10 @@ class KioskMode implements KioskModeRunner {
 	// INSERT MORE INFO DIALOG STYLES
 	protected async insertMoreInfoDialogStyles() {
 
+		if (!this.ha?.hass) {
+			return;
+		}
+
 		const options = this._getOptions();
 
 		// Do not run kiosk-mode if it is disabled
