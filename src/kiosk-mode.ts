@@ -489,7 +489,7 @@ class KioskMode implements KioskModeRunner {
 	// INSERT MORE INFO DIALOG STYLES
 	protected async insertMoreInfoDialogStyles() {
 
-		if (!this.ha?.hass) {
+		if (!this.ha) {
 			return;
 		}
 
