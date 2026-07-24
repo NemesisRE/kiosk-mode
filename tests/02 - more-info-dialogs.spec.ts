@@ -342,24 +342,28 @@ test('Option: hide_dialog_logbook_show_more', async ({ page }) => {
 
 });
 
+// On a non-Lovelace panel ON_LOVELACE_PANEL_LOAD never fires, so the local variable `ha` is never set
+// Opening a more-info dialog tries to access the local `ha` variable and in these cases it should not throw.
 test('More-info dialog on a non-Lovelace panel should not throw any errors', async ({ page }) => {
 
-	const errors: Error[] = [];
-	page.on('pageerror', (error) => errors.push(error));
-
-	// On a non-Lovelace panel ON_LOVELACE_PANEL_LOAD never fires, so kiosk-mode's
-	// "this.ha" is never set. Opening a more-info dialog here must not throw.
 	await page.goto('/logbook');
 
+	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
+	await expect(page.locator(SELECTORS.LOGBOOK_PANEL)).toBeVisible();
 	await page.locator(SELECTORS.LOGBOOK_ENTRY_ENTITY).first().click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 
 	await page.waitForTimeout(1000);
 
-	const kioskModeErrors = errors.filter((error) =>
-		error.stack?.includes('kiosk-mode')
+	const errors = await page.pageErrors();
+
+	expect(errors).not.toEqual(
+		expect.arrayContaining([
+			expect.objectContaining({
+				stack: expect.stringMatching(/kiosk-mode|KioskMode/)
+			})
+		])
 	);
-	expect(kioskModeErrors).toEqual([]);
 
 });
