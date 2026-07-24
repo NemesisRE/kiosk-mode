@@ -341,3 +341,25 @@ test('Option: hide_dialog_logbook_show_more', async ({ page }) => {
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_LOGBOOK_SHOW_MORE, false);
 
 });
+
+test('More-info dialog on a non-Lovelace panel should not throw any errors', async ({ page }) => {
+
+	const errors: Error[] = [];
+	page.on('pageerror', (error) => errors.push(error));
+
+	// On a non-Lovelace panel ON_LOVELACE_PANEL_LOAD never fires, so kiosk-mode's
+	// "this.ha" is never set. Opening a more-info dialog here must not throw.
+	await page.goto('/logbook');
+
+	await page.locator(SELECTORS.LOGBOOK_ENTRY_ENTITY).first().click();
+
+	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
+
+	await page.waitForTimeout(1000);
+
+	const kioskModeErrors = errors.filter((error) =>
+		error.stack?.includes('kiosk-mode')
+	);
+	expect(kioskModeErrors).toEqual([]);
+
+});
