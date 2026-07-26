@@ -28,8 +28,8 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.8.0)
       '@playwright/test':
-        specifier: 1.62.0
-        version: 1.62.0
+        specifier: 1.61.1
+        version: 1.61.1
       '@rollup/plugin-json':
         specifier: ^6.1.0
         version: 6.1.0(rollup@4.62.2)
@@ -59,7 +59,7 @@ importers:
         version: 18.0.0
       playwright-test-coverage:
         specifier: ^1.2.12
-        version: 1.2.12(@playwright/test@1.62.0)
+        version: 1.2.12(@playwright/test@1.61.1)
       rollup:
         specifier: ^4.62.2
         version: 4.62.2
@@ -325,9 +325,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@playwright/test@1.62.0':
-    resolution: {integrity: sha512-9zOJ6ZQRAena31MpOH9VSzIz8Ou3YJ/wtY/eQm5T2uhfhG7/U3COrMS8xOtUrZrp9OgdmzEnIYODye3nY1VqzA==}
-    engines: {node: '>=20'}
+  '@playwright/test@1.61.1':
+    resolution: {integrity: sha512-8nKv6+0RJSL9FE4jYOEGXnPeM/Hg12qZpmqzZjRh3qM0Y7c3z1mrOTfFLids72RDQYVh9WpLEfR5WdpNX4fkig==}
+    engines: {node: '>=18'}
     hasBin: true
 
   '@rollup/plugin-json@6.1.0':
@@ -1229,9 +1229,9 @@ packages:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
 
-  playwright-core@1.62.0:
-    resolution: {integrity: sha512-nsNRyq0r2zsG8AcRHWknc9QRA5XCueC7gWMrs+Gx2tlZn9hcl8zudfh00lhJPY1DE7NmZ6bDsT9g2yey8mXljA==}
-    engines: {node: '>=20'}
+  playwright-core@1.61.1:
+    resolution: {integrity: sha512-h7Qlt6m4REp25qvIdvbDtVmD4LqVXfpRxhORv9L0jzETM05p4fuPJ3dKyuSXQxDSbXnmS79HAgi9589lGSpLkg==}
+    engines: {node: '>=18'}
     hasBin: true
 
   playwright-test-coverage@1.2.12:
@@ -1239,9 +1239,9 @@ packages:
     peerDependencies:
       '@playwright/test': ^1.14.1
 
-  playwright@1.62.0:
-    resolution: {integrity: sha512-Z14dG305dgaLu6foB1TXQagFiW8JfSUIUaUuPaKQ6NtBPKF1P/qXcqfh6c6K/icPqdy37JmjbiBXf6JNg6Sylw==}
-    engines: {node: '>=20'}
+  playwright@1.61.1:
+    resolution: {integrity: sha512-DWnY5o3YbLWK4GovuAVwpqL+1VwGNdUGrRr++8j8PtQQzvAVZUIMjKQ90fY689sEJZJBbZVw1rXaOKSTitkzPQ==}
+    engines: {node: '>=18'}
     hasBin: true
 
   prelude-ls@1.2.1:
@@ -1829,9 +1829,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@playwright/test@1.62.0':
+  '@playwright/test@1.61.1':
     dependencies:
-      playwright: 1.62.0
+      playwright: 1.61.1
 
   '@rollup/plugin-json@6.1.0(rollup@4.62.2)':
     dependencies:
@@ -2660,15 +2660,15 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
-  playwright-core@1.62.0: {}
+  playwright-core@1.61.1: {}
 
-  playwright-test-coverage@1.2.12(@playwright/test@1.62.0):
+  playwright-test-coverage@1.2.12(@playwright/test@1.61.1):
     dependencies:
-      '@playwright/test': 1.62.0
+      '@playwright/test': 1.61.1
 
-  playwright@1.62.0:
+  playwright@1.61.1:
     dependencies:
-      playwright-core: 1.62.0
+      playwright-core: 1.61.1
     optionalDependencies:
       fsevents: 2.3.2
 
