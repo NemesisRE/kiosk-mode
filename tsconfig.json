@@ -21,6 +21,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "tests/**/*.ts",
     "package.json",
     "playwright.config.ts"
   ],
