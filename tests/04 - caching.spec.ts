@@ -369,7 +369,7 @@ test('Caching URL Parameter: ?block_overflow', async ({ page }) => {
 test('Caching URL Parameter: ?block_context_menu', async ({ context, page }) => {
 
 	await context.addInitScript({
-		path: path.join(__dirname, '..', './node_modules/sinon/pkg/sinon.js'),
+		path: path.resolve('node_modules/sinon/pkg/sinon.js'),
 	});
 
 	await context.addInitScript(() => {
