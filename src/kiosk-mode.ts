@@ -68,6 +68,8 @@ class KioskMode implements KioskModeRunner {
 			resetCache();
 		}
 
+		this._subscribed = false;
+
 		this.panelOptions = new Map<string, Options>();
 
 		this.styleManager = new HomeAssistantStylesManager({
@@ -76,6 +78,25 @@ class KioskMode implements KioskModeRunner {
 		});
 
 		const selector = new HAQuerySelector();
+
+		selector.addEventListener(HAQuerySelectorEvent.ON_LISTEN, async (event) => {
+
+			const ha = await event.detail.HOME_ASSISTANT.element as HomeAsssistantExtended;
+
+			this.version = parseVersion(ha.hass?.config?.version);
+			this.user = await getPromisableResult(
+				(): HomeAsssistantExtended['hass']['user'] => ha?.hass?.user,
+				(user: HomeAsssistantExtended['hass']['user']) => !!user,
+				{
+					retries: MAX_ATTEMPTS,
+					delay: RETRY_DELAY,
+					rejectMessage: `${NAMESPACE}: Cannot select ${ELEMENT.HOME_ASSISTANT} > hass > user after {{ retries }} attempts. Giving up!`
+				}
+			);
+
+			this._renderer = await new HomeAssistantJavaScriptTemplates(ha).getRenderer();
+
+		});
 
 		selector.addEventListener(HAQuerySelectorEvent.ON_LOVELACE_PANEL_LOAD, async (event) => {
 
@@ -97,19 +118,16 @@ class KioskMode implements KioskModeRunner {
 			this.appToolbar = await HEADER.selector.query(ELEMENT.TOOLBAR).element as Element;
 			this.sideBarRoot = await HA_SIDEBAR.selector.$.element as ShadowRoot;
 
-			this.user = await getPromisableResult(
-				(): HomeAsssistantExtended['hass']['user'] => this.ha?.hass?.user,
-				(user: HomeAsssistantExtended['hass']['user']) => !!user,
+			// In case that the renderer is not ready, wait for it
+			await getPromisableResult(
+				(): HomeAssistantJavaScriptTemplatesRenderer => this._renderer,
+				(renderer: HomeAssistantJavaScriptTemplatesRenderer) => !!renderer,
 				{
 					retries: MAX_ATTEMPTS,
 					delay: RETRY_DELAY,
-					rejectMessage: `${NAMESPACE}: Cannot select ${ELEMENT.HOME_ASSISTANT} > hass > user after {{ retries }} attempts. Giving up!`
+					shouldReject: false
 				}
 			);
-
-			this._renderer = await new HomeAssistantJavaScriptTemplates(this.ha).getRenderer();
-
-			this.version = parseVersion(this.ha.hass?.config?.version);
 
 			this.run();
 
@@ -126,6 +144,7 @@ class KioskMode implements KioskModeRunner {
 		});
 
 		selector.listen();
+
 		this.resizeWindowBinded = this.resizeWindow.bind(this);
 
 	}
@@ -147,6 +166,7 @@ class KioskMode implements KioskModeRunner {
 	private _renderer!: HomeAssistantJavaScriptTemplatesRenderer;
 	private _runTimeout!: number;
 	private version!: Version | null;
+	private _subscribed: boolean;
 
 	// Kiosk Mode options
 	private panelOptions!: Map<string, Options>;
@@ -850,6 +870,8 @@ class KioskMode implements KioskModeRunner {
 
 		} else if (JS_TEMPLATE_REG.test(value)) {
 
+			const template = value.replace(JS_TEMPLATE_REG, '$1');
+
 			const renderingFunction = (result: unknown): void => {
 				// Set the compiled option
 				options[option] = typeof result === 'boolean'
@@ -858,8 +880,16 @@ class KioskMode implements KioskModeRunner {
 				executeRendering(value, result);
 			};
 
+			if (!this._subscribed) {
+				const parsedTemplate = this._renderer.parseTemplate(template);
+				if (parsedTemplate.entities.length) {
+					this._subscribed = true;
+					this._renderer.init();
+				}
+			}
+
 			this._renderer.trackTemplate(
-				value.replace(JS_TEMPLATE_REG, '$1'),
+				template,
 				renderingFunction
 			);
 
