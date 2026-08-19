@@ -68,8 +68,6 @@ class KioskMode implements KioskModeRunner {
 			resetCache();
 		}
 
-		this._subscribed = false;
-
 		this.panelOptions = new Map<string, Options>();
 
 		this.styleManager = new HomeAssistantStylesManager({
@@ -166,7 +164,6 @@ class KioskMode implements KioskModeRunner {
 	private _renderer!: HomeAssistantJavaScriptTemplatesRenderer;
 	private _runTimeout!: number;
 	private version!: Version | null;
-	private _subscribed: boolean;
 
 	// Kiosk Mode options
 	private panelOptions!: Map<string, Options>;
@@ -880,10 +877,9 @@ class KioskMode implements KioskModeRunner {
 				executeRendering(value, result);
 			};
 
-			if (!this._subscribed) {
+			if (!this._renderer.subscribed) {
 				const parsedTemplate = this._renderer.parseTemplate(template);
 				if (parsedTemplate.entities.length) {
-					this._subscribed = true;
 					this._renderer.init();
 				}
 			}
