@@ -146,6 +146,7 @@ export const RESOURCE_WITH_SUFFIX_REGEXP = /^(.*?)( \([^)]+\))?$/;
 export const TRUE = 'true';
 export const JS_TEMPLATE_REG = /^\s*\[\[\[([\s\S]+)\]\]\]\s*$/;
 export const JINJA_TEMPLATE_REG = /\{\{[\s\S]*\}\}|\{%[\s\S]*%\}/;
+export const DOMAIN_ENTITY_REGEXP = /^\s*([a-z_]+)\.([\w-]+)\s*$/;
 export const CUSTOM_MOBILE_WIDTH_DEFAULT = 812;
 export const TOGGLE_MENU_EVENT = 'hass-toggle-menu';
 export const SIDEBAR_CLOSED_EVENT = 'hass-drawer-closed';
