@@ -10,5 +10,13 @@
       "datasourceTemplate": "docker",
       "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["custom.regex"],
+      "matchPackageNames": ["homeassistant/home-assistant"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    }
   ]
 }
