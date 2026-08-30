@@ -15,14 +15,14 @@ importers:
   .:
     dependencies:
       get-promisable-result:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.1.0
+        version: 2.1.0
       home-assistant-javascript-templates:
         specifier: 8.0.0
-        version: 8.0.0(get-promisable-result@2.0.0)
+        version: 8.0.0(get-promisable-result@2.1.0)
       home-assistant-query-selector:
         specifier: 7.0.0
-        version: 7.0.0(shadow-dom-selector@6.2.3(get-promisable-result@2.0.0))
+        version: 7.0.0(shadow-dom-selector@6.2.3(get-promisable-result@2.1.0))
       home-assistant-styles-manager:
         specifier: 4.1.2
         version: 4.1.2
@@ -842,8 +842,8 @@ packages:
     resolution: {integrity: sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q==}
     engines: {node: '>=8.0.0'}
 
-  get-promisable-result@2.0.0:
-    resolution: {integrity: sha512-DdA168VtnVn9A87CUsjPR8phpfYZRbKPA1wpzxMdZek6RZXxpphCUVgn0mqD4JJlHkLKChQd4y3bkFOEOZwcIA==}
+  get-promisable-result@2.1.0:
+    resolution: {integrity: sha512-r5wklp/XnLxMhjCZxD7/5Jo6drLivLTRqNPC7+r+4FsW4ovOPvgZwednygqKoWUgts1RRHNU9OUorVR2wl9XLQ==}
 
   glob-parent@6.0.2:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
@@ -2112,7 +2112,7 @@ snapshots:
 
   get-package-type@0.1.0: {}
 
-  get-promisable-result@2.0.0: {}
+  get-promisable-result@2.1.0: {}
 
   glob-parent@6.0.2:
     dependencies:
@@ -2139,13 +2139,13 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  home-assistant-javascript-templates@8.0.0(get-promisable-result@2.0.0):
+  home-assistant-javascript-templates@8.0.0(get-promisable-result@2.1.0):
     dependencies:
-      get-promisable-result: 2.0.0
+      get-promisable-result: 2.1.0
 
-  home-assistant-query-selector@7.0.0(shadow-dom-selector@6.2.3(get-promisable-result@2.0.0)):
+  home-assistant-query-selector@7.0.0(shadow-dom-selector@6.2.3(get-promisable-result@2.1.0)):
     dependencies:
-      shadow-dom-selector: 6.2.3(get-promisable-result@2.0.0)
+      shadow-dom-selector: 6.2.3(get-promisable-result@2.1.0)
 
   home-assistant-styles-manager@4.1.2: {}
 
@@ -2500,9 +2500,9 @@ snapshots:
 
   set-blocking@2.0.0: {}
 
-  shadow-dom-selector@6.2.3(get-promisable-result@2.0.0):
+  shadow-dom-selector@6.2.3(get-promisable-result@2.1.0):
     dependencies:
-      get-promisable-result: 2.0.0
+      get-promisable-result: 2.1.0
 
   shebang-command@2.0.0:
     dependencies:
