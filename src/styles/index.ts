@@ -90,6 +90,9 @@ export const STYLES = {
 	DIALOG_HEADER_HISTORY: getDisplayNoneRules(
 		`${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_HISTORY}"]`
 	),
+	DIALOG_HEADER_ADD_TO: getDisplayNoneRules(
+		`${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_ADD_TO}"]`
+	),
 	DIALOG_HEADER_SETTINGS: getDisplayNoneRules(
 		`${ELEMENT.MENU_ITEM}[data-selector="${MENU.DIALOG_SETTINGS}"]`
 	),

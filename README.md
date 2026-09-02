@@ -135,6 +135,7 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 |`block_context_menu`                                  | Prevents opening a right-click context menu (sometimes accessible via tap-and-hold on touchscreen devices).|
 |`hide_dialog_header_breadcrumb_navigation`<sup>2</sup>| Hides the breadcrumb navigation over the title of more-info dialogs |
 |`hide_dialog_header_history`                          | Hides the "History" icon in the header of more-info dialogs. |
+|`hide_dialog_header_add_to`                           | Hides the "Add to" icon in the header of more-info dialogs. |
 |`hide_dialog_header_settings`<sup>3</sup>             | Hides the "Settings" icon in the header of more-info dialogs. |
 |`hide_dialog_header_overflow`<sup>3</sup>             | Hides the top right overflow menu in the header of more-info dialogs. |
 |`hide_dialog_header_action_items`                     | Hides all the action items from the header of more-info dialogs. |
@@ -441,6 +442,7 @@ The query string options are:
 * `?hide_dialog_header_breadcrumb_navigation` to hide the breadcrumb navigation over the title of more-info dialogs
 * `?hide_dialog_header_history` to hide the "History" icon in the header of more-info dialogs
 * `?hide_dialog_header_settings` to hide the "Settings" icon in the header of more-info dialogs
+* `?hide_dialog_header_add_to` to hide the "Add to" icon in the header of more-info dialogs
 * `?hide_dialog_header_overflow` to hide the top right overflow menu in the header of more-info dialogs
 * `?hide_dialog_header_action_items` to hide all the action items from the header of more-info dialogs.
 * `?hide_dialog_history` to hide the "History" section in the more-info dialogs
