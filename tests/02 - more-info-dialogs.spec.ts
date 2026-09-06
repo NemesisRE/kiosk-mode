@@ -346,11 +346,11 @@ test('Option: hide_dialog_logbook_show_more', async ({ page }) => {
 // Opening a more-info dialog tries to access the local `ha` variable and in these cases it should not throw.
 test('More-info dialog on a non-Lovelace panel should not throw any errors', async ({ page }) => {
 
-	await page.goto('/logbook');
+	await page.goto('/config/tools/state');
 
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
-	await expect(page.locator(SELECTORS.LOGBOOK_PANEL)).toBeVisible();
-	await page.locator(SELECTORS.LOGBOOK_ENTRY_ENTITY).first().click();
+	await expect(page.locator(SELECTORS.TOOLS_STATE_PANEL)).toBeVisible();
+	await page.locator(SELECTORS.TOOL_STATE_MORE_INFO_ICON).first().click();
 
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 

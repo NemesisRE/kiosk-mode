@@ -39,8 +39,8 @@ export const SELECTORS = {
 	CODE_EDITOR: 'ha-code-editor[mode="yaml"]',
 	SAVE_BUTTON: 'hui-editor ha-top-app-bar-fixed ha-button[slot="actionItems"]',
 	CLOSE_EDIT_MODE: 'hui-editor ha-top-app-bar-fixed ha-icon-button[slot="navigationIcon"] ha-button[title="Close"]',
-	LOGBOOK_PANEL: 'ha-panel-logbook',
-	LOGBOOK_ENTRY_ENTITY: 'ha-logbook-entry .subject button.link'
+	TOOLS_STATE_PANEL: 'ha-panel-tools',
+	TOOL_STATE_MORE_INFO_ICON: 'tools-state-renderer .entities .row .cell .id-name-container .id-name-row ha-svg-icon[title="More info"]'
 };
 
 export const DIALOGS_SELECTORS = {
