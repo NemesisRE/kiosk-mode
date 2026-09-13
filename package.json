@@ -1,6 +1,6 @@
 {
   "name": "kiosk-mode",
-  "version": "14.2.0",
+  "version": "14.2.1",
   "description": "Hides the Home Assistant header and/or sidebar",
   "type": "module",
   "main": "kiosk-mode.js",
