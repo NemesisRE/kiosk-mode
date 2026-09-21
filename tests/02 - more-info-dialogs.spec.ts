@@ -162,6 +162,19 @@ test('Option: hide_dialog_camera_actions', async ({ page }) => {
 
 });
 
+test('Camera actions are not hidden by unrelated dialog action options', async ({ page }) => {
+
+	await goToPage(page);
+
+	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_UPDATE_ACTIONS, true);
+
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
+	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeVisible();
+
+	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_UPDATE_ACTIONS, false);
+
+});
+
 test('Option: hide_dialog_media_actions', async ({ page }) => {
 
 	await goToPage(page);

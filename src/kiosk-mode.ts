@@ -685,6 +685,7 @@ class KioskMode implements KioskModeRunner {
 						STYLES.DIALOG_UPDATE_ACTIONS
 					],
 					[
+						options[OPTION.HIDE_DIALOG_CAMERA_ACTIONS] &&
 						dialogChild.host.localName === ELEMENT.HA_DIALOG_CAMERA,
 						STYLES.DIALOG_CAMERA_ACTIONS
 					],
