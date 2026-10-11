@@ -5,7 +5,11 @@ import {
 	TEXT_SELECTORS,
 	ENTITIES
 } from './constants';
-import { turnBooleanState, goToPage } from './utils';
+import {
+	turnBooleanState,
+	goToPage,
+	waitForToastsBeRemoved
+} from './utils';
 
 test('Option: hide_dialog_header_breadcrumb_navigation', async ({ page }) => {
 
@@ -360,6 +364,7 @@ test('Option: hide_dialog_logbook_show_more', async ({ page }) => {
 test('More-info dialog on a non-Lovelace panel should not throw any errors', async ({ page }) => {
 
 	await page.goto('/config/tools/state');
+	await waitForToastsBeRemoved(page);
 
 	await expect(page.locator(SELECTORS.HA_SIDEBAR)).toBeVisible();
 	await expect(page.locator(SELECTORS.TOOLS_STATE_PANEL)).toBeVisible();

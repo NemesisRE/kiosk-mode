@@ -14,15 +14,21 @@ interface HomeAssistant extends HTMLElement {
     };
 }
 
+export const waitForToastsBeRemoved = async (page: Page) => {
+	await expect(page.locator('.toast')).not.toBeInViewport({ timeout: 15000 });
+};
+
 export const goToPage = async (page: Page) => {
 	await page.goto('/');
 	await expect(page.locator(SELECTORS.HUI_MASONRY_VIEW)).toBeVisible();
+	await waitForToastsBeRemoved(page);
 };
 
 export const goToPageWithParams = async (page: Page, ...params: string[]) => {
 	await page.goto(
 		getUrlWithParam(...params)
 	);
+	await waitForToastsBeRemoved(page);
 	await expect(page.locator('hui-view')).toBeVisible();
 };
 

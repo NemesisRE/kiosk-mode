@@ -413,6 +413,6 @@ test('Caching URL Parameter: ?block_context_menu', async ({ context, page }) => 
 
 	executed = await page.evaluate(() => window.__listener.calledOnce);
 
-	await expect(executed).toBe(true);
+	expect(executed).toBe(true);
 
 });
