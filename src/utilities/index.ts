@@ -118,10 +118,12 @@ export const addHeaderDropdownsDataSelectors = (
 ) => {
 	headerDropdowns.forEach((headerDropdown: HTMLElement): void => {
 		const menuItem: HTMLElement | null = headerDropdown.querySelector<HTMLElement>(ELEMENT.MENU_ITEM);
-		if (menuItem) {
-			const button = menuItem.shadowRoot!.querySelector<HTMLElement>(ELEMENT.HA_BUTTON);
-			menuItem.dataset.selector = translations[button!.getAttribute('aria-label')!.trim()];
-		}
+		if (!menuItem) return;
+		const haButton = menuItem.shadowRoot!.querySelector<HTMLElement>(ELEMENT.HA_BUTTON);
+		if (!haButton) return;
+		const button = haButton.shadowRoot!.querySelector<HTMLButtonElement>('button');
+		if (!button) return;
+		menuItem.dataset.selector = translations[button!.getAttribute('aria-label')!.trim()];
 	});
 };
 
@@ -142,10 +144,9 @@ export const addDropdownMenuItemsDataSelectors = (
 	translations: Record<string, string>
 ) => {
 	dropdownMenuItems.forEach((dropdownMenuItem: HTMLElement): void => {
-		if (dropdownMenuItem) {
-			const textContent = getTranslationWithoutShorcutSuffix(dropdownMenuItem.textContent);
-			dropdownMenuItem.dataset.selector = translations[textContent];
-		}
+		if (!dropdownMenuItem) return;
+		const textContent = getTranslationWithoutShorcutSuffix(dropdownMenuItem.textContent);
+		dropdownMenuItem.dataset.selector = translations[textContent];
 	});
 };
 

@@ -812,7 +812,6 @@ class KioskMode implements KioskModeRunner {
 			headerDropdownsPromise,
 			dropdownMenuItemsPromise
 		]).then(([headerDropdowns, dropdownMenuItems]) => {
-
 			addHeaderDropdownsDataSelectors(
 				headerDropdowns,
 				this.menuTranslations
