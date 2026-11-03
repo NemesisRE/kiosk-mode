@@ -156,7 +156,7 @@ All the options, excluding `debug_template`, can be set as a boolean and all of 
 |`hide_dialog_camera_actions`                          | Hides the actions block in the more-info dialogs of camera entities. |
 |`hide_dialog_timer_actions`                           | Hides the actions block in the more-info dialogs of timer entities. |
 |`hide_dialog_climate_actions`                         | Hides all the actions in the more-info dialogs of climate entities. |
-|`hide_dialog_climate_temperature_actions`             | Hides the temperature cotrol actions in the more-info dialogs of climate entities. |
+|`hide_dialog_climate_temperature_actions`             | Hides the temperature control actions in the more-info dialogs of climate entities. |
 |`hide_dialog_climate_settings_actions`                | Hides the mode and preset actions in the more-info dialogs of climate entities. |
 |`hide_dialog_light_actions`                           | Hides all the actions in the more-info dialogs of light entities. |
 |`hide_dialog_light_control_actions`                   | Hides the control actions in the more-info dialogs of light entities. |
@@ -319,8 +319,8 @@ kiosk_mode:
 This templating system is [the same that Home Assistant implements](https://www.home-assistant.io/docs/configuration/templating). You can use the majority of the template methods and objects. The entire template will be processed, rendered and the result will be used in the desired option. `Jinja templates` don't have access to client side variables or DOM APIs, but the next client side variables will be available:
 
 * `user_name`: String with the logged user's name
-* `user_is_admin`: Bolean value than indicates if the logged user is admin or not
-* `user_is_owner`: Bolean value than indicates if the logged user is the owner or not
+* `user_is_admin`: Boolean value than indicates if the logged user is admin or not
+* `user_is_owner`: Boolean value than indicates if the logged user is the owner or not
 * `user_agent`: User agent of the browser in which Home Assistant is being executed
 
 #### Jinja templates example
@@ -361,7 +361,7 @@ Both options are valid. At the end, using one or the other is up to you.
 <br>
 
 ## Conditional Lovelace Config
-Contitional configs take priority and if a condition matches all other config options/methods are ignored.
+Conditional configs take priority and if a condition matches all other config options/methods are ignored.
 These use the same options as above, but placed under one of the following user/entity conditions:<br><br>
 
 ### admin_settings:
@@ -462,7 +462,7 @@ The query string options are:
 * `?hide_dialog_camera_actions` to hide the actions block in the more-info dialogs of camera entities
 * `?hide_dialog_timer_actions` to hide the actions block in the more-info dialogs of timer entities
 * `?hide_dialog_climate_actions` to hide all the actions in the more-info dialogs of climate entities
-* `?hide_dialog_climate_temperature_actions` to hide the temperature cotrol actions in the more-info dialogs of climate entities
+* `?hide_dialog_climate_temperature_actions` to hide the temperature control actions in the more-info dialogs of climate entities
 * `?hide_dialog_climate_settings_actions` to hide the mode and preset actions in the more-info dialogs of climate entities
 * `?hide_dialog_light_actions` to hide all the actions in the more-info dialogs of light entities
 * `?hide_dialog_light_control_actions` to hide the control actions in the more-info dialogs of light entities
@@ -492,7 +492,7 @@ This works for all query strings except for the utility strings listed below.
 
 | Option | Description |
 | ------ | ----------- |
-| `debug` | Prints useful information in the console. The raw config loaded from the Lovelace panel, the resulting final config with all the options, and if a template is rendered, it will print the option that trigered the template, the template code and the evaluated result of it. |
+| `debug` | Prints useful information in the console. The raw config loaded from the Lovelace panel, the resulting final config with all the options, and if a template is rendered, it will print the option that triggered the template, the template code and the evaluated result of it. |
 | `debug_template` | Useful to debug the result of a single template without activating the `debug` mode. |
 
 <br>
@@ -522,7 +522,7 @@ Some features are outside `kiosk-mode` scope and they would be hard to maintain 
 ### Credit
 This was originally based on and inspired by [ciotlosm's kiosk mode gist](https://gist.github.com/ciotlosm/1f09b330aa5bd5ea87b59f33609cc931) and [corrafig's fork](https://gist.github.com/corrafig/c8288df960e7f59e82c12d14de26fde8) of the same gist.
 
-Big thank you to [matt8707](https://github.com/matt8707) for starting this project, allowing me to rewrite it, and transfering ownership.
+Big thank you to [matt8707](https://github.com/matt8707) for starting this project, allowing me to rewrite it, and transferring ownership.
 
 Many thanks to [KTibow](https://github.com/KTibow) as well, for the github release action and support.
 
