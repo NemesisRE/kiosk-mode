@@ -7,7 +7,11 @@ import {
 	DIALOGS_SELECTORS,
 	ENTITIES
 } from './constants';
-import { goToPageWithParams, turnBooleanState } from './utils';
+import {
+	goToPageWithParams,
+	setCameraSupportsTwoWayAudio,
+	turnBooleanState
+} from './utils';
 
 test('URL Parameter: ?kiosk', async ({ page }) => {
 
@@ -313,6 +317,7 @@ test('URL Parameter: ?hide_dialog_camera_actions', async ({ page }) => {
 	await goToPageWithParams(page, URL_PARAMS.HIDE_DIALOG_CAMERA_ACTIONS);
 
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
+	await setCameraSupportsTwoWayAudio(page, true);
 	await expect(page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO)).toBeVisible();
 	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeHidden();
 

@@ -8,6 +8,7 @@ import {
 import {
 	turnBooleanState,
 	goToPage,
+	setCameraSupportsTwoWayAudio,
 	waitForToastsBeRemoved
 } from './utils';
 
@@ -156,6 +157,8 @@ test('Option: hide_dialog_camera_actions', async ({ page }) => {
 
 	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
 
+	await setCameraSupportsTwoWayAudio(page, true);
+
 	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_CAMERA_ACTIONS, true);
@@ -170,9 +173,12 @@ test('Camera actions are not hidden by unrelated dialog action options', async (
 
 	await goToPage(page);
 
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
+
+	await setCameraSupportsTwoWayAudio(page, true);
+
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_UPDATE_ACTIONS, true);
 
-	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
 	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeVisible();
 
 	await turnBooleanState(page, ENTITIES.HIDE_DIALOG_UPDATE_ACTIONS, false);

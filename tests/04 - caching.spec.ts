@@ -6,7 +6,11 @@ import {
 	DIALOGS_SELECTORS,
 	TEXT_SELECTORS
 } from './constants';
-import { goToPageWithParams, goToPage } from './utils';
+import {
+	goToPageWithParams,
+	goToPage,
+	setCameraSupportsTwoWayAudio
+} from './utils';
 
 [
 	{
@@ -201,12 +205,6 @@ import { goToPageWithParams, goToPage } from './utils';
 		entitySelectorText: TEXT_SELECTORS.ADDON
 	},
 	{
-		param: URL_PARAMS.HIDE_DIALOG_CAMERA_ACTIONS,
-		selector: DIALOGS_SELECTORS.CAMERA_ACTIONS,
-		entitySelector: SELECTORS.ENTITY_ROW,
-		entitySelectorText: TEXT_SELECTORS.CAMERA
-	},
-	{
 		param: URL_PARAMS.HIDE_DIALOG_MEDIA_ACTIONS,
 		selector: [
 			DIALOGS_SELECTORS.MEDIA_ACTIONS_MAIN,
@@ -341,6 +339,53 @@ import { goToPageWithParams, goToPage } from './utils';
 		}
 
 	});
+
+});
+
+test('Caching URL Parameter: ?hide_dialog_camera_actions', async ({ page }) => {
+
+	const masonryView = page.locator(SELECTORS.HUI_MASONRY_VIEW);
+	const moreInfoDialog = page.locator(DIALOGS_SELECTORS.MORE_INFO_INFO);
+
+	await goToPageWithParams(
+		page,
+		URL_PARAMS.HIDE_DIALOG_CAMERA_ACTIONS,
+		URL_PARAMS.CACHE
+	);
+
+	await expect(masonryView).toBeVisible();
+
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
+
+	await setCameraSupportsTwoWayAudio(page, true);
+
+	await expect(moreInfoDialog).toBeVisible();
+
+	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeHidden();
+
+	await goToPage(page);
+
+	await expect(masonryView).toBeVisible();
+
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
+
+	await setCameraSupportsTwoWayAudio(page, true);
+
+	await expect(moreInfoDialog).toBeVisible();
+
+	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeHidden();
+
+	await goToPageWithParams(page, URL_PARAMS.CLEAR_KM_CACHE);
+
+	await expect(masonryView).toBeVisible();
+
+	await page.locator(SELECTORS.ENTITY_ROW, TEXT_SELECTORS.CAMERA).click();
+
+	await setCameraSupportsTwoWayAudio(page, true);
+
+	await expect(moreInfoDialog).toBeVisible();
+
+	await expect(page.locator(DIALOGS_SELECTORS.CAMERA_ACTIONS)).toBeVisible();
 
 });
 
