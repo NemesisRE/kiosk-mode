@@ -1,3 +1,5 @@
+minimumReleaseAgeExclude:
+  - home-assistant-javascript-templates@8.1.0
 overrides:
   baseline-browser-mapping@>=2.0.0 <2.11.0: ^2.11.0
   browserslist@<=4.28.6: ^4.28.7
