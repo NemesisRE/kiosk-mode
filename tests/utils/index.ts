@@ -1,6 +1,10 @@
 import { Page } from '@playwright/test';
 import { expect } from 'playwright-test-coverage';
-import { BASE_URL, SELECTORS } from '../constants';
+import {
+	BASE_URL,
+	DIALOGS_SELECTORS,
+	SELECTORS
+} from '../constants';
 
 interface Context {
     id: string;
@@ -95,3 +99,11 @@ export const changeToStorageMode = async (page: Page) => {
 };
 
 export const getUrlWithParam = (...params: string[]) => `${BASE_URL}?${params.join('&')}`;
+
+export const setCameraSupportsTwoWayAudio = async (page: Page, state: boolean) => {
+	const camera = page.locator(DIALOGS_SELECTORS.CAMERA);
+	await expect(camera).toBeVisible();
+	await camera.evaluate((cameraElement: HTMLElement & { _supportsTwoWayAudio: boolean }, state: boolean) => {
+		cameraElement._supportsTwoWayAudio = state;
+	}, state);
+};
