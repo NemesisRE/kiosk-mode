@@ -883,13 +883,6 @@ class KioskMode implements KioskModeRunner {
 				executeRendering(value, result);
 			};
 
-			if (!this._renderer.subscribed) {
-				const { entities } = this._renderer.parseTemplate(template);
-				if (entities.length) {
-					this._renderer.init();
-				}
-			}
-
 			this._renderer.trackTemplate(
 				template,
 				renderingFunction
