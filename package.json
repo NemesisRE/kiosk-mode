@@ -52,12 +52,12 @@
     "globals": "^17.14.0",
     "nyc": "^18.0.0",
     "playwright-test-coverage": "^1.2.12",
-    "rollup": "^4.68.3",
+    "rollup": "^4.68.8",
     "rollup-plugin-istanbul": "^6.0.0",
     "sinon": "^22.1.0",
     "tslib": "^2.9.1",
     "typescript": "6.0.3",
-    "typescript-eslint": "^8.72.2"
+    "typescript-eslint": "^8.73.0"
   },
   "packageManager": "pnpm@12.23.0"
 }
