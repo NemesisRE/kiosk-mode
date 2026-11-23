@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "enabledManagers": ["custom.regex"],
+  "enabledManagers": ["custom.regex", "npm"],
   "labels": ["dependencies"],
   "customManagers": [
     {
@@ -17,6 +17,12 @@
       "matchManagers": ["custom.regex"],
       "matchPackageNames": ["homeassistant/home-assistant"],
       "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["packageManager"],
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
   ]
