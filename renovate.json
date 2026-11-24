@@ -21,8 +21,13 @@
     },
     {
       "matchManagers": ["npm"],
+      "enabled": false
+    },
+    {
+      "matchManagers": ["npm"],
       "matchDepTypes": ["packageManager"],
       "matchUpdateTypes": ["minor", "patch"],
+      "enabled": true,
       "automerge": true
     }
   ]
